@@ -1,0 +1,138 @@
+%% LyX 2.1.4 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[english]{article}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage{babel}
+\begin{document}
+
+\title{Requirements Analysis and Specification Document\pagebreak{}}
+
+\maketitle
+\tableofcontents{}
+
+\pagebreak{}
+
+
+\section{Introduction}
+
+
+\subsection{Purpose}
+
+The presented document is the Requirements Analysis and Specification
+document (RASD) for the MyTaxiService platform project. 
+
+The main purpose of this document is to analyze the problems that
+the new system is to solve and the customer's necessities, to identify
+use cases and actors, to describe the functional and non-functional
+requirements of the platform along with existing constraints, and
+to propose an in-depth specification of the system before moving on
+to the more concrete design phase. 
+
+This document is intended for stakeholders, software engineers, and
+programmers and is to be used as reference throughout the whole development
+of the system. Each phase of the project must be brought on with this
+document in mind, and any implementation of the system must be clearly
+designed to reflect the specifications presented here.
+
+The secondary audience for this document includes system maintainers
+and developers who wish to integrate the platform's services within
+their own software.
+
+
+\subsection{Scope}
+
+The aim of this project is to create the MyTaxiService platform, a
+web based information system to manage the taxi service of Pallet
+Town. 
+
+The purpose of the platform is:
+\begin{enumerate}
+\item To provide users with a web application and a mobile application,
+with which to easily make use of the town's taxi service.
+\item To provide taxi drivers with a mobile application, with which to manage
+customers' requests (submitted through the above mentioned systems)
+\end{enumerate}
+In short, the platform is to be an integrated infrastructure to manage
+the initial interaction between customers and taxi drivers, to aid
+the former in requesting a taxi ride, and to enable the latter in
+managing such requests. 
+
+The platform will therefore be used exclusively to support the town's
+taxi service, and is aimed at making the taxi request process much
+efficient by reducing overall costs, communication overhead and potential
+requests overloads. 
+
+The platform will implement all necessary functions on both the users'
+side and the drivers', while keeping the two aspects separate and
+unaware of each other. It will also be given a particular focus to
+the storage of user data, in order to maximize privacy and security,
+and to the extensibility of the system, in order to make the platform
+flexible to potential changes in the requirements. 
+
+
+\subsection{Definitions, acronyms, and abbreviations}
+
+Throughout this document, the following definitions will be applied
+without further explanations:
+\begin{itemize}
+\item \textbf{Platform}: the set of software applications and hardware infrastructure
+that make up the MyTaxiService service; these include the back-end
+server software, the web application and the mobile application used
+by the customers, the mobile application used by the taxi drivers,
+and all the necessary hardware needed to run the mentioned software
+and any needed support software. 
+\item \textbf{System}: the software run on the back-end server of the platform
+which is used to handle the communication between the user applications.
+The term also addresses all the necessary software components that
+are needed to store data, perform calculations and manage the hardware
+(e.g. an operating system).
+\item \textbf{User-side application}: software run on a personal device
+which is used to send taxi requests to the system and to handle the
+system's replies. It is designed to be used by customers (see below)
+and can either be a mobile application (run on a smartphone or tablet)
+or a web application (run on any personal device through an Internet
+browser). 
+\item \textbf{Taxi-side application}: software run on a personal device
+which is used to manage taxi requests forwarded by the system and
+to reply to the system with information on how to handle the requests.
+It is designed to be used by taxi drivers (see below) and is a mobile
+application (run on a smartphone or tablet). 
+\item \textbf{Taxi driver}: the owner of a taxi license in Pallet Town,
+who uses the taxi-side application to interact with the platform.
+\item \textbf{Customer}: a person which intends to exploit the taxi service
+of the town, and who uses the user-side applications to interact with
+the platform.
+\end{itemize}
+The following acronyms will also be used in place of the extended
+form:
+\begin{itemize}
+\item \textbf{RASD}: Requirement Analysis and Specification Document
+\end{itemize}
+Finally, in order to increase readability the following abbreviations
+will be used in place of the full words or sentences:
+\begin{itemize}
+\item \textbf{e.g.: }\textit{exempli gratia}
+\end{itemize}
+
+\subsection{References}
+
+This document contains references to other documents which are part
+of the complete set of deliverables used to describe and design the
+project. The references are intended as follows: 
+\begin{itemize}
+\item \textbf{Document 1}: ..
+\item \textbf{Document 2}: ...
+\end{itemize}
+
+\subsection{Overview}
+
+The presented RASD is divided in sections and structured as follows: 
+\begin{itemize}
+\item \textbf{Section 1 - Introduction}: contains a high level description
+of the project, along with its goals, and contains information about
+the document itself, such as abbreviations used and the document structure. 
+\item \textbf{Section 2 - Overall description}: 
+\item \textbf{Section 3 - Requirements}:\end{itemize}
+
+\end{document}
