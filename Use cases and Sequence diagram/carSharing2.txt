@@ -1,0 +1,18 @@
+nome "car sharing";
+
+Attori Utente;
+
+
+the entry condition : l'utente deve essere loggato e non deve essere bannato dal sistema ;
+
+flow of events : l'utente clicca da (dove cazzo vi pare) , il bottone "richiesta taxi";
+                 il sistema mostra all'utente la pagina(?) "richiesta taxi";
+                 l'utente inserisce la posizione in cui si trova ;
+                 l'utente sceglie l'opzione "car sharing";
+                 l'utente indica la destinazione;
+                 l'utente clicca il bottone "cerca taxi";
+                 il sistema inoltra la richiesta al tassista più vicino;
+              
+exit condition : il sistema conferma che la richiesta è avvenuta con successo;
+
+exception : posizioni partenza e/o arrivo non valide;

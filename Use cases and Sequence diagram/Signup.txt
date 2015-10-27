@@ -1,0 +1,31 @@
+Nome : signup;
+
+Attori : Guest;
+
+Entry condition : il Guest non è ancora registrato al sistema/( web application/ mobile application (?));
+
+flow of events : 1)il Guest entra nel sito web/ applicazione mobile ;
+                 2)il Guest clicca sul bottone "Signup";
+                 3)il Guest inserisce nei form seguenti i dati necessari :
+                                   -nome;
+                                   -cognome;
+                                   -email;
+                                   -data di nascita ;
+                                   -identificativo (? carta d'identità / passaporto / patente ?);
+                                   -username;
+                                   -password;                                  
+                             opzionali
+                                   -numero di telefono;
+                                   -foto;
+                                   -indirizzo;
+                 4)il Guest clicca sul bottone "Done";
+                 5)il sistema mostra al Guest la sua pagina personale;
+
+exit condition : la registrazione è avvenuta con successo;
+
+exception : username già esistente , inserimenti obbligatori non validi ..(?altro) : il sistema avvisa 
+             il Guest quali sono i campi da ricontrollare;
+
+
+
+                                

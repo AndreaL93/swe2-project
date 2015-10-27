@@ -1,0 +1,15 @@
+nome "modifica info personali";
+
+Attori Utente;
+
+The entry condition : l'utente deve essere loggato;
+
+flow of events : l'utente clicca da (dove cazzo vi pare) , il bottone "info personali";
+                 il sistema mostra all'utente la pagina "info";
+                 l'utente clicca il bottone modifica;
+                 l'utente sceglie se modificare i dati (come?);
+                
+
+exit condition : il sistema conferma all'utente il successo dell'avvenuta modifica;
+
+exception : dati inseriti non corretti ;

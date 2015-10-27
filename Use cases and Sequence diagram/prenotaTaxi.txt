@@ -1,0 +1,16 @@
+Nome : "prenota taxi" ;
+Actors : Utente ;
+the entry condition : l'utente deve essere loggato e non deve essere bannato ;
+
+flow of events : l'utente clicca da (dove cazzo vi pare) , il bottone "prenota taxi";
+                 il sistema mostra all'utente la pagina "prenota taxi";
+                 l'utente inserisce i dati necessari :
+                                      -partenza
+                                      -destinazione
+                                      -ora richiesta
+                 l'utente clicca sul bottone "richiedi prenotazione";
+                 il sistema inoltra la richiesta al tassista;
+                 
+exit condition : il sistema conferma all'utente il successo dell'avvenuta richiesta;
+
+exception : l'ora di partenza non è valida , la partenza e/o la destinazione non sono corrette ;
