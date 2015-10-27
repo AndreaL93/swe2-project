@@ -1,0 +1,630 @@
+#LyX file created by tex2lyx 2.1
+\lyxformat 474
+\begin_document
+\begin_header
+\textclass article
+\begin_preamble
+\usepackage{babel}
+
+\end_preamble
+\use_default_options false
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding iso8859-15
+\fontencoding T1
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_math auto
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_package amsmath 1
+\use_package amssymb 0
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Requirements Analysis and Specification Document
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Author
+ Grattarola Daniele, Inajjar Ilyas, Lui Andrea 
+\end_layout
+
+\begin_layout Standard
+
+\begin_inset CommandInset toc
+LatexCommand tableofcontents
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Introduction
+\end_layout
+
+\begin_layout Subsection
+Purpose
+\end_layout
+
+\begin_layout Standard
+The presented document is the Requirements Analysis and Specification document (RASD) for the MyTaxiService platform project.
+\end_layout
+
+\begin_layout Standard
+The main purpose of this document is to analyze the problems that the new system is to solve and the customer's necessities, to identify use cases and actors, to describe the functional and non-functional requirements of the platform along with existing constraints, and to propose an in-depth specification of the system before moving on to the more concrete design phase.
+\end_layout
+
+\begin_layout Standard
+This document is intended for stakeholders, software engineers, and programmers and is to be used as reference throughout the whole development of the system. Each phase of the project must be brought on with this document in mind, and any implementation of the system must be clearly designed to reflect the specifications presented here.
+\end_layout
+
+\begin_layout Standard
+The secondary audience for this document includes system maintainers and developers who wish to integrate the platform's services within their own software.
+\end_layout
+
+\begin_layout Subsection
+Scope
+\end_layout
+
+\begin_layout Standard
+The aim of this project is to create the MyTaxiService platform, a web based information system to manage the taxi service of Pallet Town.
+\end_layout
+
+\begin_layout Standard
+The purpose of the platform is: 
+\end_layout
+
+\begin_layout Enumerate
+To provide users with a web application and a mobile application, with which to easily make use of the town's taxi service. 
+\end_layout
+
+\begin_layout Enumerate
+To provide taxi drivers with a mobile application, with which to manage customers' requests (submitted through the above mentioned systems) 
+\end_layout
+
+\begin_layout Standard
+In short, the platform is to be an integrated infrastructure to manage the initial interaction between customers and taxi drivers, to aid the former in requesting a taxi ride, and to enable the latter in managing such requests.
+\end_layout
+
+\begin_layout Standard
+The platform will therefore be used exclusively to support the town's taxi service, and is aimed at making the taxi request process much efficient by reducing overall costs, communication overhead and potential requests overloads.
+\end_layout
+
+\begin_layout Standard
+The platform will implement all necessary functions on both the users' side and the drivers', while keeping the two aspects separate and unaware of each other. It will also be given a particular focus to the storage of user data, in order to maximize privacy and security, and to the extensibility of the system, in order to make the platform flexible to potential changes in the requirements.
+\end_layout
+
+\begin_layout Subsection
+Definitions, acronyms, and abbreviations
+\end_layout
+
+\begin_layout Standard
+Throughout this document, the following definitions will be applied without further explanations: 
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Platform
+\series default
+: the set of software applications and hardware infrastructure that make up the MyTaxiService service; these include the back-end server software, the web application and the mobile application used by the customers, the mobile application used by the taxi drivers, and all the necessary hardware needed to run the mentioned software and any needed support software. 
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+System
+\series default
+: the software run on the back-end server of the platform which is used to handle the communication between the user applications. The term also addresses all the necessary software components that are needed to store data, perform calculations and manage the hardware (e.g. an operating system). 
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+User-side application
+\series default
+: software run on a personal device which is used to send taxi requests to the system and to handle the system's replies. It is designed to be used by customers (see below) and can either be a mobile application (run on a smartphone or tablet) or a web application (run on any personal device through an Internet browser). 
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Taxi-side application
+\series default
+: software run on a personal device which is used to manage taxi requests forwarded by the system and to reply to the system with information on how to handle the requests. It is designed to be used by taxi drivers (see below) and is a mobile application (run on a smartphone or tablet). 
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Taxi driver
+\series default
+: the owner of a taxi license in Pallet Town, who uses the taxi-side application to interact with the platform. 
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Customer
+\series default
+: a person which intends to exploit the taxi service of the town, and who uses the user-side applications to interact with the platform. 
+\end_layout
+
+\begin_layout Standard
+The following acronyms will also be used in place of the extended form: 
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+RASD
+\series default
+: Requirement Analysis and Specification Document 
+\end_layout
+
+\begin_layout Standard
+Finally, in order to increase readability the following abbreviations will be used in place of the full words or sentences: 
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+e.g.: 
+\series default
+
+\shape italic
+exempli gratia
+\shape default
+ 
+\end_layout
+
+\begin_layout Subsection
+References
+\end_layout
+
+\begin_layout Standard
+This document contains references to other documents which are part of the complete set of deliverables used to describe and design the project. The references are intended as follows: 
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Document 1
+\series default
+: .. 
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Document 2
+\series default
+: ... 
+\end_layout
+
+\begin_layout Subsection
+Overview
+\end_layout
+
+\begin_layout Standard
+The presented RASD is divided in sections and structured as follows: 
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Section 1 - Introduction
+\series default
+: contains a high level description of the project, along with its goals, and contains information about the document itself, such as abbreviations used and the document structure. 
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Section 2 - Overall description
+\series default
+: 
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Section 3 - Requirements
+\series default
+:
+\end_layout
+
+\begin_layout Section
+Overall Description
+\end_layout
+
+\begin_layout Subsection
+Product Prespective
+\end_layout
+
+\begin_layout Standard
+The system requirements mainly depends on the web technology necessary to communicate between actors (taxi, customer, guest) and the GPS due to locate the taxi customer in the specific sector and also to create the taxi queue. The central node system need a server (connected on the web) to elaborate the requests and store the users and taxis information. The end-user system relies on the guest operating system (usually a mobile OS like Android, iOS, Windows Phone, blackberry OS, \SpecialChar \ldots{}
+) on the internal GPS system and Internet connection. Of course, all the overall system should only work inside the city.
+\end_layout
+
+\begin_layout Subsubsection
+System Interfaces
+\end_layout
+
+\begin_layout Itemize
+Google Maps API for taxi ruote 
+\end_layout
+
+\begin_layout Subsubsection
+User Interface
+\end_layout
+
+\begin_layout Standard
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+%mockups
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Hardware Interface
+\end_layout
+
+\begin_layout Itemize
+Ethernet connection 
+\end_layout
+
+\begin_layout Itemize
+GPS system 
+\end_layout
+
+\begin_layout Itemize
+High fault tolerance of the central node 
+\end_layout
+
+\begin_layout Itemize
+Firewall: 
+\emph on
+server store sensitive data
+\emph default
+ 
+\end_layout
+
+\begin_layout Itemize
+Router 
+\end_layout
+
+\begin_layout Subsubsection
+Software Interface
+\end_layout
+
+\begin_layout Itemize
+Apache Server for CGI 
+\end_layout
+
+\begin_layout Itemize
+DBMS 
+\end_layout
+
+\begin_layout Subsubsection
+Connection Interface
+\end_layout
+
+\begin_layout Itemize
+EDGE, HSDPA, 3G, 4G 
+\end_layout
+
+\begin_layout Itemize
+HTML, SOAP/REST protocols 
+\end_layout
+
+\begin_layout Subsubsection
+Memory Constrains
+\end_layout
+
+\begin_layout Itemize
+Server: 128GB vRAM requiered, 512GB recommended 
+\end_layout
+
+\begin_layout Itemize
+2TB storage capacity + 64GB flash (32GB x2 mirroring) for applications system and server OS 
+\end_layout
+
+\begin_layout Subsubsection
+Operations
+\end_layout
+
+\begin_layout Itemize
+Taxi Operations: login, signup, availability notifications, request reply, report 
+\end_layout
+
+\begin_layout Itemize
+User Operations: login, signup, requests operations, user profile operations (show, edit) 
+\end_layout
+
+\begin_layout Itemize
+System Operations: notifications (to user and taxi driver), queue managment 
+\end_layout
+
+\begin_layout Itemize
+Backup operations (scheduled at 4AM every day) 
+\end_layout
+
+\begin_layout Itemize
+Restore operaions from secondary storage 
+\end_layout
+
+\begin_layout Subsubsection
+Site adaptation requirements
+\end_layout
+
+\begin_layout Itemize
+UPS system 
+\end_layout
+
+\begin_layout Itemize
+250V/110V Electrical system 
+\end_layout
+
+\begin_layout Itemize
+Ethernet connection 
+\end_layout
+
+\begin_layout Itemize
+Anti-thief system, safety room (safety grid on each door and eventually windows) and alarm 
+\end_layout
+
+\begin_layout Itemize
+Anti-fire system and alaram 
+\end_layout
+
+\begin_layout Itemize
+Anti-flooding system 
+\end_layout
+
+\begin_layout Itemize
+Air conditioning 
+\end_layout
+
+\begin_layout Subsection
+Product Function
+\end_layout
+
+\begin_layout Subsubsection
+Taxi Function
+\end_layout
+
+\begin_layout Itemize
+Taxi Login: the taxi driver logs into the system; 
+\end_layout
+
+\begin_layout Itemize
+Taxi Signup: the taxi driver provides his personal information, Username and Password, taxi and driving license to the Operator; 
+\end_layout
+
+\begin_layout Itemize
+Notification of Availability: with this operation the taxi driver notifies is presence in a specific zone of the town; 
+\end_layout
+
+\begin_layout Itemize
+Notification of Unavailability: the taxi driver notify the end of his service; 
+\end_layout
+
+\begin_layout Itemize
+Taking charge: the taxi driver positively reply to a customer request; 
+\end_layout
+
+\begin_layout Itemize
+Reject request: the taxi driver negatively reply to a customer request; 
+\end_layout
+
+\begin_layout Itemize
+Report user: the taxi driver report a problem with customer; 
+\end_layout
+
+\begin_layout Subsubsection
+User Function
+\end_layout
+
+\begin_layout Itemize
+User Login: the user get logged into the system providing his account information; 
+\end_layout
+
+\begin_layout Itemize
+User Signup: the user (previously Guest) request a signup to the system providing his personal information; 
+\end_layout
+
+\begin_layout Itemize
+Request Taxi: the user request a taxi to his location; 
+\end_layout
+
+\begin_layout Itemize
+Book Taxi: the user reserve a taxi to a specific location at the specific time; 
+\end_layout
+
+\begin_layout Itemize
+Cancel request: the user cancel the previous request or reservation; 
+\end_layout
+
+\begin_layout Itemize
+Report taxi: the user report a problem with the taxi driver or the service; 
+\end_layout
+
+\begin_layout Itemize
+Show Profile: the system provides the user information; 
+\end_layout
+
+\begin_layout Itemize
+Modify Profile: the user edit his information; 
+\end_layout
+
+\begin_layout Subsubsection
+System Function
+\end_layout
+
+\begin_layout Itemize
+Notification to User 
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Incoming taxi: a taxi take charge of the request; 
+\end_layout
+
+\begin_layout Enumerate
+No taxi available; 
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Notification to Taxi driver 
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Taxi request: a user need a taxi; 
+\end_layout
+
+\begin_layout Enumerate
+First of the queue: the taxi is the first of the queue of the current zone; 
+\end_layout
+
+\begin_layout Enumerate
+Queue change: notification to the taxi of the new position of the queue; 
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Queues management: change the queues after a request reply or new taxi driver in zone; 
+\end_layout
+
+\begin_layout Subsection
+User Characteristic
+\end_layout
+
+\begin_layout Subsubsection
+User:
+\end_layout
+
+\begin_layout Itemize
+Low knowledge of mobile app use; 
+\end_layout
+
+\begin_layout Itemize
+Age: over 18; 
+\end_layout
+
+\begin_layout Subsubsection
+Taxi Driver:
+\end_layout
+
+\begin_layout Itemize
+Owner of taxi license and driver license; 
+\end_layout
+
+\begin_layout Itemize
+Low knowledge of mobile app use; 
+\end_layout
+
+\begin_layout Itemize
+Good knowledge of the local language; 
+\end_layout
+
+\begin_layout Subsection
+Constrains
+\end_layout
+
+\begin_layout Itemize
+GPS Coverage; 
+\end_layout
+
+\begin_layout Itemize
+Privacy policy; 
+\end_layout
+
+\begin_layout Itemize
+Devices Constrains (presence of GPS and Internet connection); 
+\end_layout
+
+\begin_layout Subsection
+Assumption and Dependecies
+\end_layout
+
+\begin_layout Subsection
+Apportioning of requirements
+\end_layout
+
+\end_body
+\end_document

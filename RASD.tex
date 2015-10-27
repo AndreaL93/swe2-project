@@ -1,0 +1,280 @@
+\documentclass[english]{article}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage{babel}
+\begin{document}
+
+\title{Requirements Analysis and Specification Document\pagebreak{}}
+
+\author{
+	Grattarola Daniele, Inajjar Ilyas, Lui Andrea
+}
+
+\maketitle
+\tableofcontents{}
+
+\pagebreak{}
+
+
+\section{Introduction}
+
+
+\subsection{Purpose}
+
+The presented document is the Requirements Analysis and Specification
+document (RASD) for the MyTaxiService platform project. 
+
+The main purpose of this document is to analyze the problems that
+the new system is to solve and the customer's necessities, to identify
+use cases and actors, to describe the functional and non-functional
+requirements of the platform along with existing constraints, and
+to propose an in-depth specification of the system before moving on
+to the more concrete design phase. 
+
+This document is intended for stakeholders, software engineers, and
+programmers and is to be used as reference throughout the whole development
+of the system. Each phase of the project must be brought on with this
+document in mind, and any implementation of the system must be clearly
+designed to reflect the specifications presented here.
+
+The secondary audience for this document includes system maintainers
+and developers who wish to integrate the platform's services within
+their own software.
+
+
+\subsection{Scope}
+
+The aim of this project is to create the MyTaxiService platform, a
+web based information system to manage the taxi service of Pallet
+Town. 
+
+The purpose of the platform is:
+\begin{enumerate}
+\item To provide users with a web application and a mobile application,
+with which to easily make use of the town's taxi service.
+\item To provide taxi drivers with a mobile application, with which to manage
+customers' requests (submitted through the above mentioned systems)
+\end{enumerate}
+In short, the platform is to be an integrated infrastructure to manage
+the initial interaction between customers and taxi drivers, to aid
+the former in requesting a taxi ride, and to enable the latter in
+managing such requests. 
+
+The platform will therefore be used exclusively to support the town's
+taxi service, and is aimed at making the taxi request process much
+efficient by reducing overall costs, communication overhead and potential
+requests overloads. 
+
+The platform will implement all necessary functions on both the users'
+side and the drivers', while keeping the two aspects separate and
+unaware of each other. It will also be given a particular focus to
+the storage of user data, in order to maximize privacy and security,
+and to the extensibility of the system, in order to make the platform
+flexible to potential changes in the requirements. 
+
+
+\subsection{Definitions, acronyms, and abbreviations}
+
+Throughout this document, the following definitions will be applied
+without further explanations:
+\begin{itemize}
+\item \textbf{Platform}: the set of software applications and hardware infrastructure
+that make up the MyTaxiService service; these include the back-end
+server software, the web application and the mobile application used
+by the customers, the mobile application used by the taxi drivers,
+and all the necessary hardware needed to run the mentioned software
+and any needed support software. 
+\item \textbf{System}: the software run on the back-end server of the platform
+which is used to handle the communication between the user applications.
+The term also addresses all the necessary software components that
+are needed to store data, perform calculations and manage the hardware
+(e.g. an operating system).
+\item \textbf{User-side application}: software run on a personal device
+which is used to send taxi requests to the system and to handle the
+system's replies. It is designed to be used by customers (see below)
+and can either be a mobile application (run on a smartphone or tablet)
+or a web application (run on any personal device through an Internet
+browser). 
+\item \textbf{Taxi-side application}: software run on a personal device
+which is used to manage taxi requests forwarded by the system and
+to reply to the system with information on how to handle the requests.
+It is designed to be used by taxi drivers (see below) and is a mobile
+application (run on a smartphone or tablet). 
+\item \textbf{Taxi driver}: the owner of a taxi license in Pallet Town,
+who uses the taxi-side application to interact with the platform.
+\item \textbf{Customer}: a person which intends to exploit the taxi service
+of the town, and who uses the user-side applications to interact with
+the platform.
+\end{itemize}
+The following acronyms will also be used in place of the extended
+form:
+\begin{itemize}
+\item \textbf{RASD}: Requirement Analysis and Specification Document
+\end{itemize}
+Finally, in order to increase readability the following abbreviations
+will be used in place of the full words or sentences:
+\begin{itemize}
+\item \textbf{e.g.: }\textit{exempli gratia}
+\end{itemize}
+
+\subsection{References}
+
+This document contains references to other documents which are part
+of the complete set of deliverables used to describe and design the
+project. The references are intended as follows: 
+\begin{itemize}
+\item \textbf{Document 1}: ..
+\item \textbf{Document 2}: ...
+\end{itemize}
+
+\subsection{Overview}
+
+The presented RASD is divided in sections and structured as follows: 
+\begin{itemize}
+\item \textbf{Section 1 - Introduction}: contains a high level description
+of the project, along with its goals, and contains information about
+the document itself, such as abbreviations used and the document structure. 
+\item \textbf{Section 2 - Overall description}: 
+\item \textbf{Section 3 - Requirements}:\end{itemize}
+
+\section{Overall Description}
+
+\subsection{Product Prespective}
+
+The system requirements mainly depends on the web technology necessary to communicate between actors 
+(taxi, customer, guest) and the GPS due to locate the taxi customer in the specific sector and also to create the taxi queue. 
+The central node system need a server (connected on the web) to elaborate the requests and store the users and taxis information. 
+The end-user system relies on the guest operating system (usually a mobile OS like Android, iOS, Windows Phone, blackberry OS, \ldots) 
+on the internal GPS system and Internet connection. Of course, all the overall system should only work inside the city.
+
+\subsubsection{System Interfaces}
+
+\begin{itemize}
+	\item Google Maps API for taxi ruote
+\end{itemize}
+
+\subsubsection{User Interface}
+
+%mockups
+
+\subsubsection{Hardware Interface}
+
+\begin{itemize}
+	\item Ethernet connection
+	\item GPS system
+	\item High fault tolerance of the central node
+	\item Firewall: \emph{server store sensitive data}
+	\item Router
+\end{itemize}
+
+\subsubsection{Software Interface}
+
+\begin{itemize}
+	\item Apache Server for CGI
+	\item DBMS
+\end{itemize}
+
+\subsubsection{Connection Interface}
+
+\begin{itemize}
+	\item EDGE, HSDPA, 3G, 4G
+	\item HTML, SOAP/REST protocols
+\end{itemize}
+
+\subsubsection{Memory Constrains}
+
+\begin{itemize}
+	\item Server: 128GB vRAM  requiered, 512GB recommended
+	\item 2TB storage capacity + 64GB flash (32GB x2 mirroring) for applications system and server OS
+\end{itemize}
+
+\subsubsection{Operations}
+
+\begin{itemize}
+	\item Taxi Operations: login, signup, availability notifications, request reply, report
+	\item User Operations: login, signup, requests operations, user profile operations (show, edit)
+	\item System Operations: notifications (to user and taxi driver), queue managment
+	\item Backup operations (scheduled at 4AM every day)
+	\item Restore operaions from secondary storage
+\end{itemize}
+
+\subsubsection{Site adaptation requirements}
+
+\begin{itemize}
+	\item UPS system
+	\item 250V/110V Electrical system
+	\item Ethernet connection
+	\item Anti-thief system, safety room (safety grid on each door and eventually windows) and alarm
+	\item Anti-fire system and alaram
+	\item Anti-flooding system
+	\item Air conditioning
+\end{itemize}
+
+\subsection{Product Function}
+
+\subsubsection{Taxi Function}
+\begin{itemize}
+	\item Taxi Login: the taxi driver logs into the system;
+	\item Taxi Signup: the taxi driver provides his personal information, Username and Password, taxi  and driving license to the Operator;
+	\item Notification of Availability: with this operation the taxi driver notifies is presence in a specific zone of the town;
+	\item Notification of Unavailability: the taxi driver notify the end of his service;
+	\item Taking charge: the taxi driver positively reply to a customer request;
+	\item Reject request: the taxi driver negatively reply to a customer request;
+	\item Report user: the taxi driver report a problem with customer;
+\end{itemize}
+
+\subsubsection{User Function}
+\begin{itemize}
+	\item User Login: the user get logged into the system providing his account information;
+	\item User Signup: the user (previously Guest) request a signup to the system providing his personal information;
+	\item Request Taxi: the user request a taxi to his location;
+	\item Book Taxi: the user reserve a taxi to a specific location at the specific time;
+	\item Cancel request: the user cancel the previous request or reservation;
+	\item Report taxi: the user report a problem with the taxi driver or the service;
+	\item Show Profile: the system provides the user information;
+	\item Modify Profile: the user edit his information;
+\end{itemize}
+
+\subsubsection{System Function}
+\begin{itemize}
+	\item Notification to User
+	\begin{enumerate}
+		\item Incoming taxi: a taxi take charge of the request;
+		\item No taxi available;
+	\end{enumerate}
+	\item Notification to Taxi driver
+	\begin{enumerate}
+		\item Taxi request: a user need a taxi;
+		\item First of the queue: the taxi is the first of the queue of the current zone;
+		\item Queue change: notification to the taxi of the new position of the queue;
+	\end{enumerate}
+	\item Queues management: change the queues after a request reply or new taxi driver in zone;
+\end{itemize}
+
+\subsection{User Characteristic}
+
+\subsubsection{User:}
+\begin{itemize}
+	\item Low knowledge of mobile app use;
+	\item Age: over 18;
+\end{itemize}
+
+\subsubsection{Taxi Driver:}
+\begin{itemize}
+	\item Owner of taxi license and driver license;
+	\item Low knowledge of mobile app use;
+	\item Good knowledge of the local language;
+\end{itemize}
+
+\subsection{Constrains}
+\begin{itemize}
+	\item GPS Coverage;
+	\item Privacy policy;
+	\item Devices Constrains (presence of GPS and Internet connection);
+\end{itemize}
+
+\subsection{Assumption and Dependecies}
+
+\subsection{Apportioning of requirements}
+
+\end{document}
