@@ -1,0 +1,460 @@
+#LyX 2.1 created this file. For more info see http://www.lyx.org/
+\lyxformat 474
+\begin_document
+\begin_header
+\textclass article
+\begin_preamble
+\usepackage{babel}
+\end_preamble
+\use_default_options false
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding iso8859-15
+\fontencoding T1
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_math auto
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref true
+\pdf_bookmarks true
+\pdf_bookmarksnumbered false
+\pdf_bookmarksopen false
+\pdf_bookmarksopenlevel 1
+\pdf_breaklinks false
+\pdf_pdfborder false
+\pdf_colorlinks false
+\pdf_backref false
+\pdf_pdfusetitle true
+\papersize default
+\use_geometry false
+\use_package amsmath 1
+\use_package amssymb 0
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Section
+Overall Description
+\end_layout
+
+\begin_layout Subsection
+Product Perspective
+\end_layout
+
+\begin_layout Standard
+The platform aims at replacing the traditional means of communication between
+ taxi drivers and customers, and it is therefore designed as a stand-alone
+ entity that is able to operate with a minimum set of dependencies towards
+ external systems.
+ 
+\end_layout
+
+\begin_layout Standard
+The external interfaces on which the system relies, in order to be operational,
+ are described in the following subsections.
+\end_layout
+
+\begin_layout Subsubsection
+System Interfaces
+\end_layout
+
+\begin_layout Itemize
+Google Maps API: used in both the back-end and the taxi-side applications,
+ this free API is necessary to elaborate routes and display maps.
+ The system interacts with the API through standard GET requests.
+\end_layout
+
+\begin_layout Itemize
+GPS: this well known system is required by the mobile applications to get
+ information about the users' position.
+ The interaction happens through the standard GPS protocol.
+\end_layout
+
+\begin_layout Subsubsection
+User Interfaces
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+%mockups
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Hardware Interfaces
+\end_layout
+
+\begin_layout Itemize
+Router: the internet connectivity of the back-end system towards the external
+ world is managed by a physical router that automatically manages ports
+ and resources in order to realize standard communication protocols such
+ as NAT and DHCP.
+\end_layout
+
+\begin_layout Itemize
+Firewall: access to the back-end system is protected through the use of
+ a professional grade physical firewall which is directly linked to the
+ router and automatically allocates ports and resources.
+ 
+\end_layout
+
+\begin_layout Itemize
+Device support: the back-end system is designed to be run on usual server
+ hardware with a high fault-tolerance degree and supports hardware scaling
+ (such as replication); the mobile applications are designed to be run on
+ ARM based architectures; the user-side web application does not have specific
+ hardware requirements, since it relies on a different level of abstraction
+ than its mobile counterpart which is not to be taken into account in the
+ design of the hardware infrastructure.
+\end_layout
+
+\begin_layout Subsubsection
+Software Interfaces
+\end_layout
+
+\begin_layout Itemize
+GNU/Linux Red Hat Enterprise Linux: operating system run on the back-end
+ that acts as a virtualization level between the hardware and the software.
+ Detailed documentation about the software can be found at https://access.redhat.c
+om/documentation/en/red-hat-enterprise-linux/
+\end_layout
+
+\begin_layout Itemize
+Apache WebServer: software bundle run on the back-end, which is used to
+ allow interaction between the back-end system and the user-side application.
+ It is used to handle standard HTTP requests from the customer-side web
+ application and to provide CGI services (Apache Module mod_cgid - https://httpd.
+apache.org/docs/2.4/mod/mod_cgid.html) to all the user-side applications.
+ Detailed documentation about the software is found at https://httpd.apache.org/do
+cs/2.4/
+\end_layout
+
+\begin_layout Itemize
+SQLite: DBMS software component run on the back-end, which is used to store
+ user data in a non-resource-intensive fashion.
+ Detailed documentation about this module is found at https://www.sqlite.org/docs.h
+tml
+\end_layout
+
+\begin_layout Subsubsection
+Connection Interfaces
+\end_layout
+
+\begin_layout Itemize
+EDGE, HSDPA, 3G, 4G 
+\end_layout
+
+\begin_layout Itemize
+HTML, SOAP/REST protocols 
+\end_layout
+
+\begin_layout Subsubsection
+Memory Constrains
+\end_layout
+
+\begin_layout Itemize
+Server: 128GB vRAM required, 512GB recommended 
+\end_layout
+
+\begin_layout Itemize
+2TB storage capacity + 64GB flash (32GB x2 mirroring) for applications system
+ and server OS 
+\end_layout
+
+\begin_layout Subsubsection
+Operations
+\end_layout
+
+\begin_layout Itemize
+Taxi Operations: login, signup, availability notifications, request reply,
+ report 
+\end_layout
+
+\begin_layout Itemize
+User Operations: login, signup, requests operations, user profile operations
+ (show, edit) 
+\end_layout
+
+\begin_layout Itemize
+System Operations: notifications (to user and taxi driver), queue management
+ 
+\end_layout
+
+\begin_layout Itemize
+Backup operations (scheduled at 4AM every day) 
+\end_layout
+
+\begin_layout Itemize
+Restore operaions from secondary storage 
+\end_layout
+
+\begin_layout Subsubsection
+Site adaptation requirements
+\end_layout
+
+\begin_layout Itemize
+UPS system 
+\end_layout
+
+\begin_layout Itemize
+250V/110V Electrical system 
+\end_layout
+
+\begin_layout Itemize
+Ethernet connection 
+\end_layout
+
+\begin_layout Itemize
+Anti-thief system, safety room (safety grid on each door and eventually
+ windows) and alarm 
+\end_layout
+
+\begin_layout Itemize
+Anti-fire system and alarm 
+\end_layout
+
+\begin_layout Itemize
+Anti-flooding system 
+\end_layout
+
+\begin_layout Itemize
+Air conditioning 
+\end_layout
+
+\begin_layout Subsection
+Product Function
+\end_layout
+
+\begin_layout Subsubsection
+Taxi Function
+\end_layout
+
+\begin_layout Itemize
+Taxi Login: the taxi driver logs into the system; 
+\end_layout
+
+\begin_layout Itemize
+Taxi Sign-up: the taxi driver provides his personal information, Username
+ and Password, taxi and driving license to the Operator; 
+\end_layout
+
+\begin_layout Itemize
+Notification of Availability: with this operation the taxi driver notifies
+ is presence in a specific zone of the town; 
+\end_layout
+
+\begin_layout Itemize
+Notification of Unavailability: the taxi driver notify the end of his service;
+ 
+\end_layout
+
+\begin_layout Itemize
+Taking charge: the taxi driver positively reply to a customer request; 
+\end_layout
+
+\begin_layout Itemize
+Reject request: the taxi driver negatively reply to a customer request;
+ 
+\end_layout
+
+\begin_layout Itemize
+Report user: the taxi driver report a problem with customer; 
+\end_layout
+
+\begin_layout Subsubsection
+User Function
+\end_layout
+
+\begin_layout Itemize
+User Login: the user get logged into the system providing his account informatio
+n; 
+\end_layout
+
+\begin_layout Itemize
+User Sign-up: the user (previously Guest) request a signup to the system
+ providing his personal information; 
+\end_layout
+
+\begin_layout Itemize
+Request Taxi: the user request a taxi to his location; 
+\end_layout
+
+\begin_layout Itemize
+Book Taxi: the user reserve a taxi to a specific location at the specific
+ time; 
+\end_layout
+
+\begin_layout Itemize
+Cancel request: the user cancel the previous request or reservation; 
+\end_layout
+
+\begin_layout Itemize
+Report taxi: the user report a problem with the taxi driver or the service;
+ 
+\end_layout
+
+\begin_layout Itemize
+Show Profile: the system provides the user information; 
+\end_layout
+
+\begin_layout Itemize
+Modify Profile: the user edit his information; 
+\end_layout
+
+\begin_layout Subsubsection
+System Function
+\end_layout
+
+\begin_layout Itemize
+Notification to User 
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Incoming taxi: a taxi take charge of the request; 
+\end_layout
+
+\begin_layout Enumerate
+No taxi available; 
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Notification to Taxi driver 
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Taxi request: a user need a taxi; 
+\end_layout
+
+\begin_layout Enumerate
+First of the queue: the taxi is the first of the queue of the current zone;
+ 
+\end_layout
+
+\begin_layout Enumerate
+Queue change: notification to the taxi of the new position of the queue;
+ 
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Queues management: change the queues after a request reply or new taxi driver
+ in zone; 
+\end_layout
+
+\begin_layout Subsection
+User Characteristic
+\end_layout
+
+\begin_layout Subsubsection
+User:
+\end_layout
+
+\begin_layout Itemize
+Low knowledge of mobile app use; 
+\end_layout
+
+\begin_layout Itemize
+Age: over 18; 
+\end_layout
+
+\begin_layout Subsubsection
+Taxi Driver:
+\end_layout
+
+\begin_layout Itemize
+Owner of taxi license and driver license; 
+\end_layout
+
+\begin_layout Itemize
+Low knowledge of mobile app use; 
+\end_layout
+
+\begin_layout Itemize
+Good knowledge of the local language; 
+\end_layout
+
+\begin_layout Subsection
+Constrains
+\end_layout
+
+\begin_layout Itemize
+GPS Coverage; 
+\end_layout
+
+\begin_layout Itemize
+Privacy policy; 
+\end_layout
+
+\begin_layout Itemize
+Devices Constrains (presence of GPS and Internet connection); 
+\end_layout
+
+\begin_layout Subsection
+Assumption and Dependencies
+\end_layout
+
+\begin_layout Subsection
+Apportioning of requirements
+\end_layout
+
+\end_body
+\end_document
