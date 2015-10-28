@@ -208,6 +208,15 @@ Platform
 \series bold
 System
 \series default
+: any subset of software components of the platform (it will be specified
+ before using the term).
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Back-end
+\series default
 : the software run on the back-end server of the platform which is used
  to handle the communication between the user applications.
  The term also addresses all the necessary software components that are
@@ -218,9 +227,9 @@ System
 \begin_layout Itemize
 
 \series bold
-User-side application
+Customer-side applicat
 \series default
-: software run on a personal device which is used to send taxi requests
+ion: software run on a personal device which is used to send taxi requests
  to the system and to handle the system's replies.
  It is designed to be used by customers (see below) and can either be a
  mobile application (run on a smartphone or tablet) or a web application
@@ -239,6 +248,14 @@ Taxi-side application
  It is designed to be used by taxi drivers (see below) and is a mobile applicati
 on (run on a smartphone or tablet).
  
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+User-side application
+\series default
+: the set of customer-side and taxi-side applications
 \end_layout
 
 \begin_layout Itemize
@@ -269,6 +286,22 @@ The following acronyms will also be used in place of the extended form:
 RASD
 \series default
 : Requirement Analysis and Specification Document
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+CGI
+\series default
+: Common Gateway Interface
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+DBMS
+\series default
+: Data Base Management System
 \end_layout
 
 \begin_layout Standard
