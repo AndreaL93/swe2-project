@@ -8,6 +8,10 @@
 
 \title{Specific Requirement}
 
+\section{UseCase Diagram}
+
+\includegraphics[width=\textwidth]{UseCase}
+
 \section{Sequence Diagram}
 
 \subsection{Signup}
@@ -21,9 +25,9 @@ Preconditions &  The Guest is not registered into the system \\
 Execution Flow &  
 		\begin{enumerate}
 			\item The Guest request the registration page
-			\item The System requieres the Signup information
+			\item The System requires the Signup information
 			\item The Guest fill the form and submit the request
-			\item The System check the unicity of the Username and E-Mail
+			\item The System check the uniqueness of the Username and E-Mail
 			\item The System create the User (or Taxi drive) profile
 			\item The System send the confirm the the Guest
 		\end{enumerate} 
@@ -42,12 +46,12 @@ Exceptions & The E-Maill or username are not unique or, in the case of taxi driv
 \hline
 Actors & Guest \\
 \hline
-Preconditions &   The Guest has alredy a profile into the System\\
+Preconditions &   The Guest has already a profile into the System\\
 \hline
 Execution Flow &  
 		\begin{enumerate}
 			\item The Guest request the login page
-			\item The System requieres the Login information (Username, Password)
+			\item The System requires the Login information (Username, Password)
 			\item The Guest fill the form and submit the request
 			\item The System check the Username and Password
 			\item The System send the confirmation of Login
@@ -73,10 +77,10 @@ Preconditions & The User should not be banned \\
 \hline
 Execution Flow &  
 		\begin{enumerate}
-			\item The Guest request the TaxiRequest page
-			\item The System requieres the type of request the User wants to perform
+			\item The Guest request the Taxi Request page
+			\item The System requires the type of request the User wants to perform
 			\item The User provide the choice to the System
-			\item The System ask for the information to perform the choosed request
+			\item The System ask for the information to perform the choose request
 			\item The User fill the form and send the information to the System
 			\item The System forward the request to the first Taxi Driver of the local queue
 			\item If the Taxi Driver answer positively to the request he take in charge the User, otherwise he deny the request
@@ -96,6 +100,40 @@ Exceptions &
 
 \includegraphics[width=\textwidth]{TaxiRequest}
 
+\subsection{Manage Taxi Request}
+
+\begin{tabular}{lp{8cm}}
+\hline
+Actors & Passenger \\
+\hline
+Preconditions &  \\
+\hline
+Execution Flow &  
+		\begin{enumerate}
+			\item The Passenger request the Taxi Request Management page
+			\item The System load the page and return it to the Passenger
+			\item The Passenger can modify the Request full filling the modify Request
+			\item The System modify the request and return a confirm to the Passenger
+			\item The Passenger can delete the request, submitting the operation to the System
+			\item The System update the queue and return a confirmation to the Passenger
+		\end{enumerate} 
+	\\ 
+\hline
+Postconditions & 
+	\begin{itemize}
+		\item If the Passenger choose to modify the Request, the request is updated 
+		\item If the Passenger choose to delete the Request, the request is canceled and the taxi is now in queue
+	\end{itemize} \\
+\hline
+Exceptions & 
+	\begin{itemize} 
+		\item The Passenger provides incorrect informations in the modify request form
+		\item The Passenger cancel the request too late
+	\end{itemize}
+\end{tabular}
+
+\includegraphics[width=\textwidth]{ManageTaxiRequest}
+
 \subsection{Report Taxi}
 
 \begin{tabular}{lp{8cm}}
@@ -111,7 +149,7 @@ Execution Flow &
 			\item The Passenger fill the form and submit the report
 			\item The System check the data obtained
 			\item The System update the Taxi Driver informations
-			\item The System notify to the Passenger the succesful of the operation
+			\item The System notify to the Passenger the successful of the operation
 		\end{enumerate} 
 	\\ 
 \hline
@@ -137,7 +175,7 @@ Execution Flow &
 			\item The Taxi Driver fill the form and submit the report
 			\item The System check the data obtained
 			\item The System update the User informations
-			\item The System notify to the Taxi Driver the succesful of the operation
+			\item The System notify to the Taxi Driver the successful of the operation
 		\end{enumerate} 
 	\\ 
 \hline
@@ -148,23 +186,23 @@ Exceptions & The Taxi Driver provides wrong informations in the report form
 
 \includegraphics[width=\textwidth]{ReportUser}
 
-\subsection{Manage Personal Infromations}
+\subsection{Manage Personal Informations}
 
 \begin{tabular}{lp{8cm}}
 \hline
-Actors & User \\
+Actors & User or Taxi Driver \\
 \hline
 Preconditions & \\
 \hline
 Execution Flow &  
 		\begin{enumerate}
-			\item The User request the User profile page
-			\item The System returns the personal informations of the User
-			\item The User can request the edit of the profile
+			\item The User (or Taxi Driver) request the User profile page
+			\item The System returns the personal informations of the User (or Taxi Driver)
+			\item The User (or Taxi Driver) can request the edit of the profile
 			\item The System return the editable informations of the profile
-			\item The User can edit those data and send the changes to the System
+			\item The User (or Taxi Driver) can edit those data and send the changes to the System
 			\item The System check the correctness of the new Informations
-			\item If the informations are correct send the Change Confirm to the User, otherwise send a error message to the User
+			\item If the informations are correct send the Change Confirm to the User (or Taxi Driver), otherwise send back an error message
 		\end{enumerate} 
 	\\ 
 \hline
@@ -198,7 +236,7 @@ Postconditions & The Taxi Driver is now Available \\
 Exceptions & 
 	\begin{itemize} 
 		\item The Taxi Driver is located in a invalid zone
-		\item The Taxi Driver is carring a Passenger
+		\item The Taxi Driver is carrying a Passenger
 		\item The Taxi Driver is yet available
 	\end{itemize}
 \end{tabular}
@@ -215,10 +253,10 @@ Preconditions & The Taxi is available\\
 \hline
 Execution Flow &  
 		\begin{enumerate}
-			\item The Taxi Driver request the Report Proble page
+			\item The Taxi Driver request the Report Problem page
 			\item The System returns the page of the Report requiring problem informations
 			\item The Taxi Driver fill the form and send the information
-			\item The Taxi Driver can request another Taxi for the User who is carring (if is carring one)
+			\item The Taxi Driver can request another Taxi for the User who is carrying (if is carrying one)
 			\item If the Taxi Driver request another Taxi the System looks for a available Taxi Driver
 			\item If exist an available Taxi change the carrier of the User with the new Taxi Driver and send him, otherwise notify the unavailability
 			\item The System return the success of the operation
