@@ -95,18 +95,14 @@ The platform aims at replacing the traditional means of communication between
  taxi drivers and customers, and it is therefore designed as a stand-alone
  entity that is able to operate with a minimum set of dependencies towards
  external systems.
-\end_layout
-
-\begin_layout Standard
-The external interfaces on which the system relies, in order to be operational,
- are described in the following subsections.
+ 
 \end_layout
 
 \begin_layout Subsubsection
 Software Interfaces 
 \begin_inset CommandInset label
 LatexCommand label
-name "sub:Software-Dependencies"
+name "sub:Software-Interfaces"
 
 \end_inset
 
@@ -114,40 +110,52 @@ name "sub:Software-Dependencies"
 \end_layout
 
 \begin_layout Itemize
-Google Maps API: used in both the back-end and the taxi-side applications,
- this free API is necessary to elaborate routes and display maps.
+
+\series bold
+Google Maps API
+\series default
+: used in both the back-end and the taxi-side applications, this free API
+ is necessary to elaborate routes and display maps.
  The system interacts with the API through standard GET requests.
 \end_layout
 
 \begin_deeper
 \begin_layout Itemize
-Mnemonic: elaborate routes and display maps 
+Mnemonic: map rendering and route elaboration
 \end_layout
 
 \begin_layout Itemize
-Source: https://developers.google.com/maps/ 
+Documentation: https://developers.google.com/maps/ 
 \end_layout
 
 \end_deeper
 \begin_layout Itemize
-GPS: this well known system is required by the mobile applications to get
- information about the users' position.
+
+\series bold
+GPS
+\series default
+: this well known system is required by the mobile applications to get informati
+on about the users' position.
  The interaction happens through the standard GPS protocol provided by the
  OS of the users' devices.
 \end_layout
 
 \begin_deeper
 \begin_layout Itemize
-Mnemonic: get information about the user position 
+Mnemonic: user positions gathering
 \end_layout
 
 \begin_layout Itemize
-Source: devices' OSs' protocols 
+Documentation: refer to OS-specific documentation
 \end_layout
 
 \end_deeper
 \begin_layout Itemize
-Red Hat Enterprise Linux: operating system run on the back-end server.
+
+\series bold
+Red Hat Enterprise Linux
+\series default
+: operating system run on the back-end server.
 \end_layout
 
 \begin_deeper
@@ -156,14 +164,18 @@ Mnemonics: back-end OS
 \end_layout
 
 \begin_layout Itemize
-Source: https://access.redhat.com/documentation/en/red-hat-enterprise-linux/
- 
+Documentation: https://access.redhat.com/documentation/en/red-hat-enterprise-linux
+/ 
 \end_layout
 
 \end_deeper
 \begin_layout Itemize
-Apache WebServer: software bundle run on the back-end, which is used to
- allow interaction between the back-end system and the user-side application.
+
+\series bold
+Apache WebServer
+\series default
+: software bundle run on the back-end, which is used to allow interaction
+ between the back-end system and the user-side application.
  It is used to handle standard HTTP requests from the customer-side web
  application and to provide CGI services to all the user-side applications.
 \end_layout
@@ -174,13 +186,17 @@ Mnemonics: web-server
 \end_layout
 
 \begin_layout Itemize
-Source: https://httpd.apache.org/docs/2.4/ 
+Documentation: https://httpd.apache.org/docs/2.4/ 
 \end_layout
 
 \end_deeper
 \begin_layout Itemize
-SQLite: DBMS software component run on the back-end, which is used to store
- user data in a non-resource-intensive fashion.
+
+\series bold
+SQLite
+\series default
+: DBMS software component run on the back-end, which is used to store user
+ data in a non-resource-intensive fashion.
 \end_layout
 
 \begin_deeper
@@ -189,36 +205,45 @@ Mnemonics: DBMS
 \end_layout
 
 \begin_layout Itemize
-Source: https://www.sqlite.org/docs.html 
+Documentation: https://www.sqlite.org/docs.html 
 \end_layout
 
 \end_deeper
-\begin_layout Subsubsection
-Device support
-\end_layout
-
-\begin_layout Standard
-Device support: the back-end system is designed to be run on usual server
- hardware with a high fault-tolerance degree and supports hardware scaling
- (such as replication); the mobile applications are designed to be run on
- ARM based architectures; the user-side web application does not have specific
- hardware requirements, since it relies on a different level of abstraction
- (web browser) than its mobile counterpart which is not to be taken into
- account in the design of the hardware infrastructure.
-\end_layout
-
 \begin_layout Subsubsection
 User interface
 \end_layout
 
 \begin_layout Subsubsection
-Memory constraints
+Device support
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Device-support"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-It is assumed that enough memory will be provided to the system in order
- to scale in relation to the user traffic.
- More details on the topic will be provided in the following sections.
+The back-end system is designed to be run exclusively on usual x64 server
+ hardware and may therefore require fine-tuning of its environment, but
+ needs to be flexible for hardware scaling (such as replication) in order
+ to ensure its longevity.
+ 
+\end_layout
+
+\begin_layout Standard
+The user-side mobile applications, on the other hand, are designed to be
+ run on standard SOC architectures like the vast majority that is found
+ on smartphones and tablets, and take into account the differences in the
+ mobile operating systems that can be run on the SOC.
+\end_layout
+
+\begin_layout Standard
+Finally, the customer-side web application does not have specific device
+ requirements, since it relies on a different level of abstraction (web
+ browser) which is not to be considered as a hardware interface.
+ 
 \end_layout
 
 \begin_layout Subsection
@@ -227,19 +252,9 @@ Product functions
 
 \begin_layout Standard
 The fully developed platform should implement the following high level functions.
- 
 \end_layout
 
 \begin_layout Itemize
-\begin_inset Argument item:1
-status collapsed
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
 
 \series bold
 Customer-side application
@@ -260,7 +275,7 @@ status open
 
 \end_inset
 
-Allow user to request a taxi and receive result of request
+Allow users to request a taxi and receive result of request
 \end_layout
 
 \begin_layout Enumerate
@@ -275,7 +290,7 @@ status open
 
 \end_inset
 
-Allow user to manage their profile
+Allow users to manage their profile
 \end_layout
 
 \begin_layout Enumerate
@@ -290,20 +305,11 @@ status open
 
 \end_inset
 
-Allow user to issue taxi reports
+Allow users to issue taxi reports
 \end_layout
 
 \end_deeper
 \begin_layout Itemize
-\begin_inset Argument item:1
-status open
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
 
 \series bold
 Taxi-side application
@@ -324,7 +330,7 @@ status open
 
 \end_inset
 
-Allow user to manage incoming requests and send back confirmations 
+Allow users to manage incoming requests and send back confirmations 
 \end_layout
 
 \begin_layout Enumerate
@@ -339,50 +345,19 @@ status open
 
 \end_inset
 
-Allow user to issue customer reports
+Allow users to issue customer reports
 \end_layout
 
 \end_deeper
 \begin_layout Subsection
-User Characteristic
-\end_layout
-
-\begin_layout Standard
-As per the definitions given in 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sub:Definitions,-acronyms,-and"
-
-\end_inset
-
- the respective applications are targeted to their respective markets: these
- consist of any citizen of the town for the customer-side applications,
- and of any recognized taxi driver for the taxi-side application.
-\end_layout
-
-\begin_layout Standard
-Customers do not need specific competences to use the app other than a basic
- knowledge of web browsing (customers only) and of their mobile operating
- system (both customers and taxi drivers).
-\end_layout
-
-\begin_layout Subsection
-Domain Assumptions
-\end_layout
-
-\begin_layout Standard
-Taxi licenses databases
-\end_layout
-
-\begin_layout Subsection
-Actors and Functionalities
+Actors and related functionalities
 \end_layout
 
 \begin_layout Standard
 The platform may have different functional and non-functional requirements
  based on the user that is interacting with it.
  Throughout this document, the set of these different requirements has been
- referred to through the terminology specified in 
+ referred to with the terminology specified in 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sub:Definitions,-acronyms,-and"
@@ -394,19 +369,29 @@ reference "sub:Definitions,-acronyms,-and"
 \end_layout
 
 \begin_layout Standard
-This section is aimed at further formalizing the definition of those requirement
-, based on the different actors that participate in the use of the platform:
- 
+This section is aimed at giving a high level description of the platform,
+ based on the different actors that participate in its use: 
 \end_layout
 
 \begin_layout Itemize
 
 \series bold
-A1 Guest
+\begin_inset Argument item:1
+status open
+
+\begin_layout Plain Layout
+
+\series bold
+[A1]
+\end_layout
+
+\end_inset
+
+ Guest
 \series default
 : any person who wishes to start a session with the platform through one
  of the user-side applications.
- A1 may:
+ [A1] actors may:
 \end_layout
 
 \begin_deeper
@@ -415,11 +400,11 @@ Register a profile into the platform
 \end_layout
 
 \begin_layout Itemize
-Login into the platform 
+Log into the platform 
 \end_layout
 
 \begin_layout Standard
-After completing a login, A1 actors may become either of the two following
+After completing a login, [A1] actors may become either of the two following
  types of actor.
 \end_layout
 
@@ -427,7 +412,18 @@ After completing a login, A1 actors may become either of the two following
 \begin_layout Itemize
 
 \series bold
-A2 Customer
+\begin_inset Argument item:1
+status open
+
+\begin_layout Plain Layout
+
+\series bold
+[A2]
+\end_layout
+
+\end_inset
+
+ Customer
 \series default
 : a person as defined in 
 \begin_inset CommandInset ref
@@ -437,17 +433,28 @@ reference "sub:Definitions,-acronyms,-and"
 \end_inset
 
 .
- Based on what actions A2 completes, they can be further specialized in:
+ Based on what actions [A2] completes, they can be further specialized in:
 \end_layout
 
 \begin_deeper
 \begin_layout Itemize
 
 \series bold
-A2.1 Logged-in Customer
+\begin_inset Argument item:1
+status open
+
+\begin_layout Plain Layout
+
+\series bold
+[A2.1]
+\end_layout
+
+\end_inset
+
+ Logged-in Customer
 \series default
-: an A1 actor who simply logged in to the platform with a customer profile.
- A2.1 may:
+: an [A1] actor who logged in to the platform with a customer profile.
+ [A2.1] actors may:
 \end_layout
 
 \begin_deeper
@@ -463,15 +470,26 @@ View and edit their profile
 \begin_layout Itemize
 
 \series bold
-A2.2 Passenger
+\begin_inset Argument item:1
+status open
+
+\begin_layout Plain Layout
+
+\series bold
+[A2.2]
+\end_layout
+
+\end_inset
+
+ Passenger
 \series default
-: an A2.1 actor who requested a taxi.
- A2.2 may:
+: an [A2.1] actor who issued a taxi request.
+ [A2.2] actors may:
 \end_layout
 
 \begin_deeper
 \begin_layout Itemize
-Cancel or edit the previously issued taxi request 
+Cancel or edit the issued taxi request 
 \end_layout
 
 \begin_layout Itemize
@@ -483,7 +501,18 @@ Issue a taxi report
 \begin_layout Itemize
 
 \series bold
-A3 Taxi driver
+\begin_inset Argument item:1
+status open
+
+\begin_layout Plain Layout
+
+\series bold
+[A3]
+\end_layout
+
+\end_inset
+
+ Taxi driver
 \series default
 : a person as defined in 
 \begin_inset CommandInset ref
@@ -493,12 +522,12 @@ reference "sub:Definitions,-acronyms,-and"
 \end_inset
 
 .
- A3 may:
+ [A3] actors may:
 \end_layout
 
 \begin_deeper
 \begin_layout Itemize
-Handle (accept or refuse) a taxi request issued by an A2 actor.
+Handle (accept or refuse) a taxi request issued by an [A2] actor.
  
 \end_layout
 
@@ -511,64 +540,226 @@ Issue a customer report
 \end_layout
 
 \begin_layout Itemize
-Notify a problem 
+Notify a technical problem 
 \end_layout
 
 \end_deeper
-\begin_layout Section
-Requirements
+\begin_layout Subsubsection
+User characteristics
+\end_layout
+
+\begin_layout Standard
+Users do not need specific competences to use the app other than a basic
+ knowledge of web browsing (customers only) and of their mobile operating
+ system (both customers and taxi drivers).
 \end_layout
 
 \begin_layout Subsection
-Non functional requirements
+Constraints
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Constraints"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-The non functional requirements for the platform have been identified as
- follows: 
+The development of the platform will be limited by the following constraints
+ to which the system must be subject to.
+ These are not listed as part of the specific requirements of the platform
+ because they stem from circumstances beyond the designers' control, and
+ are not directly part of the customer's requests.
+ 
 \end_layout
 
-\begin_layout Itemize
-NF1 Reliability: the system must satisfy the functional requirements with
- 100% of server uptime on the back-end side, and a stable release of the
- user-side applications.
+\begin_layout Enumerate
+
+\series bold
+\begin_inset Argument item:1
+status open
+
+\begin_layout Plain Layout
+
+\series bold
+[C1]
 \end_layout
 
-\begin_deeper
+\end_inset
+
+Privacy policy
+\series default
+: processing of user data, be it personal or related to the use of the platform,
+ is to be carried out according to the national laws and the ways and means
+ of said processing must be clearly defined and available to the users at
+ any time.
+ 
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+\begin_inset Argument item:1
+status open
+
+\begin_layout Plain Layout
+
+\series bold
+[C2]
+\end_layout
+
+\end_inset
+
+Taxi licenses
+\series default
+: the use of the taxi-side application and the related access to the platform,
+ is intended exclusively for taxi drivers officially recognized by the town's
+ appropriate taxi organizations.
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+\begin_inset Argument item:1
+status open
+
+\begin_layout Plain Layout
+
+\series bold
+[C3]
+\end_layout
+
+\end_inset
+
+Data integrity and data security
+\series default
+: users' personal data must be stored according to specific standards that
+ guarantee their integrity and security.
+ Further analysis of this constraint will be carried out in the following
+ sections of the document.
+ 
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+\begin_inset Argument item:1
+status open
+
+\begin_layout Plain Layout
+
+\series bold
+[C4]
+\end_layout
+
+\end_inset
+
+Legal waiver of responsibility
+\series default
+: due to the nature of the platform's domain, the use of the platform can
+ be associated to car accidents and other related possible injuries; users
+ are therefore required to accept a legal disclaimer, in order to use the
+ platform.
+\end_layout
+
+\begin_layout Subsection
+Domain Assumptions
+\end_layout
+
 \begin_layout Standard
-The latter is achieved through constant maintenance of the applications'
- code bases (outside of project scope), while the former needs to be designed
- since the beginning of the project as it relies on specific hardware infrastruc
-tures; these include:
-\end_layout
-
-\end_deeper
-\begin_layout Itemize
-Server farms replication through cloning
-\end_layout
-
-\begin_deeper
-\begin_layout Itemize
-Local data duplication with RAID controllers 
-\end_layout
-
-\begin_layout Itemize
-Data synchronization between the server farms 
-\end_layout
-
-\begin_layout Itemize
-Periodic memory backup on flash storage to allow for faster recovery in
- the event of unexpected system failures 
+Some domain assumption have to be introduced in order to further define
+ the scope of the project, and to clearly state under which assumptions
+ the development should proceed in those areas that are not explicitly covered
+ by the initial customer's specification.
+ 
 \end_layout
 
 \begin_layout Standard
-These measure should minimize the RTO and RPO parameters making them tend
- to zero.
+The mentioned assumptions are the following:
 \end_layout
 
-\end_deeper
-\begin_layout Itemize
-NF2 Performance: 
+\begin_layout Enumerate
+\begin_inset Argument item:1
+status open
+
+\begin_layout Plain Layout
+
+\series bold
+[AS1]
+\end_layout
+
+\end_inset
+
+It is assumed that the user-side devices are capable of running the intended
+ user-side applications, according to the descriptions in section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Device-support"
+
+\end_inset
+
+.
+ Hardware or software compatibilities will not be discussed further.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Argument item:1
+status open
+
+\begin_layout Plain Layout
+
+\series bold
+[AS2]
+\end_layout
+
+\end_inset
+
+It is assumed that a public database exists, which can be exploited to perform
+ checks on the official status of taxi drivers in order to ensure the satisfacti
+on of constraint [C2] of section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Constraints"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Argument item:1
+status open
+
+\begin_layout Plain Layout
+
+\series bold
+[AS3]
+\end_layout
+
+\end_inset
+
+It is assumed that the number of users in the first year of operation will
+ not exceed the platform's capacity, and modifications to the platform will
+ not be needed.
+ Later modifications are not discussed in the present document.
+ 
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Argument item:1
+status open
+
+\begin_layout Plain Layout
+
+\series bold
+[AS4]
+\end_layout
+
+\end_inset
+
+It is assumed that any pre-existing taxi reservation service shall not be
+ integrated with the platform.
 \end_layout
 
 \end_body
