@@ -6,15 +6,55 @@
 \graphicspath{{images/}}
 \begin{document}
 
-\title{Specific Requirement}
+\section{Specific Requirement}
 
-\section{UseCase Diagram}
+\subsection{External interfaces}
+
+\subsection{UseCase Diagram}
 
 \includegraphics[width=\textwidth]{UseCase}
 
-\section{Sequence Diagram}
+\subsection{Scenario}
 
-\subsection{Signup}
+\emph{Adam need to take a taxi}
+
+\subsubsection{Signup}
+Adam is new into the System and wants to signup. He requires the Passenger registration page, fills the form and submit the request to the System. If the email and username are unique the System confirms to Adam the successful of the operations and redirect Adam to the Login page, otherwise it display an error message
+
+\subsubsection{Login}
+Adam, now registered, insert the username and password in the login form and click the login button, the System checks the informations and, in case of correct informations, redirect Adam to his own User profile page, otherwise shows an error message
+
+\emph{Hector is a Taxi Driver logged into the System}
+
+\subsubsection{Available}
+Hector, logged into the System, start his working day opening his Taxi Driver profile page and telling his availability to the System. The System change the queue and notify the position (2nd) in the queue to Hector.
+
+\subsubsection{Taxi Request}
+Adam, now logged into the System, book a Taxi for the 5PM (now 11AM) inserting informations in the Taxi Request page (previously required from the system) and submit the data into the System. Now the System check the informations, if are wrongs display to Adam a message with the error, otherwise start asking to the Taxis queue. The System ask the request to the first of the queue, who reject the request and is moved at the end of the queue. The System repeat the operation with the new first of the queue, Hector now confirm the request and take in charge the request. The System now confirm the successful to Adam, and is now a Passenger.
+
+\subsubsection{Manage Taxi Request}
+Adam opens the Manage Taxi Request page to change the book hour to 6PM, change the hour and, because are missing two hours, the System change the information and notify the change to Hector.
+
+\subsubsection{Report Taxi}
+Hector takes Adam, during the ride Hector lights a cigarette and Adam open the Report Taxi page to complain this behavior, fill the form with the informations and submit this into the System. The System updates the Taxi Driver informations and confirm the end of the operation to Adam.
+
+\subsubsection{Report User}
+After the ride, Adam annoyed for the behavior of Hector refused to pay the Taxi Driver. Hector open the report User page, fills the informations and submit the data. The System updates the User informations adding a negative report and notify the end of the operation to Hector. 
+
+\subsubsection{Manage Personal Informations}
+Adam opens his User Profile page, click on the edit button and change his email, submit the new informations. The System checks the informations, if are right update the Adam profile and notify the success of the operation to Adam.
+
+\subsubsection{Notify Problem}
+Adam opens his User Profile page, click on the edit button and change his email, submit the new informations. The System checks the informations, if are right update the Adam profile and notify the success of the operation to Adam.
+
+\emph{Samuel is a Taxi Driver logged into the System, available in the zone which Hector is now}
+
+\subsubsection{Report Problem}
+Hector during a ride, has a problem with his taxi motor and thought the Report Problem page report the problem filling the form and submitting. The System insert the problem and ask to Hector if needs a new Taxi. Hector positively answer to the request and the System ask to the first of the queue to reach Hector and his Passenger. Samuel, the first of the queue, accept the request and reach his colleague.
+
+\subsection{Functions}
+
+\subsubsection{Signup}
 
 \begin{tabular}{lp{8cm}}
 \hline
@@ -40,7 +80,7 @@ Exceptions & The E-Maill or username are not unique or, in the case of taxi driv
 
 \includegraphics[width=\textwidth]{Signup}
 
-\subsection{Login}
+\subsubsection{Login}
 
 \begin{tabular}{lp{8cm}}
 \hline
@@ -67,7 +107,37 @@ Exceptions & The Usename, password couple is incorrect, so the Guest cannot log 
 
 \includegraphics[width=\textwidth]{Login}
 
-\subsection{Taxi Request}
+\subsubsection{Available}
+
+\begin{tabular}{lp{8cm}}
+\hline
+Actors & Taxi Driver \\
+\hline
+Preconditions & \\
+\hline
+Execution Flow &  
+		\begin{enumerate}
+			\item The Taxi Driver request the Taxi profile page
+			\item The System returns the personal informations of the Taxi
+			\item The Taxi Driver notify the availability to the System
+			\item The System update the local queue
+			\item The System confirm the request to the Taxi Driver
+		\end{enumerate} 
+	\\ 
+\hline
+Postconditions & The Taxi Driver is now Available \\
+\hline
+Exceptions & 
+	\begin{itemize} 
+		\item The Taxi Driver is located in a invalid zone
+		\item The Taxi Driver is carrying a Passenger
+		\item The Taxi Driver is yet available
+	\end{itemize}
+\end{tabular}
+
+\includegraphics[width=\textwidth]{Available}
+
+\subsubsection{Taxi Request}
 
 \begin{tabular}{lp{8cm}}
 \hline
@@ -100,7 +170,7 @@ Exceptions &
 
 \includegraphics[width=\textwidth]{TaxiRequest}
 
-\subsection{Manage Taxi Request}
+\subsubsection{Manage Taxi Request}
 
 \begin{tabular}{lp{8cm}}
 \hline
@@ -134,7 +204,7 @@ Exceptions &
 
 \includegraphics[width=\textwidth]{ManageTaxiRequest}
 
-\subsection{Report Taxi}
+\subsubsection{Report Taxi}
 
 \begin{tabular}{lp{8cm}}
 \hline
@@ -160,7 +230,7 @@ Exceptions & The Passenger provides wrong informations in the report form
 
 \includegraphics[width=\textwidth]{ReportTaxi}
 
-\subsection{Report User}
+\subsubsection{Report User}
 
 \begin{tabular}{lp{8cm}}
 \hline
@@ -186,7 +256,7 @@ Exceptions & The Taxi Driver provides wrong informations in the report form
 
 \includegraphics[width=\textwidth]{ReportUser}
 
-\subsection{Manage Personal Informations}
+\subsubsection{Manage Personal Informations}
 
 \begin{tabular}{lp{8cm}}
 \hline
@@ -213,43 +283,13 @@ Exceptions & The User provides wrong informations
 
 \includegraphics[width=\textwidth]{ManageInformation}
 
-\subsection{Available}
+\subsubsection{Notify Problem}
 
 \begin{tabular}{lp{8cm}}
 \hline
 Actors & Taxi Driver \\
 \hline
 Preconditions & \\
-\hline
-Execution Flow &  
-		\begin{enumerate}
-			\item The Taxi Driver request the Taxi profile page
-			\item The System returns the personal informations of the Taxi
-			\item The Taxi Driver notify the availability to the System
-			\item The System update the local queue
-			\item The System confirm the request to the Taxi Driver
-		\end{enumerate} 
-	\\ 
-\hline
-Postconditions & The Taxi Driver is now Available \\
-\hline
-Exceptions & 
-	\begin{itemize} 
-		\item The Taxi Driver is located in a invalid zone
-		\item The Taxi Driver is carrying a Passenger
-		\item The Taxi Driver is yet available
-	\end{itemize}
-\end{tabular}
-
-\includegraphics[width=\textwidth]{Available}
-
-\subsection{Notify Problem}
-
-\begin{tabular}{lp{8cm}}
-\hline
-Actors & Taxi Driver \\
-\hline
-Preconditions & The Taxi is available\\
 \hline
 Execution Flow &  
 		\begin{enumerate}
@@ -266,12 +306,33 @@ Execution Flow &
 Postconditions & The problem is submitted into the System \\
 \hline
 Exceptions & 
-	\begin{itemize} 
+	\begin{itemize}
 		\item The Taxi Driver is located in a invalid zone
 		\item The Taxi Driver fill the form with wrong informations
 	\end{itemize}
 \end{tabular}
 
 \includegraphics[width=\textwidth]{NotifyProblem}
+
+\subsection{Performance requirements}
+	\begin{itemize}
+		\item The System should support at least all the Taxi Driver registered into the City Database
+		\item The System should elaborate User incoming informations
+		\item The System should provide the faster path for each ride
+		\item The System should calculate the final price of the ride with a maximum error of 10\%
+		\item The System should provide to a Passenger the arrival time (maximum error 20\%) and change the path in case of traffic
+	\end{itemize}
+	
+\subsection{Logical database requirements}
+
+\subsection{Design constraints}
+	\begin{itemize}
+		\item GPS precision limitations: average 3m error
+		\item Internet congestion
+	\end{itemize}
+
+\subsection{Standards compliance}
+
+\subsection{Software system attributes}
 
 \end{document}
