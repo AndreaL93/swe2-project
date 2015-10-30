@@ -1,159 +1,215 @@
-\documentclass[english]{article}
+%% LyX 2.1.4 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[12pt,english]{article}
+\usepackage{charter}
+\renewcommand{\familydefault}{\rmdefault}
 \usepackage[T1]{fontenc}
-\usepackage[latin9]{inputenc}
+\usepackage[utf8]{luainputenc}
 \usepackage{babel}
+\usepackage{setspace}
+\onehalfspacing
+\usepackage[unicode=true,pdfusetitle,
+ bookmarks=true,bookmarksnumbered=false,bookmarksopen=false,
+ breaklinks=false,pdfborder={0 0 1},backref=false,colorlinks=false]
+ {hyperref}
+
+\makeatletter
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+\usepackage{babel}
+
+\makeatother
+
 \begin{document}
-
-\title{Requirements Analysis and Specification Document\pagebreak{}}
-
-\author{
-	Grattarola Daniele, Inajjar Ilyas, Lui Andrea
-}
-
-\maketitle
-
-\tableofcontents{}
-
-\pagebreak{}
 
 \section{Overall Description}
 
-\subsection{Product Prespective}
 
-The system requirements mainly depends on the web technology necessary to communicate between actors 
-(taxi, customer, guest) and the GPS due to locate the taxi customer in the specific sector and also to create the taxi queue. 
-The central node system need a server (connected on the web) to elaborate the requests and store the users and taxis information. 
-The end-user system relies on the guest operating system (usually a mobile OS like Android, iOS, Windows Phone, blackberry OS, \ldots) 
-on the internal GPS system and Internet connection. Of course, all the overall system should only work inside the city.
+\subsection{Product Perspective}
 
-\subsubsection{System Interfaces}
+The platform aims at replacing the traditional means of communication
+between taxi drivers and customers, and it is therefore designed as
+a stand-alone entity that is able to operate with a minimum set of
+dependencies towards external systems. 
+
+The external interfaces on which the system relies, in order to be
+operational, are described in the following subsections.
+
+
+\subsubsection{Software Interfaces \label{sub:Software-Dependencies}}
+\begin{itemize}
+\item Google Maps API: used in both the back-end and the taxi-side applications,
+this free API is necessary to elaborate routes and display maps. The
+system interacts with the API through standard GET requests.
 
 \begin{itemize}
-	\item Google Maps API for taxi ruote
+\item Mnemonic: elaborate routes and display maps
+\item Source: https://developers.google.com/maps/
+\end{itemize}
+\item GPS: this well known system is required by the mobile applications
+to get information about the users' position. The interaction happens
+through the standard GPS protocol provided by the OS of the users'
+devices.
+
+\begin{itemize}
+\item Mnemonic: get information about the user position
+\item Source: devices' OSs' protocols
+\end{itemize}
+\item Red Hat Enterprise Linux: operating system run on the back-end server.
+
+\begin{itemize}
+\item Mnemonics: back-end OS
+\item Source: https://access.redhat.com/documentation/en/red-hat-enterprise-linux/
+\end{itemize}
+\item Apache WebServer: software bundle run on the back-end, which is used
+to allow interaction between the back-end system and the user-side
+application. It is used to handle standard HTTP requests from the
+customer-side web application and to provide CGI services to all the
+user-side applications.
+
+\begin{itemize}
+\item Mnemonics: web-server
+\item Source: https://httpd.apache.org/docs/2.4/
+\end{itemize}
+\item SQLite: DBMS software component run on the back-end, which is used
+to store user data in a non-resource-intensive fashion.
+
+\begin{itemize}
+\item Mnemonics: DBMS
+\item Source: https://www.sqlite.org/docs.html
+\end{itemize}
 \end{itemize}
 
-\subsubsection{User Interface}
+\subsubsection{Device support}
 
-%mockups
+Device support: the back-end system is designed to be run on usual
+server hardware with a high fault-tolerance degree and supports hardware
+scaling (such as replication); the mobile applications are designed
+to be run on ARM based architectures; the user-side web application
+does not have specific hardware requirements, since it relies on a
+different level of abstraction (web browser) than its mobile counterpart
+which is not to be taken into account in the design of the hardware
+infrastructure.
 
-\subsubsection{Hardware Interface}
 
+\subsubsection{User interface}
+
+
+\subsubsection{Memory constraints}
+
+It is assumed that enough memory will be provided to the system in
+order to scale in relation to the user traffic. More details on the
+topic will be provided in the following sections. 
+
+
+\subsection{Product functions}
+
+The fully developed platform should implement the following high level
+functions. 
 \begin{itemize}
-	\item Ethernet connection
-	\item GPS system
-	\item High fault tolerance of the central node
-	\item Firewall: \emph{server store sensitive data}
-	\item Router
-\end{itemize}
-
-\subsubsection{Software Interface}
-
-\begin{itemize}
-	\item Apache Server for CGI
-	\item DBMS
-\end{itemize}
-
-\subsubsection{Connection Interface}
-
-\begin{itemize}
-	\item EDGE, HSDPA, 3G, 4G
-	\item HTML, SOAP/REST protocols
-\end{itemize}
-
-\subsubsection{Memory Constrains}
-
-\begin{itemize}
-	\item Server: 128GB vRAM  requiered, 512GB recommended
-	\item 2TB storage capacity + 64GB flash (32GB x2 mirroring) for applications system and server OS
-\end{itemize}
-
-\subsubsection{Operations}
-
-\begin{itemize}
-	\item Taxi Operations: login, signup, availability notifications, request reply, report
-	\item User Operations: login, signup, requests operations, user profile operations (show, edit)
-	\item System Operations: notifications (to user and taxi driver), queue managment
-	\item Backup operations (scheduled at 4AM every day)
-	\item Restore operaions from secondary storage
-\end{itemize}
-
-\subsubsection{Site adaptation requirements}
-
-\begin{itemize}
-	\item UPS system
-	\item 250V/110V Electrical system
-	\item Ethernet connection
-	\item Anti-thief system, safety room (safety grid on each door and eventually windows) and alarm
-	\item Anti-fire system and alaram
-	\item Anti-flooding system
-	\item Air conditioning
-\end{itemize}
-
-\subsection{Product Function}
-
-\subsubsection{Taxi Function}
-\begin{itemize}
-	\item Taxi Login: the taxi driver logs into the system;
-	\item Taxi Signup: the taxi driver provides his personal information, Username and Password, taxi  and driving license to the Operator;
-	\item Notification of Availability: with this operation the taxi driver notifies is presence in a specific zone of the town;
-	\item Notification of Unavailability: the taxi driver notify the end of his service;
-	\item Taking charge: the taxi driver positively reply to a customer request;
-	\item Reject request: the taxi driver negatively reply to a customer request;
-	\item Report user: the taxi driver report a problem with customer;
-\end{itemize}
-
-\subsubsection{User Function}
-\begin{itemize}
-	\item User Login: the user get logged into the system providing his account information;
-	\item User Signup: the user (previously Guest) request a signup to the system providing his personal information;
-	\item Request Taxi: the user request a taxi to his location;
-	\item Book Taxi: the user reserve a taxi to a specific location at the specific time;
-	\item Cancel request: the user cancel the previous request or reservation;
-	\item Report taxi: the user report a problem with the taxi driver or the service;
-	\item Show Profile: the system provides the user information;
-	\item Modify Profile: the user edit his information;
-\end{itemize}
-
-\subsubsection{System Function}
-\begin{itemize}
-	\item Notification to User
-	\begin{enumerate}
-		\item Incoming taxi: a taxi take charge of the request;
-		\item No taxi available;
-	\end{enumerate}
-	\item Notification to Taxi driver
-	\begin{enumerate}
-		\item Taxi request: a user need a taxi;
-		\item First of the queue: the taxi is the first of the queue of the current zone;
-		\item Queue change: notification to the taxi of the new position of the queue;
-	\end{enumerate}
-	\item Queues management: change the queues after a request reply or new taxi driver in zone;
+\item []Customer-side application: 
 \end{itemize}
 
 \subsection{User Characteristic}
 
-\subsubsection{User:}
+As per the definitions given in \ref{sub:Definitions,-acronyms,-and}
+the respective applications are targeted to their respective markets:
+these consist of any citizen of the town for the customer-side applications,
+and of any recognized taxi driver for the taxi-side application. 
+
+Customers do not need specific competences to use the app other than
+a basic knowledge of web browsing (customers only) and of their mobile
+operating system (both customers and taxi drivers).
+
+
+\subsection{Domain Assumptions}
+
+Taxi licenses databases
+
+
+\subsection{Actors and Functionalities}
+
+The platform may have different functional and non-functional requirements
+based on the user that is interacting with it. Throughout this document,
+the set of these different requirements has been referred to through
+the terminology specified in \ref{sub:Definitions,-acronyms,-and}
+(e.g. taxi-side application, customer-side application, etc.). 
+
+This section is aimed at further formalizing the definition of those
+requirement, based on the different actors that participate in the
+use of the platform: 
 \begin{itemize}
-	\item Low knowledge of mobile app use;
-	\item Age: over 18;
+\item \textbf{A1 Guest}: any person who wishes to start a session with the
+platform through one of the user-side applications. A1 may: 
+
+\begin{itemize}
+\item Register a profile into the platform 
+\item Login into the platform 
 \end{itemize}
 
-\subsubsection{Taxi Driver:}
+After completing a login, A1 actors may become either of the two following
+types of actor. 
+
+\item \textbf{A2 Customer}: a person as defined in \ref{sub:Definitions,-acronyms,-and}.
+Based on what actions A2 completes, they can be further specialized
+in:
+
 \begin{itemize}
-	\item Owner of taxi license and driver license;
-	\item Low knowledge of mobile app use;
-	\item Good knowledge of the local language;
+\item \textbf{A2.1 Logged-in Customer}: an A1 actor who simply logged in
+to the platform with a customer profile. A2.1 may: 
+
+\begin{itemize}
+\item Issue a taxi request
+\item View and edit their profile
+\end{itemize}
+\item \textbf{A2.2 Passenger}: an A2.1 actor who requested a taxi. A2.2
+may:
+
+\begin{itemize}
+\item Cancel or edit the previously issued taxi request
+\item Issue a taxi report
+\end{itemize}
+\end{itemize}
+\item \textbf{A3 Taxi driver}: a person as defined in \ref{sub:Definitions,-acronyms,-and}.
+A3 may:
+
+\begin{itemize}
+\item Handle (accept or refuse) a taxi request issued by an A2 actor.
+\item Edit their availability status
+\item Issue a customer report
+\item Notify a problem
+\end{itemize}
 \end{itemize}
 
-\subsection{Constrains}
+\section{Requirements}
+
+
+\subsection{Non functional requirements}
+
+The non functional requirements for the platform have been identified
+as follows:
 \begin{itemize}
-	\item GPS Coverage;
-	\item Privacy policy;
-	\item Devices Constrains (presence of GPS and Internet connection);
+\item NF1 Reliability: the system must satisfy the functional requirements
+with 100\% of server uptime on the back-end side, and a stable release
+of the user-side applications.
+
+
+The latter is achieved through constant maintenance of the applications'
+code bases (outside of project scope), while the former needs to be
+designed since the beginning of the project as it relies on specific
+hardware infrastructures; these include: 
+
+\item Server farms replication through cloning
+
+\begin{itemize}
+\item Local data duplication with RAID controllers
+\item Data synchronization between the server farms
+\item Periodic memory backup on flash storage to allow for faster recovery
+in the event of unexpected system failures
 \end{itemize}
 
-\subsection{Assumption and Dependecies}
+These measure should minimize the RTO and RPO parameters making them
+tend to zero. 
 
-\subsection{Apportioning of requirements}
+\item NF2 Performance: \end{itemize}
 
 \end{document}

@@ -182,7 +182,14 @@ The platform will implement all necessary functions on both the users' side
 \end_layout
 
 \begin_layout Subsection
-Definitions, acronyms, and abbreviations
+Definitions, acronyms, and abbreviations 
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Definitions,-acronyms,-and"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -302,6 +309,22 @@ CGI
 DBMS
 \series default
 : Data Base Management System
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+RTO
+\series default
+: Recovery Time Objective
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+RPO
+\series default
+: Recovery Point Objective
 \end_layout
 
 \begin_layout Standard

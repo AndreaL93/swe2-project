@@ -5,19 +5,24 @@
 \textclass article
 \begin_preamble
 \usepackage{babel}
+\usepackage{babel}
+
+
+
+
 
 \end_preamble
 \use_default_options false
 \maintain_unincluded_children false
 \language english
 \language_package default
-\inputencoding iso8859-15
+\inputencoding utf8
 \fontencoding T1
-\font_roman default
+\font_roman charter
 \font_sans default
 \font_typewriter default
 \font_math auto
-\font_default_family default
+\font_default_family rmdefault
 \use_non_tex_fonts false
 \font_sc false
 \font_osf false
@@ -28,9 +33,18 @@
 \output_sync 0
 \bibtex_command default
 \index_command default
-\paperfontsize default
-\spacing single
-\use_hyperref false
+\paperfontsize 12
+\spacing onehalf
+\use_hyperref true
+\pdf_bookmarks 1
+\pdf_bookmarksnumbered 0
+\pdf_bookmarksopen 0
+\pdf_bookmarksopenlevel 1
+\pdf_breaklinks 0
+\pdf_pdfborder 0
+\pdf_colorlinks 0
+\pdf_backref false
+\pdf_pdfusetitle 1
 \papersize default
 \use_geometry false
 \use_package amsmath 1
@@ -73,361 +87,349 @@
 
 \begin_body
 
-\begin_layout Title
-Requirements Analysis and Specification Document
-\begin_inset Newpage pagebreak
-\end_inset
-
-
-\end_layout
-
-\begin_layout Author
- Grattarola Daniele, Inajjar Ilyas, Lui Andrea 
-\end_layout
-
-\begin_layout Standard
-
-\begin_inset CommandInset toc
-LatexCommand tableofcontents
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-
-\begin_inset Newpage pagebreak
-\end_inset
-
-
-\end_layout
-
 \begin_layout Section
 Overall Description
 \end_layout
 
 \begin_layout Subsection
-Product Prespective
+Product Perspective
 \end_layout
 
 \begin_layout Standard
-The system requirements mainly depends on the web technology necessary to communicate between actors (taxi, customer, guest) and the GPS due to locate the taxi customer in the specific sector and also to create the taxi queue. The central node system need a server (connected on the web) to elaborate the requests and store the users and taxis information. The end-user system relies on the guest operating system (usually a mobile OS like Android, iOS, Windows Phone, blackberry OS, \SpecialChar \ldots{}
-) on the internal GPS system and Internet connection. Of course, all the overall system should only work inside the city.
-\end_layout
-
-\begin_layout Subsubsection
-System Interfaces
-\end_layout
-
-\begin_layout Itemize
-Google Maps API for taxi ruote 
-\end_layout
-
-\begin_layout Subsubsection
-User Interface
+The platform aims at replacing the traditional means of communication between taxi drivers and customers, and it is therefore designed as a stand-alone entity that is able to operate with a minimum set of dependencies towards external systems.
 \end_layout
 
 \begin_layout Standard
-
-\begin_inset ERT
-status collapsed
-
-\begin_layout Plain Layout
-%mockups
+The external interfaces on which the system relies, in order to be operational, are described in the following subsections.
 \end_layout
+
+\begin_layout Subsubsection
+Software Interfaces 
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Software-Dependencies"
 
 \end_inset
 
 
 \end_layout
 
+\begin_layout Itemize
+Google Maps API: used in both the back-end and the taxi-side applications, this free API is necessary to elaborate routes and display maps. The system interacts with the API through standard GET requests.
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Mnemonic: elaborate routes and display maps 
+\end_layout
+
+\begin_layout Itemize
+Source: https://developers.google.com/maps/ 
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+GPS: this well known system is required by the mobile applications to get information about the users' position. The interaction happens through the standard GPS protocol provided by the OS of the users' devices.
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Mnemonic: get information about the user position 
+\end_layout
+
+\begin_layout Itemize
+Source: devices' OSs' protocols 
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Red Hat Enterprise Linux: operating system run on the back-end server.
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Mnemonics: back-end OS 
+\end_layout
+
+\begin_layout Itemize
+Source: https://access.redhat.com/documentation/en/red-hat-enterprise-linux/ 
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Apache WebServer: software bundle run on the back-end, which is used to allow interaction between the back-end system and the user-side application. It is used to handle standard HTTP requests from the customer-side web application and to provide CGI services to all the user-side applications.
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Mnemonics: web-server 
+\end_layout
+
+\begin_layout Itemize
+Source: https://httpd.apache.org/docs/2.4/ 
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+SQLite: DBMS software component run on the back-end, which is used to store user data in a non-resource-intensive fashion.
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Mnemonics: DBMS 
+\end_layout
+
+\begin_layout Itemize
+Source: https://www.sqlite.org/docs.html 
+\end_layout
+
+\end_deeper
 \begin_layout Subsubsection
-Hardware Interface
+Device support
 \end_layout
 
-\begin_layout Itemize
-Ethernet connection 
-\end_layout
-
-\begin_layout Itemize
-GPS system 
-\end_layout
-
-\begin_layout Itemize
-High fault tolerance of the central node 
-\end_layout
-
-\begin_layout Itemize
-Firewall: 
-\emph on
-server store sensitive data
-\emph default
- 
-\end_layout
-
-\begin_layout Itemize
-Router 
-\end_layout
-
-\begin_layout Subsubsection
-Software Interface
-\end_layout
-
-\begin_layout Itemize
-Apache Server for CGI 
-\end_layout
-
-\begin_layout Itemize
-DBMS 
-\end_layout
-
-\begin_layout Subsubsection
-Connection Interface
-\end_layout
-
-\begin_layout Itemize
-EDGE, HSDPA, 3G, 4G 
-\end_layout
-
-\begin_layout Itemize
-HTML, SOAP/REST protocols 
-\end_layout
-
-\begin_layout Subsubsection
-Memory Constrains
-\end_layout
-
-\begin_layout Itemize
-Server: 128GB vRAM requiered, 512GB recommended 
-\end_layout
-
-\begin_layout Itemize
-2TB storage capacity + 64GB flash (32GB x2 mirroring) for applications system and server OS 
-\end_layout
-
-\begin_layout Subsubsection
-Operations
-\end_layout
-
-\begin_layout Itemize
-Taxi Operations: login, signup, availability notifications, request reply, report 
-\end_layout
-
-\begin_layout Itemize
-User Operations: login, signup, requests operations, user profile operations (show, edit) 
-\end_layout
-
-\begin_layout Itemize
-System Operations: notifications (to user and taxi driver), queue managment 
-\end_layout
-
-\begin_layout Itemize
-Backup operations (scheduled at 4AM every day) 
-\end_layout
-
-\begin_layout Itemize
-Restore operaions from secondary storage 
+\begin_layout Standard
+Device support: the back-end system is designed to be run on usual server hardware with a high fault-tolerance degree and supports hardware scaling (such as replication); the mobile applications are designed to be run on ARM based architectures; the user-side web application does not have specific hardware requirements, since it relies on a different level of abstraction (web browser) than its mobile counterpart which is not to be taken into account in the design of the hardware infrastructure.
 \end_layout
 
 \begin_layout Subsubsection
-Site adaptation requirements
+User interface
 \end_layout
 
-\begin_layout Itemize
-UPS system 
+\begin_layout Subsubsection
+Memory constraints
 \end_layout
 
-\begin_layout Itemize
-250V/110V Electrical system 
-\end_layout
-
-\begin_layout Itemize
-Ethernet connection 
-\end_layout
-
-\begin_layout Itemize
-Anti-thief system, safety room (safety grid on each door and eventually windows) and alarm 
-\end_layout
-
-\begin_layout Itemize
-Anti-fire system and alaram 
-\end_layout
-
-\begin_layout Itemize
-Anti-flooding system 
-\end_layout
-
-\begin_layout Itemize
-Air conditioning 
+\begin_layout Standard
+It is assumed that enough memory will be provided to the system in order to scale in relation to the user traffic. More details on the topic will be provided in the following sections.
 \end_layout
 
 \begin_layout Subsection
-Product Function
+Product functions
 \end_layout
 
-\begin_layout Subsubsection
-Taxi Function
-\end_layout
-
-\begin_layout Itemize
-Taxi Login: the taxi driver logs into the system; 
+\begin_layout Standard
+The fully developed platform should implement the following high level functions. 
 \end_layout
 
 \begin_layout Itemize
-Taxi Signup: the taxi driver provides his personal information, Username and Password, taxi and driving license to the Operator; 
+
+\begin_inset Argument item:1
+status open
+
+\begin_layout Plain Layout
+
 \end_layout
 
-\begin_layout Itemize
-Notification of Availability: with this operation the taxi driver notifies is presence in a specific zone of the town; 
-\end_layout
+\end_inset
 
-\begin_layout Itemize
-Notification of Unavailability: the taxi driver notify the end of his service; 
-\end_layout
-
-\begin_layout Itemize
-Taking charge: the taxi driver positively reply to a customer request; 
-\end_layout
-
-\begin_layout Itemize
-Reject request: the taxi driver negatively reply to a customer request; 
-\end_layout
-
-\begin_layout Itemize
-Report user: the taxi driver report a problem with customer; 
-\end_layout
-
-\begin_layout Subsubsection
-User Function
-\end_layout
-
-\begin_layout Itemize
-User Login: the user get logged into the system providing his account information; 
-\end_layout
-
-\begin_layout Itemize
-User Signup: the user (previously Guest) request a signup to the system providing his personal information; 
-\end_layout
-
-\begin_layout Itemize
-Request Taxi: the user request a taxi to his location; 
-\end_layout
-
-\begin_layout Itemize
-Book Taxi: the user reserve a taxi to a specific location at the specific time; 
-\end_layout
-
-\begin_layout Itemize
-Cancel request: the user cancel the previous request or reservation; 
-\end_layout
-
-\begin_layout Itemize
-Report taxi: the user report a problem with the taxi driver or the service; 
-\end_layout
-
-\begin_layout Itemize
-Show Profile: the system provides the user information; 
-\end_layout
-
-\begin_layout Itemize
-Modify Profile: the user edit his information; 
-\end_layout
-
-\begin_layout Subsubsection
-System Function
-\end_layout
-
-\begin_layout Itemize
-Notification to User 
-\end_layout
-
-\begin_deeper
-\begin_layout Enumerate
-Incoming taxi: a taxi take charge of the request; 
-\end_layout
-
-\begin_layout Enumerate
-No taxi available; 
-\end_layout
-
-\end_deeper
-\begin_layout Itemize
-Notification to Taxi driver 
-\end_layout
-
-\begin_deeper
-\begin_layout Enumerate
-Taxi request: a user need a taxi; 
-\end_layout
-
-\begin_layout Enumerate
-First of the queue: the taxi is the first of the queue of the current zone; 
-\end_layout
-
-\begin_layout Enumerate
-Queue change: notification to the taxi of the new position of the queue; 
-\end_layout
-
-\end_deeper
-\begin_layout Itemize
-Queues management: change the queues after a request reply or new taxi driver in zone; 
+Customer-side application: 
 \end_layout
 
 \begin_layout Subsection
 User Characteristic
 \end_layout
 
-\begin_layout Subsubsection
-User:
+\begin_layout Standard
+As per the definitions given in 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Definitions,-acronyms,-and"
+
+\end_inset
+
+ the respective applications are targeted to their respective markets: these consist of any citizen of the town for the customer-side applications, and of any recognized taxi driver for the taxi-side application.
 \end_layout
 
-\begin_layout Itemize
-Low knowledge of mobile app use; 
-\end_layout
-
-\begin_layout Itemize
-Age: over 18; 
-\end_layout
-
-\begin_layout Subsubsection
-Taxi Driver:
-\end_layout
-
-\begin_layout Itemize
-Owner of taxi license and driver license; 
-\end_layout
-
-\begin_layout Itemize
-Low knowledge of mobile app use; 
-\end_layout
-
-\begin_layout Itemize
-Good knowledge of the local language; 
+\begin_layout Standard
+Customers do not need specific competences to use the app other than a basic knowledge of web browsing (customers only) and of their mobile operating system (both customers and taxi drivers).
 \end_layout
 
 \begin_layout Subsection
-Constrains
+Domain Assumptions
 \end_layout
 
-\begin_layout Itemize
-GPS Coverage; 
-\end_layout
-
-\begin_layout Itemize
-Privacy policy; 
-\end_layout
-
-\begin_layout Itemize
-Devices Constrains (presence of GPS and Internet connection); 
+\begin_layout Standard
+Taxi licenses databases
 \end_layout
 
 \begin_layout Subsection
-Assumption and Dependecies
+Actors and Functionalities
+\end_layout
+
+\begin_layout Standard
+The platform may have different functional and non-functional requirements based on the user that is interacting with it. Throughout this document, the set of these different requirements has been referred to through the terminology specified in 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Definitions,-acronyms,-and"
+
+\end_inset
+
+ (e.g. taxi-side application, customer-side application, etc.).
+\end_layout
+
+\begin_layout Standard
+This section is aimed at further formalizing the definition of those requirement, based on the different actors that participate in the use of the platform: 
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+A1 Guest
+\series default
+: any person who wishes to start a session with the platform through one of the user-side applications. A1 may:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Register a profile into the platform 
+\end_layout
+
+\begin_layout Itemize
+Login into the platform 
+\end_layout
+
+\end_deeper
+\begin_deeper
+\begin_layout Standard
+After completing a login, A1 actors may become either of the two following types of actor.
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+
+\series bold
+A2 Customer
+\series default
+: a person as defined in 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Definitions,-acronyms,-and"
+
+\end_inset
+
+. Based on what actions A2 completes, they can be further specialized in:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+
+\series bold
+A2.1 Logged-in Customer
+\series default
+: an A1 actor who simply logged in to the platform with a customer profile. A2.1 may:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Issue a taxi request 
+\end_layout
+
+\begin_layout Itemize
+View and edit their profile 
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+
+\series bold
+A2.2 Passenger
+\series default
+: an A2.1 actor who requested a taxi. A2.2 may:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Cancel or edit the previously issued taxi request 
+\end_layout
+
+\begin_layout Itemize
+Issue a taxi report 
+\end_layout
+
+\end_deeper
+\end_deeper
+\begin_layout Itemize
+
+\series bold
+A3 Taxi driver
+\series default
+: a person as defined in 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Definitions,-acronyms,-and"
+
+\end_inset
+
+. A3 may:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Handle (accept or refuse) a taxi request issued by an A2 actor. 
+\end_layout
+
+\begin_layout Itemize
+Edit their availability status 
+\end_layout
+
+\begin_layout Itemize
+Issue a customer report 
+\end_layout
+
+\begin_layout Itemize
+Notify a problem 
+\end_layout
+
+\end_deeper
+\begin_layout Section
+Requirements
 \end_layout
 
 \begin_layout Subsection
-Apportioning of requirements
+Non functional requirements
+\end_layout
+
+\begin_layout Standard
+The non functional requirements for the platform have been identified as follows: 
+\end_layout
+
+\begin_layout Itemize
+NF1 Reliability: the system must satisfy the functional requirements with 100% of server uptime on the back-end side, and a stable release of the user-side applications.
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+The latter is achieved through constant maintenance of the applications' code bases (outside of project scope), while the former needs to be designed since the beginning of the project as it relies on specific hardware infrastructures; these include:
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Server farms replication through cloning
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Local data duplication with RAID controllers 
+\end_layout
+
+\begin_layout Itemize
+Data synchronization between the server farms 
+\end_layout
+
+\begin_layout Itemize
+Periodic memory backup on flash storage to allow for faster recovery in the event of unexpected system failures 
+\end_layout
+
+\end_deeper
+\begin_deeper
+\begin_layout Standard
+These measure should minimize the RTO and RPO parameters making them tend to zero.
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+NF2 Performance: 
 \end_layout
 
 \end_body
