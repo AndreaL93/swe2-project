@@ -1,5 +1,3 @@
-%% LyX 2.1.4 created this file.  For more info, see http://www.lyx.org/.
-%% Do not edit unless you really know what you are doing.
 \documentclass[english]{article}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{luainputenc}
@@ -8,11 +6,8 @@
 
 \makeatletter
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
-%% Because html converters don't know tabularnewline
 \providecommand{\tabularnewline}{\\}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
 \usepackage{babel}
 \graphicspath{{images/}}
 
@@ -55,8 +50,11 @@ during the development of the user interfaces.
 
 \subsection{Use Cases}
 
-\includegraphics[width=1\textwidth,bb = 0 0 200 100, draft, type=eps]{UseCase}
+\includegraphics[width=\textwidth]{UseCase}
 
+\subsection{Class Diagram}
+
+\includegraphics[width=\textwidth]{ClassDiagram}
 
 \subsection{Scenarios}
 
@@ -208,7 +206,7 @@ Exceptions  & The e-mail or username are not unique or, in the case of taxi driv
 sign-up, the license is not valid \tabularnewline
 \end{tabular}
 
-\includegraphics[width=1\textwidth,bb = 0 0 200 100, draft, type=eps]{Signup}
+\includegraphics[width=\textwidth]{Signup}
 
 
 \subsubsection{Login}
@@ -235,7 +233,7 @@ Exceptions  & The username, password combination is incorrect, so the guest cann
 log in \tabularnewline
 \end{tabular}
 
-\includegraphics[width=1\textwidth,bb = 0 0 200 100, draft, type=eps]{Login}
+\includegraphics[width=\textwidth]{Login}
 
 
 \subsubsection{Available}
@@ -249,9 +247,11 @@ Preconditions  & \tabularnewline
 Execution Flow  & \begin{enumerate}
 \item The taxi driver requests the taxi profile page 
 \item The system returns the personal information of the user
-\item The taxi driver notifies their availability to the system 
-\item The system updates the local queue 
-\item The system confirms the request to the taxi driver \end{enumerate}
+\item The taxi driver can choose to change the his availability, becoming available or unavailable
+\item The taxi driver send the request to the system
+\item The system update the queue
+\item The system return a confirmation to the taxi driver
+\end{enumerate}
 \tabularnewline
 \hline 
 Postconditions  & The taxi driver is now available \tabularnewline
@@ -263,7 +263,7 @@ Exceptions  & \begin{itemize}
 \tabularnewline
 \end{tabular}
 
-\includegraphics[width=1\textwidth,bb = 0 0 200 100, draft, type=eps]{Available}
+\includegraphics[width=\textwidth]{Available}
 
 
 \subsubsection{Taxi Request}
@@ -297,7 +297,7 @@ Exceptions  & \begin{itemize}
 \tabularnewline
 \end{tabular}
 
-\includegraphics[width=1\textwidth,bb = 0 0 200 100, draft, type=eps]{TaxiRequest}
+\includegraphics[width=\textwidth]{TaxiRequest}
 
 
 \subsubsection{Manage Taxi Request}
@@ -331,7 +331,7 @@ form
 \tabularnewline
 \end{tabular}
 
-\includegraphics[width=1\textwidth,bb = 0 0 200 100, draft, type=eps]{ManageTaxiRequest}
+\includegraphics[width=\textwidth]{ManageTaxiRequest}
 
 
 \subsubsection{Report Taxi}
@@ -357,7 +357,7 @@ Postconditions  & The taxi driver is reported by the current passenger \tabularn
 Exceptions  & The passenger provides wrong information in the report form \tabularnewline
 \end{tabular}
 
-\includegraphics[width=1\textwidth,bb = 0 0 200 100, draft, type=eps]{ReportTaxi}
+\includegraphics[width=\textwidth]{ReportTaxi}
 
 
 \subsubsection{Report User}
@@ -383,7 +383,7 @@ Postconditions  & The user is reported by the taxi driver \tabularnewline
 Exceptions  & The taxi driver provides wrong information in the report form \tabularnewline
 \end{tabular}
 
-\includegraphics[width=1\textwidth,bb = 0 0 200 100, draft, type=eps]{ReportUser}
+\includegraphics[width=\textwidth]{ReportUser}
 
 
 \subsubsection{Manage Personal Information}
@@ -412,7 +412,7 @@ the Profile is changed \tabularnewline
 Exceptions  & The user provides wrong information \tabularnewline
 \end{tabular}
 
-\includegraphics[width=1\textwidth,bb = 0 0 200 100, draft, type=eps]{ManageInformation}
+\includegraphics[width=\textwidth]{ManageInformation}
 
 
 \subsubsection{Report Problem}
@@ -444,7 +444,21 @@ Exceptions  & \begin{itemize}
 \tabularnewline
 \end{tabular}
 
-\includegraphics[width=1\textwidth,bb = 0 0 200 100, draft, type=eps]{NotifyProblem}
+\includegraphics[width=\textwidth]{NotifyProblem}
+
+\subsection{Entities Behavior}
+
+\subsubsection{User}
+
+\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{UserBehavior}
+
+\subsubsection{Ride}
+
+\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{RideBehavior}
+
+\subsubsection{Queue Manager}
+
+\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{QueueManagerBehavior}
 
 
 \subsection{Performance requirements}
@@ -493,9 +507,6 @@ error 20\%) and change the path in case of traffic
 
 
 \subsection{Portability}
-
-\includegraphics[width=1\textwidth,bb = 0 0 200 100, draft, type=eps]{ClassDiagram}
-
 
 \subsection{Additional comments}
 \end{document}
