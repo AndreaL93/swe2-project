@@ -211,8 +211,108 @@ Documentation: https://www.sqlite.org/docs.html
 \end_deeper
 \begin_layout Subsubsection
 User interface
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:User-interface"
+
+\end_inset
+
+
 \end_layout
 
+\begin_layout Standard
+The platform must be accessible to users through three different interfaces,
+ which must be transparent to the back-end and must provide a unified user
+ experience.
+ 
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Argument item:1
+status open
+
+\begin_layout Plain Layout
+
+\series bold
+[I1]
+\end_layout
+
+\end_inset
+
+
+\series bold
+Customer web application
+\series default
+: standard dynamic website generated with information associated to the
+ user.
+ It is accessible through any standard web browser and has a responsive
+ design which allows it to fit correctly any screen size.
+ 
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+Users can access any function offered by the platform (and intended for
+ them) in no more than 5 actions (clicks, taps, scrolling, form filling...).
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+
+\series bold
+\begin_inset Argument item:1
+status open
+
+\begin_layout Plain Layout
+[I2]
+\end_layout
+
+\end_inset
+
+Customer-side mobile application
+\series default
+: mobile application developed with proprietary graphical libraries in order
+ to maintain the same business identity throughout the different mobile
+ OSs that the application targets.
+ 
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+Users can access any function offered by the platform (and intended for
+ them) in no more than 5 actions.
+ 
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+
+\series bold
+\begin_inset Argument item:1
+status open
+
+\begin_layout Plain Layout
+[I3]
+\end_layout
+
+\end_inset
+
+Taxi-side mobile application
+\series default
+: mobile application developed with proprietary graphical libraries in order
+ to maintain the same business identity throughout the different mobile
+ OSs that the application targets.
+ 
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+Users can access any function offered by the platform (and intended for
+ them) in no more than 5 actions.
+ 
+\end_layout
+
+\end_deeper
 \begin_layout Subsubsection
 Device support
 \begin_inset CommandInset label
@@ -330,7 +430,7 @@ status open
 
 \end_inset
 
-Allow users to manage incoming requests and send back confirmations 
+Allow users to manage incoming requests and send back replies 
 \end_layout
 
 \begin_layout Enumerate
@@ -686,7 +786,7 @@ status open
 \begin_layout Plain Layout
 
 \series bold
-[AS1]
+[DA1]
 \end_layout
 
 \end_inset
@@ -710,7 +810,7 @@ status open
 \begin_layout Plain Layout
 
 \series bold
-[AS2]
+[DA2]
 \end_layout
 
 \end_inset
@@ -734,7 +834,7 @@ status open
 \begin_layout Plain Layout
 
 \series bold
-[AS3]
+[DA3]
 \end_layout
 
 \end_inset
@@ -753,13 +853,29 @@ status open
 \begin_layout Plain Layout
 
 \series bold
-[AS4]
+[DA4]
 \end_layout
 
 \end_inset
 
 It is assumed that any pre-existing taxi reservation service shall not be
  integrated with the platform.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Argument item:1
+status open
+
+\begin_layout Plain Layout
+
+\series bold
+[DA5]
+\end_layout
+
+\end_inset
+
+It is assumed that the zones in which the town is divided are static and
+ do not change frequently.
 \end_layout
 
 \end_body
