@@ -36,7 +36,11 @@ fact{
 }
 
 fact{
-	all q,p:Queue | q!=p and !q.contains in p.contains
+	all q,p:Queue | q!=p implies (all t:q.contains | !t in p.contains)
+}
+
+fact exacltyOneManager{
+	all q:Queue | (one m:QueueManager | q in m.manage)
 }
 
 fact {
@@ -47,12 +51,10 @@ fact {
 	all r:Ride | #r.transport > 0
 }
 
-pred maxPassenger{
+fact maxPassenger{
 	all r:Ride  | #r.transport <= 4
 }
 
 pred show{}
-
-run maxPassenger
 
 run show for 3
