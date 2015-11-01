@@ -1899,17 +1899,11 @@ Software system attributes
 \end_layout
 
 \begin_layout Subsection
-Availability and Reliability
+Reliability
 \end_layout
 
-\begin_layout Standard
-Since MyTaxiService is a service-oriented platform, its reliability parameters
- directly relate to its availability parameters.
- The platform's ability to function under the stated conditions is indeed
- its ability to respond to users' requests at any given time, hence the
- strict relation between the two.
- It has been decided to treat the two aspect as one, and the related non
- functional requirements are listed in this section.
+\begin_layout Subsection
+Availability
 \end_layout
 
 \begin_layout Enumerate
@@ -1951,24 +1945,6 @@ Data integrity checks must be periodically performed between the main data
  of disaster recovery operations.
 \end_layout
 
-\begin_layout Enumerate
-The implementation of the platform must prefer the absence of service to
- an incorrect or unsound one.
- 
-\end_layout
-
-\begin_deeper
-\begin_layout Enumerate
-No data exchanges must happen during the disaster recovery operations.
-\end_layout
-
-\begin_layout Enumerate
-Data stored in memory in the event of a system failure or security breach
- must be considered corrupt and no attempts must be made at recovering it.
- 
-\end_layout
-
-\end_deeper
 \begin_layout Subsection
 Security
 \end_layout
