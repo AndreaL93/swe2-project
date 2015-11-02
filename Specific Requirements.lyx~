@@ -139,7 +139,7 @@ Use Cases
 
 \begin_layout Standard
 \begin_inset Graphics
-	filename UseCase
+	filename Use_cases_and_Sequence_diagram/SequenceDiagrams svg/svg/Model1__UseCaseDiagram1_17.svg
 	width 100text%
 
 \end_inset
@@ -153,7 +153,7 @@ Class Diagram
 
 \begin_layout Standard
 \begin_inset Graphics
-	filename ClassDiagram
+	filename Use_cases_and_Sequence_diagram/SequenceDiagrams svg/svg/Model2__ClassDiagram1_20.svg
 	width 100text%
 
 \end_inset
@@ -171,8 +171,8 @@ To help the reader understand the above stated requirements, a brief description
 \end_layout
 
 \begin_layout Standard
-In the examples, Adam and Joanne are customers who intend to request a taxi
- and Hector, Monica, Jim and Samuel are taxi drivers of the town.
+In the examples, Adam, Michelle and Joanne are customers who intend to request
+ a taxi and Hector, Monica, Jim and Samuel are taxi drivers of the town.
 \end_layout
 
 \begin_layout Subsubsection
@@ -261,7 +261,34 @@ Jim decides to accept Adam's booking, and will keep his schedule free for
 \end_layout
 
 \begin_layout Subsubsection
-Manage Taxi Request
+Car sharing
+\end_layout
+
+\begin_layout Standard
+Michelle and Joanne live in the same neighborhood, and they both decide
+ to go see a fair on the other side of the Town.
+ Since they are both short on money, after opening the 
+\shape italic
+Taxi request 
+\shape default
+page of the app they both check the 
+\shape italic
+car sharing 
+\shape default
+option; they then submit their requests.
+ 
+\end_layout
+
+\begin_layout Standard
+The system performs a check on Michelle and Joanne's requests
+\end_layout
+
+\begin_layout Subsubsection
+Manage 
+\shape italic
+Reserve Taxi
+\shape default
+ Request
 \end_layout
 
 \begin_layout Standard
@@ -305,7 +332,7 @@ Report taxi
 \end_layout
 
 \begin_layout Subsubsection
-Report User
+Report Customer
 \end_layout
 
 \begin_layout Standard
@@ -510,7 +537,7 @@ The e-mail or username are not unique or, in the case of a taxi driver sign-up,
 
 \begin_layout Standard
 \begin_inset Graphics
-	filename Signup
+	filename Use_cases_and_Sequence_diagram/SequenceDiagrams svg/svg/Collaboration1__Interaction1__Signup_2.svg
 	width 100text%
 
 \end_inset
@@ -662,7 +689,7 @@ The username-password combination is incorrect, so the guest cannot log
 
 \begin_layout Standard
 \begin_inset Graphics
-	filename Login
+	filename Use_cases_and_Sequence_diagram/SequenceDiagrams svg/svg/Collaboration2__Interaction1__Login_3.svg
 	width 100text%
 
 \end_inset
@@ -818,7 +845,7 @@ The taxi driver is not available
 
 \begin_layout Standard
 \begin_inset Graphics
-	filename Available
+	filename Use_cases_and_Sequence_diagram/SequenceDiagrams svg/svg/Collaboration10__Interaction1__Available_11.svg
 	width 100text%
 
 \end_inset
@@ -912,8 +939,8 @@ The system forwards the request to the first taxi driver of the local queue
 \end_layout
 
 \begin_layout Enumerate
-If the taxi driver answers positively to the request, he takes the charge
- of the ride, otherwise he denies the request 
+If the taxi driver answers positively to the request, he takes charge of
+ the ride, otherwise he denies the request 
 \end_layout
 
 \begin_layout Enumerate
@@ -990,7 +1017,7 @@ e.g.
 
 \begin_layout Standard
 \begin_inset Graphics
-	filename TaxiRequest
+	filename Use_cases_and_Sequence_diagram/SequenceDiagrams svg/svg/Collaboration3__Interaction1__Taxi Request_4.svg
 	width 100text%
 
 \end_inset
@@ -999,7 +1026,11 @@ e.g.
 \end_layout
 
 \begin_layout Subsubsection
-Manage Taxi Request
+Manage 
+\shape italic
+Reserve Taxi
+\shape default
+ Request
 \end_layout
 
 \begin_layout Standard
@@ -1160,7 +1191,7 @@ The passenger cancel the request too late
 
 \begin_layout Standard
 \begin_inset Graphics
-	filename ManageTaxiRequest
+	filename Use_cases_and_Sequence_diagram/SequenceDiagrams svg/svg/Collaboration15__Interaction1__Manage Taxi Request_19.svg
 	width 100text%
 
 \end_inset
@@ -1311,7 +1342,7 @@ The passenger provides incorrect information in the report form
 
 \begin_layout Standard
 \begin_inset Graphics
-	filename ReportTaxi
+	filename Use_cases_and_Sequence_diagram/SequenceDiagrams svg/svg/Collaboration7__Interaction1__Report Taxi_8.svg
 	width 100text%
 
 \end_inset
@@ -1320,7 +1351,7 @@ The passenger provides incorrect information in the report form
 \end_layout
 
 \begin_layout Subsubsection
-Report User
+Report Customer
 \end_layout
 
 \begin_layout Standard
@@ -1386,7 +1417,7 @@ Execution Flow
 \begin_layout Enumerate
 The taxi driver requests the
 \shape italic
- Report user
+ Report customer
 \shape default
  page 
 \end_layout
@@ -1463,7 +1494,7 @@ The taxi driver provides incorrect information in the report form
 
 \begin_layout Standard
 \begin_inset Graphics
-	filename ReportUser
+	filename Use_cases_and_Sequence_diagram/SequenceDiagrams svg/svg/Collaboration13__Interaction1__Report Customer_14.svg
 	width 100text%
 
 \end_inset
@@ -1617,7 +1648,7 @@ The user provides incorrect information
 
 \begin_layout Standard
 \begin_inset Graphics
-	filename ManageInformation
+	filename Use_cases_and_Sequence_diagram/SequenceDiagrams svg/svg/Collaboration9__Interaction1__Manage your Personal Info_10.svg
 	width 100text%
 
 \end_inset
@@ -1783,7 +1814,7 @@ The taxi driver fills the form with incorrect information
 
 \begin_layout Standard
 \begin_inset Graphics
-	filename NotifyProblem
+	filename Use_cases_and_Sequence_diagram/SequenceDiagrams svg/svg/Collaboration14__Interaction1__Notify Problem_18.svg
 	width 100text%
 
 \end_inset
@@ -1801,10 +1832,9 @@ User
 
 \begin_layout Standard
 \begin_inset Graphics
-	filename UserBehavior
+	filename Use_cases_and_Sequence_diagram/SequenceDiagrams svg/svg/StateMachine3__User_23.svg
 	width 100text%
 	height 100theight%
-	keepAspectRatio
 
 \end_inset
 
@@ -1817,10 +1847,9 @@ Ride
 
 \begin_layout Standard
 \begin_inset Graphics
-	filename RideBehavior
+	filename Use_cases_and_Sequence_diagram/SequenceDiagrams svg/svg/StateMachine2__Ride_22.svg
 	width 100text%
 	height 100theight%
-	keepAspectRatio
 
 \end_inset
 
@@ -1833,10 +1862,9 @@ Queue Manager
 
 \begin_layout Standard
 \begin_inset Graphics
-	filename QueueManagerBehavior
+	filename Use_cases_and_Sequence_diagram/SequenceDiagrams svg/svg/StateMachine1__Queue Manager _21.svg
 	width 100text%
 	height 100theight%
-	keepAspectRatio
 
 \end_inset
 
@@ -1899,11 +1927,17 @@ Software system attributes
 \end_layout
 
 \begin_layout Subsection
-Reliability
+Availability and Reliability
 \end_layout
 
-\begin_layout Subsection
-Availability
+\begin_layout Standard
+Since MyTaxiService is a service-oriented platform, its reliability parameters
+ directly relate to its availability parameters.
+ The platform's ability to function under the stated conditions is indeed
+ its ability to respond to users' requests at any given time, hence the
+ strict relation between the two.
+ It has been decided to treat the two aspect as one, and the related non
+ functional requirements are listed in this section.
 \end_layout
 
 \begin_layout Enumerate
@@ -1945,6 +1979,24 @@ Data integrity checks must be periodically performed between the main data
  of disaster recovery operations.
 \end_layout
 
+\begin_layout Enumerate
+The implementation of the platform must prefer the absence of service to
+ an incorrect or unsound one.
+ 
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+No data exchanges must happen during the disaster recovery operations.
+\end_layout
+
+\begin_layout Enumerate
+Data stored in memory in the event of a system failure or security breach
+ must be considered corrupt and no attempts must be made at recovering it.
+ 
+\end_layout
+
+\end_deeper
 \begin_layout Subsection
 Security
 \end_layout

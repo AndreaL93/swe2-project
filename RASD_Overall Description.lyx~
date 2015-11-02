@@ -375,7 +375,7 @@ status open
 
 \end_inset
 
-Allow users to request a taxi
+Allow users to request a taxi and receive result of request
 \end_layout
 
 \begin_layout Enumerate
@@ -430,7 +430,7 @@ status open
 
 \end_inset
 
-Allow users to manage incoming requests
+Allow users to manage incoming requests and send back replies 
 \end_layout
 
 \begin_layout Enumerate
@@ -446,21 +446,6 @@ status open
 \end_inset
 
 Allow users to issue customer reports
-\end_layout
-
-\begin_layout Enumerate
-\begin_inset Argument item:1
-status open
-
-\begin_layout Plain Layout
-
-\series bold
-[F6]
-\end_layout
-
-\end_inset
-
-Allow users to report a technical problem 
 \end_layout
 
 \end_deeper
@@ -516,10 +501,6 @@ Register a profile into the platform
 
 \begin_layout Itemize
 Log into the platform 
-\end_layout
-
-\begin_layout Itemize
-Retrieve their password 
 \end_layout
 
 \begin_layout Standard
@@ -659,7 +640,7 @@ Issue a customer report
 \end_layout
 
 \begin_layout Itemize
-Report a technical problem 
+Notify a technical problem 
 \end_layout
 
 \end_deeper
