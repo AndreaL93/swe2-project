@@ -1,16 +1,32 @@
+%% LyX 2.1.4 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
 \documentclass[english]{article}
 \usepackage[T1]{fontenc}
-\usepackage[utf8]{luainputenc}
+\usepackage[utf8]{inputenc}
 \usepackage{array}
 \usepackage{graphicx}
 
 \makeatletter
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
+%% Because html converters don't know tabularnewline
+\providecommand{\tabularnewline}{\\}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+\usepackage{array}
+
+
+
 
 \providecommand{\tabularnewline}{\\}
 
 \usepackage{babel}
 \graphicspath{{images/}}
 
+
+
+
+\usepackage{babel}
 
 \makeatother
 
@@ -27,7 +43,7 @@
 
 This section of the document is dedicated at giving an in-depth description
 of the platform's requirements, and is to be kept as reference during
-all future phases of development. 
+all future phases of development.
 
 
 \subsection{External interfaces}
@@ -42,7 +58,7 @@ As briefly described in section \ref{sub:User-interface}, the main
 principle that must guide the design of the external interfaces of
 the platform is that of business identity continuity. This section
 contains a set of design mock-ups that are to be kept as reference
-during the development of the user interfaces. 
+during the development of the user interfaces.
 
 
 \subsection{Functions}
@@ -50,47 +66,50 @@ during the development of the user interfaces.
 
 \subsection{Use Cases}
 
-\includegraphics[width=\textwidth]{UseCase}
+\includegraphics[width=1\textwidth]{images/png/Model1__UseCaseDiagram1_17}
+
 
 \subsection{Class Diagram}
 
-\includegraphics[width=\textwidth]{ClassDiagram}
+\includegraphics[width=1\textwidth]{images/png/Model2__ClassDiagram1_20}
+
 
 \subsection{Scenarios}
 
 To help the reader understand the above stated requirements, a brief
 description of how a use case might look like in the real world is
-given below. 
+given below.
 
-In the examples, Adam and Joanne are customers who intend to request
-a taxi and Hector, Monica, Jim and Samuel are taxi drivers of the
-town. 
+In the examples, Adam, Michelle and Joanne are customers who intend
+to request a taxi and Hector, Monica, Jim and Samuel are taxi drivers
+of the town.
 
 
 \subsubsection{Sign up}
 
 Adam has just downloaded the customer-side app and wants to sign up
 into the platform. He requests the customer registration page, fills
-the form and submit the request to the system. If Adam's e-mail and
-username are unique the system gives Adam a confirmation of the success
-of the operation and redirects Adam to the login page, otherwise it
-displays an error message.
+the form and submits the request to the system. If Adam's e-mail and
+username are unique, the system gives Adam a confirmation of the success
+of the operation and redirects Adam to the login page; otherwise,
+an error message is displayed on Adam's phone.
 
 
 \subsubsection{Login}
 
 Adam, now registered, inserts the username and password in the login
 form and clicks the login button; the system checks the information
-and, if the username-pasword combination is correct, redirects Adam
-to his own user profile page; otherwise, an error message is shown. 
+and, if the username-password combination is correct, redirects Adam
+to his own user profile page; otherwise, an error message is displayed
+on Adam's phone.
 
 
 \subsubsection{Available}
 
 Hector, already logged into the platform, starts his working by day
-opening his taxi driver profile page and communicating his availability
+opening his taxi-side application and communicating his availability
 to the system. The system updates the taxi queue in Hector's zone
-and sends Hector a notification with his position in the queue. 
+and sends Hector a notification with his position in the queue.
 
 
 \subsubsection{Taxi request}
@@ -99,41 +118,54 @@ Adam, now logged into the system, wants to book a taxi to go home.
 He opens the taxi request page on the app, and requests a taxi. The
 system forwards Adam's request to the queue associated with Adam's
 position, and Hector, which is the first taxi driver in the queue,
-is notified with the request. 
+is notified with the request.
 
 Unfortunately, Hector has now decided to take a break and does not
-want to take this ride; he refuses Adam's request by tapping a button
-on the app, and the system forwards the request to Monica, the taxi
-driver immediately after Hector in the queue. 
+want to take charge of this ride; he refuses Adam's request by tapping
+a button on the app, and the system forwards the request to Monica,
+the taxi driver immediately after Hector in the queue.
 
 As she accepts Adam's request, Adam receives a notification on the
-app with the estimated waiting time. 
+app with the estimated waiting time.
 
 
 \subsubsection{Book a Taxi}
 
 While on Monica's taxi, Adam wants to book a taxi for that evening
-at 6 PM, in order to go to the cinema. He opens the taxi request page
-of the app, and fills and submits the request form. 
+at 6 PM, in order to go to the cinema. He opens the \textit{Taxi request}
+page of the app, and fills and submits the request form.
 
 The system checks the information (sending eventual error notifications
 back to Adam) and forwards Adam's request to Jim, by using a specific
 selection algorithm over taxi drivers in the queue associated to Adam's
-zone. 
+zone.
 
 Jim decides to accept Adam's booking, and will keep his schedule free
-for the time that Adam requested. 
+for the time that Adam requested.
 
 
-\subsubsection{Manage Taxi Request}
+\subsubsection{Car sharing}
 
-Later that day, Adam opens the ``Manage taxi request'' page from
-his laptop's browser to change the booking time from 6PM to 7PM. The
-system checks whether Adam's request is feasible (there must be at
-least two hours between the current time and the requested time),
-and eventually forwards the changes to Jim. 
+Michelle and Joanne live in the same neighborhood, and they both decide
+to go see a fair on the other side of the Town. Since they are both
+short on money, after opening the \textit{Taxi request }page of the
+app they both check the \textit{car sharing }option; they then submit
+their requests. 
 
-Jim accepts the modification and a confirmation is sent back to Adam. 
+The system performs a check on Michelle and Joanne's requests
+
+
+\subsubsection{Manage \textit{Reserve Taxi} Request}
+
+Later that day, Adam browses the platform's website from his laptop's
+browser, and opens the \textit{Manage taxi request} page to change
+the booking time from 6PM to 7PM. 
+
+The system checks whether Adam's request is acceptable (there must
+be at least two hours between the current time and the requested time),
+and eventually forwards the changes to Jim.
+
+Jim accepts the modification and a confirmation is sent back to Adam.
 
 
 \subsubsection{Report Taxi}
@@ -141,28 +173,28 @@ Jim accepts the modification and a confirmation is sent back to Adam.
 Jim picks Adam up at 7PM. During the ride Jim lights up a cigarette
 and is unreasonably rude towards Adam.
 
-Adam opens the ``Report taxi'' page on the app, to file a complaint
+Adam opens the \textit{Report taxi} page on the app, to file a complaint
 about Jim's behavior. The system updates Jim's profile information
 with the new report and confirms the success of the operation to Adam.
 
 
-\subsubsection{Report User}
+\subsubsection{Report Customer}
 
 After the ride, Adam is annoyed by the behavior of Jim and refuses
-to pay for the ride. 
+to pay for the ride.
 
-Jim opens the ``Report user'' page, fills the complaint form and
-submits it to the system. The system updates Adam's profile information
+Jim opens the \textit{Report user} page, fills the complaint form
+and submits it to the system. The system updates Adam's profile information
 with the new report and confirms the success of the operation to Jim.
 
 
 \subsubsection{Manage Personal Information}
 
-Joanne has opened a new main email account. 
+Joanne has opened a new main email account.
 
-She opens his profile page from the app, clicks on the edit button
-and changes his email address to match the new one; she then submits
-the new information. 
+She opens her profile page from the app, clicks on the \textit{edit}
+button and changes her email address to match the new one; she then
+submits the new information.
 
 The system performs a check on the information, updates Joanne's profile
 and notifies the success of the operation to Joanne.
@@ -171,16 +203,16 @@ and notifies the success of the operation to Joanne.
 \subsubsection{Report Problem}
 
 During a ride, Hector has a problem with his taxi's engine and can't
-bring Joanne to destination. 
+bring Joanne to her destination.
 
-Through the ``Report problem'' page of the app, he notifies the
-problem to the system, by filling the form and submitting. The system
-acknowledges the report and asks Hector if needs a new taxi; Hector
-confirms, and the system forwards his request to Samuel, who is the
-first taxi driver in Hector and Joanne's current zone. 
+Through the \textit{Report problem} page of the app, he notifies the
+problem to the system by filling the form and submitting. The system
+acknowledges the report and asks Hector if he'll be needing a new
+taxi; Hector confirms, and the system forwards his request to Samuel,
+who is the first taxi driver in Hector and Joanne's current zone.
 
 
-\subsection{Flows of events}
+\subsection{Flow of events}
 
 
 \subsubsection{Sign-up}
@@ -202,11 +234,11 @@ Execution Flow  & \begin{enumerate}
 \hline 
 Postconditions  & The guest is now a registered user \tabularnewline
 \hline 
-Exceptions  & The e-mail or username are not unique or, in the case of taxi driver
+Exceptions  & The e-mail or username are not unique or, in the case of a taxi driver
 sign-up, the license is not valid \tabularnewline
 \end{tabular}
 
-\includegraphics[width=\textwidth]{Signup}
+\includegraphics[width=1\textwidth]{images/png/Collaboration1__Interaction1__Signup_2}
 
 
 \subsubsection{Login}
@@ -229,11 +261,11 @@ Execution Flow  & \begin{enumerate}
 \hline 
 Postconditions  & The guest is now a logged-in user\tabularnewline
 \hline 
-Exceptions  & The username, password combination is incorrect, so the guest cannot
+Exceptions  & The username-password combination is incorrect, so the guest cannot
 log in \tabularnewline
 \end{tabular}
 
-\includegraphics[width=\textwidth]{Login}
+\includegraphics[width=1\textwidth]{images/png/Collaboration2__Interaction1__Login_3}
 
 
 \subsubsection{Available}
@@ -245,13 +277,13 @@ Actors  & Taxi driver \tabularnewline
 Preconditions  & \tabularnewline
 \hline 
 Execution Flow  & \begin{enumerate}
-\item The taxi driver requests the taxi profile page 
-\item The system returns the personal information of the user
-\item The taxi driver can choose to change the his availability, becoming available or unavailable
-\item The taxi driver send the request to the system
-\item The system update the queue
-\item The system return a confirmation to the taxi driver
-\end{enumerate}
+\item The taxi driver requests their profile page 
+\item The system displays the user's personal information 
+\item The taxi driver can choose to change their availability, becoming
+available or unavailable 
+\item The taxi driver sends the request to the system 
+\item The system updates the queue 
+\item The system returns a confirmation to the taxi driver \end{enumerate}
 \tabularnewline
 \hline 
 Postconditions  & The taxi driver is now available \tabularnewline
@@ -263,44 +295,46 @@ Exceptions  & \begin{itemize}
 \tabularnewline
 \end{tabular}
 
-\includegraphics[width=\textwidth]{Available}
+\includegraphics[width=1\textwidth]{images/png/Collaboration10__Interaction1__Available_11}
 
 
 \subsubsection{Taxi Request}
 
 \begin{tabular}{lp{8cm}}
 \hline 
-Actors  & User, Taxi driver \tabularnewline
+Actors  & Customer, Taxi driver \tabularnewline
 \hline 
 Preconditions  & The user should not be banned \tabularnewline
 \hline 
 Execution Flow  & \begin{enumerate}
-\item The user requests the taxi request page 
+\item The customer requests the \textit{Taxi request} page 
 \item The system asks for the type of request that the user wants to issue 
-\item The user fills the request form and sends the information to the system 
+\item The customer fills the request form and sends the information to the
+system 
 \item The system forwards the request to the first taxi driver of the local
 queue 
-\item If the taxi driver answers positively to the request, he takes the
-user in charge, otherwise he denies the request 
+\item If the taxi driver answers positively to the request, he takes charge
+of the ride, otherwise he denies the request 
 \item If the taxi driver accepts the request, the system notifies to the
-user the incoming taxi and changes the availability of the taxi driver;
-otherwise, the system updates the queue and forwards the request to
-the new first taxi driver of the queue.
-\item If there are no taxis available, the system notifies the user.\end{enumerate}
+customer the incoming taxi and changes the availability of the taxi
+driver; otherwise, the system updates the queue and forwards the request
+to the new first taxi driver of the queue. 
+\item If there are no taxis available, the system notifies so to the user.\end{enumerate}
 \tabularnewline
 \hline 
-Postconditions  & If the request is accepted by a taxi driver, the user is now a passenger \tabularnewline
+Postconditions  & If the request is accepted by a taxi driver, the customer is now a
+passenger \tabularnewline
 \hline 
 Exceptions  & \begin{itemize}
-\item The user provides incorrect information in the request form 
-\item The user is not in a valid position (\emph{e.g. outside the town}) \end{itemize}
+\item The customer provides incorrect information in the request form 
+\item The customer is not in a valid position (\emph{e.g. outside the town}) \end{itemize}
 \tabularnewline
 \end{tabular}
 
-\includegraphics[width=\textwidth]{TaxiRequest}
+\includegraphics[width=1\textwidth]{\string"images/png/Collaboration3__Interaction1__Taxi Request_4\string".eps}
 
 
-\subsubsection{Manage Taxi Request}
+\subsubsection{Manage \textit{Reserve Taxi} Request}
 
 \begin{tabular}{lp{8cm}}
 \hline 
@@ -309,29 +343,30 @@ Actors  & Passenger \tabularnewline
 Preconditions  & \tabularnewline
 \hline 
 Execution Flow  & \begin{enumerate}
-\item The passenger request the taxi Request Management page 
-\item The system load the page and return it to the passenger 
-\item The passenger can modify the Request full filling the modify Request 
-\item The system modify the request and return a confirm to the passenger 
+\item The passenger requests the \textit{Taxi request management} page 
+\item The page is generated by the system on the user's app
+\item The passenger can modify the request by filling the \textit{Modify
+request }form
+\item The system modifies the request and returns a confirmation to the
+passenger 
 \item The passenger can delete the request, submitting the operation to
 the system 
-\item The system update the queue and return a confirmation to the passenger \end{enumerate}
+\item The system updates the queue and returns a confirmation to the passenger \end{enumerate}
 \tabularnewline
 \hline 
 Postconditions  & \begin{itemize}
-\item If the passenger choose to modify the Request, the request is updated 
-\item If the passenger choose to delete the Request, the request is canceled
-and the taxi is now in queue \end{itemize}
+\item If the passenger chooses to modify the request, the request is updated 
+\item If the passenger chooses to delete the request, the request is canceled\end{itemize}
 \tabularnewline
 \hline 
 Exceptions  & \begin{itemize}
-\item The passenger provides incorrect information in the modify request
-form 
+\item The passenger provides incorrect information in the \textit{Modify
+request} form 
 \item The passenger cancel the request too late \end{itemize}
 \tabularnewline
 \end{tabular}
 
-\includegraphics[width=\textwidth]{ManageTaxiRequest}
+\includegraphics[width=1\textwidth]{\string"images/png/Collaboration15__Interaction1__Manage reserve Taxi Request_19\string".eps}
 
 
 \subsubsection{Report Taxi}
@@ -343,76 +378,74 @@ Actors  & Passenger \tabularnewline
 Preconditions  & \tabularnewline
 \hline 
 Execution Flow  & \begin{enumerate}
-\item The passenger request the Report taxi page 
-\item The system elaborate the request and ask to the passenger the report
-information 
-\item The passenger fill the form and submit the report 
-\item The system check the data obtained 
-\item The system update the taxi driver information 
-\item The system notify to the passenger the successful of the operation \end{enumerate}
+\item The passenger requests the \textit{Report taxi} page 
+\item The page is shown on the customer's application
+\item The passenger fills the form and submits the report 
+\item The system checks the submitted data
+\item The system updates the taxi driver information 
+\item The system notifies to the passenger the success of the operation \end{enumerate}
 \tabularnewline
 \hline 
-Postconditions  & The taxi driver is reported by the current passenger \tabularnewline
+Postconditions  & The taxi driver is reported by the passenger \tabularnewline
 \hline 
-Exceptions  & The passenger provides wrong information in the report form \tabularnewline
+Exceptions  & The passenger provides incorrect information in the report form \tabularnewline
 \end{tabular}
 
-\includegraphics[width=\textwidth]{ReportTaxi}
+\includegraphics[width=1\textwidth]{\string"images/png/Collaboration7__Interaction1__Report Taxi_8\string".eps}
 
 
-\subsubsection{Report User}
+\subsubsection{Report Customer}
 
 \begin{tabular}{lp{8cm}}
 \hline 
 Actors  & Taxi driver \tabularnewline
 \hline 
-Preconditions  & The taxi driver should had carried the user past 24 hours \tabularnewline
+Preconditions  & The interaction between customer and taxi driver must have happened
+at least 24 hours before\tabularnewline
 \hline 
 Execution Flow  & \begin{enumerate}
-\item The taxi driver request the Report user page 
-\item The system elaborate the request and ask to the taxi driver the report
-information 
-\item The taxi driver fill the form and submit the report 
-\item The system check the data obtained 
-\item The system update the user information 
-\item The system notify to the taxi driver the successful of the operation \end{enumerate}
+\item The taxi driver requests the\textit{ Report customer} page 
+\item The page is shown on the taxi driver's application
+\item The taxi driver fills the form and submits the report 
+\item The system checks the submitted data
+\item The system updates the user information 
+\item The system notifies to the taxi driver the success of the operation \end{enumerate}
 \tabularnewline
 \hline 
-Postconditions  & The user is reported by the taxi driver \tabularnewline
+Postconditions  & The customer is reported by the taxi driver \tabularnewline
 \hline 
-Exceptions  & The taxi driver provides wrong information in the report form \tabularnewline
+Exceptions  & The taxi driver provides incorrect information in the report form \tabularnewline
 \end{tabular}
 
-\includegraphics[width=\textwidth]{ReportUser}
+\includegraphics[width=1\textwidth]{\string"images/png/Collaboration13__Interaction1__Report Customer_14\string".eps}
 
 
 \subsubsection{Manage Personal Information}
 
 \begin{tabular}{lp{8cm}}
 \hline 
-Actors  & User or Taxi driver \tabularnewline
+Actors  & Customer or Taxi driver \tabularnewline
 \hline 
 Preconditions  & \tabularnewline
 \hline 
 Execution Flow  & \begin{enumerate}
-\item The user (or taxi driver) request the user profile page 
-\item The system returns the personal information of the user (or taxi driver) 
-\item The user (or taxi driver) can request the edit of the profile 
-\item The system return the editable information of the profile 
-\item The user (or taxi driver) can edit those data and send the changes
-to the system 
-\item The system check the correctness of the new information
-\item If the information are correct send the Change Confirm to the user
-(or taxi driver), otherwise send back an error message \end{enumerate}
+\item The user requests the their profile page 
+\item The user's personal information is shown on the user's application
+\item The user can request to edit their profile 
+\item The system returns the editable information of the profile 
+\item The user can edit their information and send the changes to the system 
+\item The system performs a check on the new information 
+\item If the information is correct, a confirmation is sent back to the
+user; otherwise, an error messagge is shown. \end{enumerate}
 \tabularnewline
 \hline 
-Postconditions  & If the user request a modify profile and submit correct information
-the Profile is changed \tabularnewline
+Postconditions  & If the user modifies their profile with correct information, the profile
+is changed \tabularnewline
 \hline 
-Exceptions  & The user provides wrong information \tabularnewline
+Exceptions  & The user provides incorrect information \tabularnewline
 \end{tabular}
 
-\includegraphics[width=\textwidth]{ManageInformation}
+\includegraphics[width=1\textwidth]{\string"images/png/Collaboration9__Interaction1__Manage your Personal Info_10\string".eps}
 
 
 \subsubsection{Report Problem}
@@ -424,41 +457,48 @@ Actors  & Taxi driver \tabularnewline
 Preconditions  & \tabularnewline
 \hline 
 Execution Flow  & \begin{enumerate}
-\item The taxi driver request the Report Problem page 
-\item The system returns the page of the Report requiring problem information 
-\item The taxi driver fills the form and sends the information 
-\item The taxi driver can request another taxi for the user who is carrying
-(if is carrying one) 
-\item If the taxi driver request another taxi the system looks for a available
+\item The taxi driver requests the \textit{Report problem} page 
+\item The page is shown on the taxi driver's application
+\item The taxi driver fills the form and submits the information 
+\item If the taxi driver has a passenger on board, they can request another
+taxi to drive the passenger to their destination
+\item If the taxi driver requests another taxi the system looks for an available
 taxi driver 
-\item If exist an available taxi change the carrier of the user with the
-new taxi driver and send him, otherwise notify the unavailability 
-\item The system return the success of the operation \end{enumerate}
+\item If an available taxi driver is found, a notification is sent to both
+drivers. 
+\item If the new taxi driver accepts the ride, a confirmation is sent to
+the driver who is submitting the report; otherwise, the systems looks
+for other taxi drivers until someone accepts the ride, and returns
+a failure notification otherwise. \end{enumerate}
 \tabularnewline
 \hline 
-Postconditions  & The problem is submitted into the system \tabularnewline
+Postconditions  & The problem is reported to the system \tabularnewline
 \hline 
 Exceptions  & \begin{itemize}
 \item The taxi driver is located in a invalid zone 
-\item The taxi driver fill the form with wrong information\end{itemize}
+\item The taxi driver fills the form with incorrect information\end{itemize}
 \tabularnewline
 \end{tabular}
 
-\includegraphics[width=\textwidth]{NotifyProblem}
+\includegraphics[width=1\textwidth]{\string"images/png/Collaboration14__Interaction1__Notify Problem_18\string".eps}
+
 
 \subsection{Entities Behavior}
 
+
 \subsubsection{User}
 
-\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{UserBehavior}
+\includegraphics[width=1\textwidth,height=1\textheight]{images/png/StateMachine3__User_23}
+
 
 \subsubsection{Ride}
 
-\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{RideBehavior}
+\includegraphics[width=1\textwidth,height=1\textheight]{images/png/StateMachine2__Ride_22}
+
 
 \subsubsection{Queue Manager}
 
-\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{QueueManagerBehavior}
+\includegraphics[width=1\textwidth,height=1\textheight]{\string"images/png/StateMachine1__Queue Manager _21\string".eps}
 
 
 \subsection{Performance requirements}
@@ -474,7 +514,9 @@ error 20\%) and change the path in case of traffic
 \end{itemize}
 
 \subsection{Logical database requirements}
-
+\begin{itemize}
+\item The system databases has consistency check, data integrity check 
+\end{itemize}
 
 \subsection{Design constraints}
 \begin{itemize}
@@ -488,25 +530,121 @@ error 20\%) and change the path in case of traffic
 \subsection{Software system attributes}
 
 
-\subsection{Reliability}
+\subsection{Availability and Reliability}
 
+Since MyTaxiService is a service-oriented platform, its reliability
+parameters directly relate to its availability parameters. The platform's
+ability to function under the stated conditions is indeed its ability
+to respond to users' requests at any given time, hence the strict
+relation between the two. It has been decided to treat the two aspect
+as one, and the related non functional requirements are listed in
+this section.
+\begin{enumerate}
+\item The platform's services must be available to the users 24/7.
+\item The RTO parameter must be kept at minimal levels (less than 1 minute)
+at any given time.
 
-\subsection{Availability}
+\begin{enumerate}
+\item Mission critical data must be locally mirrored on fast hardware (e.g.
+stored in RAID1 arrays with flash storage).
+\end{enumerate}
+\item The RPO parameter must be kept at minimal levels (less than 10 seconds)
+at any given time.
 
+\begin{enumerate}
+\item Any data must be locally stored in a 10 second time frame from its
+creation.
+\item Any locally stored data must be locally and remotely mirrored in a
+1 minute time frame from its memorization. 
+\end{enumerate}
+\item Data integrity checks must be periodically performed between the main
+data storage unit and the secondary backups, in order to ensure the
+success of disaster recovery operations.
+\item The implementation of the platform must prefer the absence of service
+to an incorrect or unsound one. 
+
+\begin{enumerate}
+\item No data exchanges must happen during the disaster recovery operations.
+\item Data stored in memory in the event of a system failure or security
+breach must be considered corrupt and no attempts must be made at
+recovering it. 
+\end{enumerate}
+\end{enumerate}
 
 \subsection{Security}
-\begin{itemize}
-\item SSL connection over the web 
-\item Username and password to identify the user and taxi driver 
-\item All the Operation are logged into the system 
-\item The data stored inside the secondary store are encrypted 
-\item The system databases has consistency check, data integrity check 
-\end{itemize}
+
+The following non functional requirements cover the security aspects
+of the platform in order, among other reasons, to satisfy the C3 constraint
+in section \ref{sub:Constraints}.
+\begin{enumerate}
+\item Access to the user data through the intended applications must be
+password protected.
+
+\begin{enumerate}
+\item A ban system must exists to prevent brute-forcing of the users' passwords.
+\end{enumerate}
+\item Sensitive user data (like passwords) must be stored under at least
+one encryption layer, after having been \textit{salted}. This applies
+to secondary storage, too. 
+
+\begin{enumerate}
+\item Decryption of the above mentioned data must happen exclusively at
+runtime and the \textit{cleartext }information must never be sent
+through any communication channels. 
+\end{enumerate}
+\item Operations on the platform must be performed exclusively by logged
+users (with the exception of the guest registration).
+\item HTTP data exchanges between the back-end and the user-side applications
+must be encrypted with a recognized SSL certificate (HTTPS protocol).
+\item Access to the back-end system must be protected both via hardware
+and software means.
+
+\begin{enumerate}
+\item A physical firewall must exists between the Internet and the back-end
+main router.
+\item Access to the system must be enabled via IP address whitelisting,
+rather than blacklisting.
+\item Root login must be disabled for remote sessions.
+\item Password login must be disabled and signed PKA must be enforced, for
+any type of session.
+\item Access logs must be kept, backed up, and regularly analyzed.
+\end{enumerate}
+\item Mission critical data must be stored with a particular attention to
+data integrity. 
+\end{enumerate}
 
 \subsection{Maintainability}
 
+The following non functional requirements are meant as a small guideline
+for programmers and designers in the development phase.
+\begin{enumerate}
+\item The codebase for all developed software must be highly modular to
+facilitate possible changes in the platform's functions and possible
+integration with other systems; this applies especially to the back-end
+modules.
+\item The codebase for all developed software must be thoroughly documented
+with both in-code comments and official documentation, in order to
+facilitate a possible outsourcing of the maintenance phase. 
+\end{enumerate}
 
 \subsection{Portability}
 
-\subsection{Additional comments}
+The following non functional requirements consider technical details
+of the platform's implementation in order to analyze its portability
+requirements. 
+
+When seen as a whole, the platform consists mainly of its user-side
+applications, and the back-end accounts for about 25\% of the codebase;
+nonetheless, since the user-side applications are strictly OS dependent,
+as specified in section \ref{sub:User-interface}, portability is
+an issue which has to be tackled in back-end development, in order
+to keep costs to a minimum in the case of possible changes in the
+platform (e.g. an integration with a pre-existsing system). Therefore:
+\begin{enumerate}
+\item The back-end software must be developed in Java Enterprise Edition.
+\item Integration with support modules must happen through JEE libraries.
+\item Any system related calls, communication protocols and thread related
+calls in the back-end must be OS independent (the use of wrapper libraries
+is encouraged over a case-by-case analysis).\end{enumerate}
+
 \end{document}
