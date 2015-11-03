@@ -129,8 +129,38 @@ reference "sub:User-interface"
  during the development of the user interfaces.
 \end_layout
 
+\begin_layout Standard
+//MOCKUPS <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+\end_layout
+
 \begin_layout Subsection
-Functions
+Functional requirements
+\end_layout
+
+\begin_layout Standard
+The following set of functional requirements is to be kept as official reference
+ for all further phases of the development of the platform.
+ 
+\end_layout
+
+\begin_layout Standard
+These requirements are meant as a more in-depth description of the main
+ system functionalities listed in section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Product-functions"
+
+\end_inset
+
+, and must be considered alongside the domain assumptions in section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Domain-Assumptions"
+
+\end_inset
+
+.
+ 
 \end_layout
 
 \begin_layout Subsection
@@ -148,13 +178,135 @@ Use Cases
 \end_layout
 
 \begin_layout Subsection
-Class Diagram
+Logical database requirements
+\end_layout
+
+\begin_layout Standard
+The majority of data processed by the DMBS consists of Java 
+\shape italic
+String 
+\shape default
+and 
+\shape italic
+Date 
+\shape default
+objects.
+ Images and complex objects might be stored in the database, too, and must
+ therefore be considered during the design of the database.
+ 
+\end_layout
+
+\begin_layout Standard
+The majority of stored data is not frequently accessed as most of the operationa
+l variables are strictly mutable (users' positions, queues, non-booked rides)
+ and therefore not in need to be stored.
+ 
+\end_layout
+
+\begin_layout Standard
+Stored data might consist of stable personal information of the users and,
+ while not immutable, it can be considered as rarely accessed.
+ 
+\end_layout
+
+\begin_layout Standard
+A deeper insight on the data classes and operational variables is found
+ in the next sections of this document, so it is advised to keep this section
+ only as a general reference and to approach the design of the database
+ by looking at the more specific descriptions given there.
+ 
+\end_layout
+
+\begin_layout Subsubsection
+Class diagram 
 \end_layout
 
 \begin_layout Standard
 \begin_inset Graphics
 	filename Use_cases_and_Sequence_diagram/SequenceDiagrams svg/svg/Model2__ClassDiagram1_20.svg
 	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Entity Behaviors (State chart diagrams)
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Argument item:1
+status open
+
+\begin_layout Plain Layout
+
+\series bold
+[SC1]
+\end_layout
+
+\end_inset
+
+User
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename Use_cases_and_Sequence_diagram/SequenceDiagrams svg/svg/StateMachine3__User_23.svg
+	width 100text%
+	height 100theight%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Argument item:1
+status open
+
+\begin_layout Plain Layout
+
+\series bold
+[SC2]
+\end_layout
+
+\end_inset
+
+Ride
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename Use_cases_and_Sequence_diagram/SequenceDiagrams svg/svg/StateMachine2__Ride_22.svg
+	width 100text%
+	height 100theight%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Argument item:1
+status open
+
+\begin_layout Plain Layout
+
+\series bold
+[SC3]
+\end_layout
+
+\end_inset
+
+Queue Manager
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename Use_cases_and_Sequence_diagram/SequenceDiagrams svg/svg/StateMachine1__Queue Manager _21.svg
+	width 100text%
+	height 100theight%
 
 \end_inset
 
@@ -213,6 +365,13 @@ ion with his position in the queue.
 
 \begin_layout Subsubsection
 Taxi request
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Taxi-request"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -237,6 +396,13 @@ As she accepts Adam's request, Adam receives a notification on the app with
 
 \begin_layout Subsubsection
 Book a Taxi
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Book-a-Taxi"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -256,8 +422,10 @@ The system checks the information (sending eventual error notifications
 \end_layout
 
 \begin_layout Standard
-Jim decides to accept Adam's booking, and will keep his schedule free for
- the time that Adam requested.
+Ten minutes before 6PM the system will forward Adam's request to the first
+ taxi in the queue at that time, and similarly to the previous scenario
+ a taxi will be assigned to Adam.
+ 
 \end_layout
 
 \begin_layout Subsubsection
@@ -275,12 +443,36 @@ page of the app they both check the
 \shape italic
 car sharing 
 \shape default
-option; they then submit their requests.
+option; after checking the option, the apps automatically adds a field in
+ the reservation form in which they must specify their intended destination;
+ they then submit their requests.
  
 \end_layout
 
 \begin_layout Standard
-The system performs a check on Michelle and Joanne's requests
+The system performs a check on Michelle and Joanne's requests and, since
+ their routes match, it automatically assign them to the same taxi.
+ 
+\end_layout
+
+\begin_layout Standard
+Based on whether they decided to book the taxi or simply request it, the
+ taxi will be chosen similarly to scenarios 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Book-a-Taxi"
+
+\end_inset
+
+ or 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Taxi-request"
+
+\end_inset
+
+ respectively.
+ 
 \end_layout
 
 \begin_layout Subsubsection
@@ -303,12 +495,8 @@ Manage taxi request
 
 \begin_layout Standard
 The system checks whether Adam's request is acceptable (there must be at
- least two hours between the current time and the requested time), and eventuall
-y forwards the changes to Jim.
-\end_layout
-
-\begin_layout Standard
-Jim accepts the modification and a confirmation is sent back to Adam.
+ least two hours between the current time and the requested time), and possibly
+ modifies to time on which to forward the request to the queue.
 \end_layout
 
 \begin_layout Subsubsection
@@ -327,8 +515,8 @@ Adam opens the
 Report taxi
 \shape default
  page on the app, to file a complaint about Jim's behavior.
- The system updates Jim's profile information with the new report and confirms
- the success of the operation to Adam.
+ The system updates Jim's record with the new report and confirms the success
+ of the operation to Adam.
 \end_layout
 
 \begin_layout Subsubsection
@@ -346,8 +534,8 @@ Jim opens the
 Report user
 \shape default
  page, fills the complaint form and submits it to the system.
- The system updates Adam's profile information with the new report and confirms
- the success of the operation to Jim.
+ The system updates Adam's record with the new report and confirms the success
+ of the operation to Jim.
 \end_layout
 
 \begin_layout Subsubsection
@@ -421,7 +609,13 @@ Actors
 \begin_inset Text
 
 \begin_layout Plain Layout
-Guest 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "-Guest:-any"
+
+\end_inset
+
+Guest
 \end_layout
 
 \end_inset
@@ -441,7 +635,7 @@ Preconditions
 \begin_inset Text
 
 \begin_layout Plain Layout
-The guest is not registered into the system 
+The guest is not registered into the system.
 \end_layout
 
 \end_inset
@@ -461,27 +655,23 @@ Execution Flow
 \begin_inset Text
 
 \begin_layout Enumerate
-The guest requests the registration page 
+The guest requests the registration page.
 \end_layout
 
 \begin_layout Enumerate
-The system asks for the sign-up information 
+The guest fills the registration form and submits the request.
 \end_layout
 
 \begin_layout Enumerate
-The guest fills the form and submits the request 
+The system checks the uniqueness of the username and e-mail.
 \end_layout
 
 \begin_layout Enumerate
-The system checks the uniqueness of the username and e-mail 
+The system creates the customer (or taxi driver) profile .
 \end_layout
 
 \begin_layout Enumerate
-The system creates the customer (or taxi driver) profile 
-\end_layout
-
-\begin_layout Enumerate
-The system sends the confirmation to the guest 
+The system sends the confirmation to the guest.
 \end_layout
 
 \end_inset
@@ -501,7 +691,7 @@ Postconditions
 \begin_inset Text
 
 \begin_layout Plain Layout
-The guest is now a registered user 
+The guest is now a registered user.
 \end_layout
 
 \end_inset
@@ -522,7 +712,8 @@ Exceptions
 
 \begin_layout Plain Layout
 The e-mail or username are not unique or, in the case of a taxi driver sign-up,
- the license is not valid 
+ the license is not valid: an error message is shown.
+ 
 \end_layout
 
 \end_inset
@@ -589,7 +780,7 @@ Preconditions
 \begin_inset Text
 
 \begin_layout Plain Layout
-The guest has already a profile into the system
+The guest is already registered into the system.
 \end_layout
 
 \end_inset
@@ -609,31 +800,27 @@ Execution Flow
 \begin_inset Text
 
 \begin_layout Enumerate
-The guest requests the login page 
+The guest requests the login page.
 \end_layout
 
 \begin_layout Enumerate
-The system requires the login information (Username, password) 
+The guest fills the form and submits the request.
 \end_layout
 
 \begin_layout Enumerate
-The guest fills the form and submits the request 
+The system checks the username and password.
 \end_layout
 
 \begin_layout Enumerate
-The system checks the username and password 
+The system sends a login confirmation.
 \end_layout
 
 \begin_layout Enumerate
-The system sends a login confirmation 
+The guest is logged into the system.
 \end_layout
 
 \begin_layout Enumerate
-The guest is logged into the system 
-\end_layout
-
-\begin_layout Enumerate
-The guest is redirected to the user profile page 
+The guest is redirected to the user main page.
 \end_layout
 
 \end_inset
@@ -653,7 +840,7 @@ Postconditions
 \begin_inset Text
 
 \begin_layout Plain Layout
-The guest is now a logged-in user
+The guest is now a logged-in user.
 \end_layout
 
 \end_inset
@@ -674,7 +861,7 @@ Exceptions
 
 \begin_layout Plain Layout
 The username-password combination is incorrect, so the guest cannot log
- in 
+ in: an error message is shown.
 \end_layout
 
 \end_inset
@@ -690,7 +877,7 @@ The username-password combination is incorrect, so the guest cannot log
 \begin_layout Standard
 \begin_inset Graphics
 	filename Use_cases_and_Sequence_diagram/SequenceDiagrams svg/svg/Collaboration2__Interaction1__Login_3.svg
-	width 100text%
+	height 100theight%
 
 \end_inset
 
@@ -741,7 +928,7 @@ Preconditions
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+The taxi driver is logged into the system.
 \end_layout
 
 \end_inset
@@ -761,28 +948,23 @@ Execution Flow
 \begin_inset Text
 
 \begin_layout Enumerate
-The taxi driver requests their profile page 
+The taxi driver opens the app.
 \end_layout
 
 \begin_layout Enumerate
-The system displays the user's personal information 
+The taxi driver changes their availability by tapping a button: a request
+ is sent to the system.
+ 
 \end_layout
 
 \begin_layout Enumerate
-The taxi driver can choose to change their availability, becoming available
- or unavailable 
+The system updates the queue.
+ 
 \end_layout
 
 \begin_layout Enumerate
-The taxi driver sends the request to the system 
-\end_layout
-
-\begin_layout Enumerate
-The system updates the queue 
-\end_layout
-
-\begin_layout Enumerate
-The system returns a confirmation to the taxi driver 
+The system returns a confirmation to the taxi driver.
+ 
 \end_layout
 
 \end_inset
@@ -802,7 +984,7 @@ Postconditions
 \begin_inset Text
 
 \begin_layout Plain Layout
-The taxi driver is now available 
+The taxi driver has now changed their availability.
 \end_layout
 
 \end_inset
@@ -822,15 +1004,12 @@ Exceptions
 \begin_inset Text
 
 \begin_layout Itemize
-The taxi driver is located in a invalid zone 
-\end_layout
-
-\begin_layout Itemize
-The taxi driver is carrying a passenger 
-\end_layout
-
-\begin_layout Itemize
-The taxi driver is not available
+The taxi driver is located in a invalid zone and they try to become 
+\shape italic
+available
+\shape default
+: an error message is shown.
+ 
 \end_layout
 
 \end_inset
@@ -860,9 +1039,9 @@ Taxi Request
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="5" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features rotate="0" islongtable="true" longtabularalignment="left">
 <column alignment="left" valignment="top">
-<column alignment="none" valignment="top" width="8cm">
+<column alignment="left" valignment="top" width="8cm">
 <row>
 <cell alignment="left" valignment="top" topline="true" usebox="none">
 \begin_inset Text
@@ -873,7 +1052,7 @@ Actors
 
 \end_inset
 </cell>
-<cell alignment="none" valignment="top" topline="true" usebox="none">
+<cell alignment="left" valignment="top" topline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -893,17 +1072,17 @@ Preconditions
 
 \end_inset
 </cell>
-<cell alignment="none" valignment="top" topline="true" usebox="none">
+<cell alignment="left" valignment="top" topline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
-The user should not be banned 
+Both users must be logged in, the taxi driver must be available.
 \end_layout
 
 \end_inset
 </cell>
 </row>
-<row>
+<row newpage="true">
 <cell alignment="left" valignment="top" topline="true" usebox="none">
 \begin_inset Text
 
@@ -913,7 +1092,7 @@ Execution Flow
 
 \end_inset
 </cell>
-<cell alignment="none" valignment="top" topline="true" usebox="none">
+<cell alignment="left" valignment="top" topline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Enumerate
@@ -925,34 +1104,49 @@ Taxi request
 \end_layout
 
 \begin_layout Enumerate
-The system asks for the type of request that the user wants to issue 
-\end_layout
-
-\begin_layout Enumerate
-The customer fills the request form and sends the information to the system
+The customer is shown a form to fill with optional information: they can
+ choose to book a taxi and to enable the 
+\shape italic
+Taxi sharing
+\shape default
+ option.
  
 \end_layout
 
 \begin_layout Enumerate
-The system forwards the request to the first taxi driver of the local queue
+The customer fills the request form according to their preference and sends
+ the information to the system.
+\end_layout
+
+\begin_layout Enumerate
+Based on the type of request that the customer issued, the system generates
+ a request with all the needed data and sends it to the first taxi driver
+ in the right local queue, at the right time.
  
 \end_layout
 
 \begin_layout Enumerate
-If the taxi driver answers positively to the request, he takes charge of
- the ride, otherwise he denies the request 
+The taxi driver can either ignore the request or accept it.
+ 
 \end_layout
 
 \begin_layout Enumerate
 If the taxi driver accepts the request, the system notifies to the customer
- the incoming taxi and changes the availability of the taxi driver; otherwise,
- the system updates the queue and forwards the request to the new first
- taxi driver of the queue.
+ the incoming taxi (with an approximate ETA) and changes the availability
+ of the taxi driver; otherwise, the system puts the taxi driver at the end
+ of the queue and forwards the request to the next first taxi driver of
+ the queue.
  
 \end_layout
 
 \begin_layout Enumerate
-If there are no taxis available, the system notifies so to the user.
+If the issued request was a booking request or a request with 
+\shape italic
+Taxi sharing 
+\shape default
+enabled, the system calculates the estimated fee for the passenger and adds
+ it to the notification sent to the user.
+ 
 \end_layout
 
 \end_inset
@@ -968,12 +1162,11 @@ Postconditions
 
 \end_inset
 </cell>
-<cell alignment="none" valignment="top" topline="true" usebox="none">
+<cell alignment="left" valignment="top" topline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
-If the request is accepted by a taxi driver, the customer is now a passenger
- 
+If the request is accepted by a taxi driver, the customer is now a passenger.
 \end_layout
 
 \end_inset
@@ -989,11 +1182,17 @@ Exceptions
 
 \end_inset
 </cell>
-<cell alignment="none" valignment="top" topline="true" usebox="none">
+<cell alignment="left" valignment="top" topline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Itemize
-The customer provides incorrect information in the request form 
+The customer provides incorrect information in the request form: an error
+ notification is shown.
+ 
+\end_layout
+
+\begin_layout Itemize
+No taxis are available: the system notifies so to the user.
 \end_layout
 
 \begin_layout Itemize
@@ -1002,7 +1201,8 @@ The customer is not in a valid position (
 e.g.
  outside the town
 \emph default
-) 
+): an error notification is shown.
+ 
 \end_layout
 
 \end_inset
@@ -1053,7 +1253,7 @@ Actors
 \begin_inset Text
 
 \begin_layout Plain Layout
-Passenger 
+Customer
 \end_layout
 
 \end_inset
@@ -1072,8 +1272,13 @@ Preconditions
 <cell alignment="none" valignment="top" topline="true" usebox="none">
 \begin_inset Text
 
-\begin_layout Plain Layout
+\begin_layout Itemize
+The customer must have reserved a taxi.
+ 
+\end_layout
 
+\begin_layout Itemize
+The customer must be logged in.
 \end_layout
 
 \end_inset
@@ -1093,37 +1298,31 @@ Execution Flow
 \begin_inset Text
 
 \begin_layout Enumerate
-The passenger requests the 
+The customer requests the 
 \shape italic
 Taxi request management
 \shape default
- page 
+ page.
 \end_layout
 
 \begin_layout Enumerate
-The page is generated by the system on the user's app
-\end_layout
-
-\begin_layout Enumerate
-The passenger can modify the request by filling the 
+The customer can modify the request by filling a
 \shape italic
-Modify request 
+ 
 \shape default
-form
-\end_layout
-
-\begin_layout Enumerate
-The system modifies the request and returns a confirmation to the passenger
+form and submitting it, or delete the request by tapping (or clicking) a
+ button.
  
 \end_layout
 
 \begin_layout Enumerate
-The passenger can delete the request, submitting the operation to the system
+The system modifies the request and returns a confirmation to the passenger.
  
 \end_layout
 
 \begin_layout Enumerate
-The system updates the queue and returns a confirmation to the passenger
+The request is forwarded to the right local queue accordingly; if the user
+ canceled their request, the request is not sent.
  
 \end_layout
 
@@ -1144,11 +1343,11 @@ Postconditions
 \begin_inset Text
 
 \begin_layout Itemize
-If the passenger chooses to modify the request, the request is updated 
+If the customer chooses to modify the request, the request is updated.
 \end_layout
 
 \begin_layout Itemize
-If the passenger chooses to delete the request, the request is canceled
+If the customer chooses to delete the request, the request is canceled.
 \end_layout
 
 \end_inset
@@ -1168,15 +1367,18 @@ Exceptions
 \begin_inset Text
 
 \begin_layout Itemize
-The passenger provides incorrect information in the 
+The customer provides incorrect information in the 
 \shape italic
 Modify request
 \shape default
- form 
+ form: an error message is shown.
+ 
 \end_layout
 
 \begin_layout Itemize
-The passenger cancel the request too late 
+The customer tried to cancel the request when the request has already been
+ forwarded to the taxi driver: an error message is shown and the modification
+ is not allowed.
 \end_layout
 
 \end_inset
@@ -1242,8 +1444,13 @@ Preconditions
 <cell alignment="none" valignment="top" topline="true" usebox="none">
 \begin_inset Text
 
-\begin_layout Plain Layout
+\begin_layout Itemize
+The interaction between the passenger and the taxi driver must have happened
+ at least 24 hours before.
+\end_layout
 
+\begin_layout Itemize
+The passenger must be logged in.
 \end_layout
 
 \end_inset
@@ -1267,27 +1474,23 @@ The passenger requests the
 \shape italic
 Report taxi
 \shape default
- page 
+ page.
 \end_layout
 
 \begin_layout Enumerate
-The page is shown on the customer's application
+The passenger fills the form and submits the report.
 \end_layout
 
 \begin_layout Enumerate
-The passenger fills the form and submits the report 
+The system checks the submitted data.
 \end_layout
 
 \begin_layout Enumerate
-The system checks the submitted data
+The system updates the taxi driver's record.
 \end_layout
 
 \begin_layout Enumerate
-The system updates the taxi driver information 
-\end_layout
-
-\begin_layout Enumerate
-The system notifies to the passenger the success of the operation 
+The system notifies to the passenger the success of the operation.
 \end_layout
 
 \end_inset
@@ -1307,7 +1510,7 @@ Postconditions
 \begin_inset Text
 
 \begin_layout Plain Layout
-The taxi driver is reported by the passenger 
+The taxi driver is reported by the passenger.
 \end_layout
 
 \end_inset
@@ -1327,7 +1530,9 @@ Exceptions
 \begin_inset Text
 
 \begin_layout Plain Layout
-The passenger provides incorrect information in the report form 
+The passenger provides incorrect information in the report form: an error
+ message is shown.
+ 
 \end_layout
 
 \end_inset
@@ -1393,9 +1598,14 @@ Preconditions
 <cell alignment="none" valignment="top" topline="true" usebox="none">
 \begin_inset Text
 
-\begin_layout Plain Layout
-The interaction between customer and taxi driver must have happened at least
- 24 hours before
+\begin_layout Itemize
+The interaction between the passenger and the taxi driver must have happened
+ at least 24 hours before.
+ 
+\end_layout
+
+\begin_layout Itemize
+The taxi driver must be logged in.
 \end_layout
 
 \end_inset
@@ -1415,31 +1625,27 @@ Execution Flow
 \begin_inset Text
 
 \begin_layout Enumerate
-The taxi driver requests the
+The taxi driver requests the 
 \shape italic
- Report customer
+Report customer
 \shape default
- page 
+ page.
 \end_layout
 
 \begin_layout Enumerate
-The page is shown on the taxi driver's application
+The taxi driver fills the form and submits the report.
 \end_layout
 
 \begin_layout Enumerate
-The taxi driver fills the form and submits the report 
+The system checks the submitted data.
 \end_layout
 
 \begin_layout Enumerate
-The system checks the submitted data
+The system updates the custormer's record.
 \end_layout
 
 \begin_layout Enumerate
-The system updates the user information 
-\end_layout
-
-\begin_layout Enumerate
-The system notifies to the taxi driver the success of the operation 
+The system notifies to the taxi driver the success of the operation.
 \end_layout
 
 \end_inset
@@ -1459,7 +1665,7 @@ Postconditions
 \begin_inset Text
 
 \begin_layout Plain Layout
-The customer is reported by the taxi driver 
+The customer is reported by the taxi driver.
 \end_layout
 
 \end_inset
@@ -1479,7 +1685,9 @@ Exceptions
 \begin_inset Text
 
 \begin_layout Plain Layout
-The taxi driver provides incorrect information in the report form 
+The taxi driver provides incorrect information in the report form: an error
+ message is shown.
+ 
 \end_layout
 
 \end_inset
@@ -1546,7 +1754,7 @@ Preconditions
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+The user must be logged in.
 \end_layout
 
 \end_inset
@@ -1566,33 +1774,32 @@ Execution Flow
 \begin_inset Text
 
 \begin_layout Enumerate
-The user requests the their profile page 
+The user requests their profile page.
 \end_layout
 
 \begin_layout Enumerate
-The user's personal information is shown on the user's application
+The user's personal information is shown on the user's application.
 \end_layout
 
 \begin_layout Enumerate
-The user can request to edit their profile 
+The user can begin editing their profile information by tapping (or clicking)
+ on the 
+\shape italic
+Edit
+\shape default
+ button.
 \end_layout
 
 \begin_layout Enumerate
-The system returns the editable information of the profile 
+The user edits their information and submits the changes to the system.
 \end_layout
 
 \begin_layout Enumerate
-The user can edit their information and send the changes to the system 
+The system performs a check on the new information.
 \end_layout
 
 \begin_layout Enumerate
-The system performs a check on the new information 
-\end_layout
-
-\begin_layout Enumerate
-If the information is correct, a confirmation is sent back to the user;
- otherwise, an error messagge is shown.
- 
+If the information is correct, a confirmation is sent back to the user.
 \end_layout
 
 \end_inset
@@ -1612,8 +1819,7 @@ Postconditions
 \begin_inset Text
 
 \begin_layout Plain Layout
-If the user modifies their profile with correct information, the profile
- is changed 
+The user profile information is changed.
 \end_layout
 
 \end_inset
@@ -1633,7 +1839,8 @@ Exceptions
 \begin_inset Text
 
 \begin_layout Plain Layout
-The user provides incorrect information 
+The user provides incorrect information: an error message is shown.
+ 
 \end_layout
 
 \end_inset
@@ -1700,7 +1907,7 @@ Preconditions
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+The taxi driver must be logged in
 \end_layout
 
 \end_inset
@@ -1724,38 +1931,28 @@ The taxi driver requests the
 \shape italic
 Report problem
 \shape default
- page 
+ page.
 \end_layout
 
 \begin_layout Enumerate
-The page is shown on the taxi driver's application
-\end_layout
-
-\begin_layout Enumerate
-The taxi driver fills the form and submits the information 
+The taxi driver fills the form and submits the information regarding a technical
+ problem that they are experiencing.
 \end_layout
 
 \begin_layout Enumerate
 If the taxi driver has a passenger on board, they can request another taxi
- to drive the passenger to their destination
+ to drive the passenger to their destination.
 \end_layout
 
 \begin_layout Enumerate
 If the taxi driver requests another taxi the system looks for an available
- taxi driver 
-\end_layout
-
-\begin_layout Enumerate
-If an available taxi driver is found, a notification is sent to both drivers.
+ taxi driver, with the usual procedure.
  
 \end_layout
 
 \begin_layout Enumerate
-If the new taxi driver accepts the ride, a confirmation is sent to the driver
- who is submitting the report; otherwise, the systems looks for other taxi
- drivers until someone accepts the ride, and returns a failure notification
- otherwise.
- 
+If a taxi driver accepts the request, a confirmation is sent to the driver
+ who is submitting the report.
 \end_layout
 
 \end_inset
@@ -1775,7 +1972,7 @@ Postconditions
 \begin_inset Text
 
 \begin_layout Plain Layout
-The problem is reported to the system 
+The technical problem is reported to the system 
 \end_layout
 
 \end_inset
@@ -1795,11 +1992,13 @@ Exceptions
 \begin_inset Text
 
 \begin_layout Itemize
-The taxi driver is located in a invalid zone 
+The taxi driver is located in a invalid zone: an error message is shown.
 \end_layout
 
 \begin_layout Itemize
-The taxi driver fills the form with incorrect information
+The taxi driver requests a second taxi, but no available taxi is found:
+ an error message is shown to the user.
+ 
 \end_layout
 
 \end_inset
@@ -1823,103 +2022,50 @@ The taxi driver fills the form with incorrect information
 \end_layout
 
 \begin_layout Subsection
-Entities Behavior
-\end_layout
-
-\begin_layout Subsubsection
-User
-\end_layout
-
-\begin_layout Standard
-\begin_inset Graphics
-	filename Use_cases_and_Sequence_diagram/SequenceDiagrams svg/svg/StateMachine3__User_23.svg
-	width 100text%
-	height 100theight%
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsubsection
-Ride
-\end_layout
-
-\begin_layout Standard
-\begin_inset Graphics
-	filename Use_cases_and_Sequence_diagram/SequenceDiagrams svg/svg/StateMachine2__Ride_22.svg
-	width 100text%
-	height 100theight%
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsubsection
-Queue Manager
-\end_layout
-
-\begin_layout Standard
-\begin_inset Graphics
-	filename Use_cases_and_Sequence_diagram/SequenceDiagrams svg/svg/StateMachine1__Queue Manager _21.svg
-	width 100text%
-	height 100theight%
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsection
 Performance requirements
 \end_layout
 
-\begin_layout Itemize
-The system should support at least all the taxi driver registered into the
- Town Database 
+\begin_layout Standard
+Some indicative non functional requirements regarding performance have been
+ identified as follows.
+ 
 \end_layout
 
-\begin_layout Itemize
-The system should elaborate user incoming information 
+\begin_layout Enumerate
+The platform must support a number users equals to 3 times the number of
+ registered taxi drivers in the Town.
+ Estimates must be calculated each year and modifications to the infrastructure
+ must be made accordingly.
+ 
 \end_layout
 
-\begin_layout Itemize
-The system should provide the faster path for each ride 
+\begin_layout Enumerate
+The system must process 99% of requests in less than 5 seconds.
 \end_layout
 
-\begin_layout Itemize
-The system should calculate the final price of the ride with a maximum error
- of 10% 
+\begin_layout Enumerate
+The system must support parallel processing of the request to a degree proportio
+nal to at least 25% of the average number of requests.
+ 
 \end_layout
 
-\begin_layout Itemize
-The system should provide to a passenger the arrival time (maximum error
- 20%) and change the path in case of traffic 
+\begin_layout Enumerate
+Management of the database must be transparent to the user, which must have
+ the impression of a continuous interaction with the system.
+ 
 \end_layout
 
-\begin_layout Subsection
-Logical database requirements
+\begin_layout Enumerate
+Estimates of the costs of the rides must be precise with a 10% error margin.
+ 
 \end_layout
 
-\begin_layout Itemize
-The system databases has consistency check, data integrity check 
-\end_layout
-
-\begin_layout Subsection
-Design constraints
-\end_layout
-
-\begin_layout Itemize
-GPS precision limitations: average 3m error 
-\end_layout
-
-\begin_layout Itemize
-Internet congestion 
+\begin_layout Enumerate
+Estimates of the taxi drivers' ETA must be precise with a 10% error margin.
 \end_layout
 
 \begin_layout Subsection
-Availability and Reliability
+Availability and Reliability Requirements
 \end_layout
 
 \begin_layout Standard
@@ -1990,7 +2136,7 @@ Data stored in memory in the event of a system failure or security breach
 
 \end_deeper
 \begin_layout Subsection
-Security
+Security Requirements
 \end_layout
 
 \begin_layout Standard
@@ -2087,12 +2233,13 @@ Mission critical data must be stored with a particular attention to data
 \end_layout
 
 \begin_layout Subsection
-Maintainability
+Maintainability Requirements
 \end_layout
 
 \begin_layout Standard
-The following non functional requirements are meant as a small guideline
- for programmers and designers in the development phase.
+The following non functional requirements regarding the maintainability
+ of the codebase are meant as a small guideline for programmers and designers
+ in the development phase.
 \end_layout
 
 \begin_layout Enumerate
@@ -2109,7 +2256,7 @@ The codebase for all developed software must be thoroughly documented with
 \end_layout
 
 \begin_layout Subsection
-Portability
+Portability Requirements
 \end_layout
 
 \begin_layout Standard

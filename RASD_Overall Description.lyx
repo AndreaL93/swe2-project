@@ -348,6 +348,13 @@ Finally, the customer-side web application does not have specific device
 
 \begin_layout Subsection
 Product functions
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Product-functions"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -491,6 +498,13 @@ This section is aimed at giving a high level description of the platform,
 \begin_layout Itemize
 
 \series bold
+\begin_inset CommandInset label
+LatexCommand label
+name "-Guest:-any"
+
+\end_inset
+
+
 \begin_inset Argument item:1
 status open
 
@@ -531,6 +545,13 @@ After completing a login, [A1] actors may become either of the two following
 \begin_layout Itemize
 
 \series bold
+\begin_inset CommandInset label
+LatexCommand label
+name "-Customer:-a"
+
+\end_inset
+
+
 \begin_inset Argument item:1
 status open
 
@@ -559,6 +580,13 @@ reference "sub:Definitions,-acronyms,-and"
 \begin_layout Itemize
 
 \series bold
+\begin_inset CommandInset label
+LatexCommand label
+name "-Logged-in-Customer:"
+
+\end_inset
+
+
 \begin_inset Argument item:1
 status open
 
@@ -589,6 +617,13 @@ View and edit their profile
 \begin_layout Itemize
 
 \series bold
+\begin_inset CommandInset label
+LatexCommand label
+name "-Passenger:-an"
+
+\end_inset
+
+
 \begin_inset Argument item:1
 status open
 
@@ -620,6 +655,13 @@ Issue a taxi report
 \begin_layout Itemize
 
 \series bold
+\begin_inset CommandInset label
+LatexCommand label
+name "-Taxi-driver:"
+
+\end_inset
+
+
 \begin_inset Argument item:1
 status open
 
@@ -784,6 +826,13 @@ Legal waiver of responsibility
 
 \begin_layout Subsection
 Domain Assumptions
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Domain-Assumptions"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard

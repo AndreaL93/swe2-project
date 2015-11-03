@@ -348,6 +348,13 @@ Finally, the customer-side web application does not have specific device
 
 \begin_layout Subsection
 Product functions
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Product-functions"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -375,7 +382,7 @@ status open
 
 \end_inset
 
-Allow users to request a taxi and receive result of request
+Allow users to request a taxi
 \end_layout
 
 \begin_layout Enumerate
@@ -430,7 +437,7 @@ status open
 
 \end_inset
 
-Allow users to manage incoming requests and send back replies 
+Allow users to manage incoming requests
 \end_layout
 
 \begin_layout Enumerate
@@ -446,6 +453,21 @@ status open
 \end_inset
 
 Allow users to issue customer reports
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Argument item:1
+status open
+
+\begin_layout Plain Layout
+
+\series bold
+[F6]
+\end_layout
+
+\end_inset
+
+Allow users to report a technical problem 
 \end_layout
 
 \end_deeper
@@ -476,6 +498,13 @@ This section is aimed at giving a high level description of the platform,
 \begin_layout Itemize
 
 \series bold
+\begin_inset CommandInset label
+LatexCommand label
+name "-Guest:-any"
+
+\end_inset
+
+
 \begin_inset Argument item:1
 status open
 
@@ -503,6 +532,10 @@ Register a profile into the platform
 Log into the platform 
 \end_layout
 
+\begin_layout Itemize
+Retrieve their password 
+\end_layout
+
 \begin_layout Standard
 After completing a login, [A1] actors may become either of the two following
  types of actor.
@@ -512,6 +545,13 @@ After completing a login, [A1] actors may become either of the two following
 \begin_layout Itemize
 
 \series bold
+\begin_inset CommandInset label
+LatexCommand label
+name "-Customer:-a"
+
+\end_inset
+
+
 \begin_inset Argument item:1
 status open
 
@@ -540,6 +580,13 @@ reference "sub:Definitions,-acronyms,-and"
 \begin_layout Itemize
 
 \series bold
+\begin_inset CommandInset label
+LatexCommand label
+name "-Logged-in-Customer:"
+
+\end_inset
+
+
 \begin_inset Argument item:1
 status open
 
@@ -570,6 +617,13 @@ View and edit their profile
 \begin_layout Itemize
 
 \series bold
+\begin_inset CommandInset label
+LatexCommand label
+name "-Passenger:-an"
+
+\end_inset
+
+
 \begin_inset Argument item:1
 status open
 
@@ -601,6 +655,13 @@ Issue a taxi report
 \begin_layout Itemize
 
 \series bold
+\begin_inset CommandInset label
+LatexCommand label
+name "-Taxi-driver:"
+
+\end_inset
+
+
 \begin_inset Argument item:1
 status open
 
@@ -640,7 +701,7 @@ Issue a customer report
 \end_layout
 
 \begin_layout Itemize
-Notify a technical problem 
+Report a technical problem 
 \end_layout
 
 \end_deeper
