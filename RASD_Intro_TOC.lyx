@@ -327,46 +327,6 @@ RPO
 : Recovery Point Objective
 \end_layout
 
-\begin_layout Standard
-Finally, in order to increase readability the following abbreviations will
- be used in place of the full words or sentences:
-\end_layout
-
-\begin_layout Itemize
-
-\series bold
-e.g.: 
-\series default
-\shape italic
-exempli gratia
-\end_layout
-
-\begin_layout Subsection
-References
-\end_layout
-
-\begin_layout Standard
-This document contains references to other documents which are part of the
- complete set of deliverables used to describe and design the project.
- The references are intended as follows: 
-\end_layout
-
-\begin_layout Itemize
-
-\series bold
-Document 1
-\series default
-: ..
-\end_layout
-
-\begin_layout Itemize
-
-\series bold
-Document 2
-\series default
-: ...
-\end_layout
-
 \begin_layout Subsection
 Overview
 \end_layout
@@ -380,9 +340,9 @@ The presented RASD is divided in sections and structured as follows:
 \series bold
 Section 1 - Introduction
 \series default
-: contains a high level description of the project, along with its goals,
- and contains information about the document itself, such as abbreviations
- used and the document structure.
+: contains support information to better understand the presented document
+ and provides a brief introduction of the project, with its scope and general
+ goals.
  
 \end_layout
 
@@ -391,7 +351,10 @@ Section 1 - Introduction
 \series bold
 Section 2 - Overall description
 \series default
-: 
+: contains a high level descriptions of the platform to be created, with
+ its functions, conceptual structure, relations with the outside world and
+ design constraints.
+ 
 \end_layout
 
 \begin_layout Itemize
@@ -399,7 +362,10 @@ Section 2 - Overall description
 \series bold
 Section 3 - Requirements
 \series default
-:
+: contains an in-depth description of the platform's functional and non
+ functional requirements, its use cases and actors, and a software design
+ guides for developers.
+ 
 \end_layout
 
 \end_body

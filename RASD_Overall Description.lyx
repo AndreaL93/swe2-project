@@ -382,7 +382,7 @@ status open
 
 \end_inset
 
-Allow users to request a taxi
+Allow users to request a taxi.
 \end_layout
 
 \begin_layout Enumerate
@@ -397,7 +397,7 @@ status open
 
 \end_inset
 
-Allow users to manage their profile
+Allow users to manage their profile.
 \end_layout
 
 \begin_layout Enumerate
@@ -412,7 +412,7 @@ status open
 
 \end_inset
 
-Allow users to issue taxi reports
+Allow users to issue taxi reports.
 \end_layout
 
 \end_deeper
@@ -437,7 +437,7 @@ status open
 
 \end_inset
 
-Allow users to manage incoming requests
+Allow users to manage incoming requests.
 \end_layout
 
 \begin_layout Enumerate
@@ -452,7 +452,7 @@ status open
 
 \end_inset
 
-Allow users to issue customer reports
+Allow users to manage their profile.
 \end_layout
 
 \begin_layout Enumerate
@@ -467,7 +467,61 @@ status open
 
 \end_inset
 
-Allow users to report a technical problem 
+Allow users to issue customer reports.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Argument item:1
+status open
+
+\begin_layout Plain Layout
+
+\series bold
+[F7]
+\end_layout
+
+\end_inset
+
+Allow users to report a technical problem.
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+
+\series bold
+Generic platform functions: 
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+\begin_inset Argument item:1
+status open
+
+\begin_layout Plain Layout
+
+\series bold
+[F8]
+\end_layout
+
+\end_inset
+
+Manage user authentication processes.
+ 
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Argument item:1
+status open
+
+\begin_layout Plain Layout
+
+\series bold
+[F9]
+\end_layout
+
+\end_inset
+
+Manage taxi queues in the different zones of the town.
 \end_layout
 
 \end_deeper

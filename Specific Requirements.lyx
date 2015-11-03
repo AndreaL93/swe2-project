@@ -105,6 +105,13 @@ This section of the document is dedicated at giving an in-depth description
 
 \begin_layout Subsection
 External interfaces
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:External-interfaces"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -138,8 +145,8 @@ Functional requirements
 \end_layout
 
 \begin_layout Standard
-The following set of functional requirements is to be kept as official reference
- for all further phases of the development of the platform.
+The following set of functional requirements must be kept as official reference
+ for all further phases of development of the platform.
  
 \end_layout
 
@@ -160,6 +167,349 @@ reference "sub:Domain-Assumptions"
 \end_inset
 
 .
+ 
+\end_layout
+
+\begin_layout Subsubsection
+Back-end requirements
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Back-end-requirements"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+The system must act as the central point of communication between taxi drivers
+ and customers (functions F1 and F4).
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+The system must forward the customers' requests to taxi drivers.
+\end_layout
+
+\begin_layout Enumerate
+The system must forward the taxi drivers' replies (in response to requests
+ of point 1.(a)) to customers.
+\end_layout
+
+\begin_layout Enumerate
+The system must manage the exceptions that may happen in the flow of events
+ (see section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Flow-of-events"
+
+\end_inset
+
+ for more specific description of these exceptions)
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+The system must manage the customers taxi reservation requests and forward
+ them to taxi drivers when necessary.
+ (functions F1 and F4).
+\end_layout
+
+\begin_layout Enumerate
+The system must manage the taxi queues associated to the different zones
+ of the city (function F9).
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+The application must keep track of the availability statuses of all taxi
+ drivers (see also requirement 3 of section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Taxi-side-application-specific"
+
+\end_inset
+
+) and manage the queues accordingly.
+ 
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+The system must manage the operational databases.
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+The system must store user operation critical data (username, password,
+ e-mail address, name, date of birth).
+\end_layout
+
+\begin_layout Enumerate
+The system must keep track of changes in user information when prompted
+ (functions F2 and F5).
+\end_layout
+
+\begin_layout Enumerate
+The system must store user records submitted through the 
+\shape italic
+Report
+\shape default
+ functions (functions F3 and F6).
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+The system must perform the necessary validation and consistency checks
+ on any data it handles in order to ensure the functional and non functional
+ requirements listed in the following sections.
+ 
+\end_layout
+
+\begin_layout Subsubsection
+Generic user application requirements
+\end_layout
+
+\begin_layout Enumerate
+The application must act as external interface between users and the back-end.
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+The application must enable users to register into the platform.
+\end_layout
+
+\begin_layout Enumerate
+The application must enable users to log into the platform.
+ 
+\end_layout
+
+\begin_layout Enumerate
+The application must provide users with an interface to manage their personal
+ information (functions F2 and F5).
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+The application must display confirmations and error messages forwarded
+ by the back-end (see requirement 1 of section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Back-end-requirements"
+
+\end_inset
+
+, and section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Flow-of-events"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Enumerate
+The application must provide all the implementation-specific requirements
+ listed in the following sections.
+ 
+\end_layout
+
+\begin_layout Subsubsection
+Taxi-side application specific requirements
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Taxi-side-application-specific"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+The application must notify the taxi driver when a request from a customer
+ is forwarded by the back-end (function F4).
+ 
+\end_layout
+
+\begin_layout Enumerate
+The application must show the taxi driver's position in their local queue.
+ 
+\end_layout
+
+\begin_layout Enumerate
+The application must enable the taxi driver to toggle their availability
+ status between 
+\shape italic
+available 
+\shape default
+and 
+\shape italic
+unavailable
+\shape default
+.
+ 
+\end_layout
+
+\begin_layout Enumerate
+The application must enable the taxi driver to submit 
+\shape italic
+Customer
+\shape default
+ reports (function F6).
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+The application must require information about the ride if the information
+ is not directly deductible from the known data.
+ 
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+The application must enable the taxi driver to submit 
+\shape italic
+Technical problem
+\shape default
+ reports (function F7).
+ 
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+The application must require information about the technical problem before
+ submitting the report to the system.
+ 
+\end_layout
+
+\begin_layout Enumerate
+The application must require the taxi driver to state whether they want
+ a replacement to complete the ride (if the technical problem happens when
+ a passenger is on board) before submitting the report to the system.
+\end_layout
+
+\end_deeper
+\begin_layout Subsubsection
+Customer-side application specific requirements
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Customer-side-application-specif"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+The application must enable the customer to request the services of a taxi.
+ (function F1).
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+The application must enable the customer to request a taxi in the very short
+ term (service is exploited as soon as the taxi is available).
+ 
+\end_layout
+
+\begin_layout Enumerate
+The application must enable the customer to reserve a taxi in advance.
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+The application must require the customer's destination before submitting
+ this kind of request to the system.
+ 
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+The application must enable the customer to select the 
+\shape italic
+Taxi sharing
+\shape default
+ option (it allows users with similar routes at the same hour to share the
+ taxi and split the fee)
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+The application must require the customer's starting point and destination
+ before submitting this kind of request to the system.
+ 
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+The application must enable the customer to select both options of points
+ 1.(b) and 1.(c) of this section at the same time.
+ 
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+The application must enable the customer to submit a 
+\shape italic
+Taxi 
+\shape default
+reports (function F3).
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+The application must require information about the ride if the information
+ is not directly deductible from the known data.
+ 
+\end_layout
+
+\end_deeper
+\begin_layout Subsubsection
+Functional constraints
+\end_layout
+
+\begin_layout Enumerate
+Taxi reservations must can only be issued at least 2 hours before the requested
+ time of the ride (function F1, associated to req.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Customer-side-application-specif"
+
+\end_inset
+
+ 1.(b)).
+ 
+\end_layout
+
+\begin_layout Enumerate
+Requests associated to taxi reservations must be forwarded to taxi drivers
+ exactly 10 minutes before the requested time (function F9, associated to
+ req.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Customer-side-application-specif"
+
+\end_inset
+
+ 1.(b)).
+ 
+\end_layout
+
+\begin_layout Enumerate
+
+\shape italic
+Taxi
+\shape default
+ and 
+\shape italic
+Customer 
+\shape default
+reports must be accepted only on condition that the ride happened in a 24
+ hours time frame from the submission request functions (functions F3 and
+ F6).
  
 \end_layout
 
@@ -583,6 +933,13 @@ Report problem
 
 \begin_layout Subsection
 Flow of events
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Flow-of-events"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsubsection
@@ -1446,7 +1803,7 @@ Preconditions
 
 \begin_layout Itemize
 The interaction between the passenger and the taxi driver must have happened
- at least 24 hours before.
+ at most 24 hours before.
 \end_layout
 
 \begin_layout Itemize
@@ -1600,7 +1957,7 @@ Preconditions
 
 \begin_layout Itemize
 The interaction between the passenger and the taxi driver must have happened
- at least 24 hours before.
+ at most 24 hours before.
  
 \end_layout
 
