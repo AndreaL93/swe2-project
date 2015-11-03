@@ -49,24 +49,40 @@ fact {
 	User = TaxiDriver + Customer
 }
 
-fact{
+fact uniquePositions{
+	all p,q:Position | p!=q implies different[p,q] = True 
+}
+
+fact noUselessPositions{
+	Ride.start + Ride.destinations = Position
+}
+
+fact onlyUsedFloat{
+	Position.x + Position.y = Float
+}
+
+fact uniqueUsers{
 	all u,w : User | (u.username = w.username or u.mail = w.mail) iff u=w
 }
 
-fact{
+fact onlyUsedStringOnceTime{
 	all m: MString | ( one u:User | (u.username = m or u.mail = m))
 }
 
-fact{
+fact taxiInQueueIsAvailable{
 	all t:TaxiDriver | t in Queue.contains implies t.available = True else t.available = False
 }
 
-fact{
+fact taxiContainedInOneQueue{
 	all q,p:Queue | q!=p implies (all t:q.contains | !t in p.contains)
 }
 
 fact exacltyOneManager{
 	all q:Queue | (one m:QueueManager | q in m.manage)
+}
+
+fact maxDestinations{
+	all r:Ride | #r.destinations <= #r.transport
 }
 
 fact {
@@ -82,8 +98,11 @@ fun different[p1,p2 : Position] : Boolean{
 }
 
 pred numPassenger{
-	#Passenger > 3
+	#Passenger > 2
 	#Queue < 5
+	#Ride > 0
+	#Position < 5
+	one t:TaxiDriver | t.available = True
 }
 
 pred show{}
