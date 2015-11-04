@@ -24,9 +24,11 @@ sig Ride{
 	start : one Position,
 	destinations : some Position,
 	transport : set Passenger,
-	hasDriver : one TaxiDriver
+	hasDriver : lone TaxiDriver,
+	pending : Boolean
 }{
-	all d:destinations | different[d, start] = True
+	all d:destinations | different[d, start] = True and
+	#hasDriver = 1 iff pending = True 
 }
 
 //Queue for each city Zone
@@ -103,6 +105,10 @@ fact{
 	User.username + User.mail + TaxiDriver.license = MString
 }
 
+//a User can be transported at most by one pending Ride
+fact{
+	all u:Ride.transport | (lone r:Ride | r.pending = True and u in r.transport)
+}
 //If a Taxi Driver is in a Queue implies his availability
 fact taxiInQueueIsAvailable{
 	all t:TaxiDriver | t in Queue.contains implies t.available = True else t.available = False
@@ -148,15 +154,17 @@ assert differentsMail{
 /**Predicates**/
 
 pred intrestingPred{
-	#Passenger > 2
-	#Queue < 5
-	#Ride > 0
-	#Position < 5
+	#Passenger > 1
+	#Position < 3
+	#Queue = 2
+	#Ride > 0 and #Ride < 3
+	#TaxiDriver > 1
 	one t:TaxiDriver | t.available = True
+	one r:Ride | r.pending = True
 }
 
 pred show{}
 
 /**Executions**/
 
-run intrestingPred for 10 
+run intrestingPred for 10
