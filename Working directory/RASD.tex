@@ -154,16 +154,13 @@ server software, the web application and the mobile application used
 by the customers, the mobile application used by the taxi drivers,
 and all the necessary hardware needed to run the mentioned software
 and any needed support software. 
-\item \textbf{System}: any subset of software components of the platform
-(by default, it will be used to address the parts of the platform
-which are being considered at any time in this document, unless specified
-otherwise). 
+\item \textbf{System}: any subset of software components of the platform. 
 \item \textbf{Back-end}: the software run on the back-end server of the
 platform which is used to handle the communication between the user
 applications. The term also addresses all the necessary software components
 that are needed to store data, perform calculations and manage the
 hardware (e.g. an operating system). 
-\item \textbf{Customer-side applicat}ion: software run on a personal device
+\item \textbf{Customer-side application}: software run on a personal device
 which is used to send taxi requests to the system and to handle the
 system's replies. It is designed to be used by customers (see below)
 and can either be a mobile application (run on a smartphone or tablet)
@@ -193,6 +190,20 @@ form:
 \item \textbf{RPO}: Recovery Point Objective 
 \item \textbf{SOC}: System On a Chip 
 \end{itemize}
+The following convention will be used to refer to different items
+in the document:
+\begin{itemize}
+\item \textbf{sec. / secs.}: section / sections
+\item \textbf{req.}: requirement.
+\end{itemize}
+A typical use of the aforementioned abbreviation would be in the form
+``element Xx, sec. x.x.x'' (e.g. \textit{req. 1, sec. 1.3} - if
+this section contained a numbered requirement with index 1).
+
+One last observation is to be done regarding the use of the singular
+\textit{they}, which will be used to refer to single persons throughout
+the whole document. 
+
 
 \subsection{Overview}
 
@@ -206,13 +217,17 @@ of the platform to be created, with its functions, conceptual structure,
 relations with the outside world and design constraints. 
 \item \textbf{Section 3 - Requirements}: contains an in-depth description
 of the platform's functional and non functional requirements, its
-use cases and actors, and a software design guides for developers. 
+use cases and actors, and a software design guide for developers. 
+\item \textbf{Section 4 - Alloy modeling}: contains a description of the
+platform in the Alloy modeling language.
+\item \textbf{Section 5 - Additional comments}: contains a summary of the
+hours spent in producing the document. 
 \end{itemize}
 
 \section{Overall Description}
 
 
-\subsection{Product Perspective}
+\subsection{Product perspective}
 
 The platform aims at replacing the traditional means of communication
 between taxi drivers and customers, and it is therefore designed as
@@ -220,7 +235,7 @@ a stand-alone entity that is able to operate with a minimum set of
 dependencies towards external systems.
 
 
-\subsubsection{Software Interfaces \label{sub:Software-Interfaces}}
+\subsubsection{Software interfaces \label{sub:Software-Interfaces}}
 \begin{itemize}
 \item \textbf{Google Maps API}: used in both the back-end and the taxi-side
 applications, this free API is necessary to elaborate routes and display
@@ -334,7 +349,7 @@ functions.
 The platform may have different functional and non-functional requirements
 based on the user that is interacting with it. Throughout this document,
 the set of these different requirements has been referred to with
-the terminology specified in \ref{sub:Definitions,-acronyms,-and}
+the terminology specified in sec. \ref{sub:Definitions,-acronyms,-and}
 (e.g. taxi-side application, customer-side application, etc.).
 
 This section, instead, is aimed at giving a high level description
@@ -343,7 +358,7 @@ its use:
 \begin{itemize}
 \item[{{{{\textbf{{[}A1{]}}}}}}] \textbf{\label{-Guest:-any} Guest}: any person who wishes to start
 a session with the platform through one of the user-side applications.
-{[}A1{]} actors may:
+A1 actors may:
 
 \begin{itemize}
 \item Register a profile into the platform 
@@ -351,24 +366,24 @@ a session with the platform through one of the user-side applications.
 \item Retrieve their password 
 \end{itemize}
 
-After completing a login, {[}A1{]} actors may become either of the
-two following types of actor.
+After completing a login, A1 actors may become either of the two following
+types of actor.
 
-\item[{{{{\textbf{{[}A2{]}}}}}}] \textbf{\label{-Customer:-a} Customer}: a person as defined in \ref{sub:Definitions,-acronyms,-and}.
-Based on what actions {[}A2{]} completes, they can be further specialized
-in:
+\item[{{{{\textbf{{[}A2{]}}}}}}] \textbf{\label{-Customer:-a} Customer}: a person as defined in sec.
+\ref{sub:Definitions,-acronyms,-and}. Based on what actions A2 completes,
+they can be further specialized in:
 
 \begin{itemize}
-\item[{{{{\textbf{{[}A2.1{]}}}}}}] \textbf{\label{-Logged-in-Customer:} Logged-in Customer}: an {[}A1{]}
-actor who logged in to the platform with a customer profile. {[}A2.1{]}
+\item[{{{{\textbf{{[}A2.1{]}}}}}}] \textbf{\label{-Logged-in-Customer:} Logged-in Customer}: an A1
+actor who logged in to the platform with a customer profile. A2.1
 actors may:
 
 \begin{itemize}
 \item Issue a taxi request 
 \item View and edit their profile 
 \end{itemize}
-\item[{{{{\textbf{{[}A2.2{]}}}}}}] \textbf{\label{-Passenger:-an} Passenger}: an {[}A2.1{]} actor who
-issued a taxi request. {[}A2.2{]} actors may:
+\item[{{{{\textbf{{[}A2.2{]}}}}}}] \textbf{\label{-Passenger:-an} Passenger}: an A2.1 actor who issued
+a taxi request. A2.2 actors may:
 
 \begin{itemize}
 \item Cancel or edit the issued taxi request 
@@ -376,10 +391,10 @@ issued a taxi request. {[}A2.2{]} actors may:
 \end{itemize}
 \end{itemize}
 \item[{{{{\textbf{{[}A3{]}}}}}}] \textbf{\label{-Taxi-driver:} Taxi driver}: a person as defined
-in \ref{sub:Definitions,-acronyms,-and}. {[}A3{]} actors may:
+in sec. \ref{sub:Definitions,-acronyms,-and}. A3 actors may:
 
 \begin{itemize}
-\item Handle (accept or refuse) a taxi request issued by an {[}A2{]} actor. 
+\item Handle (accept or refuse) a taxi request issued by an A2 actor. 
 \item Edit their availability status 
 \item Issue a customer report 
 \item Report a technical problem 
@@ -411,14 +426,14 @@ drivers officially recognized by the town's appropriate taxi organizations.
 \item[{{{{\textbf{{[}C3{]}}}}}}] \textbf{Data integrity and data security}: users' personal data must
 be stored according to specific standards that guarantee their integrity
 and security. Further analysis of this constraint will be carried
-out in the following sections of the document. 
+out in sec. \ref{sub:Security-requirements}. 
 \item[{{{{\textbf{{[}C4{]}}}}}}] \textbf{Legal waiver of responsibility}: due to the nature of the
 platform's domain, the use of the platform can be associated to car
 accidents and other related possible injuries; users are therefore
 required to accept a legal disclaimer, in order to use the platform. 
 \end{enumerate}
 
-\subsection{Domain Assumptions\label{sub:Domain-Assumptions}}
+\subsection{Domain assumptions\label{sub:Domain-Assumptions}}
 
 Some domain assumption have to be introduced in order to further define
 the scope of the project, and to clearly state under which assumptions
@@ -429,16 +444,16 @@ The assumptions are the following:
 \begin{enumerate}
 \item[{{{{\textbf{{[}DA1{]}}}}}}] It is assumed that the user-side devices are capable of running the
 intended user-side applications, according to the descriptions in
-section \ref{sub:Device-support}. Hardware or software compatibilities
+sec. \ref{sub:Device-support}. Hardware or software compatibilities
 will not be discussed further. 
 \item[{{{{\textbf{{[}DA2{]}}}}}}] It is assumed that a public database exists, which can be exploited
 to perform checks on the official status of taxi drivers in order
-to ensure the satisfaction of constraint {[}C2{]} of section \ref{sub:Constraints}. 
+to ensure the satisfaction of constraint C2, sec. \ref{sub:Constraints}. 
 \item[{{{{\textbf{{[}DA3{]}}}}}}] It is assumed that the number of users in the first year of operation
 will not exceed the platform's capacity, and modifications to the
 platform will not be needed. Later modifications are not discussed
 in the present document. 
-\item[{{{{\textbf{{[}DA4{]}}}}}}] It is assumed that any pre-existing taxi reservation service shall
+\item[{{{{\textbf{{[}DA4{]}}}}}}] It is assumed that any preexisting taxi reservation service shall
 not be integrated with the platform. 
 \item[{{{{\textbf{{[}DA5{]}}}}}}] It is assumed that the zones in which the town is divided are static
 and do not change frequently. 
@@ -461,11 +476,11 @@ need to design specific maintenance access to the back-end system
 as this is already fully standardized and does not need specific functionalities
 other than the usual system administration tools.
 
-As briefly described in section \ref{sub:User-interface}, the main
-principle that must guide the design of the external interfaces of
-the platform is that of business identity continuity; therefore, this
-section also contains a set of design mock-ups that are to be kept
-as reference during the development of the user interfaces.
+As briefly described in sec. \ref{sub:User-interface}, the main principle
+that must guide the design of the external interfaces of the platform
+is that of business identity continuity; therefore, this section also
+contains a set of design mock-ups that are to be kept as reference
+during the development of the user interfaces.
 
 
 \subsubsection{Interface requirements}
@@ -473,8 +488,8 @@ as reference during the development of the user interfaces.
 \item Users must be able to access any function offered by the platform
 (and intended for them) in no more than 5 actions (clicks, taps, scrolling,
 form filling...). 
-\item The customer-side web application (interface I1) must implement a
-responsive design in order to fit most screen sizes. 
+\item The customer-side web application (interface I1, sec. \ref{sub:User-interface})
+must implement a responsive design in order to fit most screen sizes. 
 \item The user-side interfaces must implement the same design language throughout
 the supported platforms, in order to maintain a consistent business
 identity. 
@@ -502,9 +517,8 @@ The following set of functional requirements must be kept as official
 reference for all further phases of development of the platform.
 
 These requirements are meant as a more in-depth description of the
-main system functionalities listed in section \ref{sub:Product-functions},
-and must be considered alongside the domain assumptions in section
-\ref{sub:Domain-Assumptions}.
+main system functionalities listed in sec. \ref{sub:Product-functions},
+and must be considered alongside the domain assumptions in sec. \ref{sub:Domain-Assumptions}.
 
 
 \subsubsection{Back-end requirements\label{sub:Back-end-requirements}}
@@ -517,8 +531,8 @@ taxi drivers and customers (functions F1 and F4).
 \item The system must forward the taxi drivers' replies (in response to
 requests of point 1.(a)) to customers. 
 \item The system must manage the exceptions that may happen in the flow
-of events (see section \ref{sub:Flow-of-events} for more specific
-description of these exceptions) 
+of events (see sec. \ref{sub:Flow-of-events} for more specific description
+of these exceptions) 
 \end{enumerate}
 \item The system must manage the customers taxi reservation requests and
 forward them to taxi drivers when necessary. (functions F1 and F4). 
@@ -527,7 +541,7 @@ zones of the city (function F9).
 
 \begin{enumerate}
 \item The application must keep track of the availability statuses of all
-taxi drivers (see also requirement 3 of section \ref{sub:Taxi-side-application-specific})
+taxi drivers (also see req. 3, sec. \ref{sub:Taxi-side-application-specific})
 and manage the queues accordingly. 
 \end{enumerate}
 \item The system must manage the operational databases.
@@ -556,9 +570,12 @@ back-end.
 \item The application must provide users with an interface to manage their
 personal information (functions F2 and F5). 
 \end{enumerate}
+\item The application must enable registered users to retrieve a forgotten
+password (by sending them a temporary password on the email address
+associated to the account)
 \item The application must display confirmations and error messages forwarded
-by the back-end (see requirement 1 of section \ref{sub:Back-end-requirements},
-and section \ref{sub:Flow-of-events}). 
+by the back-end (see sec. \ref{sub:Flow-of-events} and req. 1, sec.
+\ref{sub:Back-end-requirements}). 
 \item The application must provide all the implementation-specific requirements
 listed in the following sections. 
 \end{enumerate}
@@ -567,8 +584,7 @@ listed in the following sections.
 \begin{enumerate}
 \item The application must notify the taxi driver when a request from a
 customer is forwarded by the back-end (function F4). 
-\item The application must show the taxi driver's position in their local
-queue. 
+\item The application must show the taxi driver's position in their queue. 
 \item The application must enable the taxi driver to toggle their availability
 status between \textit{available }and \textit{unavailable}. 
 \item The application must enable the taxi driver to submit \textit{Customer}
@@ -598,7 +614,7 @@ a taxi. (function F1).
 
 \begin{enumerate}
 \item The application must enable the customer to request a taxi in the
-very short term (service is exploited as soon as the taxi is available). 
+very short term (the service is exploited as soon as the taxi is available). 
 \item The application must enable the customer to reserve a taxi in advance.
 
 \begin{enumerate}
@@ -616,7 +632,7 @@ before submitting this kind of request to the system.
 \item The application must enable the customer to select both options of
 points 1.(b) and 1.(c) of this section at the same time. 
 \item The application must enable the customer to reserve a ride for more
-than 1 person (see requirement 4 in section \ref{sub:Functional-constraints})
+than 1 person (see req. 4, sec. \ref{sub:Functional-constraints})
 \end{enumerate}
 \item The application must enable the customer to submit a \textit{Taxi
 }reports (function F3).
@@ -630,25 +646,25 @@ is not directly deductible from the known data.
 \subsubsection{Functional constraints\label{sub:Functional-constraints}}
 \begin{enumerate}
 \item Taxi reservations must can only be issued at least 2 hours before
-the requested time of the ride (function F1, associated to req. \ref{sub:Customer-side-application-specif}
-1.(b)). 
+the requested time of the ride (function F1, associated to req. 1.(b),
+sec. \ref{sub:Customer-side-application-specif}). 
 \item Requests associated to taxi reservations must be forwarded to taxi
 drivers exactly 10 minutes before the requested time (function F9,
-associated to req. \ref{sub:Customer-side-application-specif} 1.(b)). 
+associated to req. 1.(b), sec. \ref{sub:Customer-side-application-specif}). 
 \item \textit{Taxi} and \textit{Customer }reports must be accepted only
 on condition that the ride happened in a 24 hours time frame from
 the submission request functions (functions F3 and F6). 
 \item A \textit{Ride} object must allow up to 6 possible passenger between
 application users (possibly in \textit{Car sharing }mode) and additional
-passenger added by a user (see requirement 1.(e) in section \ref{sub:Customer-side-application-specif})
+passenger added by a user (see requirement 1.(e), sec. \ref{sub:Customer-side-application-specif})
 \end{enumerate}
 
-\subsection{Use Cases}
+\subsection{Use cases}
 
 This section contains a graphical UML description of the possible
 use cases of the platform, associated to the respective actors.
 
-A more in-depth description of the use cases will be given in sections
+A more in-depth description of the use cases will be given in secs.
 \ref{sub:Scenarios} and \ref{sub:Flow-of-events}.
 
 \begin{center}
@@ -661,14 +677,14 @@ A more in-depth description of the use cases will be given in sections
 
 \subsubsection{Logical database requirements}
 
-The majority of data processed by the DMBS consists of Java \textit{String
+The majority of data processed by the DBMS consists of Java \textit{String
 }and \textit{Date }objects. Images and complex objects might be stored
 in the database, too, and must therefore be considered during the
 design of the database.
 
 The majority of stored data is not frequently accessed as most of
 the operational variables are strictly mutable (users' positions,
-queues, non-booked rides) and therefore not in need to be stored.
+queues, non-booked rides) and therefore not needed to be stored.
 
 Stored data might consist of stable personal information of the users
 and, while not immutable, it can be considered as rarely accessed.
@@ -689,7 +705,7 @@ there.
 \pagebreak{}
 
 
-\subsubsection{Entity Behaviors\label{sub:Entity-Behaviors}}
+\subsubsection{Entity behaviors\label{sub:Entity-Behaviors}}
 \begin{itemize}
 \item[{{{{\textbf{{[}EB1{]}}}}}}] \textbf{Taxi driver}
 
@@ -712,14 +728,14 @@ considered \textit{unavailable} once the accept a request).
 
 \pagebreak{}
 \begin{itemize}
-\item[{{{{\textbf{{[}EB3{]}}}}}}] \textbf{Queue Manager }
+\item[{{{{\textbf{{[}EB3{]}}}}}}] \textbf{Queue manager }
 
 
 The queue manager is the software component in charge of smartly managing
-the local queues and ride reservations scheduling in the platform.
-It has access to all the software instances associated to \textit{ride,
-taxi driver }and \textit{customer} objects and can modify these objects'
-statuses in reaction to different events. 
+the local queues and reservations scheduling in the platform. It has
+access to all the instances of \textit{ride, taxi driver }and \textit{customer}
+objects and can modify these objects' statuses in reaction to different
+events. 
 
 
 The core algorithms of the queue manager have to:
@@ -739,7 +755,7 @@ all the taxi drivers in a queue refuse the request and:
 \item The user never gets a failure notification, because the system is
 kept looping through a \textit{de-facto} unavailable queue. \end{enumerate}
 }. 
-\item If a taxi driver notifies a technical problem (function F7 of section
+\item If a taxi driver notifies a technical problem (function F7 of sec.
 \ref{sub:Product-functions}), they must be de-queued and set as \textit{Unavailable. }
 \end{itemize}
 \item Keep track of all the customer ride reservations and manage eventual
@@ -810,7 +826,7 @@ As she accepts Adam's request, Adam receives a notification on the
 app with the estimated waiting time.
 
 
-\subsubsection{Book a Taxi\label{sub:Book-a-Taxi}}
+\subsubsection{Book a taxi\label{sub:Book-a-Taxi}}
 
 While on Monica's taxi, Adam wants to book a taxi for that evening
 at 6 PM, in order to go to the cinema. He opens the \textit{Taxi request}
@@ -844,7 +860,7 @@ the taxi will be chosen similarly to scenarios \ref{sub:Book-a-Taxi}
 or \ref{sub:Taxi-request} respectively.
 
 
-\subsubsection{Manage \textit{Reserve Taxi} Request}
+\subsubsection{Manage \textit{Reserve taxi} request}
 
 Later that day, Adam browses the platform's website from his laptop's
 browser, and opens the \textit{Manage taxi request} page to change
@@ -856,7 +872,7 @@ and possibly modifies to time on which to forward the request to the
 queue.
 
 
-\subsubsection{Report Taxi}
+\subsubsection{Report taxi}
 
 Jim picks Adam up at 7PM. During the ride Jim lights up a cigarette
 and is unreasonably rude towards Adam.
@@ -866,7 +882,7 @@ about Jim's behavior. The system updates Jim's record with the new
 report and confirms the success of the operation to Adam.
 
 
-\subsubsection{Report Customer}
+\subsubsection{Report customer}
 
 After the ride, Adam is annoyed by the behavior of Jim and refuses
 to pay for the ride.
@@ -876,7 +892,7 @@ and submits it to the system. The system updates Adam's record with
 the new report and confirms the success of the operation to Jim.
 
 
-\subsubsection{Manage Personal Information}
+\subsubsection{Manage personal information}
 
 Joanne has opened a new main email account.
 
@@ -888,7 +904,7 @@ The system performs a check on the information, updates Joanne's profile
 and notifies the success of the operation to Joanne.
 
 
-\subsubsection{Report Problem}
+\subsubsection{Report problem}
 
 During a ride, Hector has a problem with his taxi's engine and can't
 bring Joanne to her destination.
@@ -904,7 +920,7 @@ who is the first taxi driver in Hector and Joanne's current zone.
 
 This section contains a description of how different use cases should
 happen, divided in sequential steps. The participating actor are those
-described in section \ref{sub:Actors-and-related}.
+described in sec. \ref{sub:Actors-and-related}.
 
 
 \subsubsection{Sign-up}
@@ -924,7 +940,7 @@ Execution Flow  & \begin{enumerate}
 \item The system sends the confirmation to the guest.\end{enumerate}
 \tabularnewline
 \hline 
-Postconditions  & The guest is now a registered user.\tabularnewline
+postconditions  & The guest is now a registered user.\tabularnewline
 \hline 
 Exceptions  & The e-mail or username are not unique or, in the case of a taxi driver
 sign-up, the license is not valid: an error message is shown. \tabularnewline
@@ -954,7 +970,7 @@ Execution Flow  & \begin{enumerate}
 \item The guest is redirected to the user main page.\end{enumerate}
 \tabularnewline
 \hline 
-Postconditions  & The guest is now a logged-in user.\tabularnewline
+postconditions  & The guest is now a logged-in user.\tabularnewline
 \hline 
 Exceptions  & The username-password combination is incorrect, so the guest cannot
 log in: an error message is shown.\tabularnewline
@@ -983,7 +999,7 @@ request is sent to the system.
 \item The system returns a confirmation to the taxi driver. \end{enumerate}
 \tabularnewline
 \hline 
-Postconditions  & The taxi driver has now changed their availability.\tabularnewline
+postconditions  & The taxi driver has now changed their availability.\tabularnewline
 \hline 
 Exceptions  & \begin{itemize}
 \item The taxi driver is located in a invalid zone and they try to become
@@ -997,7 +1013,7 @@ Exceptions  & \begin{itemize}
 \par\end{center}
 
 
-\subsubsection{Taxi Request}
+\subsubsection{Taxi request}
 
 \begin{center}
 \begin{longtable}{l>{\raggedright}p{8cm}}
@@ -1014,7 +1030,7 @@ a ride for a certain number of passengers, reserve a taxi or enable
 the \textit{Taxi sharing }option. 
 \item Based on the type of request that the customer issued, the system
 generates a request with all the needed data and commits it to the
-\textit{Queue manager }(entity E3, section \ref{sub:Entity-Behaviors})
+\textit{Queue manager }(entity E3, sec. \ref{sub:Entity-Behaviors})
 \item The taxi driver can either ignore the request or accept it. 
 \item If the taxi driver accepts the request, the system notifies to the
 customer the incoming taxi (with an approximate ETA) and changes the
@@ -1027,7 +1043,7 @@ passenger and adds it to the notification sent to the user. \end{enumerate}
 \tabularnewline
 \newpage
 \hline 
-Postconditions  & If the request is accepted by a taxi driver, the customer is now a
+postconditions  & If the request is accepted by a taxi driver, the customer is now a
 passenger.\tabularnewline
 \hline 
 Exceptions  & \begin{itemize}
@@ -1045,7 +1061,7 @@ an error notification is shown. \end{itemize}
 \par\end{center}
 
 
-\subsubsection{Manage \textit{Reserve Taxi} Request}
+\subsubsection{Manage \textit{Reserve taxi} request}
 
 \begin{center}
 \begin{tabular}{lp{8cm}}
@@ -1067,7 +1083,7 @@ passenger.
 the user canceled their request, the request is not sent. \end{enumerate}
 \tabularnewline
 \hline 
-Postconditions  & \begin{itemize}
+postconditions  & \begin{itemize}
 \item If the customer chooses to modify the request, the request is updated. 
 \item If the customer chooses to delete the request, the request is canceled.\end{itemize}
 \tabularnewline
@@ -1086,7 +1102,7 @@ is shown and the modification is not allowed.\end{itemize}
 \par\end{center}
 
 
-\subsubsection{Report Taxi}
+\subsubsection{Report taxi}
 
 \begin{center}
 \begin{tabular}{lp{8cm}}
@@ -1107,7 +1123,7 @@ Execution Flow  & \begin{enumerate}
 \item The system notifies to the passenger the success of the operation.\end{enumerate}
 \tabularnewline
 \hline 
-Postconditions  & The taxi driver is reported by the passenger.\tabularnewline
+postconditions  & The taxi driver is reported by the passenger.\tabularnewline
 \hline 
 Exceptions  & The passenger provides incorrect information in the report form: an
 error message is shown. \tabularnewline
@@ -1119,7 +1135,7 @@ error message is shown. \tabularnewline
 \par\end{center}
 
 
-\subsubsection{Report Customer}
+\subsubsection{Report customer}
 
 \begin{center}
 \begin{tabular}{lp{8cm}}
@@ -1136,11 +1152,11 @@ Execution Flow  & \begin{enumerate}
 \item The taxi driver requests the \textit{Report customer} page. 
 \item The taxi driver fills the form and submits the report. 
 \item The system checks the submitted data. 
-\item The system updates the custormer's record. 
+\item The system updates the customer's record. 
 \item The system notifies to the taxi driver the success of the operation.\end{enumerate}
 \tabularnewline
 \hline 
-Postconditions  & The customer is reported by the taxi driver.\tabularnewline
+postconditions  & The customer is reported by the taxi driver.\tabularnewline
 \hline 
 Exceptions  & The taxi driver provides incorrect information in the report form:
 an error message is shown. \tabularnewline
@@ -1152,7 +1168,7 @@ an error message is shown. \tabularnewline
 \par\end{center}
 
 
-\subsubsection{Manage Personal Information}
+\subsubsection{Manage personal information}
 
 \begin{center}
 \begin{tabular}{lp{8cm}}
@@ -1172,7 +1188,7 @@ clicking) on the \textit{Edit} button.
 user.\end{enumerate}
 \tabularnewline
 \hline 
-Postconditions  & The user profile information is changed.\tabularnewline
+postconditions  & The user profile information is changed.\tabularnewline
 \hline 
 Exceptions  & The user provides incorrect information: an error message is shown. \tabularnewline
 \end{tabular}
@@ -1183,7 +1199,7 @@ Exceptions  & The user provides incorrect information: an error message is shown
 \par\end{center}
 
 
-\subsubsection{Report Problem}
+\subsubsection{Report problem}
 
 \begin{center}
 \begin{tabular}{lp{8cm}}
@@ -1204,7 +1220,7 @@ taxi driver, with the usual procedure.
 driver who is submitting the report.\end{enumerate}
 \tabularnewline
 \hline 
-Postconditions  & The technical problem is reported to the system \tabularnewline
+postconditions  & The technical problem is reported to the system \tabularnewline
 \hline 
 Exceptions  & \begin{itemize}
 \item The taxi driver is located in a invalid zone: an error message is
@@ -1224,8 +1240,8 @@ an error message is shown to the user. \end{itemize}
 
 \subsection{Performance requirements}
 
-Some indicative non functional requirements regarding performance
-have been identified as follows.
+Some non functional requirements regarding performance have been identified
+as follows.
 
 
 \subsubsection{Back-end performance}
@@ -1252,7 +1268,7 @@ in order to not drain the battery on the users' mobile devices.
 pixels, in order to be efficiently stored, loaded into RAM, and transmitted. 
 \end{enumerate}
 
-\subsection{Availability and Reliability Requirements}
+\subsection{Availability and reliability requirements}
 
 Since MyTaxiService is a service-oriented platform, its reliability
 parameters directly relate to its availability parameters. The platform's
@@ -1293,11 +1309,11 @@ recovering it.
 \end{enumerate}
 \end{enumerate}
 
-\subsection{Security Requirements}
+\subsection{Security requirements\label{sub:Security-requirements}}
 
 The following non functional requirements cover the security aspects
-of the platform in order, among other reasons, to satisfy the C3 constraint
-in section \ref{sub:Constraints}. 
+of the platform in order, among other reasons, to satisfy the constraint
+C3, sec. \ref{sub:Constraints}. 
 \begin{enumerate}
 \item Access to the user data through the intended applications must be
 password protected.
@@ -1331,11 +1347,11 @@ rather than blacklisting.
 any type of session. 
 \item Access logs must be kept, backed up, and regularly analyzed. 
 \end{enumerate}
-\item Mission critical data must be stored with a particular attention to
+\item Mission critical data must be stored with particular attention to
 data integrity. 
 \end{enumerate}
 
-\subsection{Maintainability Requirements}
+\subsection{Maintainability requirements}
 
 The following non functional requirements regarding the maintainability
 of the codebase are meant as a small guideline for programmers and
@@ -1350,7 +1366,7 @@ with both in-code comments and official documentation, in order to
 facilitate a possible outsourcing of the maintenance phase. 
 \end{enumerate}
 
-\subsection{Portability Requirements}
+\subsection{Portability requirements}
 
 The following non functional requirements consider technical details
 of the platform's implementation in order to analyze its portability
@@ -1359,10 +1375,10 @@ requirements.
 When seen as a whole, the platform consists mainly of its user-side
 applications, and the back-end accounts for about 25\% of the codebase;
 nonetheless, since the user-side applications are strictly OS dependent,
-as specified in section \ref{sub:User-interface}, portability is
-an issue which has to be tackled in back-end development, in order
-to keep costs to a minimum in the case of possible changes in the
-platform (e.g. an integration with a pre-existsing system). Therefore: 
+as specified in sec. \ref{sub:User-interface}, portability is an
+issue which has to be tackled in back-end development, in order to
+keep costs to a minimum in the case of possible changes in the platform
+(e.g. an integration with a preexisting system). Therefore: 
 \begin{enumerate}
 \item The back-end software must be developed in Java Enterprise Edition. 
 \item Integration with support modules in the back-end must happen through
@@ -1372,7 +1388,7 @@ calls in the back-end must be OS independent (the use of wrapper libraries
 is encouraged over a case-by-case analysis). 
 \end{enumerate}
 
-\section{Alloy modeling}
+\section{Alloy Modeling}
 
 
 \subsection{Alloy source code\label{sub:Alloy-source-code}}
@@ -1407,6 +1423,7 @@ sig Ride{
 	hasDriver : lone TaxiDriver,
 	pending : Boolean
 }{
+	#transport >= 1 and #transport <= 4 and
 	all d:destinations | different[d, start] = True and
 	#hasDriver = 1 iff pending = True 
 }
@@ -1429,6 +1446,7 @@ sig Position{
 	x : Float,
 	y : Float
 }
+
 abstract sig Boolean{}
 one sig True extends Boolean {}
 one sig False extends Boolean {}
@@ -1436,7 +1454,7 @@ one sig False extends Boolean {}
 /**Facts**/
 //All the Passengers are Customers (and also Users)
 fact {
-	Passenger = Customer
+	Passenger in Customer
 }
 
 //Users are composed by all the TaxiDrivers and Customers
@@ -1488,6 +1506,7 @@ fact{
 fact{
 	all u:Ride.transport | (lone r:Ride | r.pending = True and u in r.transport)
 }
+
 //If a Taxi Driver is in a Queue implies his availability
 fact taxiInQueueIsAvailable{
 	all t:TaxiDriver | t in Queue.contains implies t.available = True else t.available = False
@@ -1508,14 +1527,9 @@ fact maxDestinations{
 	all r:Ride | #r.destinations <= #r.transport
 }
 
-//Each Ride can transport at least 4 Passenger
-fact maxPassenger{
-	all r:Ride  | #r.transport > 0 and #r.transport <= 4
-}
-
 /**Functions **/
 //True if the Positions are different, False otherwise
-fun different[p1,p2 : Position] : Boolean {
+fun different[p1,p2 : Position] : Boolean{
 	(p1.x != p2.x or p1.y != p2.y) implies True else False
 }
 
@@ -1529,6 +1543,10 @@ assert differentsMail{
 }
 
 /**Predicates**/
+pred taxiDriverAvailable{
+	all t:TaxiDriver | t.available = True implies (one q:Queue | t in q.contains)
+}
+
 pred intrestingPred{
 	#Passenger > 1
 	#Position < 3
@@ -1538,15 +1556,25 @@ pred intrestingPred{
 	one t:TaxiDriver | t.available = True
 	one r:Ride | r.pending = True
 }
+
 pred show{}
 
 /**Executions**/
-run intrestingPred for 10
+run taxiDriverAvailable for 5
 \end{lstlisting}
 
 
 
 \subsection{Alloy output}
+
+The output is shown to give a visual confirmation of the consistency
+of the model, even if it does not add any further information to the
+document.
+
+Note that passengers and taxi drivers can be related to more than
+one ride; this is done intentionally, as ride objects do not cease
+to exist once the ride is completed, but are stored and are associated
+with the user's history.
 
 \begin{center}
 \includegraphics[angle=90,height=0.9\textheight]{instance} 
@@ -1554,10 +1582,16 @@ run intrestingPred for 10
 
 \pagebreak{}
 
+\begin{center}
+\includegraphics[angle=90,height=0.9\textheight]{world2}
+\par\end{center}
+
+\pagebreak{}
+
 
 \subsection{Alloy metamodel}
 
-The following platfrom metamodel was derived from the Alloy code in
+The following platform metamodel was derived from the Alloy code in
 section \ref{sub:Alloy-source-code} and is a further expansion of
 the class diagram in section \ref{sub:Class-diagram}.
 
@@ -1568,10 +1602,10 @@ the class diagram in section \ref{sub:Class-diagram}.
 \pagebreak{}
 
 
-\section{Additional comments}
+\section{Additional Comments}
 
 The production of this document has been a joint effort of all the
-authors, with a fair distribution of the mansions which cause each
+authors, with a fair distribution of the mansions which caused each
 member of the group to work on all the parts of the document. 
 
 The production has been carried out between 16/10/2015 and 6/11/2015

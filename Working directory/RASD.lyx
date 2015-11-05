@@ -278,9 +278,7 @@ Platform
 \series bold
 System
 \series default
-: any subset of software components of the platform (by default, it will
- be used to address the parts of the platform which are being considered
- at any time in this document, unless specified otherwise).
+: any subset of software components of the platform.
  
 \end_layout
 
@@ -300,9 +298,9 @@ Back-end
 \begin_layout Itemize
 
 \series bold
-Customer-side applicat
+Customer-side application
 \series default
-ion: software run on a personal device which is used to send taxi requests
+: software run on a personal device which is used to send taxi requests
  to the system and to handle the system's replies.
  It is designed to be used by customers (see below) and can either be a
  mobile application (run on a smartphone or tablet) or a web application
@@ -413,6 +411,57 @@ SOC
 : System On a Chip 
 \end_layout
 
+\begin_layout Standard
+The following convention will be used to refer to different items in the
+ document:
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+sec.
+ / secs.
+\series default
+: section / sections
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+req.
+\series default
+: requirement.
+\end_layout
+
+\begin_layout Standard
+A typical use of the aforementioned abbreviation would be in the form 
+\begin_inset Quotes eld
+\end_inset
+
+element Xx, sec.
+ x.x.x
+\begin_inset Quotes erd
+\end_inset
+
+ (e.g.
+ 
+\shape italic
+req.
+ 1, sec.
+ 1.3
+\shape default
+ - if this section contained a numbered requirement with index 1).
+\end_layout
+
+\begin_layout Standard
+One last observation is to be done regarding the use of the singular 
+\shape italic
+they
+\shape default
+, which will be used to refer to single persons throughout the whole document.
+ 
+\end_layout
+
 \begin_layout Subsection
 Overview
 \end_layout
@@ -450,7 +499,24 @@ Section 3 - Requirements
 \series default
 : contains an in-depth description of the platform's functional and non
  functional requirements, its use cases and actors, and a software design
- guides for developers.
+ guide for developers.
+ 
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Section 4 - Alloy modeling
+\series default
+: contains a description of the platform in the Alloy modeling language.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Section 5 - Additional comments
+\series default
+: contains a summary of the hours spent in producing the document.
  
 \end_layout
 
@@ -459,7 +525,7 @@ Overall Description
 \end_layout
 
 \begin_layout Subsection
-Product Perspective
+Product perspective
 \end_layout
 
 \begin_layout Standard
@@ -470,7 +536,7 @@ The platform aims at replacing the traditional means of communication between
 \end_layout
 
 \begin_layout Subsubsection
-Software Interfaces 
+Software interfaces 
 \begin_inset CommandInset label
 LatexCommand label
 name "sub:Software-Interfaces"
@@ -1702,7 +1768,8 @@ name "sub:Actors-and-related"
 The platform may have different functional and non-functional requirements
  based on the user that is interacting with it.
  Throughout this document, the set of these different requirements has been
- referred to with the terminology specified in 
+ referred to with the terminology specified in sec.
+ 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sub:Definitions,-acronyms,-and"
@@ -1810,7 +1877,7 @@ name "-Guest:-any"
 \series default
 : any person who wishes to start a session with the platform through one
  of the user-side applications.
- [A1] actors may:
+ A1 actors may:
 \end_layout
 
 \begin_deeper
@@ -1827,7 +1894,7 @@ Retrieve their password
 \end_layout
 
 \begin_layout Standard
-After completing a login, [A1] actors may become either of the two following
+After completing a login, A1 actors may become either of the two following
  types of actor.
 \end_layout
 
@@ -1922,7 +1989,8 @@ name "-Customer:-a"
 
  Customer
 \series default
-: a person as defined in 
+: a person as defined in sec.
+ 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sub:Definitions,-acronyms,-and"
@@ -1930,7 +1998,7 @@ reference "sub:Definitions,-acronyms,-and"
 \end_inset
 
 .
- Based on what actions [A2] completes, they can be further specialized in:
+ Based on what actions A2 completes, they can be further specialized in:
 \end_layout
 
 \begin_deeper
@@ -2024,8 +2092,8 @@ name "-Logged-in-Customer:"
 
  Logged-in Customer
 \series default
-: an [A1] actor who logged in to the platform with a customer profile.
- [A2.1] actors may:
+: an A1 actor who logged in to the platform with a customer profile.
+ A2.1 actors may:
 \end_layout
 
 \begin_deeper
@@ -2128,8 +2196,8 @@ name "-Passenger:-an"
 
  Passenger
 \series default
-: an [A2.1] actor who issued a taxi request.
- [A2.2] actors may:
+: an A2.1 actor who issued a taxi request.
+ A2.2 actors may:
 \end_layout
 
 \begin_deeper
@@ -2233,7 +2301,8 @@ name "-Taxi-driver:"
 
  Taxi driver
 \series default
-: a person as defined in 
+: a person as defined in sec.
+ 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sub:Definitions,-acronyms,-and"
@@ -2241,12 +2310,12 @@ reference "sub:Definitions,-acronyms,-and"
 \end_inset
 
 .
- [A3] actors may:
+ A3 actors may:
 \end_layout
 
 \begin_deeper
 \begin_layout Itemize
-Handle (accept or refuse) a taxi request issued by an [A2] actor.
+Handle (accept or refuse) a taxi request issued by an A2 actor.
  
 \end_layout
 
@@ -2557,8 +2626,15 @@ Data integrity and data security
 \series default
 : users' personal data must be stored according to specific standards that
  guarantee their integrity and security.
- Further analysis of this constraint will be carried out in the following
- sections of the document.
+ Further analysis of this constraint will be carried out in sec.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Security-requirements"
+
+\end_inset
+
+.
  
 \end_layout
 
@@ -2653,7 +2729,7 @@ Legal waiver of responsibility
 \end_layout
 
 \begin_layout Subsection
-Domain Assumptions
+Domain assumptions
 \begin_inset CommandInset label
 LatexCommand label
 name "sub:Domain-Assumptions"
@@ -2754,7 +2830,8 @@ status collapsed
 \end_inset
 
 It is assumed that the user-side devices are capable of running the intended
- user-side applications, according to the descriptions in section 
+ user-side applications, according to the descriptions in sec.
+ 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sub:Device-support"
@@ -2847,7 +2924,8 @@ status collapsed
 
 It is assumed that a public database exists, which can be exploited to perform
  checks on the official status of taxi drivers in order to ensure the satisfacti
-on of constraint [C2] of section 
+on of constraint C2, sec.
+ 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sub:Constraints"
@@ -3023,7 +3101,7 @@ status collapsed
 
 \end_inset
 
-It is assumed that any pre-existing taxi reservation service shall not be
+It is assumed that any preexisting taxi reservation service shall not be
  integrated with the platform.
  
 \end_layout
@@ -3226,7 +3304,8 @@ Being MyTaxiService a fully service-oriented platform, its only external
 \end_layout
 
 \begin_layout Standard
-As briefly described in section 
+As briefly described in sec.
+ 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sub:User-interface"
@@ -3250,8 +3329,15 @@ Users must be able to access any function offered by the platform (and intended
 \end_layout
 
 \begin_layout Enumerate
-The customer-side web application (interface I1) must implement a responsive
- design in order to fit most screen sizes.
+The customer-side web application (interface I1, sec.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:User-interface"
+
+\end_inset
+
+) must implement a responsive design in order to fit most screen sizes.
  
 \end_layout
 
@@ -3314,14 +3400,16 @@ The following set of functional requirements must be kept as official reference
 
 \begin_layout Standard
 These requirements are meant as a more in-depth description of the main
- system functionalities listed in section 
+ system functionalities listed in sec.
+ 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sub:Product-functions"
 
 \end_inset
 
-, and must be considered alongside the domain assumptions in section 
+, and must be considered alongside the domain assumptions in sec.
+ 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sub:Domain-Assumptions"
@@ -3361,7 +3449,8 @@ The system must forward the taxi drivers' replies (in response to requests
 
 \begin_layout Enumerate
 The system must manage the exceptions that may happen in the flow of events
- (see section 
+ (see sec.
+ 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sub:Flow-of-events"
@@ -3387,7 +3476,9 @@ The system must manage the taxi queues associated to the different zones
 \begin_deeper
 \begin_layout Enumerate
 The application must keep track of the availability statuses of all taxi
- drivers (see also requirement 3 of section 
+ drivers (also see req.
+ 3, sec.
+ 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sub:Taxi-side-application-specific"
@@ -3460,18 +3551,27 @@ The application must provide users with an interface to manage their personal
 
 \end_deeper
 \begin_layout Enumerate
+The application must enable registered users to retrieve a forgotten password
+ (by sending them a temporary password on the email address associated to
+ the account)
+\end_layout
+
+\begin_layout Enumerate
 The application must display confirmations and error messages forwarded
- by the back-end (see requirement 1 of section 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sub:Back-end-requirements"
-
-\end_inset
-
-, and section 
+ by the back-end (see sec.
+ 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sub:Flow-of-events"
+
+\end_inset
+
+ and req.
+ 1, sec.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Back-end-requirements"
 
 \end_inset
 
@@ -3503,7 +3603,7 @@ The application must notify the taxi driver when a request from a customer
 \end_layout
 
 \begin_layout Enumerate
-The application must show the taxi driver's position in their local queue.
+The application must show the taxi driver's position in their queue.
  
 \end_layout
 
@@ -3579,7 +3679,7 @@ The application must enable the customer to request the services of a taxi.
 \begin_deeper
 \begin_layout Enumerate
 The application must enable the customer to request a taxi in the very short
- term (service is exploited as soon as the taxi is available).
+ term (the service is exploited as soon as the taxi is available).
  
 \end_layout
 
@@ -3620,7 +3720,9 @@ The application must enable the customer to select both options of points
 
 \begin_layout Enumerate
 The application must enable the customer to reserve a ride for more than
- 1 person (see requirement 4 in section 
+ 1 person (see req.
+ 4, sec.
+ 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sub:Functional-constraints"
@@ -3661,6 +3763,7 @@ name "sub:Functional-constraints"
 \begin_layout Enumerate
 Taxi reservations must can only be issued at least 2 hours before the requested
  time of the ride (function F1, associated to req.
+ 1.(b), sec.
  
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -3668,7 +3771,7 @@ reference "sub:Customer-side-application-specif"
 
 \end_inset
 
- 1.(b)).
+).
  
 \end_layout
 
@@ -3676,6 +3779,7 @@ reference "sub:Customer-side-application-specif"
 Requests associated to taxi reservations must be forwarded to taxi drivers
  exactly 10 minutes before the requested time (function F9, associated to
  req.
+ 1.(b), sec.
  
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -3683,7 +3787,7 @@ reference "sub:Customer-side-application-specif"
 
 \end_inset
 
- 1.(b)).
+).
  
 \end_layout
 
@@ -3712,8 +3816,8 @@ Ride
 \shape italic
 Car sharing 
 \shape default
-mode) and additional passenger added by a user (see requirement 1.(e) in
- section 
+mode) and additional passenger added by a user (see requirement 1.(e), sec.
+ 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sub:Customer-side-application-specif"
@@ -3724,7 +3828,7 @@ reference "sub:Customer-side-application-specif"
 \end_layout
 
 \begin_layout Subsection
-Use Cases
+Use cases
 \end_layout
 
 \begin_layout Standard
@@ -3733,7 +3837,8 @@ This section contains a graphical UML description of the possible use cases
 \end_layout
 
 \begin_layout Standard
-A more in-depth description of the use cases will be given in sections 
+A more in-depth description of the use cases will be given in secs.
+ 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sub:Scenarios"
@@ -3770,7 +3875,7 @@ Logical database requirements
 \end_layout
 
 \begin_layout Standard
-The majority of data processed by the DMBS consists of Java 
+The majority of data processed by the DBMS consists of Java 
 \shape italic
 String 
 \shape default
@@ -3786,7 +3891,7 @@ objects.
 \begin_layout Standard
 The majority of stored data is not frequently accessed as most of the operationa
 l variables are strictly mutable (users' positions, queues, non-booked rides)
- and therefore not in need to be stored.
+ and therefore not needed to be stored.
 \end_layout
 
 \begin_layout Standard
@@ -3831,7 +3936,7 @@ name "sub:Class-diagram"
 \end_layout
 
 \begin_layout Subsubsection
-Entity Behaviors
+Entity behaviors
 \begin_inset CommandInset label
 LatexCommand label
 name "sub:Entity-Behaviors"
@@ -4137,14 +4242,14 @@ status collapsed
 
 
 \series bold
-Queue Manager 
+Queue manager 
 \end_layout
 
 \begin_deeper
 \begin_layout Standard
 The queue manager is the software component in charge of smartly managing
- the local queues and ride reservations scheduling in the platform.
- It has access to all the software instances associated to 
+ the local queues and reservations scheduling in the platform.
+ It has access to all the instances of 
 \shape italic
 ride, taxi driver 
 \shape default
@@ -4216,7 +4321,8 @@ de-facto
 \end_layout
 
 \begin_layout Itemize
-If a taxi driver notifies a technical problem (function F7 of section 
+If a taxi driver notifies a technical problem (function F7 of sec.
+ 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sub:Product-functions"
@@ -4337,7 +4443,7 @@ As she accepts Adam's request, Adam receives a notification on the app with
 \end_layout
 
 \begin_layout Subsubsection
-Book a Taxi
+Book a taxi
 \begin_inset CommandInset label
 LatexCommand label
 name "sub:Book-a-Taxi"
@@ -4423,9 +4529,9 @@ reference "sub:Taxi-request"
 \begin_layout Subsubsection
 Manage 
 \shape italic
-Reserve Taxi
+Reserve taxi
 \shape default
- Request
+ request
 \end_layout
 
 \begin_layout Standard
@@ -4444,7 +4550,7 @@ The system checks whether Adam's request is acceptable (there must be at
 \end_layout
 
 \begin_layout Subsubsection
-Report Taxi
+Report taxi
 \end_layout
 
 \begin_layout Standard
@@ -4464,7 +4570,7 @@ Report taxi
 \end_layout
 
 \begin_layout Subsubsection
-Report Customer
+Report customer
 \end_layout
 
 \begin_layout Standard
@@ -4483,7 +4589,7 @@ Report user
 \end_layout
 
 \begin_layout Subsubsection
-Manage Personal Information
+Manage personal information
 \end_layout
 
 \begin_layout Standard
@@ -4505,7 +4611,7 @@ The system performs a check on the information, updates Joanne's profile
 \end_layout
 
 \begin_layout Subsubsection
-Report Problem
+Report problem
 \end_layout
 
 \begin_layout Standard
@@ -4539,7 +4645,8 @@ name "sub:Flow-of-events"
 \begin_layout Standard
 This section contains a description of how different use cases should happen,
  divided in sequential steps.
- The participating actor are those described in section 
+ The participating actor are those described in sec.
+ 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sub:Actors-and-related"
@@ -4645,7 +4752,7 @@ The system sends the confirmation to the guest.
 \begin_inset Text
 
 \begin_layout Plain Layout
-Postconditions 
+postconditions 
 \end_layout
 
 \end_inset
@@ -4801,7 +4908,7 @@ The guest is redirected to the user main page.
 \begin_inset Text
 
 \begin_layout Plain Layout
-Postconditions 
+postconditions 
 \end_layout
 
 \end_inset
@@ -4948,7 +5055,7 @@ The system returns a confirmation to the taxi driver.
 \begin_inset Text
 
 \begin_layout Plain Layout
-Postconditions 
+postconditions 
 \end_layout
 
 \end_inset
@@ -5007,7 +5114,7 @@ available
 \end_layout
 
 \begin_layout Subsubsection
-Taxi Request
+Taxi request
 \end_layout
 
 \begin_layout Standard
@@ -5095,7 +5202,8 @@ Based on the type of request that the customer issued, the system generates
 \shape italic
 Queue manager 
 \shape default
-(entity E3, section 
+(entity E3, sec.
+ 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sub:Entity-Behaviors"
@@ -5137,7 +5245,7 @@ enabled, the system calculates the estimated fee for the passenger and adds
 \begin_inset Text
 
 \begin_layout Plain Layout
-Postconditions 
+postconditions 
 \end_layout
 
 \end_inset
@@ -5210,9 +5318,9 @@ e.g.
 \begin_layout Subsubsection
 Manage 
 \shape italic
-Reserve Taxi
+Reserve taxi
 \shape default
- Request
+ request
 \end_layout
 
 \begin_layout Standard
@@ -5318,7 +5426,7 @@ The request is forwarded to the right local queue accordingly; if the user
 \begin_inset Text
 
 \begin_layout Plain Layout
-Postconditions 
+postconditions 
 \end_layout
 
 \end_inset
@@ -5387,7 +5495,7 @@ The customer tried to cancel their request too late: an error message is
 \end_layout
 
 \begin_layout Subsubsection
-Report Taxi
+Report taxi
 \end_layout
 
 \begin_layout Standard
@@ -5492,7 +5600,7 @@ The system notifies to the passenger the success of the operation.
 \begin_inset Text
 
 \begin_layout Plain Layout
-Postconditions 
+postconditions 
 \end_layout
 
 \end_inset
@@ -5548,7 +5656,7 @@ The passenger provides incorrect information in the report form: an error
 \end_layout
 
 \begin_layout Subsubsection
-Report Customer
+Report customer
 \end_layout
 
 \begin_layout Standard
@@ -5637,7 +5745,7 @@ The system checks the submitted data.
 \end_layout
 
 \begin_layout Enumerate
-The system updates the custormer's record.
+The system updates the customer's record.
  
 \end_layout
 
@@ -5653,7 +5761,7 @@ The system notifies to the taxi driver the success of the operation.
 \begin_inset Text
 
 \begin_layout Plain Layout
-Postconditions 
+postconditions 
 \end_layout
 
 \end_inset
@@ -5709,7 +5817,7 @@ The taxi driver provides incorrect information in the report form: an error
 \end_layout
 
 \begin_layout Subsubsection
-Manage Personal Information
+Manage personal information
 \end_layout
 
 \begin_layout Standard
@@ -5814,7 +5922,7 @@ If the information is correct, a confirmation is sent back to the user.
 \begin_inset Text
 
 \begin_layout Plain Layout
-Postconditions 
+postconditions 
 \end_layout
 
 \end_inset
@@ -5869,7 +5977,7 @@ The user provides incorrect information: an error message is shown.
 \end_layout
 
 \begin_layout Subsubsection
-Report Problem
+Report problem
 \end_layout
 
 \begin_layout Standard
@@ -5972,7 +6080,7 @@ If a taxi driver accepts the request, a confirmation is sent to the driver
 \begin_inset Text
 
 \begin_layout Plain Layout
-Postconditions 
+postconditions 
 \end_layout
 
 \end_inset
@@ -6044,8 +6152,8 @@ Performance requirements
 \end_layout
 
 \begin_layout Standard
-Some indicative non functional requirements regarding performance have been
- identified as follows.
+Some non functional requirements regarding performance have been identified
+ as follows.
 \end_layout
 
 \begin_layout Subsubsection
@@ -6104,7 +6212,7 @@ The users' profile pictures must have a resolution smaller than 1000x1000
 \end_layout
 
 \begin_layout Subsection
-Availability and Reliability Requirements
+Availability and reliability requirements
 \end_layout
 
 \begin_layout Standard
@@ -6180,13 +6288,21 @@ Data stored in memory in the event of a system failure or security breach
 
 \end_deeper
 \begin_layout Subsection
-Security Requirements
+Security requirements
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Security-requirements"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
 The following non functional requirements cover the security aspects of
- the platform in order, among other reasons, to satisfy the C3 constraint
- in section 
+ the platform in order, among other reasons, to satisfy the constraint C3,
+ sec.
+ 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sub:Constraints"
@@ -6279,13 +6395,12 @@ Access logs must be kept, backed up, and regularly analyzed.
 
 \end_deeper
 \begin_layout Enumerate
-Mission critical data must be stored with a particular attention to data
- integrity.
+Mission critical data must be stored with particular attention to data integrity.
  
 \end_layout
 
 \begin_layout Subsection
-Maintainability Requirements
+Maintainability requirements
 \end_layout
 
 \begin_layout Standard
@@ -6310,7 +6425,7 @@ The codebase for all developed software must be thoroughly documented with
 \end_layout
 
 \begin_layout Subsection
-Portability Requirements
+Portability requirements
 \end_layout
 
 \begin_layout Standard
@@ -6322,7 +6437,8 @@ The following non functional requirements consider technical details of
 When seen as a whole, the platform consists mainly of its user-side applications
 , and the back-end accounts for about 25% of the codebase; nonetheless,
  since the user-side applications are strictly OS dependent, as specified
- in section 
+ in sec.
+ 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sub:User-interface"
@@ -6332,7 +6448,7 @@ reference "sub:User-interface"
 , portability is an issue which has to be tackled in back-end development,
  in order to keep costs to a minimum in the case of possible changes in
  the platform (e.g.
- an integration with a pre-existsing system).
+ an integration with a preexisting system).
  Therefore: 
 \end_layout
 
@@ -6355,7 +6471,7 @@ Any system related calls, communication protocols and thread related calls
 \end_layout
 
 \begin_layout Section
-Alloy modeling
+Alloy Modeling
 \end_layout
 
 \begin_layout Subsection
@@ -6519,6 +6635,11 @@ sig Ride{
 
 \begin_layout Plain Layout
 
+	#transport >= 1 and #transport <= 4 and
+\end_layout
+
+\begin_layout Plain Layout
+
 	all d:destinations | different[d, start] = True and
 \end_layout
 
@@ -6625,6 +6746,10 @@ sig Position{
 
 \begin_layout Plain Layout
 
+\end_layout
+
+\begin_layout Plain Layout
+
 abstract sig Boolean{}
 \end_layout
 
@@ -6659,7 +6784,7 @@ fact {
 
 \begin_layout Plain Layout
 
-	Passenger = Customer
+	Passenger in Customer
 \end_layout
 
 \begin_layout Plain Layout
@@ -6909,6 +7034,10 @@ fact{
 
 \begin_layout Plain Layout
 
+\end_layout
+
+\begin_layout Plain Layout
+
 //If a Taxi Driver is in a Queue implies his availability
 \end_layout
 
@@ -7006,30 +7135,6 @@ fact maxDestinations{
 
 \begin_layout Plain Layout
 
-//Each Ride can transport at least 4 Passenger
-\end_layout
-
-\begin_layout Plain Layout
-
-fact maxPassenger{
-\end_layout
-
-\begin_layout Plain Layout
-
-	all r:Ride  | #r.transport > 0 and #r.transport <= 4
-\end_layout
-
-\begin_layout Plain Layout
-
-}
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
 /**Functions **/
 \end_layout
 
@@ -7040,7 +7145,7 @@ fact maxPassenger{
 
 \begin_layout Plain Layout
 
-fun different[p1,p2 : Position] : Boolean {
+fun different[p1,p2 : Position] : Boolean{
 \end_layout
 
 \begin_layout Plain Layout
@@ -7107,6 +7212,25 @@ assert differentsMail{
 
 \begin_layout Plain Layout
 
+pred taxiDriverAvailable{
+\end_layout
+
+\begin_layout Plain Layout
+
+	all t:TaxiDriver | t.available = True implies (one q:Queue | t in q.contains)
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
 pred intrestingPred{
 \end_layout
 
@@ -7152,6 +7276,10 @@ pred intrestingPred{
 
 \begin_layout Plain Layout
 
+\end_layout
+
+\begin_layout Plain Layout
+
 pred show{}
 \end_layout
 
@@ -7166,7 +7294,11 @@ pred show{}
 
 \begin_layout Plain Layout
 
-run intrestingPred for 10
+run taxiDriverAvailable for 5
+\end_layout
+
+\begin_layout Plain Layout
+
 \end_layout
 
 \end_inset
@@ -7176,6 +7308,18 @@ run intrestingPred for 10
 
 \begin_layout Subsection
 Alloy output
+\end_layout
+
+\begin_layout Standard
+The output is shown to give a visual confirmation of the consistency of
+ the model, even if it does not add any further information to the document.
+\end_layout
+
+\begin_layout Standard
+Note that passengers and taxi drivers can be related to more than one ride;
+ this is done intentionally, as ride objects do not cease to exist once
+ the ride is completed, but are stored and are associated with the user's
+ history.
 \end_layout
 
 \begin_layout Standard
@@ -7197,12 +7341,31 @@ Alloy output
 
 \end_layout
 
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename world2.png
+	height 90theight%
+	rotateAngle 90
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsection
 Alloy metamodel
 \end_layout
 
 \begin_layout Standard
-The following platfrom metamodel was derived from the Alloy code in section
+The following platform metamodel was derived from the Alloy code in section
  
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -7239,12 +7402,12 @@ reference "sub:Class-diagram"
 \end_layout
 
 \begin_layout Section
-Additional comments
+Additional Comments
 \end_layout
 
 \begin_layout Standard
 The production of this document has been a joint effort of all the authors,
- with a fair distribution of the mansions which cause each member of the
+ with a fair distribution of the mansions which caused each member of the
  group to work on all the parts of the document.
  
 \end_layout
