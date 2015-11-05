@@ -5,6 +5,8 @@
 \renewcommand{\familydefault}{\rmdefault}
 \usepackage[T1]{fontenc}
 \usepackage[latin9]{inputenc}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
 \usepackage{color}
 \usepackage{babel}
 \usepackage{array}
@@ -69,7 +71,7 @@ Daniele Grattarola (Mat. 853101)
 \par\end{center}
 
 \begin{center}
-lyas Inajjar (Mat. 790009) 
+Ilyas Inajjar (Mat. 790009) 
 \par\end{center}
 
 \begin{center}
@@ -272,11 +274,11 @@ user experience.
 \item[{{{{\textbf{{[}I1{]}}}}}}] \textbf{Customer web application}: standard dynamic website generated
 with information associated to the user. It is accessible through
 any standard web browser. 
-\item[{{{{{[}I2{]}}}}}] \textbf{Customer-side mobile application}: mobile application developed
+\item[{{{{\textbf{{[}I2{]}}}}}}] \textbf{Customer-side mobile application}: mobile application developed
 with proprietary graphical libraries in order to maintain the same
 business identity throughout the different mobile OSs that the application
 targets. 
-\item[{{{{{[}I3{]}}}}}] \textbf{Taxi-side mobile application}: mobile application developed
+\item[{{{{\textbf{{[}I3{]}}}}}}] \textbf{Taxi-side mobile application}: mobile application developed
 with proprietary graphical libraries in order to maintain the same
 business identity throughout the different mobile OSs that the application
 targets. 
@@ -476,6 +478,7 @@ responsive design in order to fit most screen sizes.
 \item The user-side interfaces must implement the same design language throughout
 the supported platforms, in order to maintain a consistent business
 identity. 
+\item All customer-side interfaces must enable access to the same functionalities. 
 \end{enumerate}
 
 \subsubsection{Interface mock-ups}
@@ -612,6 +615,8 @@ before submitting this kind of request to the system.
 \end{enumerate}
 \item The application must enable the customer to select both options of
 points 1.(b) and 1.(c) of this section at the same time. 
+\item The application must enable the customer to reserve a ride for more
+than 1 person (see requirement 4 in section \ref{sub:Functional-constraints})
 \end{enumerate}
 \item The application must enable the customer to submit a \textit{Taxi
 }reports (function F3).
@@ -622,7 +627,7 @@ is not directly deductible from the known data.
 \end{enumerate}
 \end{enumerate}
 
-\subsubsection{Functional constraints}
+\subsubsection{Functional constraints\label{sub:Functional-constraints}}
 \begin{enumerate}
 \item Taxi reservations must can only be issued at least 2 hours before
 the requested time of the ride (function F1, associated to req. \ref{sub:Customer-side-application-specif}
@@ -633,6 +638,9 @@ associated to req. \ref{sub:Customer-side-application-specif} 1.(b)).
 \item \textit{Taxi} and \textit{Customer }reports must be accepted only
 on condition that the ride happened in a 24 hours time frame from
 the submission request functions (functions F3 and F6). 
+\item A \textit{Ride} object must allow up to 6 possible passenger between
+application users (possibly in \textit{Car sharing }mode) and additional
+passenger added by a user (see requirement 1.(e) in section \ref{sub:Customer-side-application-specif})
 \end{enumerate}
 
 \subsection{Use Cases}
@@ -672,7 +680,7 @@ of the database by looking at the more specific descriptions given
 there.
 
 
-\subsubsection{Class diagram }
+\subsubsection{Class diagram \label{sub:Class-diagram}}
 
 \begin{center}
 \includegraphics[width=1\textwidth]{\string"Use_cases_and_Sequence_diagram/SequenceDiagrams svg/svg/Model2__ClassDiagram1_20\string".eps}
@@ -681,17 +689,22 @@ there.
 \pagebreak{}
 
 
-\subsubsection{Entity Behaviors (State chart diagrams)}
+\subsubsection{Entity Behaviors\label{sub:Entity-Behaviors}}
 \begin{itemize}
-\item[{{{{\textbf{{[}SC1{]}}}}}}] User 
-\end{itemize}
-\begin{center}
-\includegraphics[height=0.9\textheight]{\string"Use_cases_and_Sequence_diagram/SequenceDiagrams svg/svg/StateMachine3__User_23\string".eps} 
-\par\end{center}
+\item[{{{{\textbf{{[}EB1{]}}}}}}] \textbf{Taxi driver}
 
+
+Taxi drivers, once logged in, can choose to toggle their availability
+between the two main statuses \textit{Available }(if the driver is
+waiting for incoming requests and is in a local queue) and \textit{Unavailable
+}(if the driver is unable or unwilling to accept new requests; this
+applies also to drivers who are carrying passengers, who are automatically
+considered \textit{unavailable} once the accept a request).
+
+\end{itemize}
 \pagebreak{}
 \begin{itemize}
-\item[{{{{\textbf{{[}SC2{]}}}}}}] Ride 
+\item[{{{{\textbf{{[}EB2{]}}}}}}] \textbf{Ride }
 \end{itemize}
 \begin{center}
 \includegraphics[height=0.9\textheight]{\string"Use_cases_and_Sequence_diagram/SequenceDiagrams svg/svg/StateMachine2__Ride_22\string".eps} 
@@ -699,14 +712,48 @@ there.
 
 \pagebreak{}
 \begin{itemize}
-\item[{{{{\textbf{{[}SC3{]}}}}}}] Queue Manager 
+\item[{{{{\textbf{{[}EB3{]}}}}}}] \textbf{Queue Manager }
+
+
+The queue manager is the software component in charge of smartly managing
+the local queues and ride reservations scheduling in the platform.
+It has access to all the software instances associated to \textit{ride,
+taxi driver }and \textit{customer} objects and can modify these objects'
+statuses in reaction to different events. 
+
+
+The core algorithms of the queue manager have to:
+\begin{itemize}
+\item Handle one local queue for each zone of the town.
+\item Respond to taxi drivers' replies to customer requests.
+
+\begin{itemize}
+\item If a taxi driver accepts a ride request, they must be de-queued and
+set as \textit{Unavailable}.
+\item If a taxi driver refuses a ride request, they must be de-queued and
+set as \textit{Unavailable}\footnote{This behavior is different from the initial customer specification;
+it has been modified to prevent a possible unwanted situation in which
+all the taxi drivers in a queue refuse the request and:
+\begin{enumerate}
+\item The taxi drivers are continuously notified with the customer's request.
+\item The user never gets a failure notification, because the system is
+kept looping through a \textit{de-facto} unavailable queue. \end{enumerate}
+}. 
+\item If a taxi driver notifies a technical problem (function F7 of section
+\ref{sub:Product-functions}), they must be de-queued and set as \textit{Unavailable. }
 \end{itemize}
-\begin{center}
-\includegraphics[height=0.9\textheight]{\string"Use_cases_and_Sequence_diagram/SequenceDiagrams svg/svg/StateMachine1__Queue Manager _21\string".eps}
-\par\end{center}
+\item Keep track of all the customer ride reservations and manage eventual
+changes.
 
-\pagebreak{}
-
+\begin{itemize}
+\item Dynamically assign taxi drivers to a customer when the requested time
+arrives.
+\item Respond to changes in a customer's reservation (consistency checks
+are carried out by other components of the platform) and possibly
+remove the request from the schedule. 
+\end{itemize}
+\end{itemize}
+\end{itemize}
 
 \subsection{Scenarios\label{sub:Scenarios}}
 
@@ -961,14 +1008,13 @@ Preconditions  & Both users must be logged in, the taxi driver must be available
 \hline 
 Execution Flow  & \begin{enumerate}
 \item The customer requests the \textit{Taxi request} page 
-\item The customer is shown a form to fill with optional information: they
-can choose to book a taxi and to enable the \textit{Taxi sharing}
-option. 
 \item The customer fills the request form according to their preference
-and sends the information to the system. 
+and sends the information to the system: they can choose to request
+a ride for a certain number of passengers, reserve a taxi or enable
+the \textit{Taxi sharing }option. 
 \item Based on the type of request that the customer issued, the system
-generates a request with all the needed data and sends it to the first
-taxi driver in the right local queue, at the right time. 
+generates a request with all the needed data and commits it to the
+\textit{Queue manager }(entity E3, section \ref{sub:Entity-Behaviors})
 \item The taxi driver can either ignore the request or accept it. 
 \item If the taxi driver accepts the request, the system notifies to the
 customer the incoming taxi (with an approximate ETA) and changes the
@@ -1329,7 +1375,7 @@ is encouraged over a case-by-case analysis).
 \section{Alloy modeling}
 
 
-\subsection{Alloy source code}
+\subsection{Alloy source code\label{sub:Alloy-source-code}}
 
 \begin{lstlisting}[basicstyle={\normalsize\ttfamily},breaklines=true,keywordstyle={\color[RGB]{242,134,10}},morekeywords={assert, pred, all, no, lone, one, some, check, run, but, let, implies, not, iff, in, and, or, set, sig, Int, int, if, then, else, exactly, disj, fact, fun, module, abstract, extends, open, none, univ, iden, seq},morecomment={[l]{//}},morecomment={[s]{/*}{*/}},commentstyle={\color[RGB]{10,200,10}}]
 /**Signatures**/
@@ -1505,4 +1551,46 @@ run intrestingPred for 10
 \begin{center}
 \includegraphics[angle=90,height=0.9\textheight]{instance} 
 \par\end{center}
+
+\pagebreak{}
+
+
+\subsection{Alloy metamodel}
+
+The following platfrom metamodel was derived from the Alloy code in
+section \ref{sub:Alloy-source-code} and is a further expansion of
+the class diagram in section \ref{sub:Class-diagram}.
+
+\begin{center}
+\includegraphics[width=1\textwidth]{Metamodel}
+\par\end{center}
+
+\pagebreak{}
+
+
+\section{Additional comments}
+
+The production of this document has been a joint effort of all the
+authors, with a fair distribution of the mansions which cause each
+member of the group to work on all the parts of the document. 
+
+The production has been carried out between 16/10/2015 and 6/11/2015
+for a total time expense of: 
+\begin{itemize}
+\item \textbf{Group work}: 28 hours
+\item \textbf{Individual work}:
+
+
+\begin{tabular}{|c|c|}
+\hline 
+Daniele Grattarola (Mat. 853101) & 10.5 hours\tabularnewline
+\hline 
+Ilyas Inajjar (Mat. 790009)  & 9 hours\tabularnewline
+\hline 
+Andrea Lui (Mat. 850680) & 10 hours\tabularnewline
+\hline 
+\end{tabular}
+
+\end{itemize}
+\pagebreak{}
 \end{document}
