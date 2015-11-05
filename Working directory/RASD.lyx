@@ -94,7 +94,7 @@
 \quotes_language english
 \papercolumns 1
 \papersides 1
-\paperpagestyle default
+\paperpagestyle fancy
 \tracking_changes false
 \output_changes false
 \html_math_output 0
@@ -127,7 +127,7 @@ Daniele Grattarola (Mat.
 
 \begin_layout Standard
 \align center
-lyas Inajjar (Mat.
+Ilyas Inajjar (Mat.
  790009) 
 \end_layout
 
@@ -724,7 +724,11 @@ status collapsed
 
 \end_inset
 
+
+\series bold
 [I2]
+\series default
+
 \begin_inset ERT
 status collapsed
 
@@ -809,7 +813,11 @@ status collapsed
 
 \end_inset
 
+
+\series bold
 [I3]
+\series default
+
 \begin_inset ERT
 status collapsed
 
@@ -3253,6 +3261,11 @@ The user-side interfaces must implement the same design language throughout
  
 \end_layout
 
+\begin_layout Enumerate
+All customer-side interfaces must enable access to the same functionalities.
+ 
+\end_layout
+
 \begin_layout Subsubsection
 Interface mock-ups
 \end_layout
@@ -3605,6 +3618,18 @@ The application must enable the customer to select both options of points
  
 \end_layout
 
+\begin_layout Enumerate
+The application must enable the customer to reserve a ride for more than
+ 1 person (see requirement 4 in section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Functional-constraints"
+
+\end_inset
+
+)
+\end_layout
+
 \end_deeper
 \begin_layout Enumerate
 The application must enable the customer to submit a 
@@ -3624,6 +3649,13 @@ The application must require information about the ride if the information
 \end_deeper
 \begin_layout Subsubsection
 Functional constraints
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Functional-constraints"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Enumerate
@@ -3668,6 +3700,27 @@ reports must be accepted only on condition that the ride happened in a 24
  hours time frame from the submission request functions (functions F3 and
  F6).
  
+\end_layout
+
+\begin_layout Enumerate
+A 
+\shape italic
+Ride
+\shape default
+ object must allow up to 6 possible passenger between application users
+ (possibly in 
+\shape italic
+Car sharing 
+\shape default
+mode) and additional passenger added by a user (see requirement 1.(e) in
+ section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Customer-side-application-specif"
+
+\end_inset
+
+)
 \end_layout
 
 \begin_layout Subsection
@@ -3750,6 +3803,13 @@ A deeper insight on the data classes and operational variables is found
 
 \begin_layout Subsubsection
 Class diagram 
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Class-diagram"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -3771,7 +3831,14 @@ Class diagram
 \end_layout
 
 \begin_layout Subsubsection
-Entity Behaviors (State chart diagrams)
+Entity Behaviors
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Entity-Behaviors"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Itemize
@@ -3813,7 +3880,7 @@ status collapsed
 
 
 \series bold
-[SC1]
+[EB1]
 \series default
 
 \begin_inset ERT
@@ -3853,20 +3920,33 @@ status collapsed
 
 \end_inset
 
-User 
+
+\series bold
+Taxi driver
 \end_layout
 
+\begin_deeper
 \begin_layout Standard
-\align center
-\begin_inset Graphics
-	filename Use_cases_and_Sequence_diagram/SequenceDiagrams svg/svg/StateMachine3__User_23.eps
-	height 90theight%
-
-\end_inset
-
+Taxi drivers, once logged in, can choose to toggle their availability between
+ the two main statuses 
+\shape italic
+Available 
+\shape default
+(if the driver is waiting for incoming requests and is in a local queue)
+ and 
+\shape italic
+Unavailable 
+\shape default
+(if the driver is unable or unwilling to accept new requests; this applies
+ also to drivers who are carrying passengers, who are automatically considered
  
+\shape italic
+unavailable
+\shape default
+ once the accept a request).
 \end_layout
 
+\end_deeper
 \begin_layout Standard
 \begin_inset Newpage pagebreak
 \end_inset
@@ -3913,7 +3993,7 @@ status collapsed
 
 
 \series bold
-[SC2]
+[EB2]
 \series default
 
 \begin_inset ERT
@@ -3953,13 +4033,15 @@ status collapsed
 
 \end_inset
 
+
+\series bold
 Ride 
 \end_layout
 
 \begin_layout Standard
 \align center
 \begin_inset Graphics
-	filename Use_cases_and_Sequence_diagram/SequenceDiagrams svg/svg/StateMachine2__Ride_22.eps
+	filename Use_cases_and_Sequence_diagram/SequenceDiagrams svg/svg/StateMachine2__Ride_22.svg
 	height 90theight%
 
 \end_inset
@@ -4013,7 +4095,7 @@ status collapsed
 
 
 \series bold
-[SC3]
+[EB3]
 \series default
 
 \begin_inset ERT
@@ -4053,27 +4135,119 @@ status collapsed
 
 \end_inset
 
+
+\series bold
 Queue Manager 
 \end_layout
 
+\begin_deeper
 \begin_layout Standard
-\align center
-\begin_inset Graphics
-	filename Use_cases_and_Sequence_diagram/SequenceDiagrams svg/svg/StateMachine1__Queue Manager _21.eps
-	height 90theight%
-
-\end_inset
-
-
+The queue manager is the software component in charge of smartly managing
+ the local queues and ride reservations scheduling in the platform.
+ It has access to all the software instances associated to 
+\shape italic
+ride, taxi driver 
+\shape default
+and 
+\shape italic
+customer
+\shape default
+ objects and can modify these objects' statuses in reaction to different
+ events.
+ 
 \end_layout
 
 \begin_layout Standard
-\begin_inset Newpage pagebreak
-\end_inset
-
-
+The core algorithms of the queue manager have to:
 \end_layout
 
+\begin_layout Itemize
+Handle one local queue for each zone of the town.
+\end_layout
+
+\begin_layout Itemize
+Respond to taxi drivers' replies to customer requests.
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+If a taxi driver accepts a ride request, they must be de-queued and set
+ as 
+\shape italic
+Unavailable
+\shape default
+.
+\end_layout
+
+\begin_layout Itemize
+If a taxi driver refuses a ride request, they must be de-queued and set
+ as 
+\shape italic
+Unavailable
+\shape default
+
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+This behavior is different from the initial customer specification; it has
+ been modified to prevent a possible unwanted situation in which all the
+ taxi drivers in a queue refuse the request and:
+\end_layout
+
+\begin_layout Enumerate
+The taxi drivers are continuously notified with the customer's request.
+\end_layout
+
+\begin_layout Enumerate
+The user never gets a failure notification, because the system is kept looping
+ through a 
+\shape italic
+de-facto
+\shape default
+ unavailable queue.
+ 
+\end_layout
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Itemize
+If a taxi driver notifies a technical problem (function F7 of section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Product-functions"
+
+\end_inset
+
+), they must be de-queued and set as 
+\shape italic
+Unavailable.
+ 
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Keep track of all the customer ride reservations and manage eventual changes.
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Dynamically assign taxi drivers to a customer when the requested time arrives.
+\end_layout
+
+\begin_layout Itemize
+Respond to changes in a customer's reservation (consistency checks are carried
+ out by other components of the platform) and possibly remove the request
+ from the schedule.
+ 
+\end_layout
+
+\end_deeper
+\end_deeper
 \begin_layout Subsection
 Scenarios
 \begin_inset CommandInset label
@@ -4905,26 +5079,30 @@ Taxi request
 \end_layout
 
 \begin_layout Enumerate
-The customer is shown a form to fill with optional information: they can
- choose to book a taxi and to enable the 
-\shape italic
-Taxi sharing
-\shape default
- option.
- 
-\end_layout
-
-\begin_layout Enumerate
 The customer fills the request form according to their preference and sends
- the information to the system.
+ the information to the system: they can choose to request a ride for a
+ certain number of passengers, reserve a taxi or enable the 
+\shape italic
+Taxi sharing 
+\shape default
+option.
  
 \end_layout
 
 \begin_layout Enumerate
 Based on the type of request that the customer issued, the system generates
- a request with all the needed data and sends it to the first taxi driver
- in the right local queue, at the right time.
- 
+ a request with all the needed data and commits it to the 
+\shape italic
+Queue manager 
+\shape default
+(entity E3, section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Entity-Behaviors"
+
+\end_inset
+
+)
 \end_layout
 
 \begin_layout Enumerate
@@ -6182,6 +6360,13 @@ Alloy modeling
 
 \begin_layout Subsection
 Alloy source code
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Alloy-source-code"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -7003,6 +7188,171 @@ Alloy output
 \end_inset
 
  
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Alloy metamodel
+\end_layout
+
+\begin_layout Standard
+The following platfrom metamodel was derived from the Alloy code in section
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Alloy-source-code"
+
+\end_inset
+
+ and is a further expansion of the class diagram in section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Class-diagram"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename Metamodel.png
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Additional comments
+\end_layout
+
+\begin_layout Standard
+The production of this document has been a joint effort of all the authors,
+ with a fair distribution of the mansions which cause each member of the
+ group to work on all the parts of the document.
+ 
+\end_layout
+
+\begin_layout Standard
+The production has been carried out between 16/10/2015 and 6/11/2015 for
+ a total time expense of: 
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Group work
+\series default
+: 28 hours
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Individual work
+\series default
+:
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+\begin_inset Tabular
+<lyxtabular version="3" rows="3" columns="2">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Daniele Grattarola (Mat.
+ 853101)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10.5 hours
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Ilyas Inajjar (Mat.
+ 790009) 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+9 hours
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Andrea Lui (Mat.
+ 850680)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10 hours
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
 \end_layout
 
 \end_body
