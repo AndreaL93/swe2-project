@@ -1,4 +1,5 @@
 /**Signatures**/
+
 //Sig for Users, having username and mail
 abstract sig User{
 	username : MString,
@@ -27,6 +28,7 @@ sig Ride{
 	hasDriver : lone TaxiDriver,
 	pending : Boolean
 }{
+	#transport >= 1 and #transport <= 4 and
 	all d:destinations | different[d, start] = True and
 	#hasDriver = 1 iff pending = True 
 }
@@ -49,6 +51,7 @@ sig Position{
 	x : Float,
 	y : Float
 }
+
 abstract sig Boolean{}
 one sig True extends Boolean {}
 one sig False extends Boolean {}
@@ -57,7 +60,7 @@ one sig False extends Boolean {}
 
 //All the Passengers are Customers (and also Users)
 fact {
-	Passenger = Customer
+	Passenger in Customer
 }
 
 //Users are composed by all the TaxiDrivers and Customers
@@ -109,6 +112,7 @@ fact{
 fact{
 	all u:Ride.transport | (lone r:Ride | r.pending = True and u in r.transport)
 }
+
 //If a Taxi Driver is in a Queue implies his availability
 fact taxiInQueueIsAvailable{
 	all t:TaxiDriver | t in Queue.contains implies t.available = True else t.available = False
@@ -127,11 +131,6 @@ fact exacltyOneManager{
 //For each Ride the number of destinations belongs to the # of Passenger
 fact maxDestinations{
 	all r:Ride | #r.destinations <= #r.transport
-}
-
-//Each Ride can transport at least 4 Passenger
-fact maxPassenger{
-	all r:Ride  | #r.transport > 0 and #r.transport <= 4
 }
 
 /**Functions **/
@@ -153,6 +152,10 @@ assert differentsMail{
 
 /**Predicates**/
 
+pred taxiDriverAvailable{
+	all t:TaxiDriver | t.available = True implies (one q:Queue | t in q.contains)
+}
+
 pred intrestingPred{
 	#Passenger > 1
 	#Position < 3
@@ -167,4 +170,4 @@ pred show{}
 
 /**Executions**/
 
-run intrestingPred for 10
+run taxiDriverAvailable for 5
