@@ -1,0 +1,237 @@
+%% LyX 2.1.4 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[english]{article}
+\usepackage{charter}
+\renewcommand{\familydefault}{\rmdefault}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\usepackage{babel}
+\usepackage{graphicx}
+\usepackage{setspace}
+\onehalfspacing
+\usepackage[unicode=true,pdfusetitle,
+ bookmarks=true,bookmarksnumbered=false,bookmarksopen=false,
+ breaklinks=false,pdfborder={0 0 0},backref=false,colorlinks=false]
+ {hyperref}
+
+\makeatletter
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
+%% Because html converters don't know tabularnewline
+\providecommand{\tabularnewline}{\\}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+\usepackage{babel}
+\usepackage{babel}
+\usepackage{babel}
+\usepackage{babel}
+
+
+
+
+
+
+\usepackage{listings}
+\renewcommand{\lstlistingname}{Listing}
+
+
+
+
+
+\usepackage{listings}
+\renewcommand{\lstlistingname}{Listing}
+
+
+
+\usepackage{listings}
+\renewcommand{\lstlistingname}{Listing}
+
+\makeatother
+
+\begin{document}
+
+\title{Design Document}
+
+\maketitle
+\begin{center}
+\includegraphics[height=0.3\textheight]{polimiLogo}
+\par\end{center}
+
+\begin{center}
+Daniele Grattarola (Mat. 853101)
+\par\end{center}
+
+\begin{center}
+Ilyas Inajjar (Mat. 790009) 
+\par\end{center}
+
+\begin{center}
+Andrea Lui (Mat. 850680)
+\par\end{center}
+
+
+\title{\pagebreak{}}
+
+\tableofcontents{}
+
+\pagebreak{}
+
+
+\section{Introduction}
+
+
+\subsection{Purpose}
+
+
+\subsection{Scope}
+
+
+\subsection{Definitions, acronyms, and abbreviations \label{sub:Definitions,-acronyms,-and}}
+
+Throughout this document, the following definitions will be applied
+without further explanations: 
+\begin{itemize}
+\item \textbf{Platform}: the set of software applications and hardware infrastructure
+that make up the MyTaxiService service; these include the back-end
+server software, the web application and the mobile application used
+by the customers, the mobile application used by the taxi drivers,
+and all the necessary hardware needed to run the mentioned software
+and any needed support software. 
+\item \textbf{System}: any subset of software components of the platform. 
+\item \textbf{Back-end}: the software run on the back-end server of the
+platform which is used to handle the communication between the user
+applications. The term also addresses all the necessary software components
+that are needed to store data, perform calculations and manage the
+hardware (e.g. an operating system). 
+\item \textbf{Customer-side application}: software run on a personal device
+which is used to send taxi requests to the system and to handle the
+system's replies. It is designed to be used by customers (see below)
+and can either be a mobile application (run on a smartphone or tablet)
+or a web application (run on any personal device through an Internet
+browser). 
+\item \textbf{Taxi-side application}: software run on a personal device
+which is used to manage taxi requests forwarded by the system and
+to reply to the system with information on how to handle the requests.
+It is designed to be used by taxi drivers (see below) and is a mobile
+application (run on a smartphone or tablet). 
+\item \textbf{User-side application}: the set of customer-side and taxi-side
+applications 
+\item \textbf{Taxi driver}: the owner of a taxi license in Pallet Town,
+who uses the taxi-side application to interact with the platform. 
+\item \textbf{Customer}: a person which intends to exploit the taxi service
+of the town, and who uses the user-side applications to interact with
+the platform. 
+\item \textbf{User}: any customer or taxi driver who uses a user-side application. 
+\end{itemize}
+The following acronyms will also be used in place of the extended
+form: 
+\begin{itemize}
+\item \textbf{DD: }Design Document
+\item \textbf{RASD}: Requirement Analysis and Specification Document 
+\item \textbf{CGI}: Common Gateway Interface 
+\item \textbf{DBMS}: Data Base Management System 
+\item \textbf{RTO}: Recovery Time Objective 
+\item \textbf{RPO}: Recovery Point Objective 
+\item \textbf{SOC}: System On a Chip 
+\end{itemize}
+The following convention will be used to refer to different items
+in the document:
+\begin{itemize}
+\item \textbf{sec. / secs.}: section / sections
+\item \textbf{req.}: requirement.
+\end{itemize}
+A typical use of the aforementioned abbreviation would be in the form
+``element Xx, sec. x.x.x'' (e.g. \textit{req. 1, sec. 1.3} - if
+this section contained a numbered requirement with index 1).
+
+One last observation is to be done regarding the use of the singular
+\textit{they}, which will be used to refer to single persons throughout
+the whole document. 
+
+
+\subsection{Overview}
+
+The presented RASD is divided in sections and structured as follows: 
+\begin{itemize}
+\item \textbf{Section 1 - Introduction}: contains support information to
+better understand the presented document and provides a brief introduction
+of the project, with its scope and general goals. 
+\item \textbf{Section 2 - Architectural Design}: contains a high level descriptions
+of the platform to be created, with its functions, conceptual structure,
+relations with the outside world and design constraints. 
+\item \textbf{Section 3 - Algorithm Design}: Focus on the definition of
+the most relevant algorithmic part of your project. 
+\item \textbf{Section 4 - User Interface Design}: Provide an overview on
+how the user interface(s) of your system will look like. If you have
+included this part in the RASD, you can simply refer to what you have
+already done, possibly, providing here some extensions if applicable.
+\item \textbf{Section 5 - Requirements} \textbf{Traceability}: Explain how
+the requirements you have defined in the RASD map into the design
+elements that you have defined in this document.
+\item \textbf{Section 6 - References: }Additional comments about this document.
+\end{itemize}
+
+\section{Architectural Design}
+
+
+\subsection{Overview \label{sub:Architectural-Overview}}
+
+
+\subsection{High level components and their interaction\label{sub:High-Level-Components}}
+
+
+\subsection{Component view\label{sub:Component-View}}
+
+
+\subsection{Deployment view\label{sub:Deployment-View}}
+
+
+\subsection{Runtime view\label{sub:Runtime-View}}
+
+
+\subsection{Component interfaces\label{sub:Component-Interfaces}}
+
+
+\subsection{Selected architerctural styles and patterns\label{sub:Selected-Architectural}}
+
+
+\subsection{Other design decisions\label{sub:Other-Design}}
+
+
+\section{Algorithm Design}
+
+
+\section{User Interface Design}
+
+
+\section{Requirements Traceability}
+
+
+\section{References}
+
+The production of this document has been a joint effort of all the
+authors, with a fair distribution of the mansions which caused each
+member of the group to work on all the parts of the document. 
+
+The production has been carried out between 16/10/2015 and 6/11/2015
+for a total time expense of: 
+\begin{itemize}
+\item \textbf{Group work}: hours
+\item \textbf{Individual work}:
+
+
+\begin{tabular}{|c|c|}
+\hline 
+Daniele Grattarola (Mat. 853101) &  hours\tabularnewline
+\hline 
+Ilyas Inajjar (Mat. 790009)  &  hours\tabularnewline
+\hline 
+Andrea Lui (Mat. 850680) & hours\tabularnewline
+\hline 
+\end{tabular}
+
+\end{itemize}
+\pagebreak{}
+\end{document}
