@@ -17,7 +17,30 @@ sig Passenger extends Customer{}
 //Taxi Driver can be Available
 sig TaxiDriver extends User{
 	license : MString,
-	available : Boolean
+	available : Boolean,
+	drive : one Car
+}
+
+//Sig of generic Car
+abstract sig Car{
+	seats : set Seat
+}
+
+sig Seat{}
+
+//Mini Van type of Car
+one sig MiniVan extends Car{}{
+	#seats = 6
+}
+
+//Classic type of Car
+one sig Sedan extends Car{}{
+	#seats = 3
+}
+
+//Staton Vagon type of Car
+one sig StationVagon extends Car{}{
+	#seats = 5
 }
 
 //Ride has: one TaxiDriver, one Starting position, a set of Passenger and some destination positions
@@ -25,10 +48,10 @@ sig Ride{
 	start : one Position,
 	destinations : some Position,
 	transport : set Passenger,
-	hasDriver : lone TaxiDriver,
+	hasDriver : one TaxiDriver,
 	pending : Boolean
 }{
-	#transport >= 1 and #transport <= 4 and
+	#transport >= 1 and #transport <= #hasDriver.(drive.seats) and
 	all d:destinations | different[d, start] = True and
 	#hasDriver = 1 iff pending = True 
 }
@@ -81,6 +104,14 @@ fact noUselessPositions{
 //No useless Float sig
 fact onlyUsedFloat{
 	Position.x + Position.y = Float
+}
+
+fact noDuplicatedSeat{
+	all c1,c2 : Car | c1 != c2 iff c1.seats & c2.seats = none
+}
+
+fact noUselessSeat{
+	Car.seats = Seat
 }
 
 //A User has unique username and mail
@@ -170,4 +201,4 @@ pred show{}
 
 /**Executions**/
 
-run taxiDriverAvailable for 5
+run intrestingPred for 14
