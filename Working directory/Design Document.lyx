@@ -388,6 +388,14 @@ DBMS
 : Data Base Management System 
 \end_layout
 
+\begin_layout Itemize
+
+\series bold
+DMZ
+\series default
+: De-Militarized Zone
+\end_layout
+
 \begin_layout Standard
 The following convention will be used to refer to different items in the
  document:
@@ -560,9 +568,136 @@ name "sub:Deployment-View"
 \end_layout
 
 \begin_layout Standard
+The following section contains a schema of the hardware infrastructure,
+ which represents the main operational components of the back-end and their
+ relations.
+ The high-level software components run on each piece of hardware (or possibly
+ the generic hardware's function) are indicated below each node.
+ 
+\end_layout
+
+\begin_layout Standard
+For clarity's sake, it was decided to omit the representation of the purely
+ network-related hardware (routers, switches, etc.).
+\end_layout
+
+\begin_layout Standard
+The chosen architecture is a typical web-based client-server architecture,
+ with the following components: 
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+Main server array
+\series default
+: typical rack of servers dedicated to run the main back-end logic.
+ The rack is composed by independent nodes managed by usual load balancing
+ technology, where each node is equipped with the full stack of operational
+ software and its dependencies (as listed in sec.
+ 2.1.1 of the RASD) and is able to be fully functional under average load
+ of the system.
+ 
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+The redundancy of the rack has the dual function of improving fault tolerance
+ and performance under above-average load conditions.
+ 
+\end_layout
+
+\begin_layout Standard
+This node is connected to the web server, through which the communication
+ to and from the users happens, and to the DBMS server (either primary or
+ secondary - the connection is transparent to the node and is hot-swappable
+ in the event of a failure).
+ 
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+
+\series bold
+Main DBMS server
+\series default
+: server dedicated to run the DBMS software on account of the main server
+ array and to manage the communication with the secondary storage node.
+ 
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+This node is connected to the main server array, from which it receives
+ requests, and the storage nodes (either primary or secondary - the connection
+ is transparent to the node and is hot-swappale in the event of a failure).
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+
+\series bold
+Secondary DBMS server
+\series default
+: server dedicated to run the DBMS software and manage the backup requests
+ from the primary DBMS server.
+ 
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+The node is connected to the secondary storage and to the primary DBMS sever,
+ for the reasons described above.
+ 
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+
+\series bold
+Primary and secondary storage
+\series default
+: typical long term-storage technology on which the operational database
+ is saved.
+ The primary storage is the node with the highest R/W speeds and is used
+ under normal operational regime, whereas the secondary is the most reliable
+ one (in terms of long-term storage) and it is used to store data backups
+ (it becomes fully operational only in the even of a failure on the primary
+ storage or DBMS nodes).
+ 
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+Web server
+\series default
+: server dedicated to run the web server software and manage the communication
+ between the users and the back-end.
+ It is connected to the main server array and isolated by firewalls to implement
+ a DMZ and minimize the risk of unauthorized access to the main back-end
+ components (especially to the storage nodes).
+ 
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+This is the main gateway node of the back-end and is the one exposed to
+ the outside world.
+ 
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+Any communication between the user-side apps and the back-end happens through
+ the standard Internet protocol.
+ 
+\end_layout
+
+\begin_layout Standard
 \begin_inset Graphics
 	filename DD/images/Deployment.png
-	height 90theight%
+	width 100text%
 
 \end_inset
 
