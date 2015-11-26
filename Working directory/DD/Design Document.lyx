@@ -553,7 +553,72 @@ name "sub:Component-View"
 \end_layout
 
 \begin_layout Standard
-// Component view diagrams
+The platform is composed by some main core software element that are needed
+ to realize the functional and non functional requirements presented in
+ the RASD.
+ Any external dependency to make the platform operational is listed in sec.
+ 2.1.1 of the RASD and is not explicitly treated in the present document.
+\end_layout
+
+\begin_layout Subsubsection
+Queue manager
+\end_layout
+
+\begin_layout Standard
+This software module is responsible for managing the taxi queues associated
+ with each zone of the town.
+ 
+\end_layout
+
+\begin_layout Standard
+It receives requests directly from the RESTful API and the ride manager
+ through a SOA implementation, and executes the selection algorithms based
+ on the needs of the requester.
+ 
+\end_layout
+
+\begin_layout Subsubsection
+Ride manager
+\end_layout
+
+\begin_layout Standard
+This module is responsible for managing the taxi reservations requests from
+ the users.
+ 
+\end_layout
+
+\begin_layout Subsubsection
+User manager
+\end_layout
+
+\begin_layout Subsubsection
+Notification manager
+\end_layout
+
+\begin_layout Subsubsection
+RESTful API
+\end_layout
+
+\begin_layout Subsubsection
+Presentation
+\end_layout
+
+\begin_layout Subsubsection
+DBMS
+\end_layout
+
+\begin_layout Subsubsection
+Component diagram
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename images/ComponentDiagram1.svg
+	width 100text%
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
@@ -594,7 +659,15 @@ Main server array
 : typical rack of servers dedicated to run the main back-end logic.
  The rack is composed by independent nodes managed by usual load balancing
  technology, where each node is equipped with the full stack of operational
- software and its dependencies (as listed in sec.
+ software (sec.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Component-View"
+
+\end_inset
+
+) and its dependencies (sec.
  2.1.1 of the RASD) and is able to be fully functional under average load
  of the system.
  
@@ -696,7 +769,17 @@ Any communication between the user-side apps and the back-end happens through
 
 \begin_layout Standard
 \begin_inset Graphics
-	filename images/Deployment.png
+	filename images/DeploymentSchema.png
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename images/DeploymentDiagram1.svg
 	width 100text%
 
 \end_inset
