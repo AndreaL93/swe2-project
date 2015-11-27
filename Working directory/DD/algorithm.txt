@@ -1,0 +1,72 @@
+RequestManager
+
+addRequest(Request request){
+	requests.add(request);
+	try{
+		TaxiDriver driver = RideManager.createRide(request);
+	}catch(NoTaxiDriverAvailable e){
+		cancelRequest(request);
+		return;
+	}
+	requestIsReadyNotification();
+}
+
+modifyRequest(Request request, Position destination, Position start, int passengers){
+	if(request.canBeEdited()){
+		requests.remove(request);
+		request.setDestination(destination);
+		request.setStart(start);
+		request.setNumofPassenger(passenger);
+		requests.add(request);
+	}else{
+		throw new RequestCannotBeEditedException("Is to late to edit a request");
+	}
+}
+
+cancelRequest(Request request){
+	if(request.canBeEdited()){
+		request.remove();
+	}else{
+		throw new RequestCannotBeEditedException("Is to late to remove a request");
+	}
+}
+
+RideManager
+
+getRide(Request request) throws NoTaxiDriverAvailableException {
+	TaxiDriver driver = QueueManager.getTaxiDriverIntoCorrectZone(request.getStart());
+	return createRide(request, driver);
+}
+
+changeTaxiDriver(Ride ride, TaxiDriver driver){
+	rides.remove(ride);
+	Ride newRide = ride.clone();
+	newRide.setTaxiDriver(driver);
+	rides.add(newRide);
+}
+
+QueueManager
+
+
+newTaxiAvailable(TaxiDriver driver, Position position){
+	long zone = MapsUtils.getZone(position);
+	Queue rightQueue = queues.get(zone);
+	rightQueue.push(driver);
+}
+
+getTaxiDriverIntoCorrectZone(Position position){
+	long zone = MapsUtils.getZone(position);
+	Queue rightQueue = queues.get(zone);
+	if(!rightQueue.isEmpty())
+		return rightQueue.getFirst();
+	else throw new NoTaxiDriverAvailableException("No taxi available in this zone");
+}
+
+removeTaxiDriverFromQueue(TaxiDriver driver){
+	for(Queue queue : queues)
+		if(queue.contains(driver)
+			queue.remove(driver);
+}
+
+
+
