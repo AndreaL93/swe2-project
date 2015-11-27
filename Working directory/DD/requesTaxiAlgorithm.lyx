@@ -1,0 +1,192 @@
+#LyX 2.1 created this file. For more info see http://www.lyx.org/
+\lyxformat 474
+\begin_document
+\begin_header
+\textclass article
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_math auto
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Subsection
+
+\series bold
+Request Taxi
+\end_layout
+
+\begin_layout Enumerate
+The Customer fills the form and send the request with 
+\series bold
+requestTaxi()
+\series default
+ method.
+\end_layout
+
+\begin_layout Enumerate
+The 
+\series bold
+RequestManager 
+\series default
+recive the request and with the 
+\series bold
+addRequest(Request) 
+\series default
+method insert the request.
+\end_layout
+
+\begin_layout Enumerate
+The 
+\series bold
+RideManager 
+\series default
+analize the request, ask to the 
+\series bold
+QueueManager 
+\series default
+for a 
+\series bold
+TaxiDriver 
+\series default
+available in the zone of the request.
+\end_layout
+
+\begin_layout Enumerate
+The 
+\series bold
+QueueManager 
+\series default
+convert the 
+\series bold
+Position 
+\series default
+into a zoneID, check if the 
+\series bold
+Queue 
+\series default
+associated to the zoneID is not empty (
+\series bold
+isEmpty()
+\series default
+), get the first of the 
+\series bold
+Queue
+\series default
+ (
+\series bold
+getFirst()
+\series default
+) and return to 
+\series bold
+RideManager
+\series default
+.
+ Otherwise notifies to the 
+\series bold
+RideManager
+\series default
+ the absence of 
+\series bold
+TaxiDrivers
+\series default
+ and return the problem to the Customer.
+\end_layout
+
+\begin_layout Enumerate
+The 
+\series bold
+RideManager
+\series default
+ using the notification system contact the TaxiDriver.
+ If the TaxiDriver answer positively create the ride with 
+\series bold
+createRide(Request, TaxiDriver) 
+\series default
+method, otherwise using the 
+\series bold
+QueueManager
+\series default
+ puts the 
+\series bold
+TaxiDriver
+\series default
+ back of the Queue and ask for the new first of the 
+\series bold
+Queue
+\series default
+, until gets a positively reply or an empty Queue.
+\end_layout
+
+\begin_layout Enumerate
+The 
+\series bold
+RequestManager
+\series default
+ via 
+\series bold
+requestIsReadyNotification()
+\series default
+ notifies to the Customer the succesful of the operation.
+\end_layout
+
+\end_body
+\end_document
