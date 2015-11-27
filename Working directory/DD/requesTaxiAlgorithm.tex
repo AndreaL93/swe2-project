@@ -1,0 +1,52 @@
+%% LyX 2.1.4 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[english]{article}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage{babel}
+\begin{document}
+
+\subsection{Request Taxi}
+\begin{enumerate}
+\item The Customer fills the form and send the request with \textbf{requestTaxi()}
+method.
+\item The \textbf{RequestManager }recive the request and with the \textbf{addRequest(Request)
+}method insert the request.
+\item The RideManager checks the type of request: TaxiRequest or TaxiBooking
+and if has the share option or not.
+\item In case of TaxiBooking:
+
+\begin{enumerate}
+\item If the share option is true the \textbf{RideManager} analize the other
+TaxiBooking requests with share option:
+\item Calculate the possible paths of each request (usign \textbf{GoogleMaps
+API}), checks the compatibility of the time and a max number of Passenger
+per Ride
+\item Create a common \textbf{Ride} adding all those Customers.
+\item 10 minutes before the time of the booking the \textbf{RideManager}
+starts managing the TaxiBooking like a TaxiRequest. 
+\end{enumerate}
+\item In the case of TaxiRequest:
+
+\begin{enumerate}
+\item The \textbf{RideManager }analize the request, ask to the \textbf{QueueManager
+}for a \textbf{TaxiDriver }available in the zone of the request.
+\item The \textbf{QueueManager }convert the \textbf{Position }into a zoneID,
+check if the \textbf{Queue }associated to the zoneID is not empty
+(\textbf{isEmpty()}), get the first of the \textbf{Queue} (\textbf{getFirst()})
+and return to \textbf{RideManager}. Otherwise notifies to the \textbf{RideManager}
+the absence of \textbf{TaxiDrivers} and return the problem to the
+Customer.
+\item The \textbf{RideManager} using the notification system contact the
+TaxiDriver. If the TaxiDriver answer positively create the ride with
+\textbf{createRide(Request, TaxiDriver) }method and remove the TaxiDriver
+from the Queue using the \textbf{removeTaxiDriver(TaxiDriver) }method,
+otherwise using the \textbf{QueueManager} puts the \textbf{TaxiDriver}
+back of the Queue (\textbf{putBack(TaxiDriver)}) and ask for the new
+first of the \textbf{Queue}, until gets a positively reply or an empty
+Queue.
+\item The \textbf{RequestManager} via \textbf{requestIsReadyNotification()}
+notifies to the Customer the succesful of the operation.\end{enumerate}
+\end{enumerate}
+
+\end{document}

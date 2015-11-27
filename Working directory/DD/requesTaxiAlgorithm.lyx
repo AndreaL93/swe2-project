@@ -95,6 +95,56 @@ method insert the request.
 \end_layout
 
 \begin_layout Enumerate
+The RideManager checks the type of request: TaxiRequest or TaxiBooking and
+ if has the share option or not.
+\end_layout
+
+\begin_layout Enumerate
+In case of TaxiBooking:
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+If the share option is true the 
+\series bold
+RideManager
+\series default
+ analize the other TaxiBooking requests with share option:
+\end_layout
+
+\begin_layout Enumerate
+Calculate the possible paths of each request (usign 
+\series bold
+GoogleMaps API
+\series default
+), checks the compatibility of the time and a max number of Passenger per
+ Ride
+\end_layout
+
+\begin_layout Enumerate
+Create a common 
+\series bold
+Ride
+\series default
+ adding all those Customers.
+\end_layout
+
+\begin_layout Enumerate
+10 minutes before the time of the booking the 
+\series bold
+RideManager
+\series default
+ starts managing the TaxiBooking like a TaxiRequest.
+ 
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+In the case of TaxiRequest:
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
 The 
 \series bold
 RideManager 
@@ -161,6 +211,10 @@ RideManager
 \series bold
 createRide(Request, TaxiDriver) 
 \series default
+method and remove the TaxiDriver from the Queue using the 
+\series bold
+removeTaxiDriver(TaxiDriver) 
+\series default
 method, otherwise using the 
 \series bold
 QueueManager
@@ -169,7 +223,11 @@ QueueManager
 \series bold
 TaxiDriver
 \series default
- back of the Queue and ask for the new first of the 
+ back of the Queue (
+\series bold
+putBack(TaxiDriver)
+\series default
+) and ask for the new first of the 
 \series bold
 Queue
 \series default
@@ -188,5 +246,6 @@ requestIsReadyNotification()
  notifies to the Customer the succesful of the operation.
 \end_layout
 
+\end_deeper
 \end_body
 \end_document
