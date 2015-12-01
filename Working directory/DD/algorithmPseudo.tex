@@ -1,0 +1,164 @@
+%% LyX 2.1.4 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[english]{article}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+
+\makeatletter
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+\usepackage{algorithm,algpseudocode}
+
+\makeatother
+
+\usepackage{babel}
+\begin{document}
+
+\subsection{RequestManager}
+
+
+\subsubsection{addRequest(Request)}
+
+addRequest(Request request)
+
+for(i=0;i<requests.size();i++)
+
+if(request.startTime.isPrevious(requests.get(i).startTime)
+
+requests.add(request, i)
+
+endFor
+
+Path possiblePath := GoogleMaps.getPath(request.start, request.destination)
+
+forall(Request r : requests)
+
+Path rPath := GoogleMaps.getPath(r.start, r.destination)
+
+if((possiblePath.contains(r.start) \&\& possiblePath.contains(r.destination))
+
+|| (possiblePath.contains(r.start) \&\& rPath.contains(request.destination))
+
+|| (rPath.contains(request.start) \&\& rPath.contains(request.destination))
+
+|| (rPath.contains(request.start) \&\& possiblePath.contains(r.destination)))
+
+request.merge(r)
+
+
+\subsubsection{modifyRequest(Request, Request)}
+
+modifyRequest(Request request, Request newRequest)
+
+if(requests.contains(request)) 
+
+requests.remove(request)
+
+else 
+
+forall(Request r : requests)
+
+if(r.containsRequest(request))
+
+r.extractRequest(request)
+
+endElse
+
+addRequest(newRequest)
+
+
+\subsubsection{requestIsReadyNotification()}
+
+requestIsReadyNotification()
+
+while(!requests.isEmpty())
+
+if(requests.get(0).startTime > getTime() -10)
+
+RideManager.onReadyRequest(requests.remove(0))
+
+endWhile
+
+
+\subsection{RideManager}
+
+
+\subsubsection{onReadyRequest(Request)}
+
+onReadyRequest(Request request)
+
+TaxiDriver taxiDriver:= QueueManager.getTaxiDriver(request.start,
+request.numOfPassenger)
+
+if(taxiDriver is not null)
+
+createRide(request, taxiDriver)
+
+else
+
+onReadyRequest(request.splitLeft())
+
+onReadyRequest(request.splitRight())
+
+
+\subsubsection{onProblem(TaxiDriver)}
+
+onProblem(TaxiDriver taxiDriver)
+
+forall(Ride r : rides)
+
+if(r.getDriver = taxiDriver)
+
+rides.remove(r)
+
+onReadyRequest(r.getRequest())
+
+break
+
+endIf
+
+endFor
+
+
+\subsection{QueueManager}
+
+
+\subsubsection{getQueue(int ID)}
+
+getQueue(int ID)
+
+forall(Queue q : queues)
+
+if(q.getID() = ID) return q
+
+
+\subsubsection{getQueue(Position)}
+
+getQueue(Position position)
+
+return getQueue(MapUtils.getIDfromPosition(position))
+
+
+\subsubsection{getTaxiDriver(Position, int seats)}
+
+getTaxiDriver(Position position, int seats)
+
+Queue queue := getQueue(position)
+
+TaxiDriver taxiDriver := queue.getFirst(seats)
+
+if(taxiDriver is not null) return taxiDriver
+
+else
+
+forall(Queue q : MapUtils.getNeighbor(position))
+
+taxiDriver := q.getFirst(seats)
+
+if(taxiDriver is not null) return taxiDriver
+
+endFor
+
+endElse
+
+return NoTaxiDriverAvailableException
+\end{document}
