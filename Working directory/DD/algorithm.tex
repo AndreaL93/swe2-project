@@ -1,0 +1,63 @@
+%% LyX 2.1.4 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[english]{article}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage{babel}
+\begin{document}
+
+\subsection{RequestManager}
+
+The RequestManger provides all the method to manage the incoming requests
+and them dispatch.
+\begin{itemize}
+\item \textbf{addRequest(Request)}: insert the Request in the correct position
+wrt the starting hour, analize the shared requests into the list and
+using GoogleMaps API checks for compatible paths and tries to merge
+them.
+\item \textbf{modifyRequest(Request, Position destination, Position start,
+int passengers)}: if the request was merged then extract the required
+request, otherwise delete the request. After that with \textbf{addRequest(Request)}
+insert the edited request.
+\item \textbf{requestIsReadyNotification()}: every 10 seconds check the
+first request in the list if is ready and then notifies to the RideManager
+to create a Ride.
+\end{itemize}
+
+\subsection{RideManager}
+
+The RideManager manage the pending Rides and Taxi problem report.
+\begin{itemize}
+\item \textbf{onReadyRequest(Request)}: asks to the QueueManager a available
+TaxiDriver with a proper Car, if there is an available Taxi create
+a Ride with \textbf{createRide(Request, TaxiDriver)}, otherwise and
+the Request is a merged Request using a divide et impera strategy
+try to create as few as possible number of Rides to satisfies all
+the requests.
+\item \textbf{onProblem(TaxiDriver)}: firstly gets the Ride associated to
+the TaxiDriver, extract the Request and then use the \textbf{onReadyRequest(Request)}.
+\end{itemize}
+
+\subsection{QueueManager}
+
+The QueueManager manage the zones of the city managing them like a
+Queue.
+\begin{itemize}
+\item \textbf{getQueue(int ID)}: using a for clicle get the Queue with the
+desired ID.
+\item \textbf{getQueue(Position)}: using the MapUtils gets the id of the
+Queue and return it with \textbf{getQueue(int ID)}
+\item \textbf{getTaxiDriver(Position, int seats)}: gets the Queue using
+\textbf{getQueue(Position)}, if the queue has a suitable TaxiDriver
+(with a proper car) then return the TaxiDriver, otherwise using the
+MapUtils gets the neighbor Queues and retry to get a suitable TaxiDriver
+for each Queue, if no TaxiDriver is found return an Exception.
+\item \textbf{requestToTaxi(TaxiDriver)}: send a request to the TaxiDriver
+and waits 30sec for a reply, if the reply is negative then remove
+the TaxiDriver from the queue and push it back to the list and return
+false, otherwise return true.
+\item \textbf{addNewTaxiDriver(TaxiDriver, Position)}: gets the Queue using
+\textbf{getQueue(Position) }and using \textbf{push(TaxiDriver)} insert
+back to the list the TaxiDriver.\end{itemize}
+
+\end{document}
