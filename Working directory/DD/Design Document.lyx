@@ -396,6 +396,22 @@ DMZ
 : De-Militarized Zone
 \end_layout
 
+\begin_layout Itemize
+
+\series bold
+SOA
+\series default
+: Service Oriented Architecture
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+UX
+\series default
+: user experience
+\end_layout
+
 \begin_layout Standard
 The following convention will be used to refer to different items in the
  document:
@@ -476,7 +492,9 @@ Section 1 - Introduction
 \series bold
 Section 2 - Architectural design
 \series default
-: 
+: contains a description of the architectural styles and patterns selected
+ for the platform, which serve as an implementation guideline for developers.
+ 
 \end_layout
 
 \begin_layout Itemize
@@ -484,7 +502,7 @@ Section 2 - Architectural design
 \series bold
 Section 3 - Algorithms design
 \series default
-: 
+: contains a high-level description of the core algorithms of the back-end.
 \end_layout
 
 \begin_layout Itemize
@@ -492,7 +510,8 @@ Section 3 - Algorithms design
 \series bold
 Section 4 - User interface design
 \series default
-: 
+: contains a description and a conceptual preview of the user interface
+ and UX.
 \end_layout
 
 \begin_layout Itemize
@@ -500,7 +519,8 @@ Section 4 - User interface design
 \series bold
 Section 5 - Requirements traceability
 \series default
-: 
+: links the decisions described in this document to the requirements specified
+ in the RASD.
 \end_layout
 
 \begin_layout Itemize
@@ -561,6 +581,32 @@ The platform is composed by some main core software element that are needed
 \end_layout
 
 \begin_layout Subsubsection
+Request manager
+\end_layout
+
+\begin_layout Standard
+This module is responsible for managing the taxi requests forwarded by the
+ RESTful API to the back-end main server.
+\end_layout
+
+\begin_layout Standard
+Its main function is to forward the ride requests to the Ride manager at
+ the right moment, based on the type of requests it receives: in the case
+ of simple requests, it forwards them to the Ride manger immediately, whereas
+ it stores reservation requests locally and forwards them at the right moment.
+ 
+\end_layout
+
+\begin_layout Standard
+The module also handles the modification of reservations and the merging
+ of 
+\shape italic
+taxi sharing
+\shape default
+ requests when compatibles requests are found.
+\end_layout
+
+\begin_layout Subsubsection
 Queue manager
 \end_layout
 
@@ -571,9 +617,10 @@ This software module is responsible for managing the taxi queues associated
 \end_layout
 
 \begin_layout Standard
-It receives requests directly from the RESTful API and the ride manager
- through a SOA implementation, and executes the selection algorithms based
- on the needs of the requester.
+It receives requests directly from the Ride manager and executes the selection
+ algorithms based on the needs of the requester.
+ It also has a communication channel through the RESTful API with the taxi-side
+ applications, which is used to update the availability status of taxi drivers.
  
 \end_layout
 
@@ -582,8 +629,18 @@ Ride manager
 \end_layout
 
 \begin_layout Standard
-This module is responsible for managing the taxi reservations requests from
- the users.
+This module is responsible for creating the 
+\shape italic
+Ride
+\shape default
+ objects when prompted by the Request manager.
+ 
+\end_layout
+
+\begin_layout Standard
+It communicates with the Queue manager to identify available taxis, with
+ the Notification manager to handle replies to the customers and with the
+ DBMS component to keep track of rides and reports.
  
 \end_layout
 
@@ -591,20 +648,54 @@ This module is responsible for managing the taxi reservations requests from
 User manager
 \end_layout
 
+\begin_layout Standard
+This module is responsible for managing user data, registration and authenticati
+on.
+ 
+\end_layout
+
+\begin_layout Standard
+It has direct access to the DBMS component ad receives read and write requests
+ directly from the RESTful API.
+\end_layout
+
 \begin_layout Subsubsection
 Notification manager
+\end_layout
+
+\begin_layout Standard
+This module is responsible for implementing the push notification service
+ towards the user-side applications.
+ 
+\end_layout
+
+\begin_layout Standard
+It is necessary to have this type of module running in the back-end because
+ there are cases in which a communication must happen between the clients
+ and the back-end, but no direct request is made to the RESTful API by the
+ clients: these, for example, include the notifications of incoming requests
+ to taxi drivers, or the notification of incoming taxis to users.
+ 
 \end_layout
 
 \begin_layout Subsubsection
 RESTful API
 \end_layout
 
-\begin_layout Subsubsection
-Presentation
+\begin_layout Standard
+This module is the main gateway of communication that the clients have towards
+ the back-end.
+ 
 \end_layout
 
-\begin_layout Subsubsection
-DBMS
+\begin_layout Standard
+It implements a stateless service in which http calls are made by the clients
+ when they need to submit requests o data into the system, and replies are
+ immediately returned as a result for the requested computations.
+ The decision of having a RESTful API is due to the fact that the system
+ must be able to ideally support a vast number of users on a different number
+ of platforms, and using a REST API as a single endpoint is an optimal solution
+ for providing the same, integrated user experience throughout all the platforms.
 \end_layout
 
 \begin_layout Subsubsection
@@ -614,6 +705,34 @@ Component diagram
 \begin_layout Standard
 \begin_inset Graphics
 	filename images/ComponentDiagram1.svg
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Class diagram: back-end
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename Sequence diagrams and activity diagrams/ServerSide.svg
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Class diagram: client-side
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename Sequence diagrams and activity diagrams/ClientSide.svg
 	width 100text%
 
 \end_inset
@@ -768,6 +887,10 @@ Any communication between the user-side apps and the back-end happens through
 \end_layout
 
 \begin_layout Standard
+
+\end_layout
+
+\begin_layout Standard
 \begin_inset Graphics
 	filename images/DeploymentSchema.png
 	width 100text%
@@ -799,7 +922,131 @@ name "sub:Runtime-View"
 \end_layout
 
 \begin_layout Standard
-// Sequence diagram on steroids
+This section contains a detailed descriptions of how the software deployed
+ to the platform's nodes must behave in response to the events of interest.
+ 
+\end_layout
+
+\begin_layout Subsubsection
+Sequence diagrams
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename Sequence diagrams and activity diagrams/svg/Model__Signup__Interaction1__Signup_1.svg
+	width 100text%
+	rotateAngle 90
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename Sequence diagrams and activity diagrams/svg/Model__Login__Interaction1__Login_2.svg
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename Sequence diagrams and activity diagrams/svg/Model__Manage your Personal Info__Interaction1__Manage your Personal Info_8.svg
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename Sequence diagrams and activity diagrams/svg/Model__Available__Interaction1__Available_3.svg
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename Sequence diagrams and activity diagrams/svg/Taxi Request.svg
+	width 100text%
+	height 100theight%
+	rotateAngle 90
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename Sequence diagrams and activity diagrams/svg/Model__Manage Reserve Taxi Request__Interaction1__Manage Reserve Taxi Request_5.svg
+	height 100theight%
+	rotateAngle 90
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename Sequence diagrams and activity diagrams/svg/Model__Notify Problem__Interaction1__Notify Problem_9.svg
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename Sequence diagrams and activity diagrams/svg/Model__Report Customer__Interaction1__Report  Customer_7.svg
+	width 100text%
+	height 100theight%
+	rotateAngle 90
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename Sequence diagrams and activity diagrams/svg/Model__Report Taxi__Interaction1__Report Taxi_6.svg
+	width 100text%
+	height 100theight%
+	rotateAngle 90
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Taxi request: activity diagram
+\end_layout
+
+\begin_layout Standard
+It was decided to analyze the taxi request process more in detail as it
+ is the core function of the platform.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename Sequence diagrams and activity diagrams/svg/Request Taxi Activity diagram.svg
+	width 100text%
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
@@ -813,8 +1060,86 @@ name "sub:Component-Interfaces"
 
 \end_layout
 
+\begin_layout Subsubsection
+SOA
+\end_layout
+
 \begin_layout Standard
-// Extension of 2.6 (?)
+While not an interface 
+\shape italic
+per-se
+\shape default
+, it was decided to list the System Oriented Architecture used in the back-end
+ in this section.
+ 
+\end_layout
+
+\begin_layout Standard
+The software modules in the back-end are are designed to be as independent
+ as possible from each other, meaning that there must be single points of
+ contact between the different core components.
+ 
+\end_layout
+
+\begin_layout Standard
+Therefore, between the RESTful API and the Queue, User and Request managers,
+ and between the latter and the Ride manager, communications happen by implement
+ing different exposed interfaces that the relevant modules can exploit to
+ start processes on the other components.
+ 
+\end_layout
+
+\begin_layout Subsubsection
+Publish/subscribe
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Publish/subscribe"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The publish/subscribe design pattern is used to interface the Ride and Queue
+ manager components with the Notification manager, where the latter is the
+ subscriber and must react to events suitably generated by the former, which
+ are the publishers.
+ 
+\end_layout
+
+\begin_layout Subsubsection
+JDBC
+\end_layout
+
+\begin_layout Standard
+JDBC is a Java API that manages the access of a generic client to a database.
+ In our platform, it acts as interface between the Ride and User managers
+ and the DBMS component (on both the primary and secondary nodes).
+\end_layout
+
+\begin_layout Subsubsection
+Push technology
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Push-technology"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Push technology is an implementation of the publish/subscribe design pattern,
+ which is widely used in modern mobile applications to manage notification
+ services.
+\end_layout
+
+\begin_layout Standard
+In our platform, requests are generated by the Notification manager and
+ picked up by the user-side mobile applications, which react to them by
+ displaying the suitable notifications on the users' devices.
+ 
 \end_layout
 
 \begin_layout Subsection
@@ -829,61 +1154,169 @@ name "sub:Selected-Architectural"
 \end_layout
 
 \begin_layout Standard
-// MVC + Client-Server
+From a generic point of view, the platform is obviously designed as a client-ser
+ver architecture, in which the back-end nodes are the server and the various
+ users' devices are the clients.
 \end_layout
 
-\begin_layout Subsection
-Other design decisions
-\begin_inset CommandInset label
-LatexCommand label
-name "sub:Other-Design"
+\begin_layout Standard
+The main point of communication between clients and server is a RESTful
+ API, which implements a stateless communication protocol: data exchanges
+ between the clients and the servers only happens in the case of a request
+ from the clients (with the exception of the notification service implemented
+ by the Notification manager component, which uses push technology to 
+\begin_inset Quotes eld
+\end_inset
+
+send requests
+\begin_inset Quotes erd
+\end_inset
+
+ to the clients - sec.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Push-technology"
 
 \end_inset
 
+).
+ For this reason, the state of the user sessions must be stored in the back-end
+ components in order to implement coherent user sessions and the selected
+ design pattern to achieve this is the standard MVC pattern.
+\end_layout
 
+\begin_layout Standard
+Of the back-end modules: 
+\end_layout
+
+\begin_layout Itemize
+The RESTful API is part of the 
+\shape italic
+view
+\shape default
+, as it offers access from the 
+\begin_inset Quotes eld
+\end_inset
+
+outside
+\begin_inset Quotes erd
+\end_inset
+
+ to the other components.
+\end_layout
+
+\begin_layout Itemize
+The Request and Queue manager are part of the 
+\shape italic
+model
+\shape default
+ from the platform point of view, but are internally implemented with a
+ MVC pattern themselves as they need to react to events and change their
+ model accordingly.
+ 
+\end_layout
+
+\begin_layout Itemize
+The Ride manager is part of the 
+\shape italic
+controller
+\shape default
+, as its purpose is purely to bridge the model and the view, and create
+ ride objects using the information stored in the model when needed.
+ 
+\end_layout
+
+\begin_layout Itemize
+The User manager can be interpreted as part of the 
+\shape italic
+controller
+\shape default
+, although the 
+\begin_inset Quotes eld
+\end_inset
+
+model
+\begin_inset Quotes erd
+\end_inset
+
+ it refers to is the DBMS itself and has a different connotation with respect
+ to the traditional MVC pattern.
+ 
+\end_layout
+
+\begin_layout Itemize
+The Notification manger is part of the 
+\shape italic
+view
+\shape default
+, but implements a publish/subscribe-like pattern (see.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Push-technology"
+
+\end_inset
+
+) to interact with the clients.
+\end_layout
+
+\begin_layout Standard
+Moreover, as specified in sec.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Publish/subscribe"
+
+\end_inset
+
+, it was decided to use a publish/subscribe pattern to handle communication
+ between the Ride and Queue managers and the Notification manager.
+ 
+\end_layout
+
+\begin_layout Standard
+Finally, the client components (user-side applications) are also designed
+ with a MVC pattern, but can be loosely considered (from a high-level perspectiv
+e) as part of the back-end 
+\shape italic
+view
+\shape default
+.
+ The pattern is implemented with:
+\end_layout
+
+\begin_layout Itemize
+The user interface being the 
+\shape italic
+view;
+\end_layout
+
+\begin_layout Itemize
+The local data structures needed to mirror the relevant parts of the back-end
+ 
+\shape italic
+model
+\shape default
+ being the 
+\shape italic
+model;
+\end_layout
+
+\begin_layout Itemize
+The logic associated to actions on the UI being the 
+\shape italic
+controller
+\shape default
+.
 \end_layout
 
 \begin_layout Section
 Algorithm Design
 \end_layout
 
-\begin_layout Subsection
-Ride lifecycle
-\begin_inset CommandInset label
-LatexCommand label
-name "sub:Ride-lifecycle"
-
-\end_inset
-
-
-\end_layout
-
 \begin_layout Standard
-// Creation > add data > opt:wait for changes > alt:cancel/execute > opt:report
- > archive
-\end_layout
-
-\begin_layout Subsection
-Queue manager
-\begin_inset CommandInset label
-LatexCommand label
-name "sub:Queue-manager"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-// See RASD
-\end_layout
-
-\begin_layout Subsection
-Report processing
-\begin_inset CommandInset label
-LatexCommand label
-name "sub:Report-processing"
-
+\begin_inset Newpage pagebreak
 \end_inset
 
 
@@ -893,8 +1326,55 @@ name "sub:Report-processing"
 User Interface Design
 \end_layout
 
+\begin_layout Subsection
+Page flow
+\end_layout
+
 \begin_layout Standard
-// Mockups + THE F***ING WEB MOCKUPS! + Activity navigation
+\begin_inset Graphics
+	filename images/ActivityFlowCustomer.png
+	width 100text%
+	height 80theight%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename images/ActivityFlowTaxi.png
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename images/WebFlow.png
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+UX diagram
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename Sequence diagrams and activity diagrams/UX DIAGRAM.svg
+	width 100text%
+	height 90theight%
+	rotateAngle 90
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
