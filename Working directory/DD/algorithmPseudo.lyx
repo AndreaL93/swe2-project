@@ -284,38 +284,6 @@ QueueManager
 \begin_layout Subsubsection
 
 \series bold
-getQueue(int ID)
-\end_layout
-
-\begin_layout Standard
-getQueue(int ID)
-\end_layout
-
-\begin_layout Standard
-forall(Queue q : queues)
-\end_layout
-
-\begin_layout Standard
-if(q.getID() = ID) return q
-\end_layout
-
-\begin_layout Subsubsection
-
-\series bold
-getQueue(Position)
-\end_layout
-
-\begin_layout Standard
-getQueue(Position position)
-\end_layout
-
-\begin_layout Standard
-return getQueue(MapUtils.getIDfromPosition(position))
-\end_layout
-
-\begin_layout Subsubsection
-
-\series bold
 getTaxiDriver(Position, int seats)
 \end_layout
 

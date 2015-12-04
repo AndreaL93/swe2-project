@@ -546,6 +546,34 @@ name "sub:Architectural-Overview"
 
 \end_layout
 
+\begin_layout Standard
+The platform must be designed with performance, scalability, and user experience
+ in mind, and the architectural decisions must therefore reflect these core
+ principles.
+\end_layout
+
+\begin_layout Standard
+Because the platform is web-based, a communication medium must be implemented
+ between the back-end and the user-side applications in order to coordinate
+ the relevant events as required by sec.
+ 3 of the RASD.
+\end_layout
+
+\begin_layout Standard
+The architecture in the back-end must allow interaction between the different
+ core components (sec.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Component-View"
+
+\end_inset
+
+) and must facilitate upscaling and redundancy, in order to guarantee a
+ high fault-tolerance and performance.
+ 
+\end_layout
+
 \begin_layout Subsection
 High level components and their interaction
 \begin_inset CommandInset label
@@ -558,7 +586,105 @@ name "sub:High-Level-Components"
 \end_layout
 
 \begin_layout Standard
-// App-Backend interaction
+From a top-level perspective, the platform is composed by a high number
+ of clients interacting with a single server (or at least a single query
+ endpoint or API).
+\end_layout
+
+\begin_layout Standard
+The back-end is composed by different core components that implements the
+ following high-level functions (related to the functions in sec.
+ 2.2 of the RASD): 
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Argument item:1
+status open
+
+\begin_layout Plain Layout
+
+\series bold
+[HLF1]
+\end_layout
+
+\end_inset
+
+Manage and react to user requests (functions F1, F4 and F9)
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Argument item:1
+status open
+
+\begin_layout Plain Layout
+
+\series bold
+[HLF2]
+\end_layout
+
+\end_inset
+
+Manage and allow management of user data (functions F2 and F5)
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Argument item:1
+status open
+
+\begin_layout Plain Layout
+
+\series bold
+[HLF3]
+\end_layout
+
+\end_inset
+
+Manage user authentication (function F8)
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Argument item:1
+status open
+
+\begin_layout Plain Layout
+
+\series bold
+[HLF4]
+\end_layout
+
+\end_inset
+
+Manage secondary platform functions (functions F3, F6 and F7)
+\end_layout
+
+\begin_layout Standard
+The client side applications are merely an access medium to the back-end
+ functions and mostly implement the presentation layer of the platform,
+ which makes them of little interest in the high-level perspective that
+ we are giving.
+\end_layout
+
+\begin_layout Standard
+HLF1 is achieved with the interaction of three main software components,
+ two dedicated to the management of requests and the remaining one dedicated
+ to the management of the taxi queues.
+\end_layout
+
+\begin_layout Standard
+HLF2 and HLF3 are achieved with a dedicated software component with direct
+ access to the DBMS component of the platform.
+\end_layout
+
+\begin_layout Standard
+HLF4 is achieved with a subset of the functions of the Request manager,
+ which is part of the components dedicated to HLF1.
+ 
+\end_layout
+
+\begin_layout Standard
+Other core components of the platform are dedicated to client-server communicati
+on and of little interest in this description (they will be described later).
+ 
 \end_layout
 
 \begin_layout Subsection
@@ -705,6 +831,20 @@ Component diagram
 \begin_layout Standard
 \begin_inset Graphics
 	filename images/ComponentDiagram1.svg
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Entity-relationship diagram
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename ERDiagram.png
 	width 100text%
 
 \end_inset
@@ -887,10 +1027,6 @@ Any communication between the user-side apps and the back-end happens through
 \end_layout
 
 \begin_layout Standard
-
-\end_layout
-
-\begin_layout Standard
 \begin_inset Graphics
 	filename images/DeploymentSchema.png
 	width 100text%
@@ -1043,6 +1179,7 @@ It was decided to analyze the taxi request process more in detail as it
 \begin_inset Graphics
 	filename Sequence diagrams and activity diagrams/svg/Request Taxi Activity diagram.svg
 	width 100text%
+	height 90theight%
 
 \end_inset
 
@@ -1315,6 +1452,422 @@ controller
 Algorithm Design
 \end_layout
 
+\begin_layout Subsection
+Request manager
+\end_layout
+
+\begin_layout Standard
+The Request manger provides all the methods to manage and dispatch the incoming
+ requests.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+addRequest(Request)
+\series default
+: inserts the given Request in the correct position w.r.t.
+ the starting hour, analyzes the 
+\shape italic
+shared ride
+\shape default
+ requests into the list and, using the GoogleMaps API, checks for compatible
+ paths and tries to merge them.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+modifyRequest(Request, Position destination, Position start, int passengers)
+\series default
+: if the request was merged in a single 
+\shape italic
+shared ride
+\shape default
+ request, then splits the two and deletes the relevant request; after that
+ inserts the edited request in the queue, with 
+\series bold
+addRequest(Request)
+\series default
+.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+requestIsReadyNotification()
+\series default
+: checks every 10 seconds whether the first request in the list must be
+ dispatched, and possibly notifies to the Ride manager to create a Ride.
+\end_layout
+
+\begin_layout Subsection
+Ride manager
+\end_layout
+
+\begin_layout Standard
+The Ride manager manages the pending Rides and Taxi problem reports.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+onReadyRequest(Request)
+\series default
+: asks to the Queue manager an available TaxiDriver with a suitable Car
+ (based on the relevant request); if an available Taxi exists, creates a
+ Ride with 
+\series bold
+createRide(Request, TaxiDriver)
+\series default
+, otherwise:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+if the request is a 
+\shape italic
+shared ride
+\shape default
+ request composed by different requests, tries to split the ride into as
+ few smaller rides as possible.
+ 
+\end_layout
+
+\begin_layout Itemize
+if the request is a normal request, start an error procedure and notify
+ the delay to the user via the Notification manager
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+
+\series bold
+onProblem(TaxiDriver)
+\series default
+: terminates the TaxiDriver's active ride, generate a new Request to match
+ the customer's original request and then uses the 
+\series bold
+onReadyRequest(Request)
+\series default
+ to find a new taxi.
+\end_layout
+
+\begin_layout Subsection
+Queue manager
+\end_layout
+
+\begin_layout Standard
+The QueueManager manage the zones of the city managing them like a Queue.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+getTaxiDriver(Position, int seats)
+\series default
+: 
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Looks for the first available taxi driver, with a car with a capacity greater
+ or equal to the given 
+\shape italic
+seats
+\shape default
+ parameter, in the queue associated to the given position:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+If a taxi is found, the driver is notified: if they accept the ride, the
+ TaxiDriver object is returned to the caller; else, the TaxiDriver is put
+ at the end of the queue.
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+If no taxi driver is found, tries to look for a suitable taxi driver in
+ the neighboring queues with the same procedure as above.
+ If the search fails, an error is generated and the Ride manager reacts
+ as described above.
+ 
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+
+\series bold
+requestToTaxi(TaxiDriver)
+\series default
+: prompt the Notification manager to notify the selected taxi driver with
+ the data contained in the request.
+ 
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+addNewTaxiDriver(TaxiDriver, Position)
+\series default
+: called in reaction to a change in the availability status of a taxi driver,
+ inserts the driver at the end of the queue.
+\end_layout
+
+\begin_layout Subsection
+Low level algorithm description
+\end_layout
+
+\begin_layout Subsubsection
+RequestManager
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+addRequest(Request request)
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+for(i=0;i<requests.size();i++)
+\end_layout
+
+\begin_layout Standard
+if(request.startTime.isPrevious(requests.get(i).startTime)
+\end_layout
+
+\begin_layout Standard
+requests.add(request, i)
+\end_layout
+
+\begin_layout Standard
+endFor
+\end_layout
+
+\begin_layout Standard
+Path possiblePath := GoogleMaps.getPath(request.start, request.destination)
+\end_layout
+
+\begin_layout Standard
+forall(Request r : requests)
+\end_layout
+
+\begin_layout Standard
+Path rPath := GoogleMaps.getPath(r.start, r.destination)
+\end_layout
+
+\begin_layout Standard
+if((possiblePath.contains(r.start) && possiblePath.contains(r.destination))
+\end_layout
+
+\begin_layout Standard
+|| (possiblePath.contains(r.start) && rPath.contains(request.destination))
+\end_layout
+
+\begin_layout Standard
+|| (rPath.contains(request.start) && rPath.contains(request.destination))
+\end_layout
+
+\begin_layout Standard
+|| (rPath.contains(request.start) && possiblePath.contains(r.destination)))
+\end_layout
+
+\begin_layout Standard
+request.merge(r)
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+
+\series bold
+modifyRequest(Request request, Request newRequest)
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+if(requests.contains(request)) 
+\end_layout
+
+\begin_layout Standard
+requests.remove(request)
+\end_layout
+
+\begin_layout Standard
+else 
+\end_layout
+
+\begin_layout Standard
+forall(Request r : requests)
+\end_layout
+
+\begin_layout Standard
+if(r.containsRequest(request))
+\end_layout
+
+\begin_layout Standard
+r.extractRequest(request)
+\end_layout
+
+\begin_layout Standard
+endElse
+\end_layout
+
+\begin_layout Standard
+addRequest(newRequest)
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+
+\series bold
+requestIsReadyNotification()
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+while(!requests.isEmpty())
+\end_layout
+
+\begin_layout Standard
+if(requests.get(0).startTime > getTime() -10)
+\end_layout
+
+\begin_layout Standard
+RideManager.onReadyRequest(requests.remove(0))
+\end_layout
+
+\begin_layout Standard
+endWhile
+\end_layout
+
+\end_deeper
+\begin_layout Subsubsection
+RideManager
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+onReadyRequest(Request request)
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+TaxiDriver taxiDriver:= QueueManager.getTaxiDriver(request.start, request.numOfPass
+enger)
+\end_layout
+
+\begin_layout Standard
+if(taxiDriver is not null)
+\end_layout
+
+\begin_layout Standard
+createRide(request, taxiDriver)
+\end_layout
+
+\begin_layout Standard
+else
+\end_layout
+
+\begin_layout Standard
+onReadyRequest(request.splitLeft())
+\end_layout
+
+\begin_layout Standard
+onReadyRequest(request.splitRight())
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+
+\series bold
+onProblem(TaxiDriver taxiDriver)
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+forall(Ride r : rides)
+\end_layout
+
+\begin_layout Standard
+if(r.getDriver = taxiDriver)
+\end_layout
+
+\begin_layout Standard
+rides.remove(r)
+\end_layout
+
+\begin_layout Standard
+onReadyRequest(r.getRequest())
+\end_layout
+
+\begin_layout Standard
+break
+\end_layout
+
+\begin_layout Standard
+endIf
+\end_layout
+
+\begin_layout Standard
+endFor
+\end_layout
+
+\end_deeper
+\begin_layout Subsubsection
+QueueManager
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+getTaxiDriver(Position position, int seats)
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+Queue queue := getQueue(position)
+\end_layout
+
+\begin_layout Standard
+TaxiDriver taxiDriver := queue.getFirst(seats)
+\end_layout
+
+\begin_layout Standard
+if(taxiDriver is not null) return taxiDriver
+\end_layout
+
+\begin_layout Standard
+else
+\end_layout
+
+\begin_layout Standard
+forall(Queue q : MapUtils.getNeighbor(position))
+\end_layout
+
+\begin_layout Standard
+taxiDriver := q.getFirst(seats)
+\end_layout
+
+\begin_layout Standard
+if(taxiDriver is not null) return taxiDriver
+\end_layout
+
+\begin_layout Standard
+endFor
+\end_layout
+
+\begin_layout Standard
+endElse
+\end_layout
+
+\begin_layout Standard
+return NoTaxiDriverAvailableException
+\end_layout
+
+\end_deeper
 \begin_layout Standard
 \begin_inset Newpage pagebreak
 \end_inset
@@ -1378,14 +1931,6 @@ UX diagram
 \end_layout
 
 \begin_layout Section
-Requirements Traceability
-\end_layout
-
-\begin_layout Standard
-// How the design decisions reflect the specified requirements
-\end_layout
-
-\begin_layout Section
 Additional comments
 \end_layout
 
@@ -1406,7 +1951,7 @@ The production has been carried out between 12/11/2015 and 4/12/2015 for
 \series bold
 Group work
 \series default
-: hours
+: 21 hours
 \end_layout
 
 \begin_layout Itemize
@@ -1439,7 +1984,7 @@ Daniele Grattarola (Mat.
 \begin_inset Text
 
 \begin_layout Plain Layout
- hours
+9 hours
 \end_layout
 
 \end_inset
@@ -1460,7 +2005,7 @@ Ilyas Inajjar (Mat.
 \begin_inset Text
 
 \begin_layout Plain Layout
- hours
+ 11 hours
 \end_layout
 
 \end_inset
@@ -1481,7 +2026,7 @@ Andrea Lui (Mat.
 \begin_inset Text
 
 \begin_layout Plain Layout
-hours
+10 hours
 \end_layout
 
 \end_inset

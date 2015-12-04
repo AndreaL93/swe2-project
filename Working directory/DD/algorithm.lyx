@@ -69,12 +69,12 @@
 \begin_body
 
 \begin_layout Subsection
-RequestManager
+Request manager
 \end_layout
 
 \begin_layout Standard
-The RequestManger provides all the method to manage the incoming requests
- and them dispatch.
+The Request manger provides all the methods to manage and dispatch the incoming
+ requests.
 \end_layout
 
 \begin_layout Itemize
@@ -82,9 +82,13 @@ The RequestManger provides all the method to manage the incoming requests
 \series bold
 addRequest(Request)
 \series default
-: insert the Request in the correct position wrt the starting hour, analize
- the shared requests into the list and using GoogleMaps API checks for compatibl
-e paths and tries to merge them.
+: inserts the given Request in the correct position w.r.t.
+ the starting hour, analyzes the 
+\shape italic
+shared ride
+\shape default
+ requests into the list and, using the GoogleMaps API, checks for compatible
+ paths and tries to merge them.
 \end_layout
 
 \begin_layout Itemize
@@ -92,13 +96,16 @@ e paths and tries to merge them.
 \series bold
 modifyRequest(Request, Position destination, Position start, int passengers)
 \series default
-: if the request was merged then extract the required request, otherwise
- delete the request.
- After that with 
+: if the request was merged in a single 
+\shape italic
+shared ride
+\shape default
+ request, then splits the two and deletes the relevant request; after that
+ inserts the edited request in the queue, with 
 \series bold
 addRequest(Request)
 \series default
- insert the edited request.
+.
 \end_layout
 
 \begin_layout Itemize
@@ -106,16 +113,16 @@ addRequest(Request)
 \series bold
 requestIsReadyNotification()
 \series default
-: every 10 seconds check the first request in the list if is ready and then
- notifies to the RideManager to create a Ride.
+: checks every 10 seconds whether the first request in the list must be
+ dispatched, and possibly notifies to the Ride manager to create a Ride.
 \end_layout
 
 \begin_layout Subsection
-RideManager
+Ride manager
 \end_layout
 
 \begin_layout Standard
-The RideManager manage the pending Rides and Taxi problem report.
+The Ride manager manages the pending Rides and Taxi problem reports.
 \end_layout
 
 \begin_layout Itemize
@@ -123,31 +130,47 @@ The RideManager manage the pending Rides and Taxi problem report.
 \series bold
 onReadyRequest(Request)
 \series default
-: asks to the QueueManager a available TaxiDriver with a proper Car, if
- there is an available Taxi create a Ride with 
+: asks to the Queue manager an available TaxiDriver with a suitable Car
+ (based on the relevant request); if an available Taxi exists, creates a
+ Ride with 
 \series bold
 createRide(Request, TaxiDriver)
 \series default
-, otherwise and the Request is a merged Request using a divide et impera
- strategy try to create as few as possible number of Rides to satisfies
- all the requests.
+, otherwise:
 \end_layout
 
+\begin_deeper
+\begin_layout Itemize
+if the request is a 
+\shape italic
+shared ride
+\shape default
+ request composed by different requests, tries to split the ride into as
+ few smaller rides as possible.
+ 
+\end_layout
+
+\begin_layout Itemize
+if the request is a normal request, start an error procedure and notify
+ the delay to the user via the Notification manager
+\end_layout
+
+\end_deeper
 \begin_layout Itemize
 
 \series bold
 onProblem(TaxiDriver)
 \series default
-: firstly gets the Ride associated to the TaxiDriver, extract the Request
- and then use the 
+: terminates the TaxiDriver's active ride, generate a new Request to match
+ the customer's original request and then uses the 
 \series bold
 onReadyRequest(Request)
 \series default
-.
+ to find a new taxi.
 \end_layout
 
 \begin_layout Subsection
-QueueManager
+Queue manager
 \end_layout
 
 \begin_layout Standard
@@ -157,44 +180,46 @@ The QueueManager manage the zones of the city managing them like a Queue.
 \begin_layout Itemize
 
 \series bold
-getQueue(int ID)
-\series default
-: using a for clicle get the Queue with the desired ID.
-\end_layout
-
-\begin_layout Itemize
-
-\series bold
-getQueue(Position)
-\series default
-: using the MapUtils gets the id of the Queue and return it with 
-\series bold
-getQueue(int ID)
-\end_layout
-
-\begin_layout Itemize
-
-\series bold
 getTaxiDriver(Position, int seats)
 \series default
-: gets the Queue using 
-\series bold
-getQueue(Position)
-\series default
-, if the queue has a suitable TaxiDriver (with a proper car) then return
- the TaxiDriver, otherwise using the MapUtils gets the neighbor Queues and
- retry to get a suitable TaxiDriver for each Queue, if no TaxiDriver is
- found return an Exception.
+: 
 \end_layout
 
+\begin_deeper
+\begin_layout Itemize
+Looks for the first available taxi driver, with a car with a capacity greater
+ or equal to the given 
+\shape italic
+seats
+\shape default
+ parameter, in the queue associated to the given position:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+If a taxi is found, the driver is notified: if they accept the ride, the
+ TaxiDriver object is returned to the caller; else, the TaxiDriver is put
+ at the end of the queue.
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+If no taxi driver is found, tries to look for a suitable taxi driver in
+ the neighboring queues with the same procedure as above.
+ If the search fails, an error is generated and the Ride manager reacts
+ as described above.
+ 
+\end_layout
+
+\end_deeper
 \begin_layout Itemize
 
 \series bold
 requestToTaxi(TaxiDriver)
 \series default
-: send a request to the TaxiDriver and waits 30sec for a reply, if the reply
- is negative then remove the TaxiDriver from the queue and push it back
- to the list and return false, otherwise return true.
+: prompt the Notification manager to notify the selected taxi driver with
+ the data contained in the request.
+ 
 \end_layout
 
 \begin_layout Itemize
@@ -202,15 +227,8 @@ requestToTaxi(TaxiDriver)
 \series bold
 addNewTaxiDriver(TaxiDriver, Position)
 \series default
-: gets the Queue using 
-\series bold
-getQueue(Position) 
-\series default
-and using 
-\series bold
-push(TaxiDriver)
-\series default
- insert back to the list the TaxiDriver.
+: called in reaction to a change in the availability status of a taxi driver,
+ inserts the driver at the end of the queue.
 \end_layout
 
 \end_body
