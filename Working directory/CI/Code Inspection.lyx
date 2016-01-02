@@ -8,6 +8,8 @@
 \usepackage{babel}
 \usepackage{babel}
 \usepackage{babel}
+\usepackage{babel}
+
 
 
 
@@ -111,18 +113,18 @@ Glassfish 4.1.1 - Code inspection
 \begin_layout Standard
 \align center
 \begin_inset Graphics
-	filename polimiLogo.png
+	filename polimiLogo.eps
 	height 30theight%
 
 \end_inset
 
-
+ 
 \end_layout
 
 \begin_layout Standard
 \align center
 Daniele Grattarola (Mat.
- 853101)
+ 853101) 
 \end_layout
 
 \begin_layout Standard
@@ -134,7 +136,7 @@ Ilyas Inajjar (Mat.
 \begin_layout Standard
 \align center
 Andrea Lui (Mat.
- 850680)
+ 850680) 
 \end_layout
 
 \begin_layout Title
@@ -174,14 +176,12 @@ This is the code inspection document for a subset of methods in the Glassfish
  The purpose of this document is to report all code-related issues and complianc
 es of the methods, in relation to some coding practices and standards that
  will be defined later in the document.
- 
 \end_layout
 
 \begin_layout Standard
 This document is intended for software engineers and programmers involved
  in the project, as it could possibly identify a necessity for a code cleanup
  or restructuring.
- 
 \end_layout
 
 \begin_layout Subsection
@@ -191,7 +191,6 @@ Scope
 \begin_layout Standard
 The Glassfish 4.1.1 project is divided into different modules, each composed
  of numerous classes and methods.
- 
 \end_layout
 
 \begin_layout Standard
@@ -202,25 +201,25 @@ rs/ of the public Subversion repository of the project):
 \end_layout
 
 \begin_layout Enumerate
-destroyExtendedEMsForContext( SessionContextImpl sc )
+destroyExtendedEMsForContext( SessionContextImpl sc ) 
 \end_layout
 
 \begin_layout Enumerate
-_getContextForInstance( byte [] instanceKey )
+_getContextForInstance( byte [] instanceKey ) 
 \end_layout
 
 \begin_layout Enumerate
-_getContext( EjbInvocation inv )
+_getContext( EjbInvocation inv ) 
 \end_layout
 
 \begin_layout Enumerate
 doVersionCheck( EjbInvocation inv, Object sessionKey, SessionContextImpl
- sc )
+ sc ) 
 \end_layout
 
 \begin_layout Enumerate
 handleConcurrentInvocation( boolean allowSerializedAccess, EjbInvocation
- inv, SessionContextImpl sc, Object sessionKey )
+ inv, SessionContextImpl sc, Object sessionKey ) 
 \end_layout
 
 \begin_layout Subsection
@@ -229,7 +228,7 @@ Definitions, acronyms, and abbreviations
 
 \begin_layout Standard
 Throughout this document, the following definitions will be applied without
- further explanations:
+ further explanations: 
 \end_layout
 
 \begin_layout Itemize
@@ -237,7 +236,7 @@ Throughout this document, the following definitions will be applied without
 \series bold
 JEE
 \series default
-: Java Enterprise Edition
+: Java Enterprise Edition 
 \end_layout
 
 \begin_layout Subsection
@@ -258,7 +257,6 @@ Assignment 3 - Code inspection.pdf
 \end_inset
 
  file.
- 
 \end_layout
 
 \begin_layout Section
@@ -269,8 +267,251 @@ Code inspection
 destroyExtendedEMsForContext
 \end_layout
 
+\begin_layout Standard
+\begin_inset Float table
+placement h
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Tabular
+<lyxtabular version="3" rows="2" columns="3">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="none" valignment="top" width="1.5cm">
+<column alignment="none" valignment="top" width="1.5cm">
+<column alignment="none" valignment="top" width="8cm">
+<row>
+<cell alignment="none" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+Line
+\series default
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="none" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+Checklist Number
+\series default
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="none" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+Comment
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="none" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1395 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="none" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+52 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="none" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+catch block catch Throwable instead of Illegal State Exception 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsection
 _getContextForInstance
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+placement h
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Tabular
+<lyxtabular version="3" rows="3" columns="3">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="none" valignment="top" width="1.5cm">
+<column alignment="none" valignment="top" width="1.5cm">
+<column alignment="none" valignment="top" width="8cm">
+<row>
+<cell alignment="none" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+Line
+\series default
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="none" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+Checklist Number
+\series default
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="none" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+Comment
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="none" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1462 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="none" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+56 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="none" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+while(true) loop 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="none" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1476 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="none" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+54 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="none" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+empty case block without break or return 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
@@ -279,6 +520,171 @@ _getContext
 
 \begin_layout Subsection
 doVersionCheck
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+placement h
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Tabular
+<lyxtabular version="3" rows="4" columns="3">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="none" valignment="top" width="1.5cm">
+<column alignment="none" valignment="top" width="1.5cm">
+<column alignment="none" valignment="top" width="8cm">
+<row>
+<cell alignment="none" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+Line
+\series default
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="none" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+Checklist Number
+\series default
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="none" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+Comment
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="none" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1754 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="none" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+29 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="none" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+useless parameter (sessionKey) used only for log 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="none" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1757 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="none" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+29 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="none" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+useless variable (initialized with constant and no more changed) 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="none" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1778 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="none" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+43 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="none" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+string concatenation can be avoided 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
@@ -294,7 +700,7 @@ The production of this document has been a joint effort of all the authors,
  with a fair distribution of the mansions which caused each member of the
  group to work on all the parts of the document.
  The production has been carried out between 9/12/2015 and 4/1/2016 for
- a total time expense of:
+ a total time expense of: 
 \end_layout
 
 \begin_layout Itemize
@@ -302,7 +708,7 @@ The production of this document has been a joint effort of all the authors,
 \series bold
 Group work
 \series default
-: 10 hours
+: 10 hours 
 \end_layout
 
 \begin_layout Itemize
@@ -321,28 +727,28 @@ Individual work
 <column alignment="center" valignment="top">
 <column alignment="center" valignment="top">
 <row>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
 Daniele Grattarola (Mat.
- 853101)
+ 853101) 
 \end_layout
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
- hours
+hours
 \end_layout
 
 \end_inset
 </cell>
 </row>
 <row>
-<cell alignment="center" valignment="top" leftline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -352,32 +758,32 @@ Ilyas Inajjar (Mat.
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
- hours
+hours
 \end_layout
 
 \end_inset
 </cell>
 </row>
 <row>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Andrea Lui (Mat.
- 850680)
-\end_layout
-
-\end_inset
-</cell>
 <cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
- hours
+Andrea Lui (Mat.
+ 850680) 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+hours
 \end_layout
 
 \end_inset

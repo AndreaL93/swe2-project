@@ -1,0 +1,198 @@
+%% LyX 2.1.4 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[english]{article}
+\usepackage{charter}
+\renewcommand{\familydefault}{\rmdefault}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\usepackage{babel}
+\usepackage{graphicx}
+\usepackage{setspace}
+\onehalfspacing
+\usepackage[unicode=true,pdfusetitle,
+ bookmarks=true,bookmarksnumbered=false,bookmarksopen=false,
+ breaklinks=false,pdfborder={0 0 0},backref=false,colorlinks=false]
+ {hyperref}
+
+\makeatletter
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
+%% Because html converters don't know tabularnewline
+\providecommand{\tabularnewline}{\\}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+\usepackage{babel}
+\usepackage{babel}
+\usepackage{babel}
+\usepackage{babel}
+
+
+
+
+
+
+\usepackage{listings}
+\renewcommand{\lstlistingname}{Listing}
+
+
+
+
+
+\usepackage{listings}
+\renewcommand{\lstlistingname}{Listing}
+
+
+
+\usepackage{listings}
+\renewcommand{\lstlistingname}{Listing}
+
+\makeatother
+
+\begin{document}
+
+\title{Glassfish 4.1.1 - Code inspection}
+
+\maketitle
+\begin{center}
+\includegraphics[height=0.3\textheight]{polimiLogo}
+\par\end{center}
+
+\begin{center}
+Daniele Grattarola (Mat. 853101)
+\par\end{center}
+
+\begin{center}
+Ilyas Inajjar (Mat. 790009) 
+\par\end{center}
+
+\begin{center}
+Andrea Lui (Mat. 850680)
+\par\end{center}
+
+
+\title{\pagebreak{}}
+
+\tableofcontents{}
+
+\pagebreak{}
+
+
+\section{Introduction}
+
+
+\subsection{Purpose}
+
+This is the code inspection document for a subset of methods in the
+Glassfish 4.1.1 JEE web-server project. The purpose of this document
+is to report all code-related issues and compliances of the methods,
+in relation to some coding practices and standards that will be defined
+later in the document. 
+
+This document is intended for software engineers and programmers involved
+in the project, as it could possibly identify a necessity for a code
+cleanup or restructuring. 
+
+
+\subsection{Scope}
+
+The Glassfish 4.1.1 project is divided into different modules, each
+composed of numerous classes and methods. 
+
+The analysis that will be carried out in this document will only involve
+the following 5 methods of the StatefulSessionContainer class (located
+at Glassfish 4.1.1/appserver/ejb/ejb-container/src/main/java/com/sun/ejb/containers/
+of the public Subversion repository of the project): 
+\begin{enumerate}
+\item destroyExtendedEMsForContext( SessionContextImpl sc )
+\item \_getContextForInstance( byte {[}{]} instanceKey )
+\item \_getContext( EjbInvocation inv )
+\item doVersionCheck( EjbInvocation inv, Object sessionKey, SessionContextImpl
+sc )
+\item handleConcurrentInvocation( boolean allowSerializedAccess, EjbInvocation
+inv, SessionContextImpl sc, Object sessionKey )
+\end{enumerate}
+
+\subsection{Definitions, acronyms, and abbreviations}
+
+Throughout this document, the following definitions will be applied
+without further explanations:
+\begin{itemize}
+\item \textbf{JEE}: Java Enterprise Edition
+\end{itemize}
+
+\subsection{Code standards and best practice}
+
+The analysis that will be performed in this document will be centered
+on the following code standards and best practice, which will be checked
+for each method. The conventions are given in the form of a checklist
+and can be found attached to this document in the ``Assignment 3
+- Code inspection.pdf'' file. 
+
+
+\section{Code inspection}
+
+
+\subsection{destroyExtendedEMsForContext}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{p{1.5cm}|p{1.5cm}|p{8cm}}
+ \textbf{Line}             & \textbf{Checklist Number}    &   \textbf{Comment}\\ \hline
+          1395 & 52 & catch block catch Throwable instead of Illegal State Exception \\
+\end{tabular}
+\end{table}
+
+\subsection{\_getContextForInstance}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{p{1.5cm}|p{1.5cm}|p{8cm}}
+ \textbf{Line}             & \textbf{Checklist Number}    &   \textbf{Comment}\\ \hline
+          1462 & 56 & while(true) loop \\ \hline
+          1476 & 54 & empty case block without break or return \\
+\end{tabular}
+\end{table}
+
+\subsection{\_getContext}
+
+
+\subsection{doVersionCheck}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{p{1.5cm}|p{1.5cm}|p{8cm}}
+ \textbf{Line}             & \textbf{Checklist Number}    &   \textbf{Comment}\\ \hline
+          1754 & 29 & useless parameter (sessionKey) used only for log \\ \hline
+          1757 & 29 & useless variable (initialized with constant and no more changed) \\ \hline
+          1778 & 43 & string concatenation can be avoided \\
+\end{tabular}
+\end{table}
+
+\subsection{handleConcurrentInvocation}
+
+
+\section{Additional comments}
+
+The production of this document has been a joint effort of all the
+authors, with a fair distribution of the mansions which caused each
+member of the group to work on all the parts of the document. The
+production has been carried out between 9/12/2015 and 4/1/2016 for
+a total time expense of:
+\begin{itemize}
+\item \textbf{Group work}: 10 hours
+\item \textbf{Individual work}:
+
+
+\begin{tabular}{|c|c|}
+\hline 
+Daniele Grattarola (Mat. 853101) &  hours\tabularnewline
+\hline 
+Ilyas Inajjar (Mat. 790009)  &  hours\tabularnewline
+\hline 
+Andrea Lui (Mat. 850680) &  hours\tabularnewline
+\hline 
+\end{tabular}\end{itemize}
+
+\end{document}
