@@ -75,14 +75,6 @@ Request Taxi
 \end_layout
 
 \begin_layout Enumerate
-The Customer fills the form and send the request with 
-\series bold
-requestTaxi()
-\series default
- method.
-\end_layout
-
-\begin_layout Enumerate
 The 
 \series bold
 RequestManager 

@@ -1,0 +1,26 @@
+private void destroyExtendedEMsForContext(SessionContextImpl sc) {
+        for (PhysicalEntityManagerWrapper emWrapper : sc.getExtendedEntityManagers()) {
+            synchronized (extendedEMReferenceCountMap) {
+                EntityManager em = emWrapper.getEM();
+                if (extendedEMReferenceCountMap.containsKey(em)) {
+                    EEMRefInfo refInfo = extendedEMReferenceCountMap.get(em);
+                    if (refInfo.refCount > 1) {
+                        refInfo.refCount--;
+                        _logger.log(Level.FINE,
+                                "Decremented RefCount ExtendedEM em: " + em);
+                    } else {
+                        _logger.log(Level.FINE, "DESTROYED ExtendedEM em: "
+                                + em);
+                        refInfo = extendedEMReferenceCountMap.remove(em);
+                        eemKey2EEMMap.remove(refInfo.getKey());
+                        try {
+                            em.close();
+                        } catch (Throwable th) {
+                            _logger.log(Level.FINE,
+                                    "Exception during em.close()", th);
+                        }
+                    }
+                }
+            }
+        }
+    }

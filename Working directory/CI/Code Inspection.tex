@@ -4,10 +4,11 @@
 \usepackage{charter}
 \renewcommand{\familydefault}{\rmdefault}
 \usepackage[T1]{fontenc}
-\usepackage[latin9]{inputenc}
+\usepackage[utf8]{luainputenc}
 \usepackage{fancyhdr}
 \pagestyle{fancy}
 \usepackage{babel}
+\usepackage{array}
 \usepackage{graphicx}
 \usepackage{setspace}
 \onehalfspacing
@@ -27,14 +28,9 @@
 \usepackage{babel}
 \usepackage{babel}
 \usepackage{babel}
+\usepackage{babel}
 
 
-
-
-
-
-\usepackage{listings}
-\renewcommand{\lstlistingname}{Listing}
 
 
 
@@ -45,8 +41,19 @@
 
 
 
+
+
 \usepackage{listings}
 \renewcommand{\lstlistingname}{Listing}
+
+
+
+\usepackage{listings}
+\renewcommand{\lstlistingname}{Listing}
+
+
+
+
 
 \makeatother
 
@@ -56,11 +63,11 @@
 
 \maketitle
 \begin{center}
-\includegraphics[height=0.3\textheight]{polimiLogo}
+\includegraphics[height=0.3\textheight]{polimiLogo} 
 \par\end{center}
 
 \begin{center}
-Daniele Grattarola (Mat. 853101)
+Daniele Grattarola (Mat. 853101) 
 \par\end{center}
 
 \begin{center}
@@ -68,7 +75,7 @@ Ilyas Inajjar (Mat. 790009)
 \par\end{center}
 
 \begin{center}
-Andrea Lui (Mat. 850680)
+Andrea Lui (Mat. 850680) 
 \par\end{center}
 
 
@@ -88,38 +95,38 @@ This is the code inspection document for a subset of methods in the
 Glassfish 4.1.1 JEE web-server project. The purpose of this document
 is to report all code-related issues and compliances of the methods,
 in relation to some coding practices and standards that will be defined
-later in the document. 
+later in the document.
 
 This document is intended for software engineers and programmers involved
 in the project, as it could possibly identify a necessity for a code
-cleanup or restructuring. 
+cleanup or restructuring.
 
 
 \subsection{Scope}
 
 The Glassfish 4.1.1 project is divided into different modules, each
-composed of numerous classes and methods. 
+composed of numerous classes and methods.
 
 The analysis that will be carried out in this document will only involve
 the following 5 methods of the StatefulSessionContainer class (located
 at Glassfish 4.1.1/appserver/ejb/ejb-container/src/main/java/com/sun/ejb/containers/
 of the public Subversion repository of the project): 
 \begin{enumerate}
-\item destroyExtendedEMsForContext( SessionContextImpl sc )
-\item \_getContextForInstance( byte {[}{]} instanceKey )
-\item \_getContext( EjbInvocation inv )
+\item destroyExtendedEMsForContext( SessionContextImpl sc ) 
+\item \_getContextForInstance( byte {[}{]} instanceKey ) 
+\item \_getContext( EjbInvocation inv ) 
 \item doVersionCheck( EjbInvocation inv, Object sessionKey, SessionContextImpl
-sc )
+sc ) 
 \item handleConcurrentInvocation( boolean allowSerializedAccess, EjbInvocation
-inv, SessionContextImpl sc, Object sessionKey )
+inv, SessionContextImpl sc, Object sessionKey ) 
 \end{enumerate}
 
 \subsection{Definitions, acronyms, and abbreviations}
 
 Throughout this document, the following definitions will be applied
-without further explanations:
+without further explanations: 
 \begin{itemize}
-\item \textbf{JEE}: Java Enterprise Edition
+\item \textbf{JEE}: Java Enterprise Edition 
 \end{itemize}
 
 \subsection{Code standards and best practice}
@@ -128,7 +135,7 @@ The analysis that will be performed in this document will be centered
 on the following code standards and best practice, which will be checked
 for each method. The conventions are given in the form of a checklist
 and can be found attached to this document in the ``Assignment 3
-- Code inspection.pdf'' file. 
+- Code inspection.pdf'' file.
 
 
 \section{Code inspection}
@@ -137,41 +144,108 @@ and can be found attached to this document in the ``Assignment 3
 \subsection{destroyExtendedEMsForContext}
 
 \begin{table}[h]
-\centering
-\begin{tabular}{p{1.5cm}|p{1.5cm}|p{8cm}}
- \textbf{Line}             & \textbf{Checklist Number}    &   \textbf{Comment}\\ \hline
-          1395 & 52 & catch block catch Throwable instead of Illegal State Exception \\
+\centering %
+\begin{tabular}{|p{1.5cm}|p{1.5cm}|p{8cm}|}
+\hline 
+\textbf{Line}  & \textbf{Checklist Number}  & \textbf{Comment}\tabularnewline
+\hline 
+\hline 
+1379 & & Instead using parameter SessionContextImpl use List of PhysicalEntityManagerWrapper \tabularnewline
+\hline
+1395  & 52  & Catch block catch Throwable instead of Illegal State Exception \tabularnewline
+\hline 
 \end{tabular}
 \end{table}
 
 \subsection{\_getContextForInstance}
 
 \begin{table}[h]
-\centering
-\begin{tabular}{p{1.5cm}|p{1.5cm}|p{8cm}}
- \textbf{Line}             & \textbf{Checklist Number}    &   \textbf{Comment}\\ \hline
-          1462 & 56 & while(true) loop \\ \hline
-          1476 & 54 & empty case block without break or return \\
+\centering %
+\begin{tabular}{|p{1.5cm}|p{1.5cm}|p{8cm}|}
+\hline 
+\textbf{Line}  & \textbf{Checklist Number}  & \textbf{Comment}\tabularnewline
+\hline 
+\hline 
+1454 & 5 & method name pattern should be \verb/[a-z][a-z0-9][a-zA-Z0-9_]*/ \tabularnewline
+\hline
+1462  & 56  & while(true) loop \tabularnewline
+\hline 
+1471 & 43 & incorrect output format \tabularnewline
+\hline
+1476 & 19 & commented line of code \tabularnewline
+\hline
+1477 & 19 & commented line of code \tabularnewline
+\hline
+1476  & 54  & empty case block without break or return \tabularnewline
+\hline 
+1480 & 12 & useless blank line \tabularnewline
+\hline
 \end{tabular}
 \end{table}
 
 \subsection{\_getContext}
 
+\begin{table}[h] 
+\centering %
+\begin{tabular}{|p{1.5cm}|p{1.5cm}|p{8cm}|}
+\hline 
+\textbf{Line}  & \textbf{Checklist Number}  & \textbf{Comment}\tabularnewline
+\hline 
+\hline 
+1602 & 18 & Comment not explain adequately the method functions \tabularnewline
+\hline
+1605 & 27 & Duplication Code lines: 1621, 1677, 1696. Can be avoided with a proper method \tabularnewline
+\hline
+1605 & 5 & method name pattern should be \verb/[a-z][a-z0-9][a-zA-Z0-9_]*/ \tabularnewline
+\hline
+1676  & 6  & Abbreviation in name must contain no more than one capital letter \tabularnewline
+\hline 
+1673 & 12 & useless blank line \tabularnewline
+\hline
+1645 & 17 & wrong indentation and duplicated '+' \tabularnewline
+\hline
+1652 & 17 & wrong indentation and duplicated '+' \tabularnewline
+\hline
+\end{tabular}
+\end{table}
 
 \subsection{doVersionCheck}
 
 \begin{table}[h]
-\centering
-\begin{tabular}{p{1.5cm}|p{1.5cm}|p{8cm}}
- \textbf{Line}             & \textbf{Checklist Number}    &   \textbf{Comment}\\ \hline
-          1754 & 29 & useless parameter (sessionKey) used only for log \\ \hline
-          1757 & 29 & useless variable (initialized with constant and no more changed) \\ \hline
-          1778 & 43 & string concatenation can be avoided \\
+\centering %
+\begin{tabular}{|p{1.5cm}|p{1.5cm}|p{8cm}|}
+\hline 
+\textbf{Line}  & \textbf{Checklist Number}  & \textbf{Comment}\tabularnewline
+\hline 
+\hline 
+1754 & 29 & useless paramether (sessionKey) used only for log \tabularnewline
+\hline
+1766  &  & static refence to a non static object \tabularnewline
+\hline 
+1772  & 13 & line can be less then 80 characters \tabularnewline
+\hline 
+1778  & 43 & string concat can be avoided \tabularnewline
+\hline 
 \end{tabular}
 \end{table}
 
 \subsection{handleConcurrentInvocation}
 
+\begin{table}[h]
+\centering %
+\begin{tabular}{|p{1.5cm}|p{1.5cm}|p{8cm}|}
+\hline 
+\textbf{Line}  & \textbf{Checklist Number}  & \textbf{Comment}\tabularnewline
+\hline 
+\hline 
+1786 & 14 & lines can be less then 80 characters \tabularnewline
+\hline
+1786  & 29 & Useless parameters: SessionContextImpl, 'sessionKey' only for log \tabularnewline
+\hline 
+1806  & 17 & splitted line not aligned\tabularnewline
+\hline
+\end{tabular}
+\end{table}
 
 \section{Additional comments}
 
@@ -179,19 +253,19 @@ The production of this document has been a joint effort of all the
 authors, with a fair distribution of the mansions which caused each
 member of the group to work on all the parts of the document. The
 production has been carried out between 9/12/2015 and 4/1/2016 for
-a total time expense of:
+a total time expense of: 
 \begin{itemize}
-\item \textbf{Group work}: 10 hours
+\item \textbf{Group work}: 10 hours 
 \item \textbf{Individual work}:
 
 
 \begin{tabular}{|c|c|}
 \hline 
-Daniele Grattarola (Mat. 853101) &  hours\tabularnewline
+Daniele Grattarola (Mat. 853101)  & hours\tabularnewline
 \hline 
-Ilyas Inajjar (Mat. 790009)  &  hours\tabularnewline
+Ilyas Inajjar (Mat. 790009)  & hours\tabularnewline
 \hline 
-Andrea Lui (Mat. 850680) &  hours\tabularnewline
+Andrea Lui (Mat. 850680)  & hours\tabularnewline
 \hline 
 \end{tabular}\end{itemize}
 
