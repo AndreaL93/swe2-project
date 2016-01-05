@@ -269,6 +269,42 @@ Assignment 3 - Code inspection.pdf
 \end_layout
 
 \begin_layout Section
+Checklist
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+OK
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+OK
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+OK
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+OK
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+2 founds:
+\series default
+ _getContextForInstance@1454, _getContext@1605
+\end_layout
+
+\begin_layout Section
 Methods
 \end_layout
 
