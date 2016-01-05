@@ -269,11 +269,54 @@ Assignment 3 - Code inspection.pdf
 \end_layout
 
 \begin_layout Section
+Checklist
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+OK
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+OK
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+OK
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+OK
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+2 founds:
+\series default
+ _getContextForInstance@1454, _getContext@1605
+\end_layout
+
+\begin_layout Section
 Methods
 \end_layout
 
 \begin_layout Subsection
 destroyExtendedEMsForContext
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:destroyExtendedEMsForContext"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -288,6 +331,13 @@ destroyExtendedEMsForContext
 
 \begin_layout Subsection
 _getContextForInstance
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:_getContextForInstance"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -302,6 +352,13 @@ _getContextForInstance
 
 \begin_layout Subsection
 _getContext
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:_getContext"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -336,6 +393,13 @@ _getContext
 
 \begin_layout Subsection
 doVersionCheck
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:doVersionCheck"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -350,6 +414,13 @@ doVersionCheck
 
 \begin_layout Subsection
 handleConcurrentInvocation
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:handleConcurrentInvocation"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -1584,7 +1655,7 @@ Daniele Grattarola (Mat.
 \begin_inset Text
 
 \begin_layout Plain Layout
-2.5hours
+3hours
 \end_layout
 
 \end_inset
@@ -1605,7 +1676,7 @@ Ilyas Inajjar (Mat.
 \begin_inset Text
 
 \begin_layout Plain Layout
-2.5hours
+3hours
 \end_layout
 
 \end_inset
