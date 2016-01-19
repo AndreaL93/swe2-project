@@ -301,6 +301,46 @@ Secondary methods of the tested components need not be complete in order
 Elements to be Integrated
 \end_layout
 
+\begin_layout Standard
+As described in the SDD, the platform was conceived as a traditional client-serv
+er architecture with inner communications happening between the modules
+ of the back-end and direct communication happening back and forth on two
+ separate channels between the back-end and the client-side apps.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename images/ComponentDiagram1.svg
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+As can be deducted by the diagram, integration between the different tiers
+ of the platform happens through the RESTful API and the Notification Manager,
+ while internal integration must only be considered in the back end, as
+ the client-side applications can be considered as single modules which
+ rely on their respective OS to be functional in a 
+\begin_inset Quotes eld
+\end_inset
+
+stand-alone
+\begin_inset Quotes erd
+\end_inset
+
+ fashion.
+ 
+\end_layout
+
+\begin_layout Standard
+With these considerations in mind, the integration testing that must be
+ conducted is between the following pairs: 
+\end_layout
+
 \begin_layout Itemize
 Client-side apps - RESTful API
 \end_layout
@@ -350,19 +390,498 @@ Integration Testing Strategy
 \end_layout
 
 \begin_layout Standard
-Bottom-up
+Due to the complex structure of the back-end, with multiple inner integration
+ between components, a bottom-up testing strategy is the natural choice
+ to enable the separate development of the various parts of the platform.
+\end_layout
+
+\begin_layout Standard
+In a more specific way, integration tests must be conducted at first between
+ the modules of the back-end, followed by tests between the communication-relate
+d modules (RESTful API and Notification Manager) and the respective connected
+ components.
+ 
+\end_layout
+
+\begin_layout Standard
+Refer to sec.
+ 2.2 of the SDD for a specific description of the components, the high level
+ functions that the components implement and the interactions between components.
+ 
 \end_layout
 
 \begin_layout Subsection
 Sequence of Component/Function Integration
 \end_layout
 
-\begin_layout Subsubsection
-Software Integration Sequence
+\begin_layout Standard
+As discussed before, the chosen bottom-up strategy for testing is due to
+ the high modularity with which the back-end is designed.
+ The integration testing (which of course immediately precedes the actual
+ integration of the software modules) must therefore start from the testing
+ of the back-end modules and their different interactions in the various
+ use cases.
+ 
 \end_layout
 
-\begin_layout Subsubsection
-Subsystem Integration Sequence
+\begin_layout Standard
+From a high level point of view, the integration of the software will occur
+ as follows: 
+\end_layout
+
+\begin_layout Enumerate
+Test and integrate the back-end modules
+\end_layout
+
+\begin_layout Enumerate
+Test and integrate the back-end and the client-side applications with the
+ dedicated communication modules.
+ 
+\end_layout
+
+\begin_layout Standard
+Since the client-side applications are fairly less complex than the back-end
+ counterpart, they are considered as a single module with no internal interactio
+ns.
+ This applies also to the web application, which is described in the component
+ diagram in two parts (app and presentation layer), but will be considered
+ equal to the other two apps, and treated as a single client-side 
+\begin_inset Quotes eld
+\end_inset
+
+entity
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Having done these observations, he first tests to be conducted are: 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Tabular
+<lyxtabular version="3" rows="5" columns="3">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="center" valignment="top" width="0pt">
+<column alignment="left" valignment="top" width="0pt">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+ID
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+Test
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+Section
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+I1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Request manager - Ride manager
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+I2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Queue manger - Ride manager
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+I3
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Ride manager - DBMS
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+I4
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+User manager - DBMS
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The testing team can then proceed to test the communication-related interactions.
+ These can be conducted in any desired order, as they are equally important
+ and on the same level of the architecture.
+ The integration tests of this second phase are: 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Tabular
+<lyxtabular version="3" rows="8" columns="3">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="left" valignment="top" width="0pt">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+ID
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+Test
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+Section
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+I5
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Client-side apps - RESTful API
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+I6
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+RESTful API - Request manager
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+I7
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+RESTful API - User manager
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+I8
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+RESTful API - Queue manager
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+I9
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Ride manager - Notification manager
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+I10
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Queue manager - Notification manager 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+I11
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Notification manager - Client-side mobile apps
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
@@ -394,7 +913,7 @@ The production of this document has been a joint effort of all the authors,
 \series bold
 Group work
 \series default
-: 6 hours 
+: hours 
 \end_layout
 
 \begin_layout Itemize
@@ -427,7 +946,7 @@ Daniele Grattarola (Mat.
 \begin_inset Text
 
 \begin_layout Plain Layout
-3hours
+hours
 \end_layout
 
 \end_inset
@@ -448,7 +967,7 @@ Ilyas Inajjar (Mat.
 \begin_inset Text
 
 \begin_layout Plain Layout
-3hours
+hours
 \end_layout
 
 \end_inset
@@ -469,7 +988,7 @@ Andrea Lui (Mat.
 \begin_inset Text
 
 \begin_layout Plain Layout
-5hours
+hours
 \end_layout
 
 \end_inset
