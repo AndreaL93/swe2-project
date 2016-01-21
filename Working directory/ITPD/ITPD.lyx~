@@ -459,7 +459,7 @@ s's sake, and do not correspond to any actual tests to be conducted.
 \end_layout
 
 \begin_layout Subsection
-Sequence of Integration
+Sequence of Component/Function Integration
 \end_layout
 
 \begin_layout Standard
@@ -930,7 +930,7 @@ Notification manager - Client-side mobile apps
 \end_layout
 
 \begin_layout Section
-Test description
+Individual Steps and Test Description
 \end_layout
 
 \begin_layout Subsection
