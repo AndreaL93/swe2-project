@@ -418,7 +418,7 @@ Internal logic files
 \begin_inset Text
 
 \begin_layout Plain Layout
-10
+8
 \end_layout
 
 \end_inset
@@ -427,7 +427,7 @@ Internal logic files
 \begin_inset Text
 
 \begin_layout Plain Layout
-13
+10
 \end_layout
 
 \end_inset
@@ -696,7 +696,7 @@ Simple
 \begin_inset Text
 
 \begin_layout Plain Layout
-Pending Notification 
+User Information
 \end_layout
 
 \end_inset
@@ -725,7 +725,7 @@ Simple
 \begin_inset Text
 
 \begin_layout Plain Layout
-Ride
+Pending Notification 
 \end_layout
 
 \end_inset
@@ -734,7 +734,7 @@ Ride
 \begin_inset Text
 
 \begin_layout Plain Layout
-Medium
+Complex
 \end_layout
 
 \end_inset
@@ -754,8 +754,6 @@ Medium
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\series bold
 Total
 \end_layout
 
@@ -774,8 +772,6 @@ Total
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\series bold
 31
 \end_layout
 
@@ -835,7 +831,7 @@ FP
 \begin_inset Text
 
 \begin_layout Plain Layout
-Map information
+Map Information
 \end_layout
 
 \end_inset
@@ -864,8 +860,6 @@ Complex
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\series bold
 Total
 \end_layout
 
@@ -884,8 +878,6 @@ Total
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\series bold
 7
 \end_layout
 
@@ -1202,18 +1194,16 @@ Medium
 </cell>
 </row>
 <row>
-<cell multicolumn="1" alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\series bold
 Total
 \end_layout
 
 \end_inset
 </cell>
-<cell multicolumn="2" alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -1226,8 +1216,6 @@ Total
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\series bold
 29
 \end_layout
 
@@ -1345,8 +1333,6 @@ Complex
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\series bold
 Total
 \end_layout
 
@@ -1365,8 +1351,6 @@ Total
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\series bold
 14
 \end_layout
 
@@ -1484,8 +1468,6 @@ Medium
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\series bold
 Total
 \end_layout
 
@@ -1504,8 +1486,6 @@ Total
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\series bold
 10
 \end_layout
 
@@ -1564,7 +1544,7 @@ Internal logic files
 \begin_inset Text
 
 \begin_layout Plain Layout
-31
+3
 \end_layout
 
 \end_inset
@@ -1584,7 +1564,7 @@ External logic files
 \begin_inset Text
 
 \begin_layout Plain Layout
-7
+3
 \end_layout
 
 \end_inset
@@ -1604,7 +1584,7 @@ Input
 \begin_inset Text
 
 \begin_layout Plain Layout
-29
+3
 \end_layout
 
 \end_inset
@@ -1624,7 +1604,7 @@ Output
 \begin_inset Text
 
 \begin_layout Plain Layout
-14
+4
 \end_layout
 
 \end_inset
@@ -1644,7 +1624,7 @@ Inquiries
 \begin_inset Text
 
 \begin_layout Plain Layout
-10
+3
 \end_layout
 
 \end_inset
@@ -1655,8 +1635,6 @@ Inquiries
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\series bold
 Total
 \end_layout
 
@@ -1666,9 +1644,7 @@ Total
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\series bold
-91
+29
 \end_layout
 
 \end_inset
@@ -1679,1151 +1655,18 @@ Total
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
-From this brief estimation of the project's FP, we can produce an estimation
- of the final LOC (more precisely SLOC) count of the project:
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\[
-SLOC=FP\cdot CR=91\cdot53=4823
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-where 
-\begin_inset Formula $CR$
-\end_inset
-
- is the conversion ratio for the Java programming language
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-The value for the conversion ratio is taken from “COCOMO II Model Manual
- v2.1”.
-\end_layout
-
-\end_inset
-
-.
 \end_layout
 
 \begin_layout Subsection
 Effort and cost estimation
 \end_layout
 
-\begin_layout Standard
-Using the FP estimation derived in the previous section, we can produce
- an estimation of the required effort and financial resources using COCOMO
- with the following input: 
-\end_layout
-
-\begin_layout Standard
-\align center
-\begin_inset Graphics
-	filename CocomoScaleDriver.png
-	width 95text%
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-which yields the following output:
-\end_layout
-
-\begin_layout Standard
-\align center
-\begin_inset Graphics
-	filename CocomoResult.png
-	width 95text%
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-By rounding the COCOMO estimation to the most safe integer relaxation we
- find that a total of 9 months will be required for the platform to be operative
-, with a required team ranging between 1 and 2 people (depending on the
- development phase).
-\end_layout
-
 \begin_layout Section
-Schedule and resource allocation
-\end_layout
-
-\begin_layout Standard
-This section will provide a specific guideline to schedule the team's tasks,
- taking into account the design guidelines provided in the DD and the availabili
-ty of the team's members.
- 
-\end_layout
-
-\begin_layout Standard
-The development of the platform must be divided as specified in the COCOMO
- standard in 4 phases: 
-\end_layout
-
-\begin_layout Enumerate
-Inception: which will start in October 2015 and will last approximately
- until the beginning of November 2015.
-\end_layout
-
-\begin_deeper
-\begin_layout Standard
-\begin_inset Tabular
-<lyxtabular version="3" rows="5" columns="3">
-<features rotate="0" tabularvalignment="middle">
-<column alignment="center" valignment="top">
-<column alignment="center" valignment="top">
-<column alignment="center" valignment="top">
-<row>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Month
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Task
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Member
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell multirow="3" alignment="center" valignment="middle" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-October
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Client meetings
-\end_layout
-
-\end_inset
-</cell>
-<cell multirow="3" alignment="center" valignment="middle" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Grattarola
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell multirow="4" alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Team organization
-\end_layout
-
-\end_inset
-</cell>
-<cell multirow="4" alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell multirow="4" alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-RASD
-\end_layout
-
-\end_inset
-</cell>
-<cell multirow="4" alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-November
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-T.B.D.
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Inajjar
-\end_layout
-
-\end_inset
-</cell>
-</row>
-</lyxtabular>
-
-\end_inset
-
-
-\end_layout
-
-\end_deeper
-\begin_layout Enumerate
-Elaboration: which will start in November 2015 and will last approximately
- until the beginning of February 2016.
-\end_layout
-
-\begin_deeper
-\begin_layout Standard
-\begin_inset Tabular
-<lyxtabular version="3" rows="5" columns="3">
-<features rotate="0" tabularvalignment="middle">
-<column alignment="center" valignment="top">
-<column alignment="center" valignment="top">
-<column alignment="center" valignment="top">
-<row>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Month
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Task
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Member
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-November
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-DD (Architectural design)
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Inajjar
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-December
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-DD (Algorithm, UI and UX design)
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Grattarola
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-January
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-ITPD
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Lui
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-February
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-T.B.D.
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Lui
-\end_layout
-
-\end_inset
-</cell>
-</row>
-</lyxtabular>
-
-\end_inset
-
-
-\end_layout
-
-\end_deeper
-\begin_layout Enumerate
-Construction: which will start in February 2016 and will last approximately
- until the end of June 2016.
-\end_layout
-
-\begin_deeper
-\begin_layout Standard
-\begin_inset Tabular
-<lyxtabular version="3" rows="12" columns="3">
-<features rotate="0" tabularvalignment="middle">
-<column alignment="center" valignment="top">
-<column alignment="center" valignment="top">
-<column alignment="center" valignment="top">
-<row>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Month
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Task
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Member
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell multirow="3" alignment="center" valignment="middle" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-February
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Request manager
-\end_layout
-
-\end_inset
-</cell>
-<cell multirow="3" alignment="center" valignment="middle" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Grattarola, Lui
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell multirow="4" alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Ride manager
-\end_layout
-
-\end_inset
-</cell>
-<cell multirow="4" alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell multirow="4" alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-User manager
-\end_layout
-
-\end_inset
-</cell>
-<cell multirow="4" alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell multirow="3" alignment="center" valignment="middle" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-March
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Queue manager
-\end_layout
-
-\end_inset
-</cell>
-<cell multirow="3" alignment="center" valignment="middle" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Inajjar, Lui
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell multirow="4" alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Restful API
-\end_layout
-
-\end_inset
-</cell>
-<cell multirow="4" alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell multirow="4" alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Notification manager
-\end_layout
-
-\end_inset
-</cell>
-<cell multirow="4" alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell multirow="3" alignment="center" valignment="middle" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-April
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Customer-side mobile app
-\end_layout
-
-\end_inset
-</cell>
-<cell multirow="3" alignment="center" valignment="middle" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Inajjar
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell multirow="4" alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Customer-side web app
-\end_layout
-
-\end_inset
-</cell>
-<cell multirow="4" alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell multirow="4" alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Taxi-side mobile app
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Grattarola
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-May
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Component integration and first test deployment
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Grattarola, Inajjar
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-June
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Integration testing
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Inajjar, Lui
-\end_layout
-
-\end_inset
-</cell>
-</row>
-</lyxtabular>
-
-\end_inset
-
-
-\end_layout
-
-\end_deeper
-\begin_layout Enumerate
-Transition: which will approximately start in July 2016 and will last until
- August 2016.
-\end_layout
-
-\begin_deeper
-\begin_layout Standard
-\begin_inset Tabular
-<lyxtabular version="3" rows="3" columns="3">
-<features rotate="0" tabularvalignment="middle">
-<column alignment="center" valignment="top">
-<column alignment="center" valignment="top">
-<column alignment="center" valignment="top">
-<row>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Month
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Task
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Member
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-July
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-T.B.D.
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-T.B.D.
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-August
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-T.B.D.
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-T.B.D.
-\end_layout
-
-\end_inset
-</cell>
-</row>
-</lyxtabular>
-
-\end_inset
-
-
-\end_layout
-
-\end_deeper
-\begin_layout Standard
-Refer to the DD for a more detailed explanation about the choices made in
- the schedule.
- 
+Resource allocation
 \end_layout
 
 \begin_layout Section
 Project risks
-\end_layout
-
-\begin_layout Standard
-This section contains a list of potential risks that the project may undergo,
- taken and adapted from http://management.simplicable.com/management/new/130-proje
-ct-risks.
-\end_layout
-
-\begin_layout Subsubsection
-Executive Support
-\end_layout
-
-\begin_layout Enumerate
-Executives fail to support project: the project team may lack the authority
- to achieve project objectives.
- In such cases, executive management support is fundamental to project success.
- When this doesn't materialize the project fails.
-\end_layout
-
-\begin_layout Enumerate
-Executives become disengaged with project: executive management disregards
- project communications and meetings.
-\end_layout
-
-\begin_layout Enumerate
-Conflict between executive stakeholders disrupts project: members of executive
- management are combative to the project or there is a disagreement over
- project issues at the executive level.
-\end_layout
-
-\begin_layout Enumerate
-Executive turnover disrupts project: a key executive leaves the company,
- the resulting disruption becomes a project issue.
- 
-\end_layout
-
-\begin_layout Subsubsection
-Scope
-\end_layout
-
-\begin_layout Enumerate
-Scope is ill defined (i.e.
- the general risk of an error or omission in scope definition).
-\end_layout
-
-\begin_layout Enumerate
-Uncontrolled changes and continuous growth of scope.
-\end_layout
-
-\begin_layout Enumerate
-Estimates are inaccurate.
-\end_layout
-
-\begin_layout Enumerate
-Dependencies are inaccurate.
-\end_layout
-
-\begin_layout Enumerate
-Activities are missing from scope definition.
- 
-\end_layout
-
-\begin_layout Subsubsection
-Cost Management
-\end_layout
-
-\begin_layout Enumerate
-Cost forecasts are inaccurate.
-\end_layout
-
-\begin_layout Subsubsection
-Change Management
-\end_layout
-
-\begin_layout Enumerate
-A large number of change requests dramatically raises the complexity of
- the project and distracts key resources.
-\end_layout
-
-\begin_layout Enumerate
-Inaccurate change priorities, if non-essential changes are prioritized impacting
- critical schedules.
-\end_layout
-
-\begin_layout Subsubsection
-Communication
-\end_layout
-
-\begin_layout Enumerate
-Project team misunderstand requirements.
-\end_layout
-
-\begin_layout Enumerate
-Impacted individuals aren't kept informed (e.g.
- a stakeholder is missing in the communication plan)
-\end_layout
-
-\begin_layout Subsubsection
-Resources & Team
-\end_layout
-
-\begin_layout Enumerate
-Resource performance issues.
-\end_layout
-
-\begin_layout Enumerate
-Team members with negative attitudes towards the project.
-\end_layout
-
-\begin_layout Enumerate
-Low team motivation.
-\end_layout
-
-\begin_layout Subsubsection
-Architecture
-\end_layout
-
-\begin_layout Enumerate
-The architecture is incapable of supporting change requests.
-\end_layout
-
-\begin_layout Enumerate
-Architecture is not fit for purpose.
-\end_layout
-
-\begin_layout Enumerate
-The architecture is impossible to implement, excessively costly or doesn't
- support the requirements.
-\end_layout
-
-\begin_layout Subsubsection
-Design
-\end_layout
-
-\begin_layout Enumerate
-The design isn't possible, is excessively costly or doesn't support the
- requirements.
-\end_layout
-
-\begin_layout Subsubsection
-Technical
-\end_layout
-
-\begin_layout Enumerate
-Technology components are low quality.
-\end_layout
-
-\begin_layout Enumerate
-Components that can't be scaled to meet performance demands.
-\end_layout
-
-\begin_layout Enumerate
-Technology components aren't interoperable.
-\end_layout
-
-\begin_layout Enumerate
-Technology components aren't compliant with standards and best practices.
-\end_layout
-
-\begin_layout Enumerate
-Technology components have security vulnerabilities.
-\end_layout
-
-\begin_layout Enumerate
-Technology components lack stability.
-\end_layout
-
-\begin_layout Enumerate
-Technology components aren't extensible.
-\end_layout
-
-\begin_layout Enumerate
-Critical systems such as the test environments go down.
-\end_layout
-
-\begin_layout Subsubsection
-Integration
-\end_layout
-
-\begin_layout Enumerate
-Delays to infrastructure such as hardware or software.
-\end_layout
-
-\begin_layout Enumerate
-The risk that environments won't be available to test integration.
-\end_layout
-
-\begin_layout Enumerate
-The risk that product components will fail to integrate with each other.
-\end_layout
-
-\begin_layout Subsubsection
-Requirements
-\end_layout
-
-\begin_layout Enumerate
-The requirements fail to align with other systems (e.g.
- they duplicate functionality).
-\end_layout
-
-\begin_layout Enumerate
-Requirements are unclear and open to interpretation.
-\end_layout
-
-\begin_layout Enumerate
-Requirements aren't fit for purpose.
-\end_layout
-
-\begin_layout Enumerate
-82.
- Requirements are incomplete
-\end_layout
-
-\begin_layout Subsubsection
-External
-\end_layout
-
-\begin_layout Enumerate
-Legal & regulatory change impacts project.
-\end_layout
-
-\begin_layout Enumerate
-Force Majeure (e.g.
- act of nature) impacts project.
-\end_layout
-
-\begin_layout Subsubsection
-User Acceptance
-\end_layout
-
-\begin_layout Enumerate
-Users reject the product.
 \end_layout
 
 \begin_layout Section

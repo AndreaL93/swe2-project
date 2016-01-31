@@ -1730,7 +1730,6 @@ Using the FP estimation derived in the previous section, we can produce
 \align center
 \begin_inset Graphics
 	filename CocomoScaleDriver.png
-	width 95text%
 
 \end_inset
 
