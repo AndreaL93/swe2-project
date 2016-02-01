@@ -789,6 +789,12 @@ Total
 
 \end_layout
 
+\begin_layout Standard
+Most ILF of the platform will reside on the back-end side and are of little
+ impact on the project size, with the exception of the ride objects which
+ will need to store more information than the rest of the ILF such as routes.
+\end_layout
+
 \begin_layout Subsubsection
 External logic files
 \end_layout
@@ -897,6 +903,12 @@ Total
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+ELF are limited to the maps information necessary to display the taxi route
+ on the client-side apps, and are related to the client-side apps.
+ 
 \end_layout
 
 \begin_layout Subsubsection
@@ -1241,6 +1253,13 @@ Total
 
 \end_layout
 
+\begin_layout Standard
+See RASD sec.
+ 2.2 for a detailed perspective of the platform's functionalities, which
+ are obviously related to the input functions.
+ 
+\end_layout
+
 \begin_layout Subsubsection
 Output
 \end_layout
@@ -1380,6 +1399,12 @@ Total
 
 \end_layout
 
+\begin_layout Standard
+Output functions are limited to the push notification services which are
+ both considered complex due to the stateless nature of the standard.
+ 
+\end_layout
+
 \begin_layout Subsubsection
 Inquiries
 \end_layout
@@ -1517,6 +1542,14 @@ Total
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+External inquiries are considered of complex and medium size, but are limited
+ to few functions, therefore impacting the project's size less than the
+ core functionalities (i.e.
+ I/O).
+ 
 \end_layout
 
 \begin_layout Subsubsection
@@ -2601,34 +2634,6 @@ ct-risks.
 \end_layout
 
 \begin_layout Subsubsection
-Executive Support
-\end_layout
-
-\begin_layout Enumerate
-Executives fail to support project: the project team may lack the authority
- to achieve project objectives.
- In such cases, executive management support is fundamental to project success.
- When this doesn't materialize the project fails.
-\end_layout
-
-\begin_layout Enumerate
-Executives become disengaged with project: executive management disregards
- project communications and meetings.
-\end_layout
-
-\begin_layout Enumerate
-Conflict between executive stakeholders disrupts project: members of executive
- management are combative to the project or there is a disagreement over
- project issues at the executive level.
-\end_layout
-
-\begin_layout Enumerate
-Executive turnover disrupts project: a key executive leaves the company,
- the resulting disruption becomes a project issue.
- 
-\end_layout
-
-\begin_layout Subsubsection
 Scope
 \end_layout
 
@@ -2637,23 +2642,30 @@ Scope is ill defined (i.e.
  the general risk of an error or omission in scope definition).
 \end_layout
 
+\begin_deeper
+\begin_layout Standard
+Risk: low
+\end_layout
+
+\begin_layout Standard
+Solution: adapt RASD and DD to omitted parts.
+\end_layout
+
+\end_deeper
 \begin_layout Enumerate
 Uncontrolled changes and continuous growth of scope.
 \end_layout
 
-\begin_layout Enumerate
-Estimates are inaccurate.
+\begin_deeper
+\begin_layout Standard
+Risk: low.
 \end_layout
 
-\begin_layout Enumerate
-Dependencies are inaccurate.
+\begin_layout Standard
+Solution: try to moderate communication with client.
 \end_layout
 
-\begin_layout Enumerate
-Activities are missing from scope definition.
- 
-\end_layout
-
+\end_deeper
 \begin_layout Subsubsection
 Cost Management
 \end_layout
@@ -2662,20 +2674,16 @@ Cost Management
 Cost forecasts are inaccurate.
 \end_layout
 
-\begin_layout Subsubsection
-Change Management
+\begin_deeper
+\begin_layout Standard
+Risk: medium
 \end_layout
 
-\begin_layout Enumerate
-A large number of change requests dramatically raises the complexity of
- the project and distracts key resources.
+\begin_layout Standard
+Solution: modify architecture to fit budget.
 \end_layout
 
-\begin_layout Enumerate
-Inaccurate change priorities, if non-essential changes are prioritized impacting
- critical schedules.
-\end_layout
-
+\end_deeper
 \begin_layout Subsubsection
 Communication
 \end_layout
@@ -2684,27 +2692,17 @@ Communication
 Project team misunderstand requirements.
 \end_layout
 
-\begin_layout Enumerate
-Impacted individuals aren't kept informed (e.g.
- a stakeholder is missing in the communication plan)
+\begin_deeper
+\begin_layout Standard
+Risk: low
 \end_layout
 
-\begin_layout Subsubsection
-Resources & Team
+\begin_layout Standard
+Solution: adapt project to include new requirements.
+ 
 \end_layout
 
-\begin_layout Enumerate
-Resource performance issues.
-\end_layout
-
-\begin_layout Enumerate
-Team members with negative attitudes towards the project.
-\end_layout
-
-\begin_layout Enumerate
-Low team motivation.
-\end_layout
-
+\end_deeper
 \begin_layout Subsubsection
 Architecture
 \end_layout
@@ -2713,15 +2711,31 @@ Architecture
 The architecture is incapable of supporting change requests.
 \end_layout
 
-\begin_layout Enumerate
-Architecture is not fit for purpose.
+\begin_deeper
+\begin_layout Standard
+Risk: low
 \end_layout
 
+\begin_layout Standard
+Solution: adapt architecture design.
+\end_layout
+
+\end_deeper
 \begin_layout Enumerate
 The architecture is impossible to implement, excessively costly or doesn't
  support the requirements.
 \end_layout
 
+\begin_deeper
+\begin_layout Standard
+Risk: low
+\end_layout
+
+\begin_layout Standard
+Solution: adapt architecture to fit budget and requirements.
+\end_layout
+
+\end_deeper
 \begin_layout Subsubsection
 Design
 \end_layout
@@ -2731,80 +2745,66 @@ The design isn't possible, is excessively costly or doesn't support the
  requirements.
 \end_layout
 
+\begin_deeper
+\begin_layout Standard
+Risk: medium
+\end_layout
+
+\begin_layout Standard
+Solution: adapt design to fit budget and requirements.
+\end_layout
+
+\end_deeper
 \begin_layout Subsubsection
 Technical
-\end_layout
-
-\begin_layout Enumerate
-Technology components are low quality.
-\end_layout
-
-\begin_layout Enumerate
-Components that can't be scaled to meet performance demands.
-\end_layout
-
-\begin_layout Enumerate
-Technology components aren't interoperable.
-\end_layout
-
-\begin_layout Enumerate
-Technology components aren't compliant with standards and best practices.
-\end_layout
-
-\begin_layout Enumerate
-Technology components have security vulnerabilities.
-\end_layout
-
-\begin_layout Enumerate
-Technology components lack stability.
-\end_layout
-
-\begin_layout Enumerate
-Technology components aren't extensible.
 \end_layout
 
 \begin_layout Enumerate
 Critical systems such as the test environments go down.
 \end_layout
 
-\begin_layout Subsubsection
-Integration
+\begin_deeper
+\begin_layout Standard
+Risk: low
 \end_layout
 
-\begin_layout Enumerate
-Delays to infrastructure such as hardware or software.
+\begin_layout Standard
+Solution: use temporary backup system.
 \end_layout
 
-\begin_layout Enumerate
-The risk that environments won't be available to test integration.
-\end_layout
-
-\begin_layout Enumerate
-The risk that product components will fail to integrate with each other.
-\end_layout
-
+\end_deeper
 \begin_layout Subsubsection
 Requirements
-\end_layout
-
-\begin_layout Enumerate
-The requirements fail to align with other systems (e.g.
- they duplicate functionality).
 \end_layout
 
 \begin_layout Enumerate
 Requirements are unclear and open to interpretation.
 \end_layout
 
-\begin_layout Enumerate
-Requirements aren't fit for purpose.
+\begin_deeper
+\begin_layout Standard
+Risk: medium
 \end_layout
 
-\begin_layout Enumerate
-82.
- Requirements are incomplete
+\begin_layout Standard
+Solution: schedule more and frequent meetings with clients.
 \end_layout
 
+\end_deeper
+\begin_layout Enumerate
+Requirements are incomplete
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+Risk: medium
+\end_layout
+
+\begin_layout Standard
+Solution: schedule more and frequent meetings with clients
+\end_layout
+
+\end_deeper
 \begin_layout Subsubsection
 External
 \end_layout
@@ -2813,11 +2813,31 @@ External
 Legal & regulatory change impacts project.
 \end_layout
 
+\begin_deeper
+\begin_layout Standard
+Risk: low
+\end_layout
+
+\begin_layout Standard
+Solution: adapt project to new regulations.
+\end_layout
+
+\end_deeper
 \begin_layout Enumerate
 Force Majeure (e.g.
  act of nature) impacts project.
 \end_layout
 
+\begin_deeper
+\begin_layout Standard
+Risk: low
+\end_layout
+
+\begin_layout Standard
+Solution: T.B.D.
+\end_layout
+
+\end_deeper
 \begin_layout Subsubsection
 User Acceptance
 \end_layout
@@ -2826,6 +2846,16 @@ User Acceptance
 Users reject the product.
 \end_layout
 
+\begin_deeper
+\begin_layout Standard
+Risk: medium
+\end_layout
+
+\begin_layout Standard
+Solution: market analysis and UX restructuring
+\end_layout
+
+\end_deeper
 \begin_layout Section
 Additional comments
 \end_layout
