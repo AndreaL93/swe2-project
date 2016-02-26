@@ -1,0 +1,2051 @@
+#LyX 2.1 created this file. For more info see http://www.lyx.org/
+\lyxformat 474
+\begin_document
+\begin_header
+\textclass article
+\begin_preamble
+\usepackage{babel}
+\usepackage{babel}
+\usepackage{babel}
+\usepackage{babel}
+
+
+
+
+
+
+\usepackage{listings}
+\renewcommand{\lstlistingname}{Listing}
+
+
+
+
+
+\usepackage{listings}
+\renewcommand{\lstlistingname}{Listing}
+
+
+
+\usepackage{listings}
+\renewcommand{\lstlistingname}{Listing}
+\end_preamble
+\use_default_options false
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding iso8859-15
+\fontencoding T1
+\font_roman charter
+\font_sans default
+\font_typewriter default
+\font_math auto
+\font_default_family rmdefault
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing onehalf
+\use_hyperref true
+\pdf_bookmarks true
+\pdf_bookmarksnumbered false
+\pdf_bookmarksopen false
+\pdf_bookmarksopenlevel 1
+\pdf_breaklinks false
+\pdf_pdfborder true
+\pdf_colorlinks false
+\pdf_backref false
+\pdf_pdfusetitle true
+\papersize default
+\use_geometry false
+\use_package amsmath 1
+\use_package amssymb 0
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle fancy
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Software Design Document
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename polimiLogo.png
+	height 30theight%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+Daniele Grattarola (Mat.
+ 853101)
+\end_layout
+
+\begin_layout Standard
+\align center
+Ilyas Inajjar (Mat.
+ 790009) 
+\end_layout
+
+\begin_layout Standard
+\align center
+Andrea Lui (Mat.
+ 850680)
+\end_layout
+
+\begin_layout Title
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset toc
+LatexCommand tableofcontents
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Introduction
+\end_layout
+
+\begin_layout Subsection
+Purpose
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Purpose"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The presented document is the Software Design document (SDD) for the MyTaxiServi
+ce platform project.
+ The main purpose of this document is to be a guideline for the concrete
+ implementation of the platform, provide developers with high level descriptions
+ of the main algorithms, describe the architectural styles and patter, and
+ generally establish the design standards for the development phase.
+ This document is intended for stakeholders, software engineers, and programmers
+ and must be used as reference throughout the whole development of the system.
+ The secondary audience for this document includes system maintainers and
+ developers who wish to integrate the platform’s services within their own
+ software.
+ The design choices listed here must be respected throughout the whole developme
+nt of the platform and any other further expansion of the codebase.
+\end_layout
+
+\begin_layout Subsection
+Scope
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Scope"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The descriptions listed in this document define the design language that
+ must be used by design stakeholders, and implement the 
+\begin_inset Quotes eld
+\end_inset
+
+Design leads to code
+\begin_inset Quotes erd
+\end_inset
+
+ philosophy.
+ These design standards represent constraints to the development of the
+ codebase, with all unspecified design decisions left to the developers.
+\end_layout
+
+\begin_layout Standard
+Key reasons for the design language described in this document are: 
+\end_layout
+
+\begin_layout Enumerate
+To facilitate the development, integration, expansion and maintenance of
+ the platform.
+\end_layout
+
+\begin_layout Enumerate
+To define a business identity (kept consistent in UX and marketing design).
+ 
+\end_layout
+
+\begin_layout Enumerate
+To implement the requirements listed in the RASD of the project in a consistent
+ way.
+ 
+\end_layout
+
+\begin_layout Subsection
+Definitions, acronyms, and abbreviations 
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Definitions,-acronyms,-and"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Throughout this document, the following definitions will be applied without
+ further explanations: 
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Platform
+\series default
+: the set of software applications and hardware infrastructure that make
+ up the MyTaxiService service; these include the back-end server software,
+ the web application and the mobile application used by the customers, the
+ mobile application used by the taxi drivers, and all the necessary hardware
+ needed to run the mentioned software and any needed support software.
+ 
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+System
+\series default
+: any subset of software components of the platform.
+ 
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Back-end
+\series default
+: the software run on the back-end server of the platform which is used
+ to handle the communication between the user applications.
+ The term also addresses all the necessary software components that are
+ needed to store data, perform calculations and manage the hardware (e.g.
+ an operating system).
+ 
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Customer-side application
+\series default
+: software run on a personal device which is used to send taxi requests
+ to the system and to handle the system's replies.
+ It is designed to be used by customers (see below) and can either be a
+ mobile application (run on a smartphone or tablet) or a web application
+ (run on any personal device through an Internet browser).
+ 
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Taxi-side application
+\series default
+: software run on a personal device which is used to manage taxi requests
+ forwarded by the system and to reply to the system with information on
+ how to handle the requests.
+ It is designed to be used by taxi drivers (see below) and is a mobile applicati
+on (run on a smartphone or tablet).
+ 
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+User-side application
+\series default
+: the set of customer-side and taxi-side applications 
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Taxi driver
+\series default
+: the owner of a taxi license in Pallet Town, who uses the taxi-side application
+ to interact with the platform.
+ 
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Customer
+\series default
+: a person which intends to exploit the taxi service of the town, and who
+ uses the user-side applications to interact with the platform.
+ 
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+User
+\series default
+: any customer or taxi driver who uses a user-side application.
+ 
+\end_layout
+
+\begin_layout Standard
+The following acronyms will also be used in place of the extended form:
+ 
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+SDD: 
+\series default
+Software Design Document
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+RASD
+\series default
+: Requirement Analysis and Specification Document 
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+CGI
+\series default
+: Common Gateway Interface 
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+DBMS
+\series default
+: Data Base Management System 
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+DMZ
+\series default
+: De-Militarized Zone
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+SOA
+\series default
+: Service Oriented Architecture
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+UX
+\series default
+: user experience
+\end_layout
+
+\begin_layout Standard
+The following convention will be used to refer to different items in the
+ document:
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+sec.
+ / secs.
+\series default
+: section / sections
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+req.
+\series default
+: requirement.
+\end_layout
+
+\begin_layout Standard
+A typical use of the aforementioned abbreviation would be in the form 
+\begin_inset Quotes eld
+\end_inset
+
+element Xx, sec.
+ x.x.x
+\begin_inset Quotes erd
+\end_inset
+
+ (e.g.
+ 
+\shape italic
+req.
+ 1, sec.
+ 1.3
+\shape default
+ - if this section contained a numbered requirement with index 1).
+\end_layout
+
+\begin_layout Standard
+One last observation is to be done regarding the use of the singular 
+\shape italic
+they
+\shape default
+, which will be used to refer to single persons throughout the whole document.
+ 
+\end_layout
+
+\begin_layout Subsection
+Document structure
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Document-structure"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The presented SDD is divided in sections and structured as follows: 
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Section 1 - Introduction
+\series default
+: contains support information to better understand the presented document.
+ 
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Section 2 - Architectural design
+\series default
+: contains a description of the architectural styles and patterns selected
+ for the platform, which serve as an implementation guideline for developers.
+ 
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Section 3 - Algorithms design
+\series default
+: contains a high-level description of the core algorithms of the back-end.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Section 4 - User interface design
+\series default
+: contains a description and a conceptual preview of the user interface
+ and UX.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Section 5 - Requirements traceability
+\series default
+: links the decisions described in this document to the requirements specified
+ in the RASD.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Section 6 - Additional comments
+\series default
+: contains a summary of the hours spent in producing the document.
+\end_layout
+
+\begin_layout Section
+Architectural Design
+\end_layout
+
+\begin_layout Subsection
+Overview 
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Architectural-Overview"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The platform must be designed with performance, scalability, and user experience
+ in mind, and the architectural decisions must therefore reflect these core
+ principles.
+\end_layout
+
+\begin_layout Standard
+Because the platform is web-based, a communication medium must be implemented
+ between the back-end and the user-side applications in order to coordinate
+ the relevant events as required by sec.
+ 3 of the RASD.
+\end_layout
+
+\begin_layout Standard
+The architecture in the back-end must allow interaction between the different
+ core components (sec.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Component-View"
+
+\end_inset
+
+) and must facilitate upscaling and redundancy, in order to guarantee a
+ high fault-tolerance and performance.
+ 
+\end_layout
+
+\begin_layout Subsection
+High level components and their interaction
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:High-Level-Components"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+From a top-level perspective, the platform is composed by a high number
+ of clients interacting with a single server (or at least a single query
+ endpoint or API).
+\end_layout
+
+\begin_layout Standard
+The back-end is composed by different core components that implements the
+ following high-level functions (related to the functions in sec.
+ 2.2 of the RASD): 
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Argument item:1
+status open
+
+\begin_layout Plain Layout
+
+\series bold
+[HLF1]
+\end_layout
+
+\end_inset
+
+Manage and react to user requests (functions F1, F4 and F9)
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Argument item:1
+status open
+
+\begin_layout Plain Layout
+
+\series bold
+[HLF2]
+\end_layout
+
+\end_inset
+
+Manage and allow management of user data (functions F2 and F5)
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Argument item:1
+status open
+
+\begin_layout Plain Layout
+
+\series bold
+[HLF3]
+\end_layout
+
+\end_inset
+
+Manage user authentication (function F8)
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Argument item:1
+status open
+
+\begin_layout Plain Layout
+
+\series bold
+[HLF4]
+\end_layout
+
+\end_inset
+
+Manage secondary platform functions (functions F3, F6 and F7)
+\end_layout
+
+\begin_layout Standard
+The client side applications are merely an access medium to the back-end
+ functions and mostly implement the presentation layer of the platform,
+ which makes them of little interest in the high-level perspective that
+ we are giving.
+\end_layout
+
+\begin_layout Standard
+HLF1 is achieved with the interaction of three main software components,
+ two dedicated to the management of requests and the remaining one dedicated
+ to the management of the taxi queues.
+\end_layout
+
+\begin_layout Standard
+HLF2 and HLF3 are achieved with a dedicated software component with direct
+ access to the DBMS component of the platform.
+\end_layout
+
+\begin_layout Standard
+HLF4 is achieved with a subset of the functions of the Request manager,
+ which is part of the components dedicated to HLF1.
+ 
+\end_layout
+
+\begin_layout Standard
+Other core components of the platform are dedicated to client-server communicati
+on and of little interest in this description (they will be described later).
+ 
+\end_layout
+
+\begin_layout Subsection
+Component view
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Component-View"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The platform is composed by some main core software element that are needed
+ to realize the functional and non functional requirements presented in
+ the RASD.
+ Any external dependency to make the platform operational is listed in sec.
+ 2.1.1 of the RASD and is not explicitly treated in the present document.
+\end_layout
+
+\begin_layout Subsubsection
+Request manager
+\end_layout
+
+\begin_layout Standard
+This module is responsible for managing the taxi requests forwarded by the
+ RESTful API to the back-end main server.
+\end_layout
+
+\begin_layout Standard
+Its main function is to forward the ride requests to the Ride manager at
+ the right moment, based on the type of requests it receives: in the case
+ of simple requests, it forwards them to the Ride manger immediately, whereas
+ it stores reservation requests locally and forwards them at the right moment.
+ 
+\end_layout
+
+\begin_layout Standard
+The module also handles the modification of reservations and the merging
+ of 
+\shape italic
+taxi sharing
+\shape default
+ requests when compatibles requests are found.
+\end_layout
+
+\begin_layout Subsubsection
+Queue manager
+\end_layout
+
+\begin_layout Standard
+This software module is responsible for managing the taxi queues associated
+ with each zone of the town.
+ 
+\end_layout
+
+\begin_layout Standard
+It receives requests directly from the Ride manager and executes the selection
+ algorithms based on the needs of the requester.
+ It also has a communication channel through the RESTful API with the taxi-side
+ applications, which is used to update the availability status of taxi drivers.
+ 
+\end_layout
+
+\begin_layout Subsubsection
+Ride manager
+\end_layout
+
+\begin_layout Standard
+This module is responsible for creating the 
+\shape italic
+Ride
+\shape default
+ objects when prompted by the Request manager.
+ 
+\end_layout
+
+\begin_layout Standard
+It communicates with the Queue manager to identify available taxis, with
+ the Notification manager to handle replies to the customers and with the
+ DBMS component to keep track of rides and reports.
+ 
+\end_layout
+
+\begin_layout Subsubsection
+User manager
+\end_layout
+
+\begin_layout Standard
+This module is responsible for managing user data, registration and authenticati
+on.
+ 
+\end_layout
+
+\begin_layout Standard
+It has direct access to the DBMS component ad receives read and write requests
+ directly from the RESTful API.
+\end_layout
+
+\begin_layout Subsubsection
+Notification manager
+\end_layout
+
+\begin_layout Standard
+This module is responsible for implementing the push notification service
+ towards the user-side applications.
+ 
+\end_layout
+
+\begin_layout Standard
+It is necessary to have this type of module running in the back-end because
+ there are cases in which a communication must happen between the clients
+ and the back-end, but no direct request is made to the RESTful API by the
+ clients: these, for example, include the notifications of incoming requests
+ to taxi drivers, or the notification of incoming taxis to users.
+ 
+\end_layout
+
+\begin_layout Subsubsection
+RESTful API
+\end_layout
+
+\begin_layout Standard
+This module is the main gateway of communication that the clients have towards
+ the back-end.
+ 
+\end_layout
+
+\begin_layout Standard
+It implements a stateless service in which http calls are made by the clients
+ when they need to submit requests o data into the system, and replies are
+ immediately returned as a result for the requested computations.
+ The decision of having a RESTful API is due to the fact that the system
+ must be able to ideally support a vast number of users on a different number
+ of platforms, and using a REST API as a single endpoint is an optimal solution
+ for providing the same, integrated user experience throughout all the platforms.
+\end_layout
+
+\begin_layout Subsubsection
+Component diagram
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename images/ComponentDiagram1.svg
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Entity-relationship diagram
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename ERDiagram.png
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Class diagram: back-end
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename Sequence diagrams and activity diagrams/ServerSide.svg
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Class diagram: client-side
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename Sequence diagrams and activity diagrams/ClientSide.svg
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Deployment view
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Deployment-View"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The following section contains a schema of the hardware infrastructure,
+ which represents the main operational components of the back-end and their
+ relations.
+ The high-level software components run on each piece of hardware (or possibly
+ the generic hardware's function) are indicated below each node.
+ 
+\end_layout
+
+\begin_layout Standard
+For clarity's sake, it was decided to omit the representation of the purely
+ network-related hardware (routers, switches, etc.).
+\end_layout
+
+\begin_layout Standard
+The chosen architecture is a typical web-based client-server architecture,
+ with the following components: 
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+Main server array
+\series default
+: typical rack of servers dedicated to run the main back-end logic.
+ The rack is composed by independent nodes managed by usual load balancing
+ technology, where each node is equipped with the full stack of operational
+ software (sec.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Component-View"
+
+\end_inset
+
+) and its dependencies (sec.
+ 2.1.1 of the RASD) and is able to be fully functional under average load
+ of the system.
+ 
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+The redundancy of the rack has the dual function of improving fault tolerance
+ and performance under above-average load conditions.
+ 
+\end_layout
+
+\begin_layout Standard
+This node is connected to the web server, through which the communication
+ to and from the users happens, and to the DBMS server (either primary or
+ secondary - the connection is transparent to the node and is hot-swappable
+ in the event of a failure).
+ 
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+
+\series bold
+Main DBMS server
+\series default
+: server dedicated to run the DBMS software on account of the main server
+ array and to manage the communication with the secondary storage node.
+ 
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+This node is connected to the main server array, from which it receives
+ requests, and the storage nodes (either primary or secondary - the connection
+ is transparent to the node and is hot-swappale in the event of a failure).
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+
+\series bold
+Secondary DBMS server
+\series default
+: server dedicated to run the DBMS software and manage the backup requests
+ from the primary DBMS server.
+ 
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+The node is connected to the secondary storage and to the primary DBMS sever,
+ for the reasons described above.
+ 
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+
+\series bold
+Primary and secondary storage
+\series default
+: typical long term-storage technology on which the operational database
+ is saved.
+ The primary storage is the node with the highest R/W speeds and is used
+ under normal operational regime, whereas the secondary is the most reliable
+ one (in terms of long-term storage) and it is used to store data backups
+ (it becomes fully operational only in the even of a failure on the primary
+ storage or DBMS nodes).
+ 
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+Web server
+\series default
+: server dedicated to run the web server software and manage the load balancing
+ towards the main server array.
+ It is isolated by firewalls to implement a DMZ and minimize the risk of
+ unauthorized access to the main back-end components (especially to the
+ storage nodes).
+ 
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+This is the main gateway node of the back-end and is the one exposed to
+ the outside world.
+ 
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+Any communication between the user-side apps and the back-end happens through
+ the standard Internet protocol.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename images/DeploymentSchema.png
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename images/DeploymentDiagram1.svg
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Runtime view
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Runtime-View"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This section contains a detailed descriptions of how the software deployed
+ to the platform's nodes must behave in response to the events of interest.
+ 
+\end_layout
+
+\begin_layout Subsubsection
+Sequence diagrams
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename Sequence diagrams and activity diagrams/svg/Model__Signup__Interaction1__Signup_1.svg
+	width 100text%
+	rotateAngle 90
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename Sequence diagrams and activity diagrams/svg/Model__Login__Interaction1__Login_2.svg
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename Sequence diagrams and activity diagrams/svg/Model__Manage your Personal Info__Interaction1__Manage your Personal Info_8.svg
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename Sequence diagrams and activity diagrams/svg/Model__Available__Interaction1__Available_3.svg
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename Sequence diagrams and activity diagrams/svg/Taxi Request.svg
+	width 100text%
+	height 100theight%
+	rotateAngle 90
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename Sequence diagrams and activity diagrams/svg/Model__Manage Reserve Taxi Request__Interaction1__Manage Reserve Taxi Request_5.svg
+	height 100theight%
+	rotateAngle 90
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename Sequence diagrams and activity diagrams/svg/Model__Notify Problem__Interaction1__Notify Problem_9.svg
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename Sequence diagrams and activity diagrams/svg/Model__Report Customer__Interaction1__Report  Customer_7.svg
+	width 100text%
+	height 100theight%
+	rotateAngle 90
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename Sequence diagrams and activity diagrams/svg/Model__Report Taxi__Interaction1__Report Taxi_6.svg
+	width 100text%
+	height 100theight%
+	rotateAngle 90
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Taxi request: activity diagram
+\end_layout
+
+\begin_layout Standard
+It was decided to analyze the taxi request process more in detail as it
+ is the core function of the platform.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename Sequence diagrams and activity diagrams/svg/Request Taxi Activity diagram.svg
+	width 100text%
+	height 90theight%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Component interfaces
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Component-Interfaces"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+SOA
+\end_layout
+
+\begin_layout Standard
+While not an interface 
+\shape italic
+per-se
+\shape default
+, it was decided to list the System Oriented Architecture used in the back-end
+ in this section.
+ 
+\end_layout
+
+\begin_layout Standard
+The software modules in the back-end are are designed to be as independent
+ as possible from each other, meaning that there must be single points of
+ contact between the different core components.
+ 
+\end_layout
+
+\begin_layout Standard
+Therefore, between the RESTful API and the Queue, User and Request managers,
+ and between the latter and the Ride manager, communications happen by implement
+ing different exposed interfaces that the relevant modules can exploit to
+ start processes on the other components.
+ 
+\end_layout
+
+\begin_layout Subsubsection
+Publish/subscribe
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Publish/subscribe"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The publish/subscribe design pattern is used to interface the Ride and Queue
+ manager components with the Notification manager, where the latter is the
+ subscriber and must react to events suitably generated by the former, which
+ are the publishers.
+ 
+\end_layout
+
+\begin_layout Subsubsection
+JDBC
+\end_layout
+
+\begin_layout Standard
+JDBC is a Java API that manages the access of a generic client to a database.
+ In our platform, it acts as interface between the Ride and User managers
+ and the DBMS component (on both the primary and secondary nodes).
+\end_layout
+
+\begin_layout Subsubsection
+Push technology
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Push-technology"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Push technology is an implementation of the publish/subscribe design pattern,
+ which is widely used in modern mobile applications to manage notification
+ services.
+\end_layout
+
+\begin_layout Standard
+In our platform, requests are generated by the Notification manager and
+ picked up by the user-side mobile applications, which react to them by
+ displaying the suitable notifications on the users' devices.
+ 
+\end_layout
+
+\begin_layout Subsection
+Selected architectural styles and patterns
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Selected-Architectural"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+From a generic point of view, the platform is obviously designed as a client-ser
+ver architecture, in which the back-end nodes are the server and the various
+ users' devices are the clients.
+\end_layout
+
+\begin_layout Standard
+The main point of communication between clients and server is a RESTful
+ API, which implements a stateless communication protocol: data exchanges
+ between the clients and the servers only happens in the case of a request
+ from the clients (with the exception of the notification service implemented
+ by the Notification manager component, which uses push technology to 
+\begin_inset Quotes eld
+\end_inset
+
+send requests
+\begin_inset Quotes erd
+\end_inset
+
+ to the clients - sec.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Push-technology"
+
+\end_inset
+
+).
+ For this reason, the state of the user sessions must be stored in the back-end
+ components in order to implement coherent user sessions and the selected
+ design pattern to achieve this is the standard MVC pattern.
+\end_layout
+
+\begin_layout Standard
+Of the back-end modules: 
+\end_layout
+
+\begin_layout Itemize
+The RESTful API is part of the 
+\shape italic
+view
+\shape default
+, as it offers access from the 
+\begin_inset Quotes eld
+\end_inset
+
+outside
+\begin_inset Quotes erd
+\end_inset
+
+ to the other components.
+\end_layout
+
+\begin_layout Itemize
+The Request and Queue manager are part of the 
+\shape italic
+model
+\shape default
+ from the platform point of view, but are internally implemented with a
+ MVC pattern themselves as they need to react to events and change their
+ model accordingly.
+ 
+\end_layout
+
+\begin_layout Itemize
+The Ride manager is part of the 
+\shape italic
+controller
+\shape default
+, as its purpose is purely to bridge the model and the view, and create
+ ride objects using the information stored in the model when needed.
+ 
+\end_layout
+
+\begin_layout Itemize
+The User manager can be interpreted as part of the 
+\shape italic
+controller
+\shape default
+, although the 
+\begin_inset Quotes eld
+\end_inset
+
+model
+\begin_inset Quotes erd
+\end_inset
+
+ it refers to is the DBMS itself and has a different connotation with respect
+ to the traditional MVC pattern.
+ 
+\end_layout
+
+\begin_layout Itemize
+The Notification manger is part of the 
+\shape italic
+view
+\shape default
+, but implements a publish/subscribe-like pattern (see.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Push-technology"
+
+\end_inset
+
+) to interact with the clients.
+\end_layout
+
+\begin_layout Standard
+Moreover, as specified in sec.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Publish/subscribe"
+
+\end_inset
+
+, it was decided to use a publish/subscribe pattern to handle communication
+ between the Ride and Queue managers and the Notification manager.
+ 
+\end_layout
+
+\begin_layout Standard
+Finally, the client components (user-side applications) are also designed
+ with a MVC pattern, but can be loosely considered (from a high-level perspectiv
+e) as part of the back-end 
+\shape italic
+view
+\shape default
+.
+ The pattern is implemented with:
+\end_layout
+
+\begin_layout Itemize
+The user interface being the 
+\shape italic
+view;
+\end_layout
+
+\begin_layout Itemize
+The local data structures needed to mirror the relevant parts of the back-end
+ 
+\shape italic
+model
+\shape default
+ being the 
+\shape italic
+model;
+\end_layout
+
+\begin_layout Itemize
+The logic associated to actions on the UI being the 
+\shape italic
+controller
+\shape default
+.
+\end_layout
+
+\begin_layout Section
+Algorithm Design
+\end_layout
+
+\begin_layout Subsection
+Request manager
+\end_layout
+
+\begin_layout Standard
+The Request manger provides all the methods to manage and dispatch the incoming
+ requests.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+addRequest(Request)
+\series default
+: inserts the given Request in the correct position w.r.t.
+ the starting hour, analyzes the 
+\shape italic
+shared ride
+\shape default
+ requests into the list and, using the GoogleMaps API, checks for compatible
+ paths and tries to merge them.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+modifyRequest(Request, Position destination, Position start, int passengers)
+\series default
+: if the request was merged in a single 
+\shape italic
+shared ride
+\shape default
+ request, then splits the two and deletes the relevant request; after that
+ inserts the edited request in the queue, with 
+\series bold
+addRequest(Request)
+\series default
+.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+requestIsReadyNotification()
+\series default
+: checks every 10 seconds whether the first request in the list must be
+ dispatched, and possibly notifies to the Ride manager to create a Ride.
+\end_layout
+
+\begin_layout Subsection
+Ride manager
+\end_layout
+
+\begin_layout Standard
+The Ride manager manages the pending Rides and Taxi problem reports.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+onReadyRequest(Request)
+\series default
+: asks to the Queue manager an available TaxiDriver with a suitable Car
+ (based on the relevant request); if an available Taxi exists, creates a
+ Ride with 
+\series bold
+createRide(Request, TaxiDriver)
+\series default
+, otherwise:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+if the request is a 
+\shape italic
+shared ride
+\shape default
+ request composed by different requests, tries to split the ride into as
+ few smaller rides as possible.
+ 
+\end_layout
+
+\begin_layout Itemize
+if the request is a normal request, start an error procedure and notify
+ the delay to the user via the Notification manager
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+
+\series bold
+onProblem(TaxiDriver)
+\series default
+: terminates the TaxiDriver's active ride, generate a new Request to match
+ the customer's original request and then uses the 
+\series bold
+onReadyRequest(Request)
+\series default
+ to find a new taxi.
+\end_layout
+
+\begin_layout Subsection
+Queue manager
+\end_layout
+
+\begin_layout Standard
+The QueueManager manage the zones of the city managing them like a Queue.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+getTaxiDriver(Position, int seats)
+\series default
+: 
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Looks for the first available taxi driver, with a car with a capacity greater
+ or equal to the given 
+\shape italic
+seats
+\shape default
+ parameter, in the queue associated to the given position:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+If a taxi is found, the driver is notified: if they accept the ride, the
+ TaxiDriver object is returned to the caller; else, the TaxiDriver is put
+ at the end of the queue.
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+If no taxi driver is found, tries to look for a suitable taxi driver in
+ the neighboring queues with the same procedure as above.
+ If the search fails, an error is generated and the Ride manager reacts
+ as described above.
+ 
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+
+\series bold
+requestToTaxi(TaxiDriver)
+\series default
+: prompt the Notification manager to notify the selected taxi driver with
+ the data contained in the request.
+ 
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+addNewTaxiDriver(TaxiDriver, Position)
+\series default
+: called in reaction to a change in the availability status of a taxi driver,
+ inserts the driver at the end of the queue.
+\end_layout
+
+\begin_layout Subsection
+Low level algorithm description
+\end_layout
+
+\begin_layout Subsubsection
+RequestManager
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+addRequest(Request request)
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+for(i=0;i<requests.size();i++)
+\end_layout
+
+\begin_layout Standard
+if(request.startTime.isPrevious(requests.get(i).startTime)
+\end_layout
+
+\begin_layout Standard
+requests.add(request, i)
+\end_layout
+
+\begin_layout Standard
+endFor
+\end_layout
+
+\begin_layout Standard
+Path possiblePath := GoogleMaps.getPath(request.start, request.destination)
+\end_layout
+
+\begin_layout Standard
+forall(Request r : requests)
+\end_layout
+
+\begin_layout Standard
+Path rPath := GoogleMaps.getPath(r.start, r.destination)
+\end_layout
+
+\begin_layout Standard
+if((possiblePath.contains(r.start) && possiblePath.contains(r.destination))
+\end_layout
+
+\begin_layout Standard
+|| (possiblePath.contains(r.start) && rPath.contains(request.destination))
+\end_layout
+
+\begin_layout Standard
+|| (rPath.contains(request.start) && rPath.contains(request.destination))
+\end_layout
+
+\begin_layout Standard
+|| (rPath.contains(request.start) && possiblePath.contains(r.destination)))
+\end_layout
+
+\begin_layout Standard
+request.merge(r)
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+
+\series bold
+modifyRequest(Request request, Request newRequest)
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+if(requests.contains(request)) 
+\end_layout
+
+\begin_layout Standard
+requests.remove(request)
+\end_layout
+
+\begin_layout Standard
+else 
+\end_layout
+
+\begin_layout Standard
+forall(Request r : requests)
+\end_layout
+
+\begin_layout Standard
+if(r.containsRequest(request))
+\end_layout
+
+\begin_layout Standard
+r.extractRequest(request)
+\end_layout
+
+\begin_layout Standard
+endElse
+\end_layout
+
+\begin_layout Standard
+addRequest(newRequest)
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+
+\series bold
+requestIsReadyNotification()
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+while(!requests.isEmpty())
+\end_layout
+
+\begin_layout Standard
+if(requests.get(0).startTime > getTime() -10)
+\end_layout
+
+\begin_layout Standard
+RideManager.onReadyRequest(requests.remove(0))
+\end_layout
+
+\begin_layout Standard
+endWhile
+\end_layout
+
+\end_deeper
+\begin_layout Subsubsection
+RideManager
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+onReadyRequest(Request request)
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+TaxiDriver taxiDriver:= QueueManager.getTaxiDriver(request.start, request.numOfPass
+enger)
+\end_layout
+
+\begin_layout Standard
+if(taxiDriver is not null)
+\end_layout
+
+\begin_layout Standard
+createRide(request, taxiDriver)
+\end_layout
+
+\begin_layout Standard
+else
+\end_layout
+
+\begin_layout Standard
+onReadyRequest(request.splitLeft())
+\end_layout
+
+\begin_layout Standard
+onReadyRequest(request.splitRight())
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+
+\series bold
+onProblem(TaxiDriver taxiDriver)
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+forall(Ride r : rides)
+\end_layout
+
+\begin_layout Standard
+if(r.getDriver = taxiDriver)
+\end_layout
+
+\begin_layout Standard
+rides.remove(r)
+\end_layout
+
+\begin_layout Standard
+onReadyRequest(r.getRequest())
+\end_layout
+
+\begin_layout Standard
+break
+\end_layout
+
+\begin_layout Standard
+endIf
+\end_layout
+
+\begin_layout Standard
+endFor
+\end_layout
+
+\end_deeper
+\begin_layout Subsubsection
+QueueManager
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+getTaxiDriver(Position position, int seats)
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+Queue queue := getQueue(position)
+\end_layout
+
+\begin_layout Standard
+TaxiDriver taxiDriver := queue.getFirst(seats)
+\end_layout
+
+\begin_layout Standard
+if(taxiDriver is not null) return taxiDriver
+\end_layout
+
+\begin_layout Standard
+else
+\end_layout
+
+\begin_layout Standard
+forall(Queue q : MapUtils.getNeighbor(position))
+\end_layout
+
+\begin_layout Standard
+taxiDriver := q.getFirst(seats)
+\end_layout
+
+\begin_layout Standard
+if(taxiDriver is not null) return taxiDriver
+\end_layout
+
+\begin_layout Standard
+endFor
+\end_layout
+
+\begin_layout Standard
+endElse
+\end_layout
+
+\begin_layout Standard
+return NoTaxiDriverAvailableException
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+User Interface Design
+\end_layout
+
+\begin_layout Subsection
+Page flow
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename images/ActivityFlowCustomer.png
+	width 100text%
+	height 80theight%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename images/ActivityFlowTaxi.png
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename images/WebFlow.png
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+UX diagram
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename Sequence diagrams and activity diagrams/UX DIAGRAM.svg
+	width 100text%
+	height 90theight%
+	rotateAngle 90
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Additional comments
+\end_layout
+
+\begin_layout Standard
+The production of this document has been a joint effort of all the authors,
+ with a fair distribution of the mansions which caused each member of the
+ group to work on all the parts of the document.
+ 
+\end_layout
+
+\begin_layout Standard
+The production has been carried out between 12/11/2015 and 4/12/2015 for
+ a total time expense of: 
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Group work
+\series default
+: 21 hours
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Individual work
+\series default
+:
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+\begin_inset Tabular
+<lyxtabular version="3" rows="3" columns="2">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Daniele Grattarola (Mat.
+ 853101)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+9 hours
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Ilyas Inajjar (Mat.
+ 790009) 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+ 11 hours
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Andrea Lui (Mat.
+ 850680)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10 hours
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

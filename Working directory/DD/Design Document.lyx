@@ -180,15 +180,19 @@ The presented document is the Software Design document (SDD) for the MyTaxiServi
 ce platform project.
  The main purpose of this document is to be a guideline for the concrete
  implementation of the platform, provide developers with high level descriptions
- of the main algorithms, describe the architectural styles and patter, and
- generally establish the design standards for the development phase.
+ of the main algorithms, describe the architectural styles and patterns,
+ and generally establish the design standards for the development phase.
  This document is intended for stakeholders, software engineers, and programmers
  and must be used as reference throughout the whole development of the system.
- The secondary audience for this document includes system maintainers and
- developers who wish to integrate the platform’s services within their own
+ 
+\end_layout
+
+\begin_layout Standard
+The secondary audience for this document includes system maintainers and
+ developers who wish to integrate the platform’s services with their own
  software.
- The design choices listed here must be respected throughout the whole developme
-nt of the platform and any other further expansion of the codebase.
+ The design choices listed here must be respected throughout the initial
+ development of the platform and any other further modification to the codebase.
 \end_layout
 
 \begin_layout Subsection
@@ -203,18 +207,18 @@ name "sub:Scope"
 \end_layout
 
 \begin_layout Standard
-The descriptions listed in this document define the design language that
- must be used by design stakeholders, and implement the 
+The descriptions listed in this document define the design specifications
+ that must be used by design stakeholders, in order to implement the 
 \begin_inset Quotes eld
 \end_inset
 
-Design leads to code
+design leads to code
 \begin_inset Quotes erd
 \end_inset
 
  philosophy.
  These design standards represent constraints to the development of the
- codebase, with all unspecified design decisions left to the developers.
+ platform, with all unspecified design decisions left to the developers.
 \end_layout
 
 \begin_layout Standard
@@ -227,7 +231,7 @@ To facilitate the development, integration, expansion and maintenance of
 \end_layout
 
 \begin_layout Enumerate
-To define a business identity (kept consistent in UX and marketing design).
+To define a business identity (consistency of UX and marketing).
  
 \end_layout
 
@@ -1202,16 +1206,6 @@ SOA
 \end_layout
 
 \begin_layout Standard
-While not an interface 
-\shape italic
-per-se
-\shape default
-, it was decided to list the System Oriented Architecture used in the back-end
- in this section.
- 
-\end_layout
-
-\begin_layout Standard
 The software modules in the back-end are are designed to be as independent
  as possible from each other, meaning that there must be single points of
  contact between the different core components.
@@ -1631,51 +1625,68 @@ addRequest(Request request)
 
 \begin_deeper
 \begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
 for(i=0;i<requests.size();i++)
 \end_layout
 
-\begin_layout Standard
-if(request.startTime.isPrevious(requests.get(i).startTime)
+\begin_layout Plain Layout
+
+	if(request.startTime.isPrevious(requests.get(i).startTime)
 \end_layout
 
-\begin_layout Standard
-requests.add(request, i)
+\begin_layout Plain Layout
+
+		requests.add(request, i)
 \end_layout
 
-\begin_layout Standard
-endFor
-\end_layout
+\begin_layout Plain Layout
 
-\begin_layout Standard
 Path possiblePath := GoogleMaps.getPath(request.start, request.destination)
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
+
 forall(Request r : requests)
 \end_layout
 
-\begin_layout Standard
-Path rPath := GoogleMaps.getPath(r.start, r.destination)
+\begin_layout Plain Layout
+
+	Path rPath := GoogleMaps.getPath(r.start, r.destination)
 \end_layout
 
-\begin_layout Standard
-if((possiblePath.contains(r.start) && possiblePath.contains(r.destination))
+\begin_layout Plain Layout
+
+	if((possiblePath.contains(r.start) && possiblePath.contains(r.destination))
 \end_layout
 
-\begin_layout Standard
-|| (possiblePath.contains(r.start) && rPath.contains(request.destination))
+\begin_layout Plain Layout
+
+		|| (possiblePath.contains(r.start) && rPath.contains(request.destination))
 \end_layout
 
-\begin_layout Standard
-|| (rPath.contains(request.start) && rPath.contains(request.destination))
+\begin_layout Plain Layout
+
+		|| (rPath.contains(request.start) && rPath.contains(request.destination))
 \end_layout
 
-\begin_layout Standard
-|| (rPath.contains(request.start) && possiblePath.contains(r.destination)))
+\begin_layout Plain Layout
+
+		|| (rPath.contains(request.start) && possiblePath.contains(r.destination)))
 \end_layout
 
-\begin_layout Standard
-request.merge(r)
+\begin_layout Plain Layout
+
+		request.merge(r)
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_deeper
@@ -1687,35 +1698,48 @@ modifyRequest(Request request, Request newRequest)
 
 \begin_deeper
 \begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
 if(requests.contains(request)) 
 \end_layout
 
-\begin_layout Standard
-requests.remove(request)
+\begin_layout Plain Layout
+
+	requests.remove(request)
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
+
 else 
 \end_layout
 
-\begin_layout Standard
-forall(Request r : requests)
+\begin_layout Plain Layout
+
+	forall(Request r : requests)
 \end_layout
 
-\begin_layout Standard
-if(r.containsRequest(request))
+\begin_layout Plain Layout
+
+		if(r.containsRequest(request))
 \end_layout
 
-\begin_layout Standard
-r.extractRequest(request)
+\begin_layout Plain Layout
+
+		r.extractRequest(request)
 \end_layout
 
-\begin_layout Standard
-endElse
-\end_layout
+\begin_layout Plain Layout
 
-\begin_layout Standard
 addRequest(newRequest)
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_deeper
@@ -1727,19 +1751,28 @@ requestIsReadyNotification()
 
 \begin_deeper
 \begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
 while(!requests.isEmpty())
 \end_layout
 
-\begin_layout Standard
-if(requests.get(0).startTime > getTime() -10)
+\begin_layout Plain Layout
+
+	if(requests.get(0).startTime > getTime() -10)
 \end_layout
 
-\begin_layout Standard
-RideManager.onReadyRequest(requests.remove(0))
+\begin_layout Plain Layout
+
+		RideManager.onReadyRequest(requests.remove(0))
 \end_layout
 
-\begin_layout Standard
-endWhile
+\end_inset
+
+
 \end_layout
 
 \end_deeper
@@ -1755,28 +1788,44 @@ onReadyRequest(Request request)
 
 \begin_deeper
 \begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
 TaxiDriver taxiDriver:= QueueManager.getTaxiDriver(request.start, request.numOfPass
 enger)
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
+
 if(taxiDriver is not null)
 \end_layout
 
-\begin_layout Standard
-createRide(request, taxiDriver)
+\begin_layout Plain Layout
+
+	createRide(request, taxiDriver)
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
+
 else
 \end_layout
 
-\begin_layout Standard
-onReadyRequest(request.splitLeft())
+\begin_layout Plain Layout
+
+	onReadyRequest(request.splitLeft())
 \end_layout
 
-\begin_layout Standard
-onReadyRequest(request.splitRight())
+\begin_layout Plain Layout
+
+	onReadyRequest(request.splitRight())
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_deeper
@@ -1788,31 +1837,38 @@ onProblem(TaxiDriver taxiDriver)
 
 \begin_deeper
 \begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
 forall(Ride r : rides)
 \end_layout
 
-\begin_layout Standard
-if(r.getDriver = taxiDriver)
+\begin_layout Plain Layout
+
+	if(r.getDriver = taxiDriver)
 \end_layout
 
-\begin_layout Standard
-rides.remove(r)
+\begin_layout Plain Layout
+
+		rides.remove(r)
 \end_layout
 
-\begin_layout Standard
-onReadyRequest(r.getRequest())
+\begin_layout Plain Layout
+
+		onReadyRequest(r.getRequest())
 \end_layout
 
-\begin_layout Standard
-break
+\begin_layout Plain Layout
+
+		break
 \end_layout
 
-\begin_layout Standard
-endIf
-\end_layout
+\end_inset
 
-\begin_layout Standard
-endFor
+
 \end_layout
 
 \end_deeper
@@ -1828,43 +1884,63 @@ getTaxiDriver(Position position, int seats)
 
 \begin_deeper
 \begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
 Queue queue := getQueue(position)
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
+
 TaxiDriver taxiDriver := queue.getFirst(seats)
 \end_layout
 
-\begin_layout Standard
-if(taxiDriver is not null) return taxiDriver
+\begin_layout Plain Layout
+
+if(taxiDriver is not null) 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
+
+	return taxiDriver
+\end_layout
+
+\begin_layout Plain Layout
+
 else
 \end_layout
 
-\begin_layout Standard
-forall(Queue q : MapUtils.getNeighbor(position))
+\begin_layout Plain Layout
+
+	forall(Queue q : MapUtils.getNeighbor(position))
 \end_layout
 
-\begin_layout Standard
-taxiDriver := q.getFirst(seats)
+\begin_layout Plain Layout
+
+		taxiDriver := q.getFirst(seats)
 \end_layout
 
-\begin_layout Standard
-if(taxiDriver is not null) return taxiDriver
+\begin_layout Plain Layout
+
+		if(taxiDriver is not null) 
 \end_layout
 
-\begin_layout Standard
-endFor
+\begin_layout Plain Layout
+
+			return taxiDriver
 \end_layout
 
-\begin_layout Standard
-endElse
-\end_layout
+\begin_layout Plain Layout
 
-\begin_layout Standard
 return NoTaxiDriverAvailableException
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_deeper

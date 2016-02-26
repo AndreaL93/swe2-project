@@ -272,36 +272,292 @@ Assignment 3 - Code inspection.pdf
 Checklist
 \end_layout
 
-\begin_layout Enumerate
+\begin_layout Itemize
 
 \series bold
-OK
+Naming Convention
 \end_layout
 
-\begin_layout Enumerate
+\begin_deeper
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
 
 \series bold
-OK
-\end_layout
-
-\begin_layout Enumerate
-
-\series bold
-OK
-\end_layout
-
-\begin_layout Enumerate
-
-\series bold
-OK
-\end_layout
-
-\begin_layout Enumerate
-
-\series bold
-2 founds:
+5)
 \series default
- _getContextForInstance@1454, _getContext@1605
+_getContextForInstance@1454,_getContext@1605
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+
+\series bold
+6)
+\series default
+_getContext@1676
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+
+\series bold
+7)
+\series default
+@185,@304,@323,@325
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+
+\series bold
+Indention: 
+\series default
+Nothing found
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Braces: 
+\series default
+Nothing found
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+File Organization
+\end_layout
+
+\begin_deeper
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+
+\series bold
+12)
+\series default
+_getContextForInstance@1480,_getContext@1673
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+
+\series bold
+13)
+\series default
+doVersionCheck@1772
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+
+\series bold
+14)
+\series default
+handleConcurrentInvocation@1786
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+
+\series bold
+Wrapping Lines
+\end_layout
+
+\begin_deeper
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+
+\series bold
+17)
+\series default
+_getContext@1645,1652,handleConcurrentInvocation@1806
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+
+\series bold
+Comments
+\end_layout
+
+\begin_deeper
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+
+\series bold
+18)
+\series default
+_getContext@1602
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+
+\series bold
+19)
+\series default
+_getContextForInstance@1476,1477
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+
+\series bold
+Java Source Files: 
+\series default
+Nothing found
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Package and Import Statements: 
+\series default
+Nothing found
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Class and Interface Declarations
+\end_layout
+
+\begin_deeper
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+
+\series bold
+25)
+\series default
+@278
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+
+\series bold
+27)
+\series default
+_getContext@1605
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+
+\series bold
+Initialization and Declarations
+\end_layout
+
+\begin_deeper
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+
+\series bold
+29)
+\series default
+doVersionCheck@1754,handleConcurrentInvocation@1786
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+
+\series bold
+Method Calls: 
+\series default
+Nothing found
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Arrays: 
+\series default
+Nothing found
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Object Comparison: 
+\series default
+Nothing found
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Output Format
+\end_layout
+
+\begin_deeper
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+
+\series bold
+43)
+\series default
+_getContextForInstance@1471, doVersionCheck@1778
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+
+\series bold
+Computation, Comparisons and Assignments: 
+\series default
+Nothing found
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Exceptions
+\end_layout
+
+\begin_deeper
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+
+\series bold
+52)
+\series default
+destroyExtendedEMsForContext@1395
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+
+\series bold
+Flow of Control
+\end_layout
+
+\begin_deeper
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+
+\series bold
+54)
+\series default
+_getContextForInstance@1476
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+
+\series bold
+56)
+\series default
+_getContextForInstance@1462
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+
+\series bold
+Files: 
+\series default
+Nothing found
 \end_layout
 
 \begin_layout Section
@@ -443,10 +699,10 @@ StatefulSessionContainer
 
 \begin_layout Standard
 \begin_inset Tabular
-<lyxtabular version="3" rows="7" columns="3">
+<lyxtabular version="3" rows="6" columns="3">
 <features rotate="0" tabularvalignment="middle">
 <column alignment="left" valignment="top">
-<column alignment="left" valignment="top">
+<column alignment="center" valignment="top">
 <column alignment="left" valignment="top" width="8cm">
 <row>
 <cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
@@ -460,7 +716,7 @@ Line
 
 \end_inset
 </cell>
-<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -488,41 +744,12 @@ Comment
 \begin_inset Text
 
 \begin_layout Plain Layout
-150
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" bottomline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-12
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" bottomline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Two spaces before equal 
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="left" valignment="top" bottomline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
 185
 \end_layout
 
 \end_inset
 </cell>
-<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -551,7 +778,7 @@ Last character not uppercase
 
 \end_inset
 </cell>
-<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -580,7 +807,7 @@ public static variable after private static ones
 
 \end_inset
 </cell>
-<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -593,7 +820,7 @@ public static variable after private static ones
 \begin_inset Text
 
 \begin_layout Plain Layout
-non costant variable with uppercase name 
+non constant variable with uppercase name 
 \end_layout
 
 \end_inset
@@ -609,7 +836,7 @@ non costant variable with uppercase name
 
 \end_inset
 </cell>
-<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -622,7 +849,7 @@ non costant variable with uppercase name
 \begin_inset Text
 
 \begin_layout Plain Layout
-constant with lowecase name 
+constant with lowercase name 
 \end_layout
 
 \end_inset
@@ -638,7 +865,7 @@ constant with lowecase name
 
 \end_inset
 </cell>
-<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -651,7 +878,7 @@ constant with lowecase name
 \begin_inset Text
 
 \begin_layout Plain Layout
-constant with lowecase name 
+constant with lowercase name 
 \end_layout
 
 \end_inset
@@ -724,7 +951,7 @@ Comment
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+-
 \end_layout
 
 \end_inset
@@ -733,8 +960,8 @@ Comment
 \begin_inset Text
 
 \begin_layout Plain Layout
-Instead using parameter SessionContextImpl use List of PhysicalEntityManagerWrap
-per 
+Instead of using parameter SessionContextImpl use List of PhysicalEntityManagerW
+rapper 
 \end_layout
 
 \end_inset
@@ -763,7 +990,7 @@ per
 \begin_inset Text
 
 \begin_layout Plain Layout
-Catch block catch Throwable instead of Illegal State Exception 
+Catch block catches Throwable instead of Illegal State Exception 
 \end_layout
 
 \end_inset
@@ -1101,7 +1328,7 @@ Comment
 \begin_inset Text
 
 \begin_layout Plain Layout
-Comment not explain adequately the method functions 
+Comment doesn't explain adequately the method functions 
 \end_layout
 
 \end_inset
@@ -1130,8 +1357,8 @@ Comment not explain adequately the method functions
 \begin_inset Text
 
 \begin_layout Plain Layout
-Duplication Code lines: 1621, 1677, 1696.
- Can be avoided with a proper method 
+Code duplication at lines 1621, 1677 and 1696 can be avoided with a proper
+ method.
 \end_layout
 
 \end_inset
@@ -1358,7 +1585,7 @@ Comment
 \begin_inset Text
 
 \begin_layout Plain Layout
-Useless paramether (sessionKey) used only for log 
+Useless parameter (sessionKey) used only for logging
 \end_layout
 
 \end_inset
@@ -1378,7 +1605,7 @@ Useless paramether (sessionKey) used only for log
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+-
 \end_layout
 
 \end_inset
@@ -1387,7 +1614,7 @@ Useless paramether (sessionKey) used only for log
 \begin_inset Text
 
 \begin_layout Plain Layout
-Static refence to a non static object 
+Static reference to a non static object 
 \end_layout
 
 \end_inset
@@ -1556,7 +1783,7 @@ Lines can be less then 80 characters
 \begin_inset Text
 
 \begin_layout Plain Layout
-Useless parameters: SessionContextImpl, 'sessionKey' only for log 
+Useless parameters (SessionContextImpl, sessionKey) used only for logging
 \end_layout
 
 \end_inset
@@ -1585,7 +1812,7 @@ Useless parameters: SessionContextImpl, 'sessionKey' only for log
 \begin_inset Text
 
 \begin_layout Plain Layout
-Splitted line not aligned
+Split line not aligned
 \end_layout
 
 \end_inset

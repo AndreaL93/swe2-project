@@ -497,7 +497,7 @@ Output Format
 \series bold
 43)
 \series default
-_getContextForInstance@1471, doVersionCheck@1778
+_getContextForInstance@1471,doVersionCheck@1778
 \end_layout
 
 \end_deeper
@@ -576,6 +576,7 @@ name "sub:destroyExtendedEMsForContext"
 \end_layout
 
 \begin_layout Standard
+\align center
 \begin_inset Graphics
 	filename destroyExtendedEMsForContext.png
 	width 100text%
@@ -597,6 +598,7 @@ name "sub:_getContextForInstance"
 \end_layout
 
 \begin_layout Standard
+\align center
 \begin_inset Graphics
 	filename _getContextForInstance.png
 	width 100text%
@@ -618,6 +620,7 @@ name "sub:_getContext"
 \end_layout
 
 \begin_layout Standard
+\align center
 \begin_inset Graphics
 	filename _getContext1.png
 	width 100text%
@@ -628,6 +631,7 @@ name "sub:_getContext"
 \end_layout
 
 \begin_layout Standard
+\align center
 \begin_inset Graphics
 	filename _getContext2.png
 	width 100text%
@@ -638,6 +642,7 @@ name "sub:_getContext"
 \end_layout
 
 \begin_layout Standard
+\align center
 \begin_inset Graphics
 	filename _getContext3.png
 	width 100text%
@@ -659,6 +664,7 @@ name "sub:doVersionCheck"
 \end_layout
 
 \begin_layout Standard
+\align center
 \begin_inset Graphics
 	filename doVersionCheck.png
 	width 100text%
@@ -680,6 +686,7 @@ name "sub:handleConcurrentInvocation"
 \end_layout
 
 \begin_layout Standard
+\align center
 \begin_inset Graphics
 	filename handleConcurrentInvocation.png
 	width 100text%
@@ -698,6 +705,7 @@ StatefulSessionContainer
 \end_layout
 
 \begin_layout Standard
+\align center
 \begin_inset Tabular
 <lyxtabular version="3" rows="6" columns="3">
 <features rotate="0" tabularvalignment="middle">
@@ -820,7 +828,7 @@ public static variable after private static ones
 \begin_inset Text
 
 \begin_layout Plain Layout
-non costant variable with uppercase name 
+non constant variable with uppercase name 
 \end_layout
 
 \end_inset
@@ -849,7 +857,7 @@ non costant variable with uppercase name
 \begin_inset Text
 
 \begin_layout Plain Layout
-constant with lowecase name 
+constant with lowercase name 
 \end_layout
 
 \end_inset
@@ -878,7 +886,7 @@ constant with lowecase name
 \begin_inset Text
 
 \begin_layout Plain Layout
-constant with lowecase name 
+constant with lowercase name 
 \end_layout
 
 \end_inset
@@ -896,6 +904,7 @@ destroyExtendedEMsForContext
 \end_layout
 
 \begin_layout Standard
+\align center
 \begin_inset Tabular
 <lyxtabular version="3" rows="3" columns="3">
 <features rotate="0" tabularvalignment="middle">
@@ -951,7 +960,7 @@ Comment
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+-
 \end_layout
 
 \end_inset
@@ -960,8 +969,8 @@ Comment
 \begin_inset Text
 
 \begin_layout Plain Layout
-Instead using parameter SessionContextImpl use List of PhysicalEntityManagerWrap
-per 
+Instead of using parameter SessionContextImpl use List of PhysicalEntityManagerW
+rapper 
 \end_layout
 
 \end_inset
@@ -990,7 +999,7 @@ per
 \begin_inset Text
 
 \begin_layout Plain Layout
-Catch block catch Throwable instead of Illegal State Exception 
+Catch block catches Throwable instead of Illegal State Exception 
 \end_layout
 
 \end_inset
@@ -1008,6 +1017,7 @@ _getContextForInstance
 \end_layout
 
 \begin_layout Standard
+\align center
 \begin_inset Tabular
 <lyxtabular version="3" rows="8" columns="3">
 <features rotate="0" tabularvalignment="middle">
@@ -1264,6 +1274,7 @@ _getContext
 \end_layout
 
 \begin_layout Standard
+\align center
 \begin_inset Tabular
 <lyxtabular version="3" rows="8" columns="3">
 <features rotate="0" tabularvalignment="middle">
@@ -1328,7 +1339,7 @@ Comment
 \begin_inset Text
 
 \begin_layout Plain Layout
-Comment not explain adequately the method functions 
+Comment doesn't explain adequately the method functions 
 \end_layout
 
 \end_inset
@@ -1357,8 +1368,8 @@ Comment not explain adequately the method functions
 \begin_inset Text
 
 \begin_layout Plain Layout
-Duplication Code lines: 1621, 1677, 1696.
- Can be avoided with a proper method 
+Code duplication at lines 1621, 1677 and 1696 can be avoided with a proper
+ method.
 \end_layout
 
 \end_inset
@@ -1521,6 +1532,7 @@ doVersionCheck
 \end_layout
 
 \begin_layout Standard
+\align center
 \begin_inset Tabular
 <lyxtabular version="3" rows="5" columns="3">
 <features rotate="0" tabularvalignment="middle">
@@ -1585,7 +1597,7 @@ Comment
 \begin_inset Text
 
 \begin_layout Plain Layout
-Useless paramether (sessionKey) used only for log 
+Useless parameter (sessionKey) used only for logging
 \end_layout
 
 \end_inset
@@ -1605,7 +1617,7 @@ Useless paramether (sessionKey) used only for log
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+-
 \end_layout
 
 \end_inset
@@ -1614,7 +1626,7 @@ Useless paramether (sessionKey) used only for log
 \begin_inset Text
 
 \begin_layout Plain Layout
-Static refence to a non static object 
+Static reference to a non static object 
 \end_layout
 
 \end_inset
@@ -1690,6 +1702,7 @@ handleConcurrentInvocation
 \end_layout
 
 \begin_layout Standard
+\align center
 \begin_inset Tabular
 <lyxtabular version="3" rows="4" columns="3">
 <features rotate="0" tabularvalignment="middle">
@@ -1783,7 +1796,7 @@ Lines can be less then 80 characters
 \begin_inset Text
 
 \begin_layout Plain Layout
-Useless parameters: SessionContextImpl, 'sessionKey' only for log 
+Useless parameters (SessionContextImpl, sessionKey) used only for logging
 \end_layout
 
 \end_inset
@@ -1812,7 +1825,7 @@ Useless parameters: SessionContextImpl, 'sessionKey' only for log
 \begin_inset Text
 
 \begin_layout Plain Layout
-Splitted line not aligned
+Split line not aligned
 \end_layout
 
 \end_inset
